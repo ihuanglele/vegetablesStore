@@ -1,4 +1,9 @@
-
+微信公众号信息
+账号 zhongheny@sina.com
+密码 zhongheny2
+mchid    1334616001
+key  WeixingTianxia043187956777wxtx00
+appid  wx3a7c3b2d733010db
 
 统一字段说明
     订单号生成方式 date("YmdHis").当前微秒数。

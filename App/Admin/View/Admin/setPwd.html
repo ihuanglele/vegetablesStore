@@ -1,0 +1,24 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        商家重置默认密码
+    </div>
+    <div class="panel-body">
+        <form class="form-horizontal" action="<{:U('setDefaultPwd')}>" method="post" style="margin: 30px auto;">
+            <div class="row">
+                <div class="col-xs-5 col-sm-offset-3">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">商家重置默认密码</div>
+                            <input type="text" class="form-control" id="pwd" value="<{$pwd}>" name="pwd" placeholder="填写密码" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-5 col-sm-offset-3">
+                    <button type="submit" style="width: 100%" name="submit" class="btn btn-success">修改</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

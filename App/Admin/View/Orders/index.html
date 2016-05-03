@@ -1,0 +1,77 @@
+<style>
+    .headimg{
+        width: 25px;
+        border-radius: 50%;
+    }
+</style>
+<form class="form-horizontal" action="<{:U('orders/index')}>" method="get">
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="form-group">
+                <label class="sr-only">订单号</label>
+                <div class="input-group">
+                    <div class="input-group-addon">订单号</div>
+                    <input type="text" class="form-control" name="trade" placeholder="填写订单号" value="<{$trade}>">
+                </div>
+            </div>
+        </div>
+       
+        <div class="col-xs-3">
+            <div class="input-group">
+                <div class="input-group-addon">状态</div>
+                <select class="form-control" name="status">
+                    <option value="0">全部</option>
+                    <volist name="OrderStatus" id="v">
+                        <option value="<{$key}>" ><{$v}></option>
+                    </volist>
+                </select>
+            </div>
+        </div>
+        <div class="col-xs-2 ">
+            <button type="submit" class="btn btn-primary">搜索</button>
+        </div>
+    </div>
+</form>
+<script>
+    $(window).ready(function(){
+        $('select[name="status"]').val('<{$status}>');
+    })
+</script>
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            订单列表
+        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>订单号</th>
+                <th>头像</th>
+                <th>昵称</th>
+                <th>商品</th>
+                <th>下单时间</th>
+                <th>状态</th>
+                <th>详情</th>
+            </tr>
+            </thead>
+            <tbody>
+            <volist name="list" id="vo">
+                <tr>
+                    <td><{$vo.oid}></td>
+                    <td><img class="headimg" src="<{$vo.headimgurl}>" /></td>
+                    <td><{$vo.nickname}></td>
+                    <eq name="role" value="1">
+                        <td><a href="<{:U('goods/view')}>?id=<{$vo.gid}>" target="_blank" ><{$vo.name}></a>【<{$GoodsStatus[$vo['gstatus']]}>】</td>
+                        <else />
+                        <td><a href="<{:U('goods/editor')}>?id=<{$vo.gid}>" target="_blank" ><{$vo.name}></a>【<{$GoodsStatus[$vo['gstatus']]}>】</td>
+                    </eq>
+                    <td><{:Mydate($vo['create_time'])}></td>
+                    <td><{$OrderStatus[$vo['status']]}></td>
+                    <td><a href="<{:U('orders/detail')}>?id=<{$vo.oid}>">详情</a></td>
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+    </div>
+    <div><{$page}></div>
+</div>

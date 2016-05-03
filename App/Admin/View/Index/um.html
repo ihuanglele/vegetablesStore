@@ -1,0 +1,9 @@
+<script src="__PUBLIC__/umeditor/umeditor.min.js" type="text/javascript"></script>
+<if condition="isset($_SERVER['HTTP_APPNAME'])">
+    <script src="__PUBLIC__/umeditor/umeditor.config.sae.js" type="text/javascript"></script>
+    <else />
+    <script src="__PUBLIC__/umeditor/umeditor.config.js" type="text/javascript"></script>
+</if>
+<script>
+    um = UM.getEditor('editor');
+</script>

@@ -1,0 +1,47 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        修改密码
+    </div>
+    <div class="panel-body">
+        <form class="form-horizontal" action="<{:U('pwd')}>" method="post" style="margin: 30px auto;">
+            <div class="row">
+                <div class="col-xs-5 col-sm-offset-3">
+                    <div class="form-group">
+                        <label class="sr-only" for="pwd">原密码</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">原密码</div>
+                            <input type="password" class="form-control" id="pwd" name="pwd" placeholder="填写原密码" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-5 col-sm-offset-3">
+                    <div class="form-group">
+                        <label class="sr-only" for="newpwd">新密码</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">新密码</div>
+                            <input type="password" class="form-control" id="newpwd" name="newpwd" placeholder="不能和原密码相同" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-5 col-sm-offset-3">
+                    <div class="form-group">
+                        <label class="sr-only" for="repwd"> 确认</label>
+                        <div class="input-group">
+                            <div class="input-group-addon"> &nbsp;&nbsp;&nbsp;确认</div>
+                            <input type="password" class="form-control" id="repwd" name="repwd" placeholder="和新密码相同" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-5 col-sm-offset-3">
+                    <button type="submit" style="width: 100%" name="submit" class="btn btn-success">修改</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

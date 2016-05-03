@@ -1,0 +1,75 @@
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading">设置商品类别</div>
+        <div class="panel-body">
+            <form method="post" action="<{:U('setGoodsType')}>" class="form-horizontal">
+                <div id="mean">
+                    <volist name="list" id="v">
+                        <div class="form-group col-sm-3">
+                            <div class="input-group">
+                                <div class="input-group-addon">类别ID</div>
+                                <input type="text" name="ids[]" <php>if(in_array($key,$useType))echo 'readonly="readonly"';</php> class="form-control" value="<{$key}>" placeholder="<{$key}>">
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-9">
+                            <div class="input-group">
+                                <div class="input-group-addon">类别名</div>
+                                <input type="text" name="name[]" class="form-control" value="<{$v}>"  placeholder="<{$v}>">
+                            </div>
+                        </div>
+                    </volist>
+                    <div class="form-group col-sm-3">
+                        <div class="input-group">
+                            <div class="input-group-addon">类别ID</div>
+                            <input type="text" name="ids[]" class="form-control" value="" placeholder="不能重复"></div>
+                    </div>
+                    <div class="form-group col-sm-9">
+                        <div class="input-group">
+                            <div class="input-group-addon">类别名</div>
+                            <input type="text" name="name[]" class="form-control" value="" placeholder="类别名">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2 col-sm-offset-4">
+                    <button class="btn btn-primary" type="button" id="addGroup">添加一组</button>
+                </div>
+                <div class="col-sm-2 col-sm-offset-4">
+                    <button class="btn btn-info" type="submit" name="submit">更新</button>
+                </div>
+            </form>
+        </div>
+        <div class="panel-footer">
+            <div class="row">
+                <div class="form-group col-sm-12">
+                    <div class="input-group">
+                        <div class="input-group-addon">已添加商品的类别</div>
+                        <input type="text" class="form-control" disabled="disabled" value="<{$useTypeStr}>">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(window).ready(function(){
+        //添加一组
+        $('#addGroup').click(function(){
+            var html = ' <div class="form-group col-sm-3"> <div class="input-group"> <div class="input-group-addon">类别ID</div> <input type="text" name="ids[]" class="form-control" value="" placeholder="不能重复"></div> </div> <div class="form-group col-sm-9"> <div class="input-group"> <div class="input-group-addon">类别名</div> <input type="text" name="name[]" class="form-control" value="" placeholder="类别名"> </div> </div>';
+            $('#mean').append(html);
+        });
+
+        $('form').submit(function(){
+            var ids = new Array();
+            $('input[name="ids[]"]').each(function(){
+                if(ids.indexOf($(this).val()==-1)){
+                    ids.push($(this).val());
+                }else{
+                    alert('存在重复ID');
+                    $(this).focus();
+                    return false;
+                }
+            });
+        })
+    })
+</script>

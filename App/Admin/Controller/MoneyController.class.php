@@ -50,18 +50,22 @@ class MoneyController extends CommonController
         $this->display('wxpay');
     }
 
-    public function shang(){
-        $this->assign('MoneyType',C('SMoneyType'));
+    public function user(){
+        $this->assign('MoneyType',C('MoneyType'));
         $map = array();
-        $id = I('get.id','','number_int');
-        $this->assign('id',$id);
-        if($id){
-            $map['aid'] = $id;
+        $uid = I('get.uid','','number_int');
+        $this->assign('uid',$uid);
+        if($uid){
+            $map['uid'] = $uid;
         }
-        $M = M('smoney');
+        $type = I('get.type',0);
+        if($type)$map['type'] = $type;
+        $this->assign('type',$type);
+
+        $M = M('money');
         $order = 'mid desc';
         $this->getData($M,$map,$order);
-        $this->display('shang');
+        $this->display('user');
     }
 
 

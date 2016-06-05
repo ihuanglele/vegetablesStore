@@ -66,10 +66,24 @@
                     <li ><a href="<{:U('orders/index',array('status'=>2))}>">待发货</a></li>
                 </ul>
 
+                <div class="nav-header"><i class="icon-briefcase"></i>网站管理<span class="label label-info"></span></div>
+                <ul class="nav nav-list collapse in">
+                    <li ><a href="<{:U('admin/index')}>">所有管理员</a></li>
+                    <li ><a href="<{:U('admin/adduser')}>">添加管理员</a></li>
+                    <li ><a href="<{:U('admin/pwd')}>">修改密码</a></li>
+                    <li ><a href="<{:U('admin/info')}>">公司信息</a></li>
+                </ul>
+
+                <div class="nav-header"><i class="icon-exclamation-sign"></i>网站前台</div>
+                <ul class="nav nav-list collapse in">
+                    <li ><a href="<{:U('help/index')}>">所有新闻</a></li>
+                    <li ><a href="<{:U('help/add')}>">发布新闻</a></li>
+
+                </ul>
 
                 <div class="nav-header"><i class="icon-exclamation-sign"></i>支付账单</div>
                 <ul class="nav nav-list collapse in">
-                    <li ><a href="<{:U('pay/index')}>">支付订单</a></li>
+                    <li ><a href="<{:U('money/index')}>">微信订单</a></li>
 
                 </ul>
             </div>

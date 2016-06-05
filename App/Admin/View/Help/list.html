@@ -1,0 +1,55 @@
+<div class="row text-center" style="margin: 20px auto">
+    <form class="form-inline form-group" action="<{:U('help/index')}>" method="get">
+        <div class="input-group">
+            <span class="input-group-addon">标题</span>
+            <input type="text" placeholder="文章标题"  class="form-control col-sm-3" name="word" value="<{$Think.get.word}>" aria-describedby="inputGroupSuccess1Status">
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon">文章ID</span>
+            <input type="text" class="form-control col-sm-1" name="id" value="<{$Think.get.id}>" aria-describedby="inputGroupSuccess1Status">
+        </div>
+        <div class="input-group">
+            <select name="cid" class="form-control">
+                <option value="">全部</option>
+                <foreach name="cidArr" item="v">
+                    <option value="<{$key}>"><{$v}></option>
+                </foreach>
+            </select>
+        </div>
+        <button type="submit" class="btn" name="submit" >搜索</button>
+    </form>
+</div>
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading">新闻列表</div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>编号</th>
+                <th>标题</th>
+                <th>分类</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <volist name="list" id="vo">
+                <tr>
+                    <td><{$vo.id}></td>
+                    <td><a href="__CONTROLLER__/editor/id/<{$vo.id}>"><{$vo.title}></a></td>
+                    <td><{$cidArr[$vo['cid']]}></td>
+                    <td>
+                        <a href="__CONTROLLER__/editor/id/<{$vo.id}>" >编辑</a>
+                        <a class="deleteA" href="__CONTROLLER__/del/id/<{$vo.id}>" >删除</a>
+                    </td>
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+    </div>
+    <div><{$page}></div>
+</div>
+<script>
+    $(window).ready(function(){
+        $('select[name="cid"]').val("<{$Think.get.cid|default=''}>");
+    });
+</script>

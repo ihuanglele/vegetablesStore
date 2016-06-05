@@ -33,6 +33,22 @@ class CommonController extends Controller
 
 
     /**
+     * 检测操作权限
+     * @param array $access
+     * @return bool
+     */
+    public function checkRole($access){
+        $role = session('role');
+        if(is_array($access) && in_array($role,$access)){
+            return true;
+        }else if($role==$access){
+            return true;
+        }else{
+            $this->error('没有操作权限');die;
+        }
+    }
+
+    /**
      * 管理员登录
      */
     public final function login(){
@@ -42,22 +58,15 @@ class CommonController extends Controller
             $pw = I('post.pw','');
             $map['name'] = $user;
             $map['password'] = md5($pw);
-            $info = M('Admin')->field('name,aid')->where($map)->find();
+            $info = M('Admin')->field('name,aid,role')->where($map)->find();
             if($info){
                 if($info['role']==0){
-                    session('aid',$info['aid']);
-                    session('name',$info['user']);
-                    $this->success('欢迎回来管理员',U('index/index'));
+                    die('该账户已被限制，请联系管理员');
                 }else{
-                    if($info['status']==0){
-                        $this->error('用户等待审核');
-                    }elseif($info['status']==1){
-                        session('aid',$info['aid']);
-                        session('name',$info['name']);
-                        $this->success('登录成功',U('index/index'));
-                    }elseif($info['status']==2){
-                        $this->error('该账户已被封，请联系管理员',U('index/index'));
-                    }
+                    session('aid',$info['aid']);
+                    session('name',$info['name']);
+                    session('role',$info['role']);
+                    $this->success('登录成功',U('index/index'));
                 }
             }else{
                 $this->error('用户名不存在或者密码错误');

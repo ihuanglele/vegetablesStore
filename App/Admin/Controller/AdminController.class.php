@@ -22,9 +22,9 @@ class AdminController extends CommonController
             $map['user'] = array('like','%'.$user.'%');
         }
         $this->assign('user',$user);
-        $map['role'] = 0;
         $M = M('Admin');
         $order = 'aid desc';
+        $this->assign('AdminRole',C('AdminRole'));
         $this->getData($M,$map,$order);
         $this->display('index');
     }
@@ -33,6 +33,7 @@ class AdminController extends CommonController
      * 删除一个用户，不能删除自己
      */
     public function deluser(){
+        $this->checkRole(1);
         $id = I('get.id');
         if($id == $this->aid) $this->error('不能删除自己');
         $M = M('Admin');
@@ -47,6 +48,7 @@ class AdminController extends CommonController
      * 添加一个用户
      */
     public function adduser(){
+        $this->checkRole(1);
         if(isset($_POST['submit'])){
             $name = I('post.name');
             $pwd = I('post.pwd');
@@ -64,7 +66,39 @@ class AdminController extends CommonController
                 $this->error('添加失败');
             }
         }else{
+            $this->assign('role',C('AdminRole'));
             $this->display('adduser');
+        }
+    }
+
+    /**
+     * 查看一个管理员的详细信息
+     */
+    public function detail(){
+        $this->checkRole(1);
+        $id = I('get.id');
+        $info = M('admin')->find($id);
+        $this->assign('info',$info);
+        $this->assign('role',C('AdminRole'));
+        $this->display('detail');
+    }
+
+    /**
+     * 修改管理员信息
+     */
+    public function update(){
+        $this->checkRole(1);
+        if(isset($_POST['submit'])){
+            $aid = I('post.aid');
+            $data['aid'] = $aid;
+            $pwd = I('post.pwd');
+            if($pwd)    $data['password'] = md5($pwd);
+            $role = I('post.role');
+            $data['role'] = $role;
+            M('admin')->save($data);
+            $this->success('操作成功');
+        }else{
+            $this->error('页面不存在');
         }
     }
 
@@ -96,89 +130,20 @@ class AdminController extends CommonController
         }
     }
 
-    /**
-     * 帮助文档
-     */
-    public function help(){
-        if(isset($_POST['submit'])){
-            $help = $_POST['help'];
-            writeConf('userHelpDoc',$help);
-        }else{
-            $help = readConf('userHelpDoc');
-        }
-        $this->assign('help',$help);
-        $this->display('help');
-    }
+
 
     /**
-     * 联系客服
+     * 公司信息
      */
-    public function kefu(){
+    public function info(){
+        $this->checkRole(array(1,2));
         if(isset($_POST['submit'])){
-            $kefu = $_POST['kefu'];
-            writeConf('userKeFuDoc',$kefu);
-        }else{
-            $kefu = readConf('userKeFuDoc');
+            $data = $_POST;
+            writeConf('CompanyInfo',json_encode($data));
         }
-        $this->assign('kefu',$kefu);
-        $this->display('kefu');
-    }
-
-    /**
-     * 后台通知
-     */
-    public function note(){
-        if(isset($_POST['submit'])){
-            $note = $_POST['note'];
-            writeConf('adminNoteDoc',$note);
-        }else{
-            $note = readConf('adminNoteDoc');
-        }
-        $this->assign('note',$note);
-        $this->display('note');
-    }
-
-    /**
-     * 设置商家默认密码
-     */
-    public function setDefaultPwd(){
-        if(isset($_POST['submit'])){
-            $pwd = $_POST['pwd'];
-            writeConf('adminDefaultPwd',$pwd);
-        }else{
-            $pwd = readConf('adminDefaultPwd');
-        }
-        $this->assign('pwd',$pwd);
-        $this->display('setPwd');
-
-    }
-
-    /**
-     * 网站商家注册
-     */
-    public function openReg(){
-        if(isset($_POST['submit'])){
-            $s = $_POST['s'];
-            writeConf('openshangRegister',$s);
-        }else{
-            $s = readConf('openshangRegister');
-        }
-        $this->assign('s',$s);
-        $this->display('openReg');
-    }
-
-    /**
-     * 设置邮箱
-     */
-    public function setAdminEmail(){
-        if(isset($_POST['submit'])){
-            $value = $_POST['value'];
-            writeConf('adminEmail',$value);
-        }else{
-            $value = readConf('adminEmail');
-        }
-        $this->assign('value',$value);
-        $this->display('setAdminEmail');
+        $info = readConf('CompanyInfo');
+        $this->assign('info',json_decode($info,true));
+        $this->display('info');
     }
 
 }

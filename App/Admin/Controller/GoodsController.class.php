@@ -12,6 +12,11 @@ namespace Admin\Controller;
 class GoodsController extends CommonController
 {
 
+    public function _initialize(){
+        parent::_initialize();
+        $this->checkRole(array(1,4));
+    }
+
     /**
      * 列出所有商品
      */

@@ -1,0 +1,53 @@
+<div id="help">
+    <div class="">
+        <form action="<{:U('help/index')}>" method="get">
+            <table>
+                <tbody>
+                <tr>
+                    <td>分类</td>
+                    <td>文章ID</td>
+                    <td>标题</td>
+                    <td rowspan="2">
+                        <input class="btnCtn" type="submit" value="搜索">
+                    </td>
+                    <td rowspan="2">
+                        <a class="btnCtn" href="<{:U('Help/add')}>" >发布新帮助</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <select name="cid">
+                            <option value="">全部</option>
+                            <foreach name="cidArr" item="v">
+                                <option value="<{$key}>"><{$v}></option>
+                            </foreach>
+                        </select>
+                    </td>
+                    <td><input placeholder="文章ID" type="text" name="id" value="<{$id}>" size="6" ></td>
+                    <td><input placeholder="文章标题" type="text" name="word" value="<{$word}>" ></td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <div>
+        <notempty name="list">
+            <table>
+                <volist name="list" id="vo">
+                    <tr>
+                        <td style="text-align: center"><{$vo.title}></td>
+                        <td><a href="__CONTROLLER__/editor/id/<{$vo.id}>" >编辑</a></td>
+                        <td><a href="__CONTROLLER__/del/id/<{$vo.id}>" >删除</a></td>
+                    </tr>
+                </volist>
+            </table>
+            <else />
+            <p>没有记录</p>
+        </notempty>
+    </div>
+    <script>
+        $(window).ready(function(){
+            $('select[name="cid"]').val("<{$cid|default=''}>");
+        });
+    </script>
+</div>

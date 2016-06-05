@@ -12,6 +12,11 @@ namespace Admin\Controller;
 class OrdersController extends CommonController
 {
 
+    public function _initialize(){
+        parent::_initialize();
+        $this->checkRole(array(1,4));
+    }
+
     /**
      * 订单列表
      */

@@ -12,6 +12,8 @@ use Admin\Controller;
 class UserController extends CommonController
 {
 
+
+
     /**
      * 列出所有的微信用户
      */

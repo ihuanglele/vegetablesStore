@@ -38,6 +38,7 @@ class AdminController extends CommonController
         if($id == $this->aid) $this->error('不能删除自己');
         $M = M('Admin');
         if($M->delete($id)){
+            record('删除管理员ID'.$id);
             $this->success('删除成功');
         }else{
             $this->error('删除失败');
@@ -60,7 +61,9 @@ class AdminController extends CommonController
             $data['time'] = time();
             $data['role'] = 0;
             $data['status'] = 0;
-            if($M->add($data)){
+            $id = $M->add($data);
+            if($id){
+                record('添加管理员ID'.$id);
                 $this->success('添加成功',U('index'));
             }else{
                 $this->error('添加失败');
@@ -96,6 +99,7 @@ class AdminController extends CommonController
             $role = I('post.role');
             $data['role'] = $role;
             M('admin')->save($data);
+            record('修改管理员信息,ID'.$aid);
             $this->success('操作成功');
         }else{
             $this->error('页面不存在');
@@ -121,6 +125,7 @@ class AdminController extends CommonController
             $data['aid'] = $this->aid;
             $data['password'] = md5($newpwd);
             if($M->save($data)){
+                record('修改了自己的密码');
                 $this->success('修改成功',U('index'));
             }else{
                 $this->error('修改失败');
@@ -130,6 +135,20 @@ class AdminController extends CommonController
         }
     }
 
+    /**
+     * 查看日志
+     */
+    public function record(){
+        $map = array();
+        $aid = I('get.aid');
+        if($aid){
+            $map['aid'] = $aid;
+        }
+        $this->assign('aid',$aid);
+
+        $this->getData(M('admin_action'),$map,'id desc');
+        $this->display();
+    }
 
 
     /**
@@ -139,6 +158,7 @@ class AdminController extends CommonController
         $this->checkRole(array(1,2));
         if(isset($_POST['submit'])){
             $data = $_POST;
+            record('修改了公司信息');
             writeConf('CompanyInfo',json_encode($data));
         }
         $info = readConf('CompanyInfo');

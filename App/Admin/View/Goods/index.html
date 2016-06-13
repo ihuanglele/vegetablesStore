@@ -44,11 +44,23 @@
         <table class="table">
             <thead>
             <tr>
-                <th>商品ID</th>
+                <th>
+                    <a class="btn btn-default <eq name="sort" value="gid">active</eq>" href="<{:U('index',array('sort'=>'gid','or'=>$or))}>">
+                        商品ID<i class="glyphicon <{$cls}>"></i>
+                    </a>
+                </th>
                 <th>商品名</th>
                 <th>状态</th>
-                <th>库存</th>
-                <th>销量</th>
+                <th>
+                    <a class="btn btn-default <eq name="sort" value="left_num">active</eq>" href="<{:U('index',array('sort'=>'left_num','or'=>$or))}>">
+                    库存<i class="glyphicon <{$cls}>"></i>
+                    </a>
+                </th>
+                <th>
+                    <a class="btn btn-default <eq name="sort" value="sold_num">active</eq>" href="<{:U('index',array('sort'=>'sold_num','or'=>$or))}>">
+                    销量<i class="glyphicon <{$cls}>"></i>
+                    </a>
+                </th>
                 <th>操作</th>
             </tr>
             </thead>

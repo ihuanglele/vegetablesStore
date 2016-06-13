@@ -1,0 +1,49 @@
+<form class="form-horizontal" action="<{:U('index')}>" method="get">
+    <div class="row">
+        <div class="col-xs-3">
+            <div class="form-group">
+                <label class="sr-only">管理员ID</label>
+                <div class="input-group">
+                    <div class="input-group-addon">管理员ID</div>
+                    <input type="text" class="form-control" id="aid" name="aid" placeholder="需要查询的管理员ID" value="<{$uid}>">
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-2 ">
+            <button type="submit" class="btn btn-primary">搜索</button>
+        </div>
+    </div>
+</form>
+<script>
+    $(window).ready(function(){
+        $('select[name="status"]').val('<{$status}>');
+    })
+</script>
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            操作记录列表
+        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>管理员ID</th>
+                <th>时间</th>
+                <th>IP</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <volist name="list" id="vo">
+                <tr>
+                    <td><{$vo.aid}></td>
+                    <td><{$vo.time|Mydate}></td>
+                    <td><{$vo.ip}></td>
+                    <td><{$vo['action']}></td>
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+    </div>
+    <div><{$page}></div>
+</div>

@@ -37,6 +37,12 @@ class UserController extends CommonController
         }
         $this->assign('status',$status);
 
+        $phone = I('get.phone');
+        if($phone){
+            $map['phone'] = $phone;
+        }
+        $this->assign('phone',$phone);
+
         $M = M('user');
         $order = 'uid desc';
         $this->getData($M,$map,$order);
@@ -72,8 +78,10 @@ class UserController extends CommonController
         $User->startTrans();
 
         if($status==5){     //扣除
+            $Type = '扣除';
             $r1 = $User->where('uid='.$uid)->setDec('money',$amount);
         }else if($status==4){     //添加
+            $Type = '添加';
             $r1 = $User->where('uid='.$uid)->setInc('money',$amount);
         }
 
@@ -86,6 +94,7 @@ class UserController extends CommonController
 
         if($r1 && $r2){
             $User->commit();
+            record("操作了".$uid.'号用户的财务，'.$Type.'了'.$amount);
             $this->success('添加成功');
         }else{
             $User->rollback();
@@ -148,6 +157,8 @@ class UserController extends CommonController
             $data['aid'] = $aid;
             $data['rate'] = $rate;
             if($M->save($data)){
+                $Status = C('UserStatue');
+                record("操作了".$aid.'号商户信息，状态：'.$Status[$data['status']].'，分成比例：'.$rate);
                 $this->success('更新成功');
             }else{
                 $this->error('更新失败');
@@ -192,8 +203,10 @@ class UserController extends CommonController
         $User->startTrans();
 
         if($status==5){     //扣除
+            $Type = '扣除';
             $r1 = $User->where('aid='.$aid)->setDec('money',$amount);
         }else if($status==4){     //添加
+            $Type = '添加';
             $r1 = $User->where('aid='.$aid)->setInc('money',$amount);
         }
 
@@ -206,6 +219,7 @@ class UserController extends CommonController
 
         if($r1 && $r2){
             $User->commit();
+            record("操作了".$aid.'号商户的财务，'.$Type.'了'.$amount);
             $this->success('添加成功');
         }else{
             $User->rollback();

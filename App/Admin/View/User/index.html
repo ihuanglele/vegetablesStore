@@ -6,7 +6,7 @@
 </style>
 <form class="form-horizontal" action="<{:U('index')}>" method="get">
     <div class="row">
-        <div class="col-xs-3">
+        <div class="col-xs-2">
             <div class="form-group">
                 <label class="sr-only">用户ID</label>
                 <div class="input-group">
@@ -15,12 +15,21 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-5">
+        <div class="col-xs-3">
             <div class="form-group">
                 <label class="sr-only" for="name">用户昵称</label>
                 <div class="input-group">
                     <div class="input-group-addon">用户昵称</div>
                     <input type="text" class="form-control" id="name" name="name" placeholder="填写用户昵称" value="<{$name}>">
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-3">
+            <div class="form-group">
+                <label class="sr-only" for="name">用户手机</label>
+                <div class="input-group">
+                    <div class="input-group-addon">用户手机</div>
+                    <input type="text" class="form-control" name="phone" placeholder="填写用户手机" value="<{$phone}>">
                 </div>
             </div>
         </div>
@@ -53,6 +62,7 @@
                 <th>用户ID</th>
                 <th>头像</th>
                 <th>昵称</th>
+                <th>手机</th>
                 <th>积分</th>
                 <th>余额</th>
                 <th>更多</th>
@@ -64,6 +74,7 @@
                     <td><{$vo.uid}></td>
                     <td><img class="headimg" src="<{$vo.headimgurl}>" /></td>
                     <td><{$vo.nickname}></td>
+                    <td><{$vo.phone}></td>
                     <td><{$vo.coin}></td>
                     <td><{$vo['money']}></td>
                     <td><a href="<{:U('user/userInfo',array('uid'=>$vo['uid']))}>">更多</a></td>

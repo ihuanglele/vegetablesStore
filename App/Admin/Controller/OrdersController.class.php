@@ -91,6 +91,7 @@ class OrdersController extends CommonController
             $data['ex_time'] = time();
             $M = M('orders');
             if($M->save($data)){
+                record("更新了".$_POST['oid'].'号订单信息');
                 $this->success('处理成功');
             }else{
                 $this->error('修改失败');
@@ -114,6 +115,68 @@ class OrdersController extends CommonController
         }else{
             $this->error('订单当前状态不可取消');
         }
+    }
+
+    /**
+     * 导出订单
+     */
+    public function export(){
+        $starTime = strtotime(date('Y-m-d'))-7*24*3600;
+        $endTime = time();
+        $this->assign('starTime',$starTime);
+        $this->assign('endTime',$endTime);
+        $this->display('export');
+    }
+
+    public function exportOrder(){
+        C('SHOW_PAGE_TRACE',false);
+        $t = I('get.t');
+        if($t){
+            //直接查询某个特定时间段
+            $endTime = strtotime(date('Y-m-d 23:59:59'))+1;
+            switch($t){
+                case 'month':$starTime = strtotime(date("Y-m-1 00:00:00"));break;//本月
+                case '15':$starTime = $endTime-15*24*3600;break;   //15天
+                case '30':$starTime = $endTime-30*24*3600;break;   //30天
+                default:$starTime = strtotime(date('Y-m-1 00:00:00'));break;//本月
+            }
+        }else{
+            $t1 = I('get.t1',0);
+            $starTime = $t1?strtotime($t1):0;
+            if($starTime==0){
+                $starTime = strtotime(date('Y-m-d'))-7*24*3600;
+            }
+            $t2 = I('get.t2',0);
+            $endTime = $t1?strtotime($t2):0;
+            if($endTime==0){
+                $endTime = time();
+            }
+        }
+        $map['time'] = array(array('egt',$starTime),array('elt',$endTime));
+        $list = $this->getData(M('orders'),$map,'trade desc');
+        $data = array();
+        $Status = C('OrdersStatus');
+        foreach($list as $v){
+            $addr = json_decode($v['address_info'],true);
+            $t[] = $v['trade'];
+            $t[] = Mydate($v['create_time']);
+            $t[] = Mydate($v['pay_time']);
+            $t[] = $Status[$v['status']];
+            $t[] = $addr['name'];
+            $t[] = $addr['tel'];
+            $t[] = $addr['address'];
+            $goods = json_decode($v['goods_info']);
+            foreach($goods as $g){
+                $t[] = $g['gid'];
+                $t[] = $g['pay_each_price'];
+                $t[] = $g['buy_num'];
+                $data[] = $t;
+            }
+
+        }
+        $title = array('订单号','创建时间','支付时间','状态','收件人姓名','收件人电话','收件地址','商品ID','购买单价','购买数量');
+
+        exportexcel($data,$title,date('m-d H:i').'导出订单');
     }
 
 }

@@ -173,7 +173,7 @@ class GoodsController extends CommonController
      */
     public function export(){
         C('SHOW_PAGE_TRACE',false);
-        $list = M('goods')->order('gid desc')->field('gid,name,cose_price,vip_price,buy_price,market_price,sold_num,left_num,cid,status');
+        $list = M('goods')->order('gid desc')->field('gid,name,cose_price,vip_price,buy_price,market_price,sold_num,left_num,cid,status')->select();
         $type = readConf('goodsType');
         $Cid = json_decode($type,true);
         $Status = C('GoodsStatus');

@@ -5,6 +5,11 @@ mchid    1334616001
 key  WeixingTianxia043187956777wxtx00
 appid  wx3a7c3b2d733010db
 
+//临时应用
+dingyingezu@sina.com  dingyingezu123
+'AppID' => 'wxcf843d2e9c7d6623',
+'AppSecret' => '8cabd200b73c97753b67832d6674e903',
+
 统一字段说明
     订单号生成方式 date("YmdHis").当前微秒数。
 

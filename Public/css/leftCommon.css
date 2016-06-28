@@ -1,0 +1,48 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+.leftProView{width:208px;border:1px solid #ccc; margin-top:33px;}
+.leftProView .leftProView_title{ width:208px; height:49px;border-bottom:1px solid #ccc; text-align:center; color:#6B916C;  font-size:18px; line-height:49px;}
+.leftProView .leftProView_cont{ width:208px; }
+.leftProView .leftProView_cont .preView{ width:208px; cursor:pointer; }
+.leftProView .leftProView_cont .nextView{ width:208px; cursor:pointer; }
+.leftProView .leftProView_cont .viewBox{ width:180px;  position:relative;  padding:14px 0px; margin:0 auto;}
+
+.leftProView .leftProView_cont .viewBox .proList{ width:180px; }
+.leftProView .leftProView_cont .viewBox .proList li{ width:180px; margin-right:13px; height:230px; }
+.leftProView .leftProView_cont .viewBox .proList li.mr0{ margin-right:0px;}
+.leftProView .leftProView_cont .viewBox .proList li .showPic{width:180px;}
+.leftProView .leftProView_cont .viewBox .proList li .showPic img{width:180px; height:180px;}
+.leftProView .leftProView_cont .viewBox .proList li .showInfo{ width:180px;}
+.leftProView .leftProView_cont .viewBox .proList li .showInfo .showInfo_col1{ width:115px; float:left;}
+.leftProView .leftProView_cont .viewBox .proList li .showInfo .showInfo_col2{ width:65px; float:right;}
+.leftProView .leftProView_cont .viewBox .proList li .showInfo .showInfo_col1 .name{ color:#5A5A5A; font-size:14px; margin-top:5px; width:125px;  display:inline-block; white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.leftProView .leftProView_cont .viewBox .proList li .showInfo .showInfo_col1 .desc1{ color:#AFAFAF; line-height:18px; display:inline-block; height:35px;/*white-space:nowrap;*/overflow:hidden;/*text-overflow:ellipsis;*/}
+.leftProView .leftProView_cont .viewBox .proList li .showInfo .showInfo_col1 .desc2{ color:#AFAFAF; line-height:14px; display:none;}
+
+.leftProView .leftProView_cont .viewBox .proList li .showInfo .showInfo_col2 .price{ color:#AC050F; text-align:right; margin-top:5px;}
+.leftProView .leftProView_cont .viewBox .proList li .showInfo .showInfo_col2 .price i{ color:#AC050F; font-size:12px;}
+.leftProView .leftProView_cont .viewBox .proList li .showInfo .showInfo_col2 .price span{ font-size:16px;}
+.leftProView .leftProView_cont .viewBox .proList li .showInfo2{width:180px; color:#AFAFAF; line-height:16px; display:inline-block; height:16px;/*white-space:nowrap;*/overflow:hidden;/*text-overflow:ellipsis;*/}
+
+
+
+.leftProView{width:208px;border:1px solid #ccc; margin-top:33px;}
+.leftProView .leftProView_title{ width:208px; height:49px; border-bottom:1px solid #ccc;text-align:center; color:#6B916C;  font-size:18px; line-height:49px;}
+.leftProView .leftProView_cont2{ width:208px; }
+.leftProView .leftProView_cont2 .preView{ width:208px; cursor:pointer; display:none;}
+.leftProView .leftProView_cont2 .nextView{ width:208px; cursor:pointer; display:none; }
+.leftProView .leftProView_cont2 .viewBox{ width:180px;  position:relative;  padding:14px 0px; margin:0 auto;}
+
+.leftProView .leftProView_cont2 .viewBox .proList{ width:180px; }
+.leftProView .leftProView_cont2 .viewBox .proList li{ width:180px; height:80px; margin-right:13px; }
+.leftProView .leftProView_cont2 .viewBox .proList li.mr0{ margin-right:0px;}
+.leftProView .leftProView_cont2 .viewBox .proList li .showPic{width:60px; float:left;}
+.leftProView .leftProView_cont2 .viewBox .proList li .showPic img{width:60px; height:60px;}
+.leftProView .leftProView_cont2 .viewBox .proList li .showInfo{ width:110px; float:left; margin-left:10px;}
+.leftProView .leftProView_cont2 .viewBox .proList li .showInfo .name{ color:#5A5A5A; font-size:14px; width:125px;  display:inline-block; white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.leftProView .leftProView_cont2 .viewBox .proList li .showInfo .desc1{ color:#AFAFAF; line-height:18px; display:inline-block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; width:110px;}
+.leftProView .leftProView_cont2 .viewBox .proList li .showInfo .price{ color:#AC050F; margin-top:0px;}
+.leftProView .leftProView_cont2 .viewBox .proList li .showInfo .price i{ color:#AC050F; font-size:12px;}
+.leftProView .leftProView_cont2 .viewBox .proList li .showInfo .price span{ font-size:14px;}

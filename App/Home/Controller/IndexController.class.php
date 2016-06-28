@@ -4,13 +4,23 @@ use Think\Controller;
 class IndexController extends Controller {
 
     public function index(){
-        $arr[] = array('gid'=>1,'pay_each_price'=>3,'discount'=>'9');
-        $arr[] = array('gid'=>223423423,'pay_each_price'=>3234323,'discount'=>'9');
-        $arr[] = array('gid'=>223423423,'pay_each_price'=>3234323,'discount'=>'9');
-        $arr[] = array('gid'=>223423423,'pay_each_price'=>3234323,'discount'=>'9');
-        $arr[] = array('gid'=>223423423,'pay_each_price'=>3234323,'discount'=>'9');
-        $str = json_encode($arr);
-        echo strlen($str);
+        $Tool = A('Tool');
+        $map['status'] = 2;
+        $order = 'sold_num desc';
+        $data = $Tool->getGoods($map,4,$order);
+        $this->assign('hots',$data);
+
+        $goodsType = json_decode(readConf('goodsType'),true);
+        foreach($goodsType as $k=>$v){
+            $map['cid'] = $k;
+            $data = $Tool->getGoods($map,8,$order);
+            $lists[] = array('title'=>$v,'data'=>$data,'type'=>$k);
+        }
+
+        $this->assign('lists',$lists);
+
+        $this->display('index');
     }
+
 
 }

@@ -127,85 +127,6 @@ function getNonceStr($length = 32)
 }
 
 
-/**
- * @param $tid 任务ID
- */
-function sendZhongJiangTempMsg($tid){
-    $taskInfo = M('task')->field('name,times,market_price,price,end_time,winner')->find($tid);
-    if($taskInfo){
-        $guessInfo = M('guess')->field('uid,time')->find($taskInfo['winner']);
-        //查询用户openid
-        $userInfo = M('user')->field('openid,subscribe')->find($guessInfo['uid']);
-        if($userInfo['subscribe']){
-            $data['touser'] = $userInfo['openid'];
-            $data['template_id'] = '4Sn1KVnKk_O-_1zLcSM2YMUh5EGBgZyxPraIdDQU2EY';
-            $data['url'] = U('user/mywin','',true,true);
-            $arr['result'] = array('value'=>'恭喜您，中奖啦！','color'=>'#173177');
-            $arr['totalWinMoney'] = array('value'=>'价值'.$taskInfo['market_price'].'元','color'=>'#173177');
-            $arr['issueInfo'] = array('value'=>$taskInfo['name'].'第'.$taskInfo['times'].'期','color'=>'#173177');
-            $arr['fee'] = array('value'=>$taskInfo['price'].'元','color'=>'#173177');
-            $arr['betTime'] = array('value'=>Mydate($guessInfo['time']),'color'=>'#173177');
-            $arr['remark'] = array('value'=>'详情请登陆官网查看','color'=>'#173177');
-            $data['data'] = $arr;
-            $post = json_encode($data,true);
-            $url = 'https://api.weixin.qq.com/cgi-bin/message/template/send?access_token='.getWxAccessToken();
-            $res = myCurl($url,array(CURLOPT_POST=>true,CURLOPT_POSTFIELDS=>$post));
-            return $res;
-        }else{//没有关注
-            return '没有关注';
-        }
-    }else{//查询中奖信息失败
-        return '查询中奖信息失败';
-    }
-}
-
-function sendTaskTempMsg($id,$type){
-    if($type=='task'){
-        $first = '你发布的任务有新进度';
-        $Status = C('TaskStatus');
-    }elseif($type=='goods'){
-        $first = '你的商品状态更新了';
-        $Status = C('GoodsStatus');
-    }
-    $info = M($type)->field('aid,name,status')->find($id);
-    if($info){
-        $user = M('admin')->field('wx_openid,user')->find($info['aid']);
-        if($user['wx_openid']){
-            $data['touser'] = $user['wx_openid'];
-            $data['template_id'] = 'C3QfusfneaqNt4mvteI1t9YUvLEl9Ol-RfZ3BJTDALg';
-            $data['url'] = U('../admin.php/common/login','',true,true);
-            $arr['first'] = array('value'=>$first,'color'=>'#173177');
-            $arr['keyword1'] = array('value'=>$info['name'],'color'=>'#173177');
-            $arr['keyword2'] = array('value'=>$Status[$info['status']],'color'=>'#173177');
-            $arr['keyword3'] = array('value'=>$Status[$info['status']],'color'=>'#173177');
-            $arr['remark'] = array('value'=>'详情请登陆官网查看','color'=>'#173177');
-            $data['data'] = $arr;
-            $post = json_encode($data,true);
-            $url = 'https://api.weixin.qq.com/cgi-bin/message/template/send?access_token='.getWxAccessToken();
-            $res = myCurl($url,array(CURLOPT_POST=>true,CURLOPT_POSTFIELDS=>$post));
-            return $res;
-        }
-    }else{
-        return false;
-    }
-}
-
-function sendOrderTempMsg($openid,$data){
-    $data['touser'] = $openid;
-    $data['template_id'] = '8yc4WCRCIGlUGMrTc_MFM1Hrfm2EHSRjE9H3tYqsi6c';
-    $data['url'] = U('../admin.php/common/login','',true,true);
-    $arr['first'] = array('value'=>'你有商品被购买','color'=>'#173177');
-    $arr['keyword1'] = array('value'=>$data['buyer'],'color'=>'#173177');
-    $arr['keyword2'] = array('value'=>$data['name'],'color'=>'#173177');
-    $arr['keyword3'] = array('value'=>$data['money'],'color'=>'#173177');
-    $arr['remark'] = array('value'=>'详情请登陆官网查看','color'=>'#173177');
-    $data['data'] = $arr;
-    $post = json_encode($data,true);
-    $url = 'https://api.weixin.qq.com/cgi-bin/message/template/send?access_token='.getWxAccessToken();
-    $res = myCurl($url,array(CURLOPT_POST=>true,CURLOPT_POSTFIELDS=>$post));
-    return $res;
-}
-
 function sendAdminEmail($type){
     $to = readConf('adminEmail');
     if($to){
@@ -254,4 +175,36 @@ function send_mail($to, $name, $subject = '', $body = '', $attachment = null){
         }
     }
     return $mail->Send() ? true : $mail->ErrorInfo;
+}
+
+/**
+ * 微信扫码登录
+ */
+function wxScanLogin(){
+    $ticket = $this->getTicket();
+    if($ticket){
+        $qrUrl = 'https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket='.urldecode($ticket);
+        return $qrUrl;
+    }else{
+        return false;
+    }
+}
+
+/**
+ * http请求方式: POST
+ *   URL: https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=TOKENPOST数据格式：json
+ *   POST数据例子：{"action_name": "QR_LIMIT_SCENE", "action_info": {"scene": {"scene_id": 123}}}
+ * 或者也可以使用以下POST数据创建字符串形式的二维码参数：
+ * {"action_name": "QR_LIMIT_STR_SCENE", "action_info": {"scene": {"scene_str": "123"}}}
+ */
+function getTicket($data){
+    $url = 'https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token='.getWxAccessToken();
+    $data = '{"action_name": "QR_LIMIT_STR_SCENE", "action_info": {"scene": {"scene_str": "'.session('uid').'"}}}';
+    $curlArr = array(CURLOPT_POSTFIELDS=>$data);
+    $res = json_decode(myCurl($url,$curlArr),true);
+    if(isset($res['ticket'])){
+        return $res['ticket'];
+    }else{
+        return false;
+    }
 }

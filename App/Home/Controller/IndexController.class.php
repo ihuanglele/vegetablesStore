@@ -16,7 +16,7 @@ class IndexController extends Controller {
             $data = $Tool->getGoods($map,8,$order);
             $lists[] = array('title'=>$v,'data'=>$data,'type'=>$k);
         }
-
+        $this->assign('goodsType',$goodsType);
         $this->assign('lists',$lists);
 
         $this->display('index');

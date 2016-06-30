@@ -1,0 +1,516 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>多利农庄,有机蔬菜,安心食材,优质食品网上一站式购物平台</title>
+    <meta name="Keywords" content="有机蔬菜,有机食品,安心食材,优质食材,天然食品,绿色食品,有机,蔬菜水果,肉蛋禽奶,海鲜,水产,粮油,副食,多利农庄,多利,商务礼品,礼品册,礼品卡,礼品定制,高端"/>
+    <meta name="Description" content="多利农庄官网上海规模最大专业从事有机蔬菜种植和销售的有机农庄,采用从田间到餐桌直供会员服务模式,为消费者提供安全、健康的有机蔬菜,全国销售热线：400-820-2162"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta property="qc:admins" content="245206746764761361256375" />
+    <meta property="wb:webmaster" content="f31800f5c956271d" />
+
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/common.css" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/index.css" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/slide.css" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/login.css" />
+
+    <link href="__PUBLIC__/css/login.css" rel="stylesheet" type="text/css">
+    <script src="__PUBLIC__/js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/global.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/site.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/login.js"></script>
+    <script>
+        $(function(){
+//登录注册tab切换
+            $("#loginTab").live("click",function(){
+                resetLoginForm();
+                $(this).addClass("curr");
+                $("#regTab").removeClass("curr");
+                $(".log").show();
+                $(".reg").hide();
+                $("#div_active").hide();
+            });
+
+            $("#regTab").live("click",function(){
+                resetMobileRegForm();
+                $(this).addClass("curr");
+                $("#loginTab").removeClass("curr");
+                $(".reg").show();
+                $(".log").hide();
+                $("#div_active").hide();
+            });
+
+
+            $("#emailReg").live("click",function(){
+                resetEmailRegForm();
+                $(".emailRegT").show();
+                $(".phoneRegT").hide();
+            });
+
+            $("#phoneReg").live("click",function(){
+                resetMobileRegForm();
+                $(".phoneRegT").show();
+                $(".emailRegT").hide();
+            });
+
+        })
+    </script>
+
+    <script src="__PUBLIC__/js/common.js"></script>
+    <script src="__PUBLIC__/js/index.js"></script>
+    <script src="__PUBLIC__/js/jquery.flexslider-min.js"></script>
+
+    <script type="text/javascript" src="__PUBLIC__/js/global.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/tonysfarm-global.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/cookie.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/cart.js?t=20160322"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/login.js"></script>
+
+</head>
+<body>
+
+
+<div class="loginTip">
+    <div class="tit"><span></span>
+        <a href="javascript:void(0)" onclick="closeRegisterDialog()"></a>
+    </div>
+    <div class="loginTab_warp clearfix">
+        <ul class="loginTab">
+            <li id="loginTab" class="curr"><a href="javascript:void(0)" >-登录-</a></li>
+            <li id="regTab"><a href="javascript:void(0)" >-注册-</a></li>
+        </ul>
+    </div>
+    <div class="login_warp clearfix">
+        <input id="go" type="hidden"/>
+        <div class="login">
+            <div class="log">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="loginT">
+                    <tr>
+                        <td class="cols1"><b>*</b>邮箱/手机：</td>
+                        <td class="cols2"><input name="" type="text" class="bordersty1" id="user_name_login" />
+                            <P id="user_name_login_message"></P></td>
+                    </tr>
+                    <tr>
+                        <td class="cols1"><b>*</b>密码：</td>
+                        <td class="cols2"><input name="" type="password" class="bordersty1" id="passwd_login"/>
+                            <P id="passwd_login_message"></P></td>
+                    </tr>
+                    <tr id="login_auth_code_div" style="display: none;">
+                        <td class="cols1"><b>*</b>防伪码：</td>
+                        <td class="cols2"><input name="" type="text" class="bordersty2" id="loginJCaptcha"/>
+                            <img id="loginJCaptcha_image" src="__PUBLIC__/images/yzm.jpg" width="98" height="35" style="vertical-align:middle;" onclick="refreshCaptcha()"/>
+                            <a href="javascript:void(0);" onclick="refreshCaptcha()">换一张</a>
+                            <P id="loginJCaptcha_message"></P></td>
+                    </tr>
+                    <tr>
+                        <td class="cols1">&nbsp;</td>
+                        <td class="cols2 cols2_h"><div class="operateBox">
+                            <input name="" type="checkbox" value="" id="forever" />
+                            &nbsp;记住账户 &nbsp;&nbsp;&nbsp;&nbsp; <a href="/help/getpass.html" target="_blank">忘记密码？</a></div></td>
+                    </tr>
+                    <tr>
+                        <td  class="cols1">&nbsp;</td>
+                        <td  class="cols2 cols2_h2">
+                            <div class="operateBox">
+                                <p id="error"></p>
+                                <input name="" type="button" class="loginBtn" onclick="doLogin()" />
+                            </div>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+            <div class="reg">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="phoneRegT" id="phoneregform">
+                    <tr>
+                        <td class="cols1"><b>*</b>手机：</td>
+                        <td class="cols2"><input name="" type="text" class="bordersty1" id="mobile_input"/><a href="javascript:void(0)" id="emailReg">邮箱注册</a>
+                            <P id="mobile_input_message"></P></td>
+                    </tr>
+                    <tr>
+                        <td class="cols1"><b>*</b>短信验证码：</td>
+                        <td class="cols2"><input name="" type="text" class="bordersty1" id="authcode" /><a id="smsId" href="javascript:void(0)" onclick="sendSms()">获取短信验证码</a>
+                            <span><b>59秒</b> 验证码已发送</span>
+                            <P id="authcode_message"></P></td>
+                    </tr>
+                    <tr>
+                        <td class="cols1"><b>*</b>密码：</td>
+                        <td class="cols2"><input name="" type="password" class="bordersty1" id="password1"/>
+                            <P id="password1_message"></P></td>
+                    </tr>
+                    <tr>
+                        <td class="cols1"><b>*</b>确认密码：</td>
+                        <td class="cols2"><input name="" type="password" class="bordersty1" id="password2"/>
+                            <P id="password2_message"></P></td>
+                    </tr>
+                    <tr>
+                        <td class="cols1">&nbsp;</td>
+                        <td class="cols2 cols2_h"><div class="operateBox">
+                            <input name="" type="checkbox" value="" checked="checked" />
+                            &nbsp;<a href="/customerAgreement.html"  target="_blank">我已阅读多利农庄服务条例</a></div></td>
+                    </tr>
+                    <tr>
+                        <td  class="cols1">&nbsp;</td>
+                        <td  class="cols2"><div class="operateBox">
+                            <p id="phoneReg_error"></p>
+                            <input name="" type="button" class="regBtn" onclick="register()" />
+                        </div></td>
+                    </tr>
+                </table>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="emailRegT" id="emailregform">
+                    <tr>
+                        <td class="cols1"><b>*</b>邮箱：</td>
+                        <td class="cols2"><input name="" type="text" class="bordersty1" id="email_input" /><a href="javascript:void(0)" id="phoneReg">手机注册</a>
+                            <P id="email_input_message"></P></td>
+                    </tr>
+                    <tr>
+                        <td class="cols1"><b>*</b>密码：</td>
+                        <td class="cols2"><input name="" type="password" class="bordersty1" id="password1"/>
+                            <P id="password1_message"></P></td>
+                    </tr>
+                    <tr>
+                        <td class="cols1"><b>*</b>确认密码：</td>
+                        <td class="cols2"><input name="" type="password" class="bordersty1" id="password2"/>
+                            <P id="password2_message"></P></td>
+                    </tr>
+                    <tr>
+                        <td class="cols1">&nbsp;</td>
+                        <td class="cols2 cols2_h"><div class="operateBox">
+                            <input name="" type="checkbox" value="" checked="checked" id="checkbox"/>
+                            &nbsp;<a href="/customerAgreement.html" target="_blank">我已阅读多利农庄</a>服务条例</div></td>
+                    </tr>
+                    <tr>
+                        <td  class="cols1">&nbsp;</td>
+                        <td  class="cols2"><div class="operateBox">
+                            <p id="emailReg_error"></p>
+                            <input name="" type="button" class="regBtn" id="register_btn" onclick="register2()"/>
+                        </div></td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<!--邮箱激活-->
+<div id="win2">
+    <div class="win2box">
+
+        <div class="tit"><span>邮箱验证</span>
+            <a href="javascript:void(0)" onclick="openEmailDialog()"></a>
+        </div>
+
+        <div class="win_cont">
+            <div class="success_warp">
+                <div class="success">
+                    <div class="part1">您的账号已创建，但必须激活才能登录。我们已向您<span id="activeEmail" style="font-weight: bold"></span>邮箱发送了一封验证邮件，请前往收信。 </div>
+                    <div class="part2"><a partyid="" id="goEmail" target="_blank"><img src="__PUBLIC__/images/email_activation.jpg"></a></div>
+                    <div class="part3">
+                        <strong>没有收到验证邮件？</strong>
+                        <p>可以查看垃圾箱，邮件有可能被误认为垃圾邮件，或 <a style="margin-left: 5px" href="javascript:reSendEmail();" id="reSendEmail">点击这里</a>重新发送验证邮件。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--账户升级-->
+<div class="register-dialog" id="win3">
+    <div style="display:block;" class="winlogin">
+        <div class="tit"><span>账户升级</span>
+            <a href="javascript:void(0);" onclick="closeBindWin();"></a>
+        </div>
+        <div class="win_cont">
+            <div class="formbox">
+                <fieldset id="login" style="display: block;">
+                    <form class="loginwin" id="bind_login_form" name="bind_login_form" method="POST">
+                        <div class="entry">
+                            <div style="font-size:14px;padding-left:30px;padding-top:3px;line-height:30px;">
+                                <div style="width:80px; float:left;"><img width="80" height="80" src="__PUBLIC__/images/qqface.jpg"></div>
+                                <div style="width:300px; float:left; margin-left:20px;">来自<span id="accountTypeName"></span>的<b style="color:#359C55;"><span id="accountNickName"></span></b>，您好！
+                                    <p style="font-size:12px; line-height:22px;">若您已是多利用户，绑定账号后就可以使用<span id="accountTypeName1"></span>账号直接登录了！</p>
+                                </div>
+                                <div style="clear:both;"></div>
+                            </div>
+                        </div>
+                        <div class="entry">
+                            <input type="hidden" id="openId">
+                            <input type="hidden" id="accountType">
+                            <input type="hidden" id="nickName">
+                            <input type="hidden" id="partyId">
+                            <div style="font-size:14px;padding-left:30px;padding-top:3px;line-height:30px;">
+                                邮箱 / 手机号：<br>
+                                <input type="text" style="width:290px;" name="memberDO.email_verified" id="user_name_bind_login" class="form_input form_input_defaultvalue">
+                            </div>
+                        </div>
+                        <div class="entry" style="margin-top:-15px; margin-bottom:0px;">
+                            <div style="font-size:14px;padding-left:30px;padding-top:0px;line-height:30px;">
+                                密码：<br>
+                                <input type="password" style="width:290px;" name="memberDO.password" id="passwd_bind_login" class="form_input">
+                            </div>
+                        </div>
+                        <div class="loginerror" id="bind_error"></div>
+                        <div class="entry" style="margin-left:65px;margin-top:-6px;">
+                            <input type="button" onclick="javascript:doBind('');" style="border:0;" tabindex="8" value="登&nbsp;录" id="bindloginsubmitframe" class="btn-login2">
+                            <a onclick="closeBindWin();" href="#">以后再说，立即去购物！</a>
+                        </div>
+                    </form>
+                </fieldset>
+            </div>
+        </div><!--main end-->
+    </div>
+</div>
+
+
+
+
+<!--防伪码提示-->
+<div id="codeTip" class="codeTip">
+    <div class="tit"><span>-防伪码提示-</span><a href="javascript:void(0)"></a></div>
+    <div class="code_warp">
+        <table class="codeT" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td class="cols1"><b></b>防伪码：</td>
+                <td class="cols2">
+                    <div class="inputForm">
+                        <input name="" type="text" class="bordersty2" id="smsJCaptcha" placeholder="请输入防伪码"/>
+                        <!--<span class="code_right"></span>-->
+                        <span id="code_wrong" class="code_wrong"></span>
+                    </div>
+                </td>
+                <td class="cols3">
+                    <img src="__PUBLIC__/images/yzm.jpg" width="98" height="35" style="vertical-align:middle;" id="smsJCaptchaImg" onclick="refreshsmsCaptcha()"/>
+                    <a href="javascript:void(0);" onclick="refreshsmsCaptcha()">换一张</a>
+                </td>
+            </tr>
+            <tr>
+                <td class="cols1"></td>
+                <td colspan="2"><P id="smsJCaptcha_message"></P></td>
+            </tr>
+        </table>
+    </div>
+    <div class="footer">
+        <input type="button" class="confirmNotice" onclick="sendSms()">
+    </div>
+</div>
+<!--防伪码提示-->
+
+
+
+<div class="thickdiv"></div>
+<div class="topAdWarpper">
+    <div class="topAd"><a href="/item/productdetail-1519.html" target="_blank"></a></div>
+</div>
+
+<div class="headerWapper">&nbsp;
+    <div class="header clearfix">
+        <div class="topbar">
+            <div class="tel"><i></i><span>400-820-2162</span></div>
+            <div class="fastLoginBox">
+                <span id="regId"><a href="/login.html?id=1" >注册</a></span>
+                <span id="none"> | </span>
+                <span id="logId"><a href="/login.html?id=0" >登录</a></span>
+            </div>
+        </div>
+        <div class="logo"><a href="/index.html"><img src="__PUBLIC__/images/logo.jpg" /></a></div>
+        <div class="header_r">
+            <div class="header_r_t clearfix">
+                <div class="searchBox_warp">
+                    <div class="searchBox" id="searchBox">
+                        <input name="" type="text" class="searchInput" placeholder="草莓酱" value="" id="searchInput_header"/>
+                        <input name="" type="button" class="searchBtn" id="searchBtn" value="搜索" onclick="search_product('searchInput_header')"/>
+                        <input type="hidden" id="keyword"/>
+                        <input type="hidden" id="from"/>
+                        <input type="hidden" id="to"/>
+                        <input type="hidden" id="pg"/>
+                    </div>
+                </div>
+            </div>
+            <div class="header_r_b clearfix">
+                <!-- 主导航开始 -->
+                <div class="navBox">
+                    <ul class="nav clearfix">
+                        <li><a href="/index.html" class="nav1"><span>首页</span></a></li>
+                        <li>
+                            <a href="/vegbox/deliveryPackage.html" class="nav2"><span>宅配套餐</span></a>
+                            <div class="subNav" style="width:78px;">
+                                <div class="suvNavList">
+                                    <p><a class="zhaipei" href="/vegbox/deliveryPackage.html">有机宅配菜箱</a></p>
+                                    <p><a class="zhaipei"  href="/vegbox/deliveryPackage1.html">精品宅配菜箱</a></p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="#" class="nav3"><span>优选食材</span></a>
+                            <div class="subNav" style="width:78px;">
+                                <div class="suvNavList">
+                                    <volist name="goodsType" id="vo">
+                                        <p><a href="<{:U('goods/index')}>?type=<{$key}>"><{$vo}></a></p>
+                                    </volist>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="http://www.tonysfarm.com/ingredients/itemlist-20084.html" class="nav4"><span>卡券专区</span></a>
+                            <div class="subNav" style="width:78px;">
+                                <div class="suvNavList">
+                                    <p><a href="/ingredients/itemlist-20085.html">会员卡</a></p>
+                                    <p><a href="/ingredients/itemlist-20086.html">储值卡</a></p>
+                                    <p><a href="/ingredients/itemlist-20087.html">礼券/采摘券</a></p>
+                                    <p><a href="/ingredients/itemlist-20088.html">礼盒</a></p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="/selfservice/exchange.html" class="nav5"><span>卡券兑换</span></a>
+
+                        </li>
+                        <li>
+                            <a href="/farmintro/video.html" class="nav6"><span>走进农庄</span></a>
+                            <div class="subNav" style="width:78px;">
+                                <div class="suvNavList">
+                                    <p><a href="/farmintro/words.html">庄主寄语</a></p>
+                                    <p><a href="/farmintro/video.html">有机农庄</a></p>
+                                    <p><a href="/news/newslist.html">农庄新闻</a></p>
+                                    <p><a href="/farmintro/team.html">关于多利</a></p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 主导航结束 -->
+
+                <!-- 定义购物车 -->
+                <!-- 定义购物车的时候，这个div里用到的id值和class值是固定的，不能更改 -->
+                <div class="shopCartBox" id="shopCartBox">
+                    <div class="shopCart">
+                        <a href="/order/shopcart.html"  rel="nofollow" id="mycart" title="购物车" class="cartTxt">购物车</a>
+                        <a href="#" class="cartIcon"></a>
+                        <a href="#" class="cartNum"><span  id="carts">0</span></a>
+                    </div>
+                    <!--购物车悬浮开始-->
+                    <div class="shopCartList" id="shopCartList" style="height: auto;z-index:999999;">
+                        <div class="nopro" id="nopro">您的购物车里还没有商品哦~ </br> 赶紧去选购吧！</div>
+                    </div>
+                    <!--购物车悬浮结束-->
+                </div>
+                <!-- 定义购物车 -->
+            </div>
+        </div>
+    </div>
+</div>
+
+{__CONTENT__}
+
+<!--footer 开始-->
+<div class="footerWarp">
+    <div class="footer">
+        <div class="footer_row1 clearfix">
+            <dl>
+                <dt>食品安全</dt>
+                <dd><a href="/help/help_buyguide.html">有机食品选购指南</a></dd>
+                <dd><a href="/help/help_whyvegorg.html">为何选择有机蔬菜</a></dd>
+            </dl>
+            <dl>
+                <dt>新手指南</dt>
+                <dd><a href="/help/help_register.html">账户注册</a></dd>
+                <dd><a href="/help/help_process.html">购物流程</a></dd>
+                <dd><a href="/help/help_structions.html">会员须知</a></dd>
+            </dl>
+            <dl>
+                <dt>支付方式</dt>
+                <dd><a href="/help/help_onlinepay.html">在线支付</a></dd>
+                <dd><a href="/help/help_delivery.html">货到付款</a></dd>
+                <dd><a href="/help/help_invoice.html">发票制度</a></dd>
+                <dd><a href="/help/help_discount.html">抵用券使用规则</a></dd>
+                <dd><a href="/help/help_prepaidCard.html">多利储值卡章程</a></dd>
+            </dl>
+            <dl>
+                <dt>配送说明</dt>
+                <dd><a href="/help/help_coldchain.html">冷链配送</a></dd>
+                <dd><a href="/help/help_door.html">上门自提</a></dd>
+                <dd><a href="/help/help_scopecost.html">配送范围费用与时间</a></dd>
+            </dl>
+            <dl>
+                <dt>帮助中心</dt>
+                <dd><a href="/help/help_instruction.html">退换货政策</a></dd>
+                <dd><a href="/help/getpass.html">找回密码</a></dd>
+                <dd><a href="/help/help_problems.html">常见问题</a></dd>
+            </dl>
+            <dl class="contact">
+                <dt>联系我们</dt>
+                <dd><a href="/help/help_contactus.html">联系我们</a></dd>
+            </dl>
+        </div>
+    </div>
+</div>
+<!--footer 结束-->
+
+<!--版权开始-->
+<div class="copyRight">Copyright © 2005-2015  上海多利农业发展有限公司 版权所有 <span>沪ICP备15019506号-1</span> </div>
+<!--版权结束-->
+
+<!--右侧浮动栏 开始-->
+
+<div class="toTop-fixed">
+    <div class="siderbar-toTop"><a href="#">
+        <p>回到<br />
+            顶部</p>
+    </a></div>
+</div>
+<div class="right-fixed">
+    <div class="siderbar-wx"><a href="javascript:void(0)" title="官方微信二维码"></a>
+        <div class="thick_wx">
+            <div class="wx_pic"><img src="__PUBLIC__/images/weixi2.png" width="100" height="100" /></div>
+            <div class="wx_text">官方微信二维码</div>
+        </div>
+    </div>
+    <div class="siderbar-xl"><a href="http://weibo.com/tonysfarm" target="_blank" title="点击访问官方微博"></a></div>
+    <div class="siderbar-cart"><a href="http://www.tonysfarm.com/order/shopcart.html" title="点击查看购物车"><i><span id="cartIndexRight">0</span></i></a>
+        <p class="name">购物车</p>
+    </div>
+    <div class="siderbar-member"><a href="/selfservice/exchange.html" title="卡券兑换"></a>
+        <p class="name">卡券兑换</p>
+    </div>
+    <div class="siderbar-search"><a href="javascript:void(0)" class="searchIcon" title="点击进行产品搜索"></a>
+        <p class="name">产品搜索</p>
+        <div class="thick_search">
+            <div id="searchBox" class="searchBox">
+                <input type="text" id="searchInput_right" placeholder="水蜜桃" class="searchInput" name="">
+                <input type="button" id="searchBtn" class="searchBtn" name="" value="搜索" onclick="search_product('searchInput_right')">
+            </div>
+            <div class="hotSearch">
+                <p>热门搜索：<a href="/item/productdetail-1519.html" target="_blank">水蜜桃</a></p>
+            </div>
+            <div class="historySearch">
+                <p>历史搜索：<a href="#">大红提子500g</a><a href="#">大红提子500g</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="pop_cart" style="display: none;">
+    <div class="pop_buy">
+        <ul id="item_added">
+            <li class="b0">
+                <div id="cart_tip_img" class="pic"><img src="__PUBLIC__/images/pro1.jpg"></div>
+                <div id="cart_tip_name" class="name">荷美尔出口备案冷冻肋排  500g<br>
+                    <span>X 1 加入成功</span></div>
+                <div id="cart_tip_price" class="price">¥39.80</div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!--右侧浮动栏 结束-->
+
+</body>
+
+</html>

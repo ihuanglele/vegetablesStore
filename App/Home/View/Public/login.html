@@ -1,0 +1,158 @@
+<div class="main">
+    <div class="breads">
+        <i class="breads_icon"></i>
+        <a href="<{:U('index/index')}>">首页</a> &gt;
+        <b>登录注册</b>
+    </div>
+    <div class="loginTab_warp">
+        <ul class="loginTab">
+            <li id="loginTab" class=""><a href="javascript:void(0)">-登录-</a></li>
+            <li id="regTab" class="curr"><a href="javascript:void(0)">-注册-</a></li>
+        </ul>
+    </div>
+    <div class="login_warp clearfix">
+        <div class="login">
+            <div class="log" style="display: none;">
+                <table id="login" width="100%" border="0" cellspacing="0" cellpadding="0" class="loginT">
+                    <tbody><tr>
+                        <td class="cols1"><b>*</b>手机：</td>
+                        <td class="cols2">
+                            <input name="phone" type="text" class="bordersty1">
+                            <p id="user_name_login_page_message"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="cols1"><b>*</b>密码：</td>
+                        <td class="cols2">
+                            <input name="password" type="password" class="bordersty1" >
+                            <p id="passwd_login_page_message"></p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="cols1">&nbsp;</td>
+                        <td class="cols2 cols2_h2">
+                            <div class="operateBox">
+                                <p id="login_error"></p>
+                                <input name="" type="button" class="loginBtn" onclick="pgLogin()">
+                            </div>
+                        </td>
+                    </tr>
+
+                    </tbody></table>
+            </div>
+
+            <div id="reg" class="reg" style="display: none;">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="phoneRegT" >
+                    <tbody><tr>
+                        <td class="cols1"><b>*</b>手机：</td>
+                        <td class="cols2">
+                            <input name="phone" type="text" class="bordersty1" id="mobile_input">
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="cols1"><b>*</b>密码：</td>
+                        <td class="cols2"><input name="password" type="password" class="bordersty1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="cols1"><b>*</b>确认密码：</td>
+                        <td class="cols2"><input name="password2" type="password" class="bordersty1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="cols1">&nbsp;</td>
+                        <td class="cols2 cols2_h"><div class="operateBox">
+                            <input name="" type="checkbox" value="" checked="checked">
+                            &nbsp;<a href="" target="_blank">我已阅读多利农庄服务条例</a></div></td>
+                    </tr>
+                    <tr>
+                        <td class="cols1">&nbsp;</td>
+                        <td class="cols2"><div class="operateBox">
+                            <p id="phoneReg_error"></p>
+                            <input name="" type="button" class="regBtn" onclick="pgRegister()">
+                        </div></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="security">
+            <!--
+          <img src="images/login_r_intro.jpg" width="100%" height="100%" />
+          -->
+        </div>
+    </div>
+    <div class="security">
+        <ul class="security_tab clearfix">
+            <li class=""><img src="__PUBLIC__/images/security1.gif"></li>
+            <li class=""><img src="__PUBLIC__/images/security2.gif"></li>
+            <li class=""><img src="__PUBLIC__/images/security3.gif"></li>
+            <li><img src="__PUBLIC__/images/security4.gif"></li>
+            <li class="on"><img src="__PUBLIC__/images/security5.gif"></li>
+        </ul>
+        <div class="security_cont" style="display: none;"> <img src="__PUBLIC__/images/security_show1.gif"> </div>
+        <div class="security_cont" style="display: none;"> <img src="__PUBLIC__/images/security_show2.gif"> </div>
+        <div class="security_cont" style="display: none;"> <img src="__PUBLIC__/images/security_show3.gif"> </div>
+        <div class="security_cont" style=" display:none;"> <img src="__PUBLIC__/images/security_show4.gif"> </div>
+        <div class="security_cont" style=""> <img src="__PUBLIC__/images/security_show5.gif"> </div>
+    </div>
+
+</div>
+
+<script>
+    $(function(){
+        //登录注册tab切换
+        $("#loginTab").live("click",function(){
+
+            $(this).addClass("curr");
+            $("#regTab").removeClass("curr");
+            $(".log").show();
+            $(".reg").hide();
+            $("#div_active").hide();
+        });
+
+        $("#regTab").live("click",function(){
+
+            $(this).addClass("curr");
+            $("#loginTab").removeClass("curr");
+            $(".reg").show();
+            $(".log").hide();
+            $("#div_active").hide();
+        });
+
+
+        $("#emailReg").live("click",function(){
+            resetEmailRegForm();
+            $(".emailRegT").show();
+            $(".phoneRegT").hide();
+        });
+
+        $("#phoneReg").live("click",function(){
+            resetMobileRegForm();
+            $(".phoneRegT").show();
+            $(".emailRegT").hide();
+        });
+
+    })
+
+    //处理登录
+    function pgLogin(){
+        var dom = $('#login');
+        var phone = $('input[name="phone"]',dom).val();
+        var password = $('input[name="password"]',dom).val();
+        if(password==''){
+            alert('请填写手机号');return false;
+        }
+        if(name==''){
+            alert('请填写密码');return false;
+        }
+
+    }
+
+    $(window).ready(function(){
+        $("<{$Tab}>").click();
+    })
+</script>

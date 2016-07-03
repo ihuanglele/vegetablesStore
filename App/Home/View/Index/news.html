@@ -1,0 +1,33 @@
+<div class="breads">
+    <i class="breads_icon"></i>
+    <a href="<{:U('index/index')}>">首页</a> &gt;
+    <a href="<{:U('index/newsList')}>">走进农庄</a> &gt;
+    <a href="<{:U('index/newsList')}>?cid=<{$info.cid}>"><{$Cat[$info['cid']]}></a> &gt;
+    <b><{$info.title}></b>
+</div>
+<div class="main clearfix">
+    <div class="mainWrapper leftbox">
+        <div class="mainWrapper_left leftbox">
+            <dl class="leftbar">
+                <dt><a href="<{:U('newsList')}>"><span>走进农庄</span></a></dt>
+                <volist name="Cat" id="v">
+                    <dd>
+                        <a <eq name="key" value="$info.cid">class="on"</eq> href="<{:U('newsList')}>?cid=<{$key}>"><{$v}></a>
+                    </dd>
+                </volist>
+            </dl>
+        </div>
+        <div class="mainWrapper_right rightbox">
+            <!--农庄新闻 开始-->
+            <div class="mainContent">
+                <h4>农庄新闻</h4>
+                <div class="news_title"><{$info.title}></div>
+                <div class="news_time"><{$info.time|date='Y-m-d',###}></div>
+                <div class="news_cont">
+                    <{$info.content}>
+                </div>
+            </div>
+            <!--农庄新闻 结束-->
+        </div>
+    </div>
+</div>

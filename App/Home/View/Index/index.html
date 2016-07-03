@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/index.css" />
 <div class="banner">
     <div class="flexslider">
         <ul class="slides">
@@ -11,7 +12,6 @@
 </div>
 
 <div class="main">
-
     <!--活动区域-->
     <div class="activityWarpper">
         <div class="activity_title">
@@ -96,11 +96,12 @@
             <div class="title"><img src="__PUBLIC__/images/news_tit.jpg" /></div>
             <div class="cont">
                 <ul>
-                    <li><a href="/news/news51.html" target="_blank" title='多利农庄宅配菜箱会员卡调价通知'>多利农庄宅配菜箱会员卡调价通知</a><img src="__PUBLIC__/images/new.gif" /></li>
-                    <li><a href="/news/news50.html" target="_blank" title='多利农庄战略转型升级'>多利农庄战略转型升级</a></li>
-                    <li><a href="/news/news49.html" target="_blank" title='2016春节期间产品暂停配送公告'>2016春节期间产品暂停配送公告 </a></li>
-                    <li><a href="/news/news48.html" target="_blank" title='精品西藏墨脱红米将"全部被替换"'>年货精品西藏墨脱红米将"被替换" </a></li>
-                    <li><a href="/news/news47.html" target="_blank" title='大闸蟹配送注意事项'>大闸蟹配送注意事项</a></li>
+                    <volist name="news" id="vo">
+                        <li>
+                            <a href="<{:U('news')}>?id=<{$vo.id}>" target="_blank" title='<{$vo.title}>'><{$vo.title}></a>
+                            <eq name="key" value="0"><img src="__PUBLIC__/images/new.gif" /></eq>
+                        </li>
+                    </volist>
                 </ul>
             </div>
         </div>

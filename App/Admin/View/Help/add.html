@@ -1,40 +1,40 @@
-<div id="help">
-    <form id="form1" action="<{:U('Help/post')}>" method="post">
-        <div class="row myrow">
-            <div class="col-xs-6">
-                <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-addon">标题</div>
-                        <input type="text" class="form-control" name="title" placeholder="文章标题" value="<{$info.title}>">
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-2 col-xs-offset-1">
-                <div class="form-group">
-                    <div class="input-group">
-                        <select class="form-control" name="cid">
-                            <volist name="cidArr" id="v">
-                                <option value="<{$key}>" ><{$v}></option>
-                            </volist>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-2 col-xs-offset-1">
-                <input type="hidden" name="id" value="<{$info.id}>">
-                <button type="submit" name="submit" value="add" class="btn btn-blue">提交</button>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-10 col-xs-offset-1">
-                <script type="text/plain" name="content" id="editor" style="width:100%;height:500px;"><{$info.content}></script>
-            </div>
-        </div>
-    </form>
-</div>
-<script>
-    $(window).ready(function(){
-        $('select[name="cid"]').val("<{$info.cid|default='1'}>");
-    })
-</script>
+<div id="help">
+    <form id="form1" action="<{:U('Help/post')}>" method="post">
+        <div class="row myrow">
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon">标题</div>
+                        <input type="text" class="form-control" name="title" placeholder="文章标题" value="<{$info.title}>">
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-2 col-xs-offset-1">
+                <div class="form-group">
+                    <div class="input-group">
+                        <select class="form-control" name="cid">
+                            <volist name="cidArr" id="v">
+                                <option value="<{$key}>" ><{$v}></option>
+                            </volist>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-2 col-xs-offset-1">
+                <input type="hidden" name="id" value="<{$info.id}>">
+                <button type="submit" name="submit" value="add" class="btn btn-blue">提交</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-10 col-xs-offset-1">
+                <script type="text/plain" name="content" id="editor" style="width:100%;height:500px;"><{$info.content}></script>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    $(window).ready(function(){
+        $('select[name="cid"]').val("<{$info.cid|default='1'}>");
+    })
+</script>
 <include file="Public:umeditor" />

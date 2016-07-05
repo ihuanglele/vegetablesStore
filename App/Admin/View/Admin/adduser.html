@@ -1,50 +1,50 @@
-<div class="panel panel-default">
-    <div class="panel-heading">
-        添加后台管理用户
-    </div>
-    <div class="panel-body">
-        <form class="form-horizontal" action="<{:U('adduser')}>" method="post" style="margin: 30px auto;">
-            <div class="row">
-                <div class="col-xs-5 col-sm-offset-3">
-                    <div class="form-group">
-                        <label class="sr-only" for="user">用户</label>
-                        <div class="input-group">
-                            <div class="input-group-addon">用户</div>
-                            <input type="text" class="form-control" id="user" name="name" placeholder="填写用户名" >
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-5 col-sm-offset-3">
-                    <div class="form-group">
-                        <label class="sr-only" for="pwd">密码</label>
-                        <div class="input-group">
-                            <div class="input-group-addon">密码</div>
-                            <input type="text" class="form-control" id="pwd" name="pwd" placeholder="填写新用户登录密码" >
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-5 col-sm-offset-3">
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-addon">角色</div>
-                            <select class="form-control" name="form-control">
-                                <volist name="role" id="v">
-                                    <option value="<{$key}>"><{$v}></option>
-                                </volist>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-5 col-sm-offset-3">
-                    <button type="submit" style="width: 100%" name="submit" class="btn btn-success">添加</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        添加后台管理用户
+    </div>
+    <div class="panel-body">
+        <form class="form-horizontal" action="<{:U('adduser')}>" method="post" style="margin: 30px auto;">
+            <div class="row">
+                <div class="col-xs-5 col-sm-offset-3">
+                    <div class="form-group">
+                        <label class="sr-only" for="user">用户</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">用户</div>
+                            <input type="text" class="form-control" id="user" name="name" placeholder="填写用户名" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-5 col-sm-offset-3">
+                    <div class="form-group">
+                        <label class="sr-only" for="pwd">密码</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">密码</div>
+                            <input type="text" class="form-control" id="pwd" name="pwd" placeholder="填写新用户登录密码" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-5 col-sm-offset-3">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">角色</div>
+                            <select class="form-control" name="form-control">
+                                <volist name="role" id="v">
+                                    <option value="<{$key}>"><{$v}></option>
+                                </volist>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-5 col-sm-offset-3">
+                    <button type="submit" style="width: 100%" name="submit" class="btn btn-success">添加</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

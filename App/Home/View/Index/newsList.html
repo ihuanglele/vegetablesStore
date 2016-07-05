@@ -1,40 +1,40 @@
-<div class="breads">
-    <i class="breads_icon"></i>
-    <a href="<{:U('index/index')}>">首页</a> &gt;
-    <a href="<{:U('index/newsList')}>">走进农庄</a> &gt;
-    <b><{$Cat[$cid]}></b>
-</div>
-<div class="main clearfix">
-    <!--走进农庄 开始-->
-    <div class="mainWrapper leftbox">
-        <div class="mainWrapper_left  leftbox">
-            <dl class="leftbar">
-                <dt><a href="<{:U('newsList')}>"><span>走进农庄</span></a></dt>
-                <volist name="Cat" id="v">
-                    <dd>
-                        <a <eq name="key" value="$cid">class="on"</eq> href="<{:U('newsList')}>?cid=<{$key}>"><{$v}></a>
-                    </dd>
-                </volist>
-            </dl>
-
-        </div>
-
-        <div class="mainWrapper_right rightbox">
-            <!--农庄新闻 开始-->
-            <div class="mainContent">
-                <h4>农庄新闻</h4>
-                <ul class="news">
-                    <volist name="list" id="vo">
-                        <li>
-                            <span>[<{$vo.time|date='Y-m-d',###}>]</span>
-                            <a href="<{:U('news')}>?id=<{$vo.id}>" target="_blank" title='<{$vo.title}>'><{$vo.title}></a>
-                            <eq name="key" value="0"><img src="__PUBLIC__/images/new.gif" /></eq>
-                        </li>
-                    </volist>
-                </ul>
-            </div>
-            <!--农庄新闻 结束-->
-        </div>
-    </div>
-    <!--走进农庄 结束-->
+<div class="breads">
+    <i class="breads_icon"></i>
+    <a href="<{:U('index/index')}>">首页</a> &gt;
+    <a href="<{:U('index/newsList')}>">走进农庄</a> &gt;
+    <b><{$Cat[$cid]}></b>
+</div>
+<div class="main clearfix">
+    <!--走进农庄 开始-->
+    <div class="mainWrapper leftbox">
+        <div class="mainWrapper_left  leftbox">
+            <dl class="leftbar">
+                <dt><a href="<{:U('newsList')}>"><span>走进农庄</span></a></dt>
+                <volist name="Cat" id="v">
+                    <dd>
+                        <a <eq name="key" value="$cid">class="on"</eq> href="<{:U('newsList')}>?cid=<{$key}>"><{$v}></a>
+                    </dd>
+                </volist>
+            </dl>
+
+        </div>
+
+        <div class="mainWrapper_right rightbox">
+            <!--农庄新闻 开始-->
+            <div class="mainContent">
+                <h4>农庄新闻</h4>
+                <ul class="news">
+                    <volist name="list" id="vo">
+                        <li>
+                            <span>[<{$vo.time|date='Y-m-d',###}>]</span>
+                            <a href="<{:U('news')}>?id=<{$vo.id}>" target="_blank" title='<{$vo.title}>'><{$vo.title}></a>
+                            <eq name="key" value="0"><img src="__PUBLIC__/images/new.gif" /></eq>
+                        </li>
+                    </volist>
+                </ul>
+            </div>
+            <!--农庄新闻 结束-->
+        </div>
+    </div>
+    <!--走进农庄 结束-->
 </div>

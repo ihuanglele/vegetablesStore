@@ -2,108 +2,124 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>多利农庄,有机蔬菜,安心食材,优质食品网上一站式购物平台</title>
-    <meta name="Keywords" content="有机蔬菜,有机食品,安心食材,优质食材,天然食品,绿色食品,有机,蔬菜水果,肉蛋禽奶,海鲜,水产,粮油,副食,多利农庄,多利,商务礼品,礼品册,礼品卡,礼品定制,高端"/>
-    <meta name="Description" content="多利农庄官网上海规模最大专业从事有机蔬菜种植和销售的有机农庄,采用从田间到餐桌直供会员服务模式,为消费者提供安全、健康的有机蔬菜,全国销售热线：400-820-2162"/>
+    <meta name="Keywords" content="有机蔬菜,有机食品,安心食材,优质食材,天然食品,绿色食品,有机,蔬菜水果,肉蛋禽奶,海鲜,水产,粮油,副食,多利农庄,多利,商务礼品,礼品册,礼品卡,礼品定制,高端" />
+    <meta name="Description" content="多利农庄官网上海规模最大专业从事有机蔬菜种植和销售的有机农庄,采用从田间到餐桌直供会员服务模式,为消费者提供安全、健康的有机蔬菜,全国销售热线：400-820-2162" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta property="qc:admins" content="245206746764761361256375" />
-    <meta property="wb:webmaster" content="f31800f5c956271d" />
-
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/common.css" />
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/base.css" />
-    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/slide.css" />
-    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/login.css" />
-
-    <link href="__PUBLIC__/css/login.css" rel="stylesheet" type="text/css">
     <script src="__PUBLIC__/js/jquery-1.7.2.min.js"></script>
-    <script type="text/javascript" src="__PUBLIC__/js/global.js"></script>
     <script type="text/javascript" src="__PUBLIC__/js/site.js"></script>
-
-
+    <script type="text/javascript" src="__PUBLIC__/js/cart.js"></script>
     <script src="__PUBLIC__/js/common.js"></script>
-    <script src="__PUBLIC__/js/index.js"></script>
-    <script src="__PUBLIC__/js/jquery.flexslider-min.js"></script>
-
-    <script type="text/javascript" src="__PUBLIC__/js/global.js"></script>
-    <script type="text/javascript" src="__PUBLIC__/js/tonysfarm-global.js"></script>
-    <script type="text/javascript" src="__PUBLIC__/js/cookie.js"></script>
-    <script type="text/javascript" src="__PUBLIC__/js/cart.js?t=20160322"></script>
-
+    <script>
+        base_path = "__ROOT__/index.php"
+    </script>
 </head>
-<body>
 
+<body>
 <div class="headerWapper">
     <div class="header clearfix">
         <div class="topbar">
-            <div class="tel"><i></i><span>400-820-2162</span></div>
+            <div class="tel">
+                <i>
+                </i>
+                <span>400-820-2162</span></div>
             <div class="fastLoginBox">
-                <notempty name="Think.session.uid">
-                    您好   <{$Think.session.nickname}>  <a  href="<{:U('user/index')}>" class="loginMember"><b>[进会员中心]</b></a>&nbsp;&nbsp;<a  href="<{:U('common/logout')}>">注销</a>;
+                <notempty name="Think.session.uid">您好
+                    <{$Think.session.nickname}>
+                    <a href="<{:U('user/index')}>" class="loginMember">
+                        <b>[进会员中心]</b>
+                    </a>&nbsp;&nbsp;
+                    <a href="<{:U('common/logout')}>">注销</a>;
                     <else />
-                    <span><a href="<{:U('common/login')}>?id=1" >注册</a></span>
-                    <span id="none"> | </span>
-                    <span id="logId"><a href="<{:U('common/login')}>?id=0" >登录</a></span>
+                <span>
+                  <a href="<{:U('common/login')}>?id=1">注册</a></span>
+                    <span id="none">|</span>
+                <span id="logId">
+                  <a href="<{:U('common/login')}>?id=0">登录</a></span>
                 </notempty>
             </div>
         </div>
-        <div class="logo"><a href="/index.html"><img src="__PUBLIC__/images/logo.jpg" /></a></div>
+        <div class="logo">
+            <a href="<{:U('index/index')}>">
+                <img src="__PUBLIC__/images/logo.jpg" /></a>
+        </div>
         <div class="header_r">
             <div class="header_r_t clearfix">
                 <div class="searchBox_warp">
                     <div class="searchBox" id="searchBox">
-                        <input name="" type="text" class="searchInput" placeholder="草莓酱" value="" id="searchInput_header"/>
-                        <input name="" type="button" class="searchBtn" id="searchBtn" value="搜索" onclick="search_product('searchInput_header')"/>
-                        <input type="hidden" id="keyword"/>
-                        <input type="hidden" id="from"/>
-                        <input type="hidden" id="to"/>
-                        <input type="hidden" id="pg"/>
-                    </div>
+                        <input name="" type="text" class="searchInput" placeholder="草莓酱" value="" id="searchInput_header" />
+                        <input name="" type="button" class="searchBtn" id="searchBtn" value="搜索" onclick="search_product('searchInput_header')" />
+                        <input type="hidden" id="keyword" />
+                        <input type="hidden" id="from" />
+                        <input type="hidden" id="to" />
+                        <input type="hidden" id="pg" /></div>
                 </div>
             </div>
             <div class="header_r_b clearfix">
                 <!-- 主导航开始 -->
                 <div class="navBox">
                     <ul class="nav clearfix">
-                        <li><a href="<{:U('index/index')}>" class="nav1"><span>首页</span></a></li>
                         <li>
-                            <a href="/vegbox/deliveryPackage.html" class="nav2"><span>宅配套餐</span></a>
+                            <a href="<{:U('index/index')}>" class="nav1">
+                                <span>首页</span></a>
+                        </li>
+                        <li>
+                            <a href="/vegbox/deliveryPackage.html" class="nav2">
+                                <span>宅配套餐</span></a>
                             <div class="subNav" style="width:78px;">
                                 <div class="suvNavList">
-                                    <p><a class="zhaipei" href="/vegbox/deliveryPackage.html">有机宅配菜箱</a></p>
-                                    <p><a class="zhaipei"  href="/vegbox/deliveryPackage1.html">精品宅配菜箱</a></p>
+                                    <p>
+                                        <a class="zhaipei" href="/vegbox/deliveryPackage.html">有机宅配菜箱</a></p>
+                                    <p>
+                                        <a class="zhaipei" href="/vegbox/deliveryPackage1.html">精品宅配菜箱</a></p>
                                 </div>
                             </div>
                         </li>
                         <li>
-                            <a href="<{:U('goods/index')}>" class="nav3"><span>优选食材</span></a>
+                            <a href="<{:U('goods/index')}>" class="nav3">
+                                <span>优选食材</span></a>
                             <div class="subNav" style="width:78px;">
                                 <div class="suvNavList">
                                     <volist name="goodsType" id="vo">
-                                        <p><a href="<{:U('goods/index')}>?type=<{$key}>"><{$vo}></a></p>
+                                        <p>
+                                            <a href="<{:U('goods/index')}>?type=<{$key}>">
+                                                <{$vo}></a>
+                                        </p>
                                     </volist>
                                 </div>
                             </div>
                         </li>
                         <li>
-                            <a href="http://www.tonysfarm.com/ingredients/itemlist-20084.html" class="nav4"><span>卡券专区</span></a>
+                            <a href="http://www.tonysfarm.com/ingredients/itemlist-20084.html" class="nav4">
+                                <span>卡券专区</span></a>
                             <div class="subNav" style="width:78px;">
                                 <div class="suvNavList">
-                                    <p><a href="/ingredients/itemlist-20085.html">会员卡</a></p>
-                                    <p><a href="/ingredients/itemlist-20086.html">储值卡</a></p>
-                                    <p><a href="/ingredients/itemlist-20087.html">礼券/采摘券</a></p>
-                                    <p><a href="/ingredients/itemlist-20088.html">礼盒</a></p>
+                                    <p>
+                                        <a href="/ingredients/itemlist-20085.html">会员卡</a></p>
+                                    <p>
+                                        <a href="/ingredients/itemlist-20086.html">储值卡</a></p>
+                                    <p>
+                                        <a href="/ingredients/itemlist-20087.html">礼券/采摘券</a></p>
+                                    <p>
+                                        <a href="/ingredients/itemlist-20088.html">礼盒</a></p>
                                 </div>
                             </div>
                         </li>
                         <li>
-                            <a href="/selfservice/exchange.html" class="nav5"><span>卡券兑换</span></a>
-
+                            <a href="/selfservice/exchange.html" class="nav5">
+                                <span>卡券兑换</span></a>
                         </li>
                         <li>
-                            <a href="<{:U('index/newsList')}>" class="nav6"><span>走进农庄</span></a>
+                            <a href="<{:U('index/newsList')}>" class="nav6">
+                                <span>走进农庄</span></a>
                             <div class="subNav" style="width:78px;">
                                 <div class="suvNavList">
                                     <volist name="Cat" id="vo">
-                                        <p><a href="<{:U('index/newsList')}>?cid=<{$key}>"><{$vo}></a></p>
+                                        <p>
+                                            <a href="<{:U('index/newsList')}>?cid=<{$key}>">
+                                                <{$vo}></a>
+                                        </p>
                                     </volist>
                                 </div>
                             </div>
@@ -111,111 +127,131 @@
                     </ul>
                 </div>
                 <!-- 主导航结束 -->
-
                 <!-- 定义购物车 -->
                 <!-- 定义购物车的时候，这个div里用到的id值和class值是固定的，不能更改 -->
                 <div class="shopCartBox" id="shopCartBox">
                     <div class="shopCart">
-                        <a href="/order/shopcart.html"  rel="nofollow" id="mycart" title="购物车" class="cartTxt">购物车</a>
+                        <a href="/order/shopcart.html" rel="nofollow" id="mycart" title="购物车" class="cartTxt">购物车</a>
                         <a href="#" class="cartIcon"></a>
-                        <a href="#" class="cartNum"><span  id="carts">0</span></a>
+                        <a href="#" class="cartNum">
+                            <span id="carts">0</span></a>
                     </div>
                     <!--购物车悬浮开始-->
                     <div class="shopCartList" id="shopCartList" style="height: auto;z-index:999999;">
-                        <div class="nopro" id="nopro">您的购物车里还没有商品哦~ </br> 赶紧去选购吧！</div>
-                    </div>
-                    <!--购物车悬浮结束-->
-                </div>
-                <!-- 定义购物车 -->
-            </div>
+                        <div class="nopro" id="nopro">您的购物车里还没有商品哦~</br>赶紧去选购吧！</div></div>
+                    <!--购物车悬浮结束--></div>
+                <!-- 定义购物车 --></div>
         </div>
     </div>
 </div>
-
 {__CONTENT__}
-
 <!--footer 开始-->
 <div class="footerWarp">
     <div class="footer">
         <div class="footer_row1 clearfix">
             <dl>
                 <dt>食品安全</dt>
-                <dd><a href="/help/help_buyguide.html">有机食品选购指南</a></dd>
-                <dd><a href="/help/help_whyvegorg.html">为何选择有机蔬菜</a></dd>
+                <dd>
+                    <a href="/help/help_buyguide.html">有机食品选购指南</a></dd>
+                <dd>
+                    <a href="/help/help_whyvegorg.html">为何选择有机蔬菜</a></dd>
             </dl>
             <dl>
                 <dt>新手指南</dt>
-                <dd><a href="/help/help_register.html">账户注册</a></dd>
-                <dd><a href="/help/help_process.html">购物流程</a></dd>
-                <dd><a href="/help/help_structions.html">会员须知</a></dd>
+                <dd>
+                    <a href="/help/help_register.html">账户注册</a></dd>
+                <dd>
+                    <a href="/help/help_process.html">购物流程</a></dd>
+                <dd>
+                    <a href="/help/help_structions.html">会员须知</a></dd>
             </dl>
             <dl>
                 <dt>支付方式</dt>
-                <dd><a href="/help/help_onlinepay.html">在线支付</a></dd>
-                <dd><a href="/help/help_delivery.html">货到付款</a></dd>
-                <dd><a href="/help/help_invoice.html">发票制度</a></dd>
-                <dd><a href="/help/help_discount.html">抵用券使用规则</a></dd>
-                <dd><a href="/help/help_prepaidCard.html">多利储值卡章程</a></dd>
+                <dd>
+                    <a href="/help/help_onlinepay.html">在线支付</a></dd>
+                <dd>
+                    <a href="/help/help_delivery.html">货到付款</a></dd>
+                <dd>
+                    <a href="/help/help_invoice.html">发票制度</a></dd>
+                <dd>
+                    <a href="/help/help_discount.html">抵用券使用规则</a></dd>
+                <dd>
+                    <a href="/help/help_prepaidCard.html">多利储值卡章程</a></dd>
             </dl>
             <dl>
                 <dt>配送说明</dt>
-                <dd><a href="/help/help_coldchain.html">冷链配送</a></dd>
-                <dd><a href="/help/help_door.html">上门自提</a></dd>
-                <dd><a href="/help/help_scopecost.html">配送范围费用与时间</a></dd>
+                <dd>
+                    <a href="/help/help_coldchain.html">冷链配送</a></dd>
+                <dd>
+                    <a href="/help/help_door.html">上门自提</a></dd>
+                <dd>
+                    <a href="/help/help_scopecost.html">配送范围费用与时间</a></dd>
             </dl>
             <dl>
                 <dt>帮助中心</dt>
-                <dd><a href="/help/help_instruction.html">退换货政策</a></dd>
-                <dd><a href="/help/getpass.html">找回密码</a></dd>
-                <dd><a href="/help/help_problems.html">常见问题</a></dd>
+                <dd>
+                    <a href="/help/help_instruction.html">退换货政策</a></dd>
+                <dd>
+                    <a href="/help/getpass.html">找回密码</a></dd>
+                <dd>
+                    <a href="/help/help_problems.html">常见问题</a></dd>
             </dl>
             <dl class="contact">
                 <dt>联系我们</dt>
-                <dd><a href="/help/help_contactus.html">联系我们</a></dd>
+                <dd>
+                    <a href="/help/help_contactus.html">联系我们</a></dd>
             </dl>
         </div>
     </div>
 </div>
 <!--footer 结束-->
-
 <!--版权开始-->
-<div class="copyRight">Copyright © 2005-2015  上海多利农业发展有限公司 版权所有 <span>沪ICP备15019506号-1</span> </div>
+<div class="copyRight">Copyright © 2005-2015 上海多利农业发展有限公司 版权所有
+    <span>沪ICP备15019506号-1</span></div>
 <!--版权结束-->
-
 <!--右侧浮动栏 开始-->
-
 <div class="toTop-fixed">
-    <div class="siderbar-toTop"><a href="#">
-        <p>回到<br />
-            顶部</p>
-    </a></div>
+    <div class="siderbar-toTop">
+        <a href="#">
+            <p>回到
+                <br />顶部</p></a>
+    </div>
 </div>
 <div class="right-fixed">
-    <div class="siderbar-wx"><a href="javascript:void(0)" title="官方微信二维码"></a>
+    <div class="siderbar-wx">
+        <a href="javascript:void(0)" title="官方微信二维码"></a>
         <div class="thick_wx">
-            <div class="wx_pic"><img src="__PUBLIC__/images/weixi2.png" width="100" height="100" /></div>
-            <div class="wx_text">官方微信二维码</div>
-        </div>
+            <div class="wx_pic">
+                <img src="__PUBLIC__/images/weixi2.png" width="100" height="100" /></div>
+            <div class="wx_text">官方微信二维码</div></div>
     </div>
-    <div class="siderbar-xl"><a href="http://weibo.com/tonysfarm" target="_blank" title="点击访问官方微博"></a></div>
-    <div class="siderbar-cart"><a href="http://www.tonysfarm.com/order/shopcart.html" title="点击查看购物车"><i><span id="cartIndexRight">0</span></i></a>
-        <p class="name">购物车</p>
+    <div class="siderbar-xl">
+        <a href="http://weibo.com/tonysfarm" target="_blank" title="点击访问官方微博"></a>
     </div>
-    <div class="siderbar-member"><a href="/selfservice/exchange.html" title="卡券兑换"></a>
-        <p class="name">卡券兑换</p>
-    </div>
-    <div class="siderbar-search"><a href="javascript:void(0)" class="searchIcon" title="点击进行产品搜索"></a>
+    <div class="siderbar-cart">
+        <a href="http://www.tonysfarm.com/order/shopcart.html" title="点击查看购物车">
+            <i>
+                <span id="cartIndexRight">0</span></i>
+        </a>
+        <p class="name">购物车</p></div>
+    <div class="siderbar-member">
+        <a href="/selfservice/exchange.html" title="卡券兑换"></a>
+        <p class="name">卡券兑换</p></div>
+    <div class="siderbar-search">
+        <a href="javascript:void(0)" class="searchIcon" title="点击进行产品搜索"></a>
         <p class="name">产品搜索</p>
         <div class="thick_search">
             <div id="searchBox" class="searchBox">
                 <input type="text" id="searchInput_right" placeholder="水蜜桃" class="searchInput" name="">
-                <input type="button" id="searchBtn" class="searchBtn" name="" value="搜索" onclick="search_product('searchInput_right')">
-            </div>
+                <input type="button" id="searchBtn" class="searchBtn" name="" value="搜索" onclick="search_product('searchInput_right')"></div>
             <div class="hotSearch">
-                <p>热门搜索：<a href="/item/productdetail-1519.html" target="_blank">水蜜桃</a></p>
+                <p>热门搜索：
+                    <a href="/item/productdetail-1519.html" target="_blank">水蜜桃</a></p>
             </div>
             <div class="historySearch">
-                <p>历史搜索：<a href="#">大红提子500g</a><a href="#">大红提子500g</a></p>
+                <p>历史搜索：
+                    <a href="#">大红提子500g</a>
+                    <a href="#">大红提子500g</a></p>
             </div>
         </div>
     </div>
@@ -224,17 +260,16 @@
     <div class="pop_buy">
         <ul id="item_added">
             <li class="b0">
-                <div id="cart_tip_img" class="pic"><img src="__PUBLIC__/images/pro1.jpg"></div>
-                <div id="cart_tip_name" class="name">荷美尔出口备案冷冻肋排  500g<br>
+                <div id="cart_tip_img" class="pic">
+                    <img src="__PUBLIC__/images/pro1.jpg"></div>
+                <div id="cart_tip_name" class="name">荷美尔出口备案冷冻肋排 500g
+                    <br>
                     <span>X 1 加入成功</span></div>
-                <div id="cart_tip_price" class="price">¥39.80</div>
-            </li>
+                <div id="cart_tip_price" class="price">¥39.80</div></li>
         </ul>
     </div>
 </div>
-
 <!--右侧浮动栏 结束-->
-
 </body>
 
 </html>

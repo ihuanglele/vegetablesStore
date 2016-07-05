@@ -1,64 +1,64 @@
-<div class="panel panel-default">
-    <div class="panel-heading">
-        添加后台管理用户
-    </div>
-    <div class="panel-body">
-        <form class="form-horizontal" action="<{:U('update')}>" method="post" style="margin: 30px auto;">
-            <div class="row">
-                <div class="col-xs-5 col-sm-offset-3">
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-addon">用户</div>
-                            <input type="text" class="form-control"  name="name" disabled="disabled" value="<{$info.name}>" >
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-5 col-sm-offset-3">
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-addon">添加时间</div>
-                            <input type="text" class="form-control"  name="name" disabled="disabled" value="<{$info.time|Mydate}>" >
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-5 col-sm-offset-3">
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-addon">密码</div>
-                            <input type="text" class="form-control" name="pwd" placeholder="留空不修改密码" >
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-5 col-sm-offset-3">
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-addon">角色</div>
-                            <select class="form-control" name="role">
-                                <volist name="role" id="v">
-                                    <option value="<{$key}>"><{$v}></option>
-                                </volist>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-5 col-sm-offset-3">
-                    <input type="hidden" value="<{$info.aid}>" name="aid">
-                    <button type="submit" style="width: 100%" name="submit" class="btn btn-success">添加</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-<script>
-    $(window).ready(function(){
-        $('select[name="role"]').val('<{$info.role}>');
-    })
+<div class="panel panel-default">
+    <div class="panel-heading">
+        添加后台管理用户
+    </div>
+    <div class="panel-body">
+        <form class="form-horizontal" action="<{:U('update')}>" method="post" style="margin: 30px auto;">
+            <div class="row">
+                <div class="col-xs-5 col-sm-offset-3">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">用户</div>
+                            <input type="text" class="form-control"  name="name" disabled="disabled" value="<{$info.name}>" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-5 col-sm-offset-3">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">添加时间</div>
+                            <input type="text" class="form-control"  name="name" disabled="disabled" value="<{$info.time|Mydate}>" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-5 col-sm-offset-3">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">密码</div>
+                            <input type="text" class="form-control" name="pwd" placeholder="留空不修改密码" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-5 col-sm-offset-3">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">角色</div>
+                            <select class="form-control" name="role">
+                                <volist name="role" id="v">
+                                    <option value="<{$key}>"><{$v}></option>
+                                </volist>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-5 col-sm-offset-3">
+                    <input type="hidden" value="<{$info.aid}>" name="aid">
+                    <button type="submit" style="width: 100%" name="submit" class="btn btn-success">添加</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    $(window).ready(function(){
+        $('select[name="role"]').val('<{$info.role}>');
+    })
 </script>

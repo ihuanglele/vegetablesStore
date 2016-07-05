@@ -1,254 +1,1 @@
-<link type="text/css" rel="stylesheet" href="__PUBLIC__/css/common.css" />
-<link type="text/css" rel="stylesheet" href="__PUBLIC__/css/ingredients.css" />
-<link type="text/css" rel="stylesheet" href="__PUBLIC__/css/leftCommon.css" />
-
-<div class="banner"></div>
-<div class="breads" style="height:32px;line-height:32px;">
-    <i class="breads_icon"></i>
-    <a href="<{:U('index/index')}>">首页</a>
-</div>
-<div class="main mt35 clearfix">
-    <div class="main_l">
-        <div class="leftMenuWarp">
-            <div class="leftMenu_tit">分类</div>
-            <div class="leftMenu_cont">
-                <ul class="menuList">
-                    <li>
-                        <div class="menu">
-                            <a href="<{:U('goods/index')}>?type=0" class="menuName <eq name='cid' value="0">on</eq>">全部</a>
-                        </div>
-                        <div class="subMenu"   >
-                        </div>
-                    </li>
-                    <volist name="goodsType" id="v">
-                        <li>
-                            <div class="menu">
-                                <a href="<{:U('goods/index')}>?type=<{$key}>" class="menuName <eq name='key' value="$cid">on</eq>"><{$v}></a>
-                            </div>
-                            <div class="subMenu"   >
-                            </div>
-                        </li>
-                    </volist>
-                </ul>
-            </div>
-        </div>
-        <!-- 热销排行 开始 -->
-        <div class="leftProView">
-            <div class="leftProView_title" id="assozonename1">热销排行</div>
-            <div class="leftProView_cont clearfix">
-                <!--<div class="preView"><img src="__PUBLIC__/images/preViewBtn.jpg" width="208" height="23" /></div>-->
-                <div class="viewBox">
-                    <ul class="proList" id="assozoneitem1">
-                        <volist name="hots" id="vo">
-                            <li>
-                                <div class="showPic"><a href="<{:U('goods/item')}>?id=<{$vo.gid}>" title="<{$vo.name}>" target="_blank"><img src="__ROOT__/upload/<{$vo.img}>"></a></div>
-                                <div class="showInfo clearfix">
-                                    <div class="showInfo_col1">
-                                        <div class="name"><a href="<{:U('goods/item')}>?id=<{$vo.gid}>" title="<{$vo.name}>" target="_blank"><{$vo.name}></a></div>
-                                    </div>
-                                    <div class="showInfo_col2">
-                                        <div class="price"><i>¥</i><span><{$vo.price}></span></div>
-                                    </div>
-                                </div>
-                                <div class="showInfo2">"绿色滋养，纯正美味"</div>
-                            </li>
-                        </volist>
-                    </ul>
-                </div>
-
-                <!--<div class="nextView"><img src="__PUBLIC__/images/nextViewBtn.jpg" width="208" height="23" /></div>-->
-            </div>
-        </div>
-        <!-- 热销排行 结束 -->
-
-    </div>
-    <div class="main_r">
-        <div class="bannerShow"><img src="__PUBLIC__/images/banner_itemList.jpg" width="765" height="265" /></div>
-        <div class="proClassifyWarpper">
-            <div class="proClassify_cont clearfix">
-                <input type="hidden" id="pg" />
-                <input type="hidden" id="sortby" />
-                <div id="noFindList_itemlist" class="noFindList">
-                    <span>很抱歉，暂无此类目的商品，请继续关注哦~</span>
-                </div>
-                <ul id="proList" class="proList">
-                    <volist name="list" id="vo">
-                        <li style="margin-right:0px;">
-                            <div class="showPic">
-                                <a href="<{:U('goods/item')}>?id=<{$vo.gid}>" target="_blank" title="<{$vo.name}>"><img src="__ROOT__/upload/<{$vo.img}>" /></a></div>
-                            <div class="showInfo">
-                                <div class="showInfo_col1">
-                                    <div class="name"><a href="<{:U('goods/item')}>?id=<{$vo.gid}>" target="_blank" title="<{$vo.name}>"><{$vo.name}></a></div>
-                                    <div class="desc1"></div>
-                                </div>
-                                <div class="showInfo_col2">
-                                    <div class="price"><i>¥</i><span><{$vo.price}></span></div>
-                                    <div class="addShopCartBox">
-                                        <div class="addNumBox">
-                                            <input type="button" class="minus" />
-                                            <input type="text" id="tonysfarm_product<{$vo.gid}>" class="inputBorder" value="1" />
-                                            <input type="button" class="add" />
-                                        </div>
-                                        <input type="button" class="addShopCart" onclick="javascript:readytoadd('__ROOT__/upload/<{$vo.img}>', '<{$vo.name}>', '<{$vo.price}>', '<{$vo.gid}>');" />
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </volist>
-                </ul>
-            </div>
-        </div>
-        <div class="pageWarpper">
-            <{$page}>
-        </div>
-    </div>
-    <div class="line"></div>
-    <div class="security">
-        <ul class="security_tab clearfix">
-            <li class="on"><img src="__PUBLIC__/images/security1.gif" /></li>
-            <li><img src="__PUBLIC__/images/security2.gif" /></li>
-            <li><img src="__PUBLIC__/images/security3.gif" /></li>
-            <li><img src="__PUBLIC__/images/security4.gif" /></li>
-            <li><img src="__PUBLIC__/images/security5.gif" /></li>
-        </ul>
-        <div class="security_cont"> <img src="__PUBLIC__/images/security_show1.gif" /> </div>
-        <div class="security_cont" style=" display:none;"> <img src="__PUBLIC__/images/security_show2.gif" /> </div>
-        <div class="security_cont" style=" display:none;"> <img src="__PUBLIC__/images/security_show3.gif" /> </div>
-        <div class="security_cont" style=" display:none;"> <img src="__PUBLIC__/images/security_show4.gif" /> </div>
-        <div class="security_cont" style=" display:none;"> <img src="__PUBLIC__/images/security_show5.gif" /> </div>
-    </div> </div>
-
-<script language="javascript">
-
-    $(function() {
-
-        var url = location.href;
-        var sortby = $.getCommonParam(url, "sortby");
-        var pg=$.getCommonParam(url, "pg");
-        $("#sortby").val(sortby);
-        $("#pg").val(pg);
-        init_item();
-
-        $(".addShopCart").live('click', function() {
-            var itemId=$(this).attr("itemId");
-            addCart(itemId);
-        });
-
-
-        $(".add").live('click', function() {
-            var itemId=$(this).attr("itemId");
-
-            var t = "#tonysfarm_product" + itemId;
-
-            var c = eval($(t).val());
-
-            $(t).attr("value", c + 1);
-
-        });
-
-        $(".minus").live('click', function() {
-            var itemId=$(this).attr("itemId");
-
-            var t = "#tonysfarm_product" + itemId;
-
-            var c = eval($(t).val());
-
-            if(c > 1){
-                $(t).attr("value", c - 1);
-            }
-
-        });
-    });
-
-    function itemPage(pg){
-        //var sortby = $.trim($("#sortby").val());
-        //window.location.href="/ingredients/itemlist-20033.html?sortby="+sortby+"&pg="+pg;
-        $("#pg").val(pg);
-        $(document).scrollTop($("#proList").offset().top-30);
-        init_item();
-    }
-
-    function init_item() {
-        var shopid='8NvWUHKIf78=';
-        var menuid='20033';
-        var sortby = $.trim($("#sortby").val());
-        var pg = $.trim($("#pg").val());
-        $.ajax({
-            method : itemMethod.method,
-            url : itemMethod.url,
-            data:{shopid:shopid,menuid:menuid,sortby:sortby,pg:pg},
-            dataType : itemMethod.datatype,
-            beforeSend : function(XMLHttpRequest) {
-                $("#proList").empty();
-                $(".pageWarpper").empty();
-            },
-            success : function(data) {
-                if (data.status == "true") {
-                    pg=pg==""?1:parseInt(pg,10);
-                    var ul = $("#proList");
-                    var list=data.message;
-                    var index=1;
-                    var str='';
-                    if(list.length>0){
-                        var p_s=list.length;
-                        var s_index=p_s>item_page_size?(p_s-1):p_s;
-                        for(var i=0;i<s_index;i++){
-                            var d=list[i];
-                            if(index%4==0){
-                                str = '<li class="mr0">';
-                            }else{
-                                str = '<li>';
-                            }
-                            str+= '<div class="showPic"><i class="hot"></i><a href="/item/productdetail-'+d.itemid+'.html" title="'+d.name+'" target="_blank"><img src="'+d.image+'" /></a></div>';
-                            str+= '<div class="name"><a href="/item/productdetail-'+d.itemid+'.html" title="'+d.name+'" target="_blank">'+d.name+'</a></div>';
-                            str+= '<div class="desc">'+d.intro+'</div>';
-                            str+= '<div class="showInfo clearfix">';
-                            str+= '  <div class="showInfo_col1">';
-                            str+= '    <div class="price"><i>￥</i><span>'+d.price+'</span></div>';
-                            str+= '  </div>';
-                            str+= '  <div class="showInfo_col2">';
-                            str+= '   <div class="addShopCartBox">';
-                            str+= '      <div class="addNumBox">';
-                            str+= '        <input name="" type="button" class="minus" itemId="' + d.skuid + '" />';
-                            str+= '        <input id="tonysfarm_product' + d.skuid + '" type="text" class="inputBorder" value="1" />';
-                            str+= '        <input name="" type="button" class="add"  itemId="' + d.skuid + '"/>';
-                            str+= '      </div>';
-                            str+= '      <input name="" type="button" class="addShopCart" itemId="' + d.skuid + '" />';
-                            str+= '    </div>';
-                            str+= '  </div>';
-                            str+= ' </div>';
-                            str+= ' </li>';
-
-                            $("#proList").append(str);
-                            index++;
-                        }
-                        var prev=pg-1;
-                        var next=pg+1;
-                        if(pg==0){
-                            prev=1;
-                        }
-                        str='';
-                        if(pg-1>0){
-                            str+='<a class="prePage" href="javascript:void(0);" onclick="itemPage('+prev+')">上一页</a> <a class="prePage2" href="javascript:void(0);" onclick="itemPage('+prev+')"></a>';
-                        }else{
-                            str+='<a class="prePage" href="javascript:void(0);" >上一页</a> <a class="prePage2" href="javascript:void(0);" ></a>';
-                        }
-                        str+= '  <input type="text" class="currPage" value="'+pg+'" name="">';
-                        if(p_s>item_page_size){
-                            str+= ' <a class="nextPage2" href="javascript:void(0);" onclick="itemPage('+next+')"></a> <a class="nextPage" href="javascript:void(0);" onclick="itemPage('+next+')">下一页</a>';
-                        }else{
-                            str+= ' <a class="nextPage2" href="javascript:void(0);" ></a> <a class="nextPage" href="javascript:void(0);" >下一页</a>';
-                        }
-                        $(".pageWarpper").append(str);
-                    }else{
-                        $("#noFindList_itemlist").html('<span>很抱歉，没有找到相关的商品</span>');
-                        $("#noFindList_itemlist").show();
-                    }
-                }else{
-                    $("#noFindList_itemlist").html('<span>'+data.message+'</span>');
-                    $("#noFindList_itemlist").show();
-                }
-            }
-        });
-    }
-</script>
+<link type="text/css" rel="stylesheet" href="__PUBLIC__/css/common.css" /><link type="text/css" rel="stylesheet" href="__PUBLIC__/css/ingredients.css" /><link type="text/css" rel="stylesheet" href="__PUBLIC__/css/leftCommon.css" /><div class="banner"></div><div class="breads" style="height:32px;line-height:32px;">    <i class="breads_icon"></i>    <a href="<{:U('index/index')}>">首页</a></div><div class="main mt35 clearfix">    <div class="main_l">        <div class="leftMenuWarp">            <div class="leftMenu_tit">分类</div>            <div class="leftMenu_cont">                <ul class="menuList">                    <li>                        <div class="menu">                            <a href="<{:U('goods/index')}>?type=0" class="menuName <eq name='cid' value=" 0 ">on</eq>">全部</a></div>                        <div class="subMenu"></div>                    </li>                    <volist name="goodsType" id="v">                        <li>                            <div class="menu">                                <a href="<{:U('goods/index')}>?type=<{$key}>" class="menuName <eq name='key' value=" $cid ">on</eq>">                                <{$v}></a>                            </div>                            <div class="subMenu"></div>                        </li>                    </volist>                </ul>            </div>        </div>        <!-- 热销排行 开始 -->        <div class="leftProView">            <div class="leftProView_title" id="assozonename1">热销排行</div>            <div class="leftProView_cont clearfix">                <!--<div class="preView"><img src="__PUBLIC__/images/preViewBtn.jpg" width="208" height="23" /></div>-->                <div class="viewBox">                    <ul class="proList" id="assozoneitem1">                        <volist name="hots" id="vo">                            <li>                                <div class="showPic">                                    <a href="<{:U('goods/item')}>?id=<{$vo.gid}>" title="<{$vo.name}>" target="_blank">                                        <img src="__ROOT__/upload/<{$vo.img}>"></a>                                </div>                                <div class="showInfo clearfix">                                    <div class="showInfo_col1">                                        <div class="name">                                            <a href="<{:U('goods/item')}>?id=<{$vo.gid}>" title="<{$vo.name}>" target="_blank">                                                <{$vo.name}></a>                                        </div>                                    </div>                                    <div class="showInfo_col2">                                        <div class="price">                                            <i>¥</i>                      <span>                        <{$vo.price}></span>                                        </div>                                    </div>                                </div>                                <div class="showInfo2">"绿色滋养，纯正美味"</div></li>                        </volist>                    </ul>                </div>                <!--<div class="nextView"><img src="__PUBLIC__/images/nextViewBtn.jpg" width="208" height="23" /></div>--></div>        </div>        <!-- 热销排行 结束 --></div>    <div class="main_r">        <div class="bannerShow">            <img src="__PUBLIC__/images/banner_itemList.jpg" width="765" height="265" /></div>        <div class="proClassifyWarpper">            <div class="proClassify_cont clearfix">                <input type="hidden" id="pg" />                <input type="hidden" id="sortby" />                <div id="noFindList_itemlist" class="noFindList">                    <span>很抱歉，暂无此类目的商品，请继续关注哦~</span></div>                <ul id="proList" class="proList">                    <volist name="list" id="vo">                        <li style="margin-right:0px;">                            <div class="showPic">                                <a href="<{:U('goods/item')}>?id=<{$vo.gid}>" target="_blank" title="<{$vo.name}>">                                    <img src="__ROOT__/upload/<{$vo.img}>" /></a>                            </div>                            <div class="showInfo">                                <div class="showInfo_col1">                                    <div class="name">                                        <a href="<{:U('goods/item')}>?id=<{$vo.gid}>" target="_blank" title="<{$vo.name}>">                                            <{$vo.name}></a>                                    </div>                                    <div class="desc1"></div>                                </div>                                <div class="showInfo_col2">                                    <div class="price">                                        <i>¥</i>                    <span>                      <{$vo.price}></span>                                    </div>                                    <div class="addShopCartBox">                                        <div class="addNumBox">                                            <input type="button" class="minus" />                                            <input type="text" id="tonysfarm_product<{$vo.gid}>" class="inputBorder" value="1" />                                            <input type="button" class="add" /></div>                                        <input type="button" class="addShopCart" onclick="javascript:readytoadd('__ROOT__/upload/<{$vo.img}>', '<{$vo.name}>', '<{$vo.price}>', '<{$vo.gid}>');" /></div>                                </div>                            </div>                        </li>                    </volist>                </ul>            </div>        </div>        <div class="pageWarpper">            <{$page}></div>    </div>    <div class="line"></div>    <div class="security">        <ul class="security_tab clearfix">            <li class="on">                <img src="__PUBLIC__/images/security1.gif" /></li>            <li>                <img src="__PUBLIC__/images/security2.gif" /></li>            <li>                <img src="__PUBLIC__/images/security3.gif" /></li>            <li>                <img src="__PUBLIC__/images/security4.gif" /></li>            <li>                <img src="__PUBLIC__/images/security5.gif" /></li>        </ul>        <div class="security_cont">            <img src="__PUBLIC__/images/security_show1.gif" /></div>        <div class="security_cont" style=" display:none;">            <img src="__PUBLIC__/images/security_show2.gif" /></div>        <div class="security_cont" style=" display:none;">            <img src="__PUBLIC__/images/security_show3.gif" /></div>        <div class="security_cont" style=" display:none;">            <img src="__PUBLIC__/images/security_show4.gif" /></div>        <div class="security_cont" style=" display:none;">            <img src="__PUBLIC__/images/security_show5.gif" /></div>    </div></div><script language="javascript">$(function() {    var url = location.href;    var sortby = $.getCommonParam(url, "sortby");    var pg = $.getCommonParam(url, "pg");    $("#sortby").val(sortby);    $("#pg").val(pg);    init_item();    $(".addShopCart").live('click',            function() {                var itemId = $(this).attr("itemId");                addCart(itemId);            });    $(".add").live('click',            function() {                var itemId = $(this).attr("itemId");                var t = "#tonysfarm_product" + itemId;                var c = eval($(t).val());                $(t).attr("value", c + 1);            });    $(".minus").live('click',            function() {                var itemId = $(this).attr("itemId");                var t = "#tonysfarm_product" + itemId;                var c = eval($(t).val());                if (c > 1) {                    $(t).attr("value", c - 1);                }            });});function itemPage(pg) {    //var sortby = $.trim($("#sortby").val());    //window.location.href="/ingredients/itemlist-20033.html?sortby="+sortby+"&pg="+pg;    $("#pg").val(pg);    $(document).scrollTop($("#proList").offset().top - 30);    init_item();}function init_item() {    var shopid = '8NvWUHKIf78=';    var menuid = '20033';    var sortby = $.trim($("#sortby").val());    var pg = $.trim($("#pg").val());    $.ajax({        method: itemMethod.method,        url: itemMethod.url,        data: {            shopid: shopid,            menuid: menuid,            sortby: sortby,            pg: pg        },        dataType: itemMethod.datatype,        beforeSend: function(XMLHttpRequest) {            $("#proList").empty();            $(".pageWarpper").empty();        },        success: function(data) {            if (data.status == "true") {                pg = pg == "" ? 1 : parseInt(pg, 10);                var ul = $("#proList");                var list = data.message;                var index = 1;                var str = '';                if (list.length > 0) {                    var p_s = list.length;                    var s_index = p_s > item_page_size ? (p_s - 1) : p_s;                    for (var i = 0; i < s_index; i++) {                        var d = list[i];                        if (index % 4 == 0) {                            str = '<li class="mr0">';                        } else {                            str = '<li>';                        }                        str += '<div class="showPic"><i class="hot"></i><a href="/item/productdetail-' + d.itemid + '.html" title="' + d.name + '" target="_blank"><img src="' + d.image + '" /></a></div>';                        str += '<div class="name"><a href="/item/productdetail-' + d.itemid + '.html" title="' + d.name + '" target="_blank">' + d.name + '</a></div>';                        str += '<div class="desc">' + d.intro + '</div>';                        str += '<div class="showInfo clearfix">';                        str += '  <div class="showInfo_col1">';                        str += '    <div class="price"><i>￥</i><span>' + d.price + '</span></div>';                        str += '  </div>';                        str += '  <div class="showInfo_col2">';                        str += '   <div class="addShopCartBox">';                        str += '      <div class="addNumBox">';                        str += '        <input name="" type="button" class="minus" itemId="' + d.skuid + '" />';                        str += '        <input id="tonysfarm_product' + d.skuid + '" type="text" class="inputBorder" value="1" />';                        str += '        <input name="" type="button" class="add"  itemId="' + d.skuid + '"/>';                        str += '      </div>';                        str += '      <input name="" type="button" class="addShopCart" itemId="' + d.skuid + '" />';                        str += '    </div>';                        str += '  </div>';                        str += ' </div>';                        str += ' </li>';                        $("#proList").append(str);                        index++;                    }                    var prev = pg - 1;                    var next = pg + 1;                    if (pg == 0) {                        prev = 1;                    }                    str = '';                    if (pg - 1 > 0) {                        str += '<a class="prePage" href="javascript:void(0);" onclick="itemPage(' + prev + ')">上一页</a> <a class="prePage2" href="javascript:void(0);" onclick="itemPage(' + prev + ')"></a>';                    } else {                        str += '<a class="prePage" href="javascript:void(0);" >上一页</a> <a class="prePage2" href="javascript:void(0);" ></a>';                    }                    str += '  <input type="text" class="currPage" value="' + pg + '" name="">';                    if (p_s > item_page_size) {                        str += ' <a class="nextPage2" href="javascript:void(0);" onclick="itemPage(' + next + ')"></a> <a class="nextPage" href="javascript:void(0);" onclick="itemPage(' + next + ')">下一页</a>';                    } else {                        str += ' <a class="nextPage2" href="javascript:void(0);" ></a> <a class="nextPage" href="javascript:void(0);" >下一页</a>';                    }                    $(".pageWarpper").append(str);                } else {                    $("#noFindList_itemlist").html('<span>很抱歉，没有找到相关的商品</span>');                    $("#noFindList_itemlist").show();                }            } else {                $("#noFindList_itemlist").html('<span>' + data.message + '</span>');                $("#noFindList_itemlist").show();            }        }    });}</script>

@@ -1,174 +1,342 @@
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/slide.css" />
 <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/index.css" />
+<script src="__PUBLIC__/js/index.js"></script>
+<script src="__PUBLIC__/js/jquery.flexslider-min.js"></script>
 <div class="banner">
+
     <div class="flexslider">
+
         <ul class="slides">
-            <li style="background:url(http://www.tonysfarm.com/upload/1465979450413.jpg) 50% 0 no-repeat;" title="啤酒"><a href="/ingredients/itemlist-20091.html" target="_blank" class="item"></a></li>
-            <li style="background:url(http://www.tonysfarm.com/upload/1466047706548.jpg) 50% 0 no-repeat;" title="父亲节"><a href="http://www.tonysfarm.com/2016/fatherday/index.html" target="_blank" class="item"></a></li>
-            <li style="background:url(http://www.tonysfarm.com/upload/1465783903150.jpg) 50% 0 no-repeat;" title="杂粮"><a href="http://www.tonysfarm.com/2016/zaliang/index.html" target="_blank" class="item"></a></li>
-            <li style="background:url(http://www.tonysfarm.com/upload/1465377472135.jpg) 50% 0 no-repeat;" title="端午节"><a href="http://www.tonysfarm.com/2016/duanwu/index.html" target="_blank" class="item"></a></li>
-            <li style="background:url(http://www.tonysfarm.com/upload/1465377472391_671.jpg) 50% 0 no-repeat;" title="杨梅"><a href="http://www.tonysfarm.com/2016/yangmei/index.html" target="_blank" class="item"></a></li>
+        <volist name='slides' id='vo'>
+            <li style="background:url(/Public/carousel/<{$vo.pic}>) 50% 0 no-repeat;" title=""><a href="<{$vo.url}>" target="_blank" class="item"></a></li>
+		</volist>
         </ul>
+
     </div>
+
 </div>
 
+
+
 <div class="main">
+
     <!--活动区域-->
+
     <div class="activityWarpper">
+
         <div class="activity_title">
+
             <a href="javascript:void(0);" class="freshLine on">
+
                 <i><img src="__PUBLIC__/images/freshLine.png"></i>热卖推荐</a>
+
         </div>
+
         <div class="activity_cont clearfix" >
+
             <ul class="activityProList">
+
                 <volist name="hots" id="vo">
+
                     <li style="margin-right:0px;">
+
                         <div class="showPic">
+
                             <a href="<{:U('goods/item')}>?id=<{$vo.gid}>" target="_blank" title="<{$vo.name}>"><img src="__ROOT__/upload/<{$vo.img}>" /></a></div>
+
                         <div class="showInfo">
+
                             <div class="showInfo_col1">
+
                                 <div class="name"><a href="<{:U('goods/item')}>?id=<{$vo.gid}>" target="_blank" title="<{$vo.name}>"><{$vo.name}></a></div>
+
                                 <div class="desc1"></div>
+
                             </div>
+
                             <div class="showInfo_col2">
+
                                 <div class="price"><i>¥</i><span><{$vo.price}></span></div>
+
                                 <div class="addShopCartBox">
+
                                     <div class="addNumBox">
+
                                         <input type="button" class="minus" />
+
                                         <input type="text" class="inputBorder" value="1" id="tonysfarm_product<{$vo.gid}>" />
+
                                         <input type="button" class="add" />
+
                                     </div>
+
                                     <input type="button" class="addShopCart" onclick="javascript:readytoadd('__ROOT__/upload/<{$vo.img}>', '<{$vo.name}>', '<{$vo.price}>', '<{$vo.gid}>');" />
+
                                 </div>
+
                             </div>
+
                         </div>
+
                     </li>
+
                 </volist>
+
             </ul>
+
         </div>
+
     </div>
+
     <div class="navbar">
+
         <a href="#">
+
             <img src="__PUBLIC__/images/katonglan.jpg" width="1010" height="42">
+
         </a>
+
     </div>
+
     <!--活动区域-->
+
+
 
     <volist name="lists" id="list">
+
         <div class="proClassifyWarpper">
+
             <div class="proClassify_title">
+
                 <i><img src="__PUBLIC__/images/tit1.jpg" /></i>
+
                 <span><a href="javascript:void(0);"><{$list.title}></a></span>
+
                 <a href="<{:U('goods/list')}>?type=<{$list.type}>" class="more" target="_blank">更多&gt;</a>
+
             </div>
+
             <div class="proClassify_cont clearfix">
+
                 <ul class="proList">
+
                     <volist name="list.data" id="vo">
+
                         <li style="margin-right:0px;">
+
                             <div class="showPic">
+
                                 <a href="<{:U('goods/item')}>?id=<{$vo.gid}>" target="_blank" title="<{$vo.name}>"><img src="__ROOT__/upload/<{$vo.img}>" /></a></div>
+
                             <div class="showInfo">
+
                                 <div class="showInfo_col1">
+
                                     <div class="name"><a href="<{:U('goods/item')}>?id=<{$vo.gid}>" target="_blank" title="<{$vo.name}>"><{$vo.name}></a></div>
+
                                     <div class="desc1"></div>
+
                                 </div>
+
                                 <div class="showInfo_col2">
+
                                     <div class="price"><i>¥</i><span><{$vo.price}></span></div>
+
                                     <div class="addShopCartBox">
+
                                         <div class="addNumBox">
+
                                             <input type="button" class="minus" />
+
                                             <input type="text" id="tonysfarm_product<{$vo.gid}>" class="inputBorder" value="1" />
+
                                             <input type="button" class="add" />
+
                                         </div>
+
                                         <input type="button" class="addShopCart" onclick="javascript:readytoadd('__ROOT__/upload/<{$vo.img}>', '<{$vo.name}>', '<{$vo.price}>', '<{$vo.gid}>');" />
+
                                     </div>
+
                                 </div>
+
                             </div>
+
                         </li>
+
                     </volist>
+
                 </ul>
+
             </div>
+
         </div>
+
     </volist>
 
+
+
     <div class="tonysWarpper clearfix">
+
         <div class="tonysWarpper_showPic"><a href="/farmintro/video.html" target="_blank"><img src="__PUBLIC__/images/tonysPic.jpg" /></a></div>
+
         <div class="tonysWarpper_news">
+
             <div class="title"><img src="__PUBLIC__/images/news_tit.jpg" /></div>
+
             <div class="cont">
+
                 <ul>
+
                     <volist name="news" id="vo">
+
                         <li>
+
                             <a href="<{:U('news')}>?id=<{$vo.id}>" target="_blank" title='<{$vo.title}>'><{$vo.title}></a>
+
                             <eq name="key" value="0"><img src="__PUBLIC__/images/new.gif" /></eq>
+
                         </li>
+
                     </volist>
+
                 </ul>
+
             </div>
+
         </div>
+
     </div>
 
+
+
     <div class="security">
+
         <ul class="security_tab clearfix">
+
             <li class="on"><img src="__PUBLIC__/images/security1.gif" /></li>
+
             <li><img src="__PUBLIC__/images/security2.gif" /></li>
+
             <li><img src="__PUBLIC__/images/security3.gif" /></li>
+
             <li><img src="__PUBLIC__/images/security4.gif" /></li>
+
             <li><img src="__PUBLIC__/images/security5.gif" /></li>
+
         </ul>
+
         <div class="security_cont"> <img src="__PUBLIC__/images/security_show1.gif" /> </div>
+
         <div class="security_cont" style=" display:none;"> <img src="__PUBLIC__/images/security_show2.gif" /> </div>
+
         <div class="security_cont" style=" display:none;"> <img src="__PUBLIC__/images/security_show3.gif" /> </div>
+
         <div class="security_cont" style=" display:none;"> <img src="__PUBLIC__/images/security_show4.gif" /> </div>
+
         <div class="security_cont" style=" display:none;"> <img src="__PUBLIC__/images/security_show5.gif" /> </div>
+
     </div></div>
+
+
 
 <script language="javascript">
 
+
+
     function search_product(id) {
+
         var key = $.trim($("#"+id).val());
+
         if (key == "") {
+
             key=$.trim($("#"+id).attr("placeholder"));
+
         }
+
         window.location.href = "/search.html?keyword=" + key;
+
     }
+
     $(function () {
+
         /*var res = getRequest();
+
          var par = res['index'];
+
          if (par != 'gfan') {
+
          var ua = navigator.userAgent.toLowerCase();
+
          var contains = function (a, b) {
+
          if (a.indexOf(b) != -1) {
+
          return true;
+
          }
+
          };
+
          var toMobileVertion = function () {
+
          window.location.href = 'http://10.0.1.8:8082/tfmobile/index.html';
+
          }
+
          if (contains(ua, "ipad") || (contains(ua, "rv:1.2.3.4")) || (contains(ua, "0.0.0.0")) || (contains(ua, "8.0.552.237"))) {
+
          return false;
+
          }
+
          if ((contains(ua, "android") && contains(ua, "mobile")) || (contains(ua, "android") && contains(ua, "mozilla")) || (contains(ua, "android") && contains(ua, "opera")) || contains(ua, "ucweb7") || contains(ua, "iphone")) {
+
          toMobileVertion();
+
          }
+
          }*/
 
+
+
         $('.flexslider').flexslider({
+
             directionNav: false,
+
             pauseOnAction: false
+
         });
+
     });
 
 
+
+
+
     /*function getRequest() {
+
      var url = location.search; //获取url中"?"符后的字串
+
      var theRequest = new Object();
+
      if (url.indexOf("?") != -1) {
+
      var str = url.substr(1);
+
      strs = str.split("&");
+
      for (var i = 0; i < strs.length; i++) {
+
      theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+
      }
+
      }
+
      return theRequest;
+
      }*/
+
 </script>
+

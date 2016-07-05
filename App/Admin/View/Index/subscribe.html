@@ -1,52 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no, maximum-scale=1.0"/>
-    <title>关注<{$info.name}></title>
-    <style>
-        *{padding: 0px;margin:0px}
-        .heaer{
-            background: #eeeeee;
-        }
-        .heaer .img{
-            display: inline-block;
-            margin: 10px 10px 10px 20px;
-        }
-        .heaer .img img{
-            width: 36px;
-            border-radius: 50%;
-        }
-        .heaer .info{
-            display: inline-block;
-        }
-        .heaer h4{color:#424242;}
-        .heaer p{color:#a2a2a2;margin-top: 5px;}
-
-        .main{
-            width: 100%;
-            margin: 20px auto;
-            text-align: center;
-        }
-        .qrcode{width: 55%;}
-        .tip1{color:#ff902d;margin-top: 30px;}
-        .tip2{color:#bdbdbd;margin-top: 10px;    font-size: 15px;}
-    </style>
-</head>
-<body>
-<div class="heaer">
-    <div class="img">
-        <img src="__PUBLIC__/images/wechathead.jpg" />
-    </div>
-    <div class="info">
-        <h4><{$info.name}></h4>
-        <p class="tip2">微信号:&nbsp;<{$info.num}></p>
-    </div>
-</div>
-<div class="main">
-    <img class="qrcode" src="__PUBLIC__/images/wechat_qrcode.jpg" />
-    <p class="tip1">长按二维码图片，识别图片中的二维码 关注</p>
-    <p class="tip2">关注我们 获取更多服务</p>
-</div>
-</body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no, maximum-scale=1.0"/>
+    <title>关注<{$info.name}></title>
+    <style>
+        *{padding: 0px;margin:0px}
+        .heaer{
+            background: #eeeeee;
+        }
+        .heaer .img{
+            display: inline-block;
+            margin: 10px 10px 10px 20px;
+        }
+        .heaer .img img{
+            width: 36px;
+            border-radius: 50%;
+        }
+        .heaer .info{
+            display: inline-block;
+        }
+        .heaer h4{color:#424242;}
+        .heaer p{color:#a2a2a2;margin-top: 5px;}
+
+        .main{
+            width: 100%;
+            margin: 20px auto;
+            text-align: center;
+        }
+        .qrcode{width: 55%;}
+        .tip1{color:#ff902d;margin-top: 30px;}
+        .tip2{color:#bdbdbd;margin-top: 10px;    font-size: 15px;}
+    </style>
+</head>
+<body>
+<div class="heaer">
+    <div class="img">
+        <img src="__PUBLIC__/images/wechathead.jpg" />
+    </div>
+    <div class="info">
+        <h4><{$info.name}></h4>
+        <p class="tip2">微信号:&nbsp;<{$info.num}></p>
+    </div>
+</div>
+<div class="main">
+    <img class="qrcode" src="__PUBLIC__/images/wechat_qrcode.jpg" />
+    <p class="tip1">长按二维码图片，识别图片中的二维码 关注</p>
+    <p class="tip2">关注我们 获取更多服务</p>
+</div>
+</body>
 </html>

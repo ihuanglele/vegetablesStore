@@ -1,303 +1,303 @@
-<link type="text/css" rel="stylesheet" href="__PUBLIC__/css/common.css" />
-<link type="text/css" rel="stylesheet" href="__PUBLIC__/css/productdetail.css">
-<link type="text/css" rel="stylesheet" href="__PUBLIC__/css/imgZoon.css">
-<link type="text/css" rel="stylesheet" href="__PUBLIC__/css/leftCommon.css" />
-
-
-<input type="hidden" value="images/1461637193583.jpg" id="_page_detail_product_image" />
-
-<input type="hidden" value="<{$info.buy_price}>" id="_page_detail_product_price" />
-<input type="hidden" value="<{$info.name}>" id="_page_detail_product_name" />
-<input type="hidden" value="<{$info.gid}>" id="_page_detail_item_skuid" />
-<input type="hidden" value="<{$info.type}>" id="_page_detail_product_category_name" />
-<input type="hidden" value="<{$info.cid}>" id="_page_detail_product_category_code" />
-<input type="hidden" value="<{$info.gid}>" id="_page_detail_product_code" />
-
-<div class="breads" style="height:32px;line-height:32px;">
-    <i class="breads_icon"></i>
-    <a href="<{:U('index/index')}>">首页</a> &gt;
-    <a href="<{:U('goods/index')}>?type=<{$info.cid}>"><{$info.type}></a> &gt;
-    <a href="#"><{$info.name}></a> &gt;
-
-    <b></b>
-</div>
-<div class="main mt35 clearfix">
-    <div class="prodectDetailBox clearfix">
-        <div class="prodectDetailBox_l">
-            <div id=preview>
-                <div class=jqzoom id=spec-n1>
-                    <img height=360 src="__ROOT__/upload/<{$info.img}>" jqimg="__ROOT__/upload/<{$info.img}>" width=360 />
-                </div>
-                <div id=spec-n5>
-                    <div class=control id=spec-left><img src="__PUBLIC__/images/left.jpg" /></div>
-                    <div id=spec-list>
-                        <ul class=list-h>
-                            <li><img src="__ROOT__/upload/<{$info.img}>"></li>
-                        </ul>
-                    </div>
-                    <div class=control id=spec-right><img src="__PUBLIC__/images/right.jpg" /></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="prodectDetailBox_r" style="width:602px;">
-            <div class="pro_name"><{$info.name}></div>
-            <!--<div class="pro_des">鲜嫩爽口，营养美味</div>-->
-            <div class="pro_info2 clearfix" style="width:602px;">
-                <ul style="overflow:hidden;margin-top:4px;margin-bottom:4px;height:90px;max-height:90px;">
-                </ul>
-            </div>
-            <div class="pro_info" style="width:600px;">
-                <div class="part_spec clearfix">
-                    <div class="part_specTit">市场价：<{$info.market_price}></div>
-                </div>
-
-                <div class="part_spec clearfix">
-                    <div class="part_specTit">库存：<{$info.left_num}></div>
-                </div>
-
-                <div class="part_deal">
-                    <table border=0 cellspacing=0 cellpadding=0>
-                        <tr>
-                            <td height=45 valign="middle" class="part_price" style="padding:0;">
-                                <div style="height:45px;line-height:45px;"><i class="price">¥</i>&nbsp;<span class="price"><{$info.buy_price}></span></div>
-                            </td>
-                            <td width=10></td>
-                            <td height=45 valign="middle" class="addNumBox" style="padding:0;line-height:45px;">
-                                <p><input type="text" value="1" class="inputBorder" style="font-size:18px;font-weight:normal;color:#666;" id="tonysfarm_product211598"></p>
-                                <p><input type="button" class="add"><input type="button" class="minus"></p>
-                            </td>
-                            <td height=45 valign="middle" style="padding:0;line-height:45px;">
-                                <input type="button" id="shopcartbtn" style="background-image:url('__PUBLIC__/images/addShopCartBtn2.jpg');background-position:-160px 0px;" class="addShopCart" />
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-
-    <div class="productDeatil_c clearfix">
-        <div class="main_l">
-            <div class="leftMenuWarp">
-                <div class="leftMenu_tit">优选食材</div>
-                <div class="leftMenu_cont">
-                    <ul class="menuList">
-                        <volist name="goodsType" id="v">
-                            <li><a href="<{:U('goods/index')}>?type=<{$key}>" class="Menu Menu2" target="_blank"><{$v}></a></li>
-                        </volist>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- 关联商品显示 开始 -->
-            <div class="leftProView">
-                <div class="leftProView_title" id="assozonename1">看了该商品的用户还看了</div>
-                <div class="leftProView_cont clearfix">
-                    <!--<div class="preView"><img src="__PUBLIC__/images/preViewBtn.jpg" width="208" height="23" /></div>-->
-                    <div class="viewBox">
-                        <ul class="proList" id="assozoneitem1">
-                            <volist name="hots" id="vo">
-                                <li>
-                                    <div class="showPic"><a href="<{:U('goods/item')}>?id=<{$vo.gid}>" title="<{$vo.name}>" target="_blank"><img src="__ROOT__/upload/<{$vo.img}>"></a></div>
-                                    <div class="showInfo clearfix">
-                                        <div class="showInfo_col1">
-                                            <div class="name"><a href="<{:U('goods/item')}>?id=<{$vo.gid}>" title="<{$vo.name}>" target="_blank"><{$vo.name}></a></div>
-                                        </div>
-                                        <div class="showInfo_col2">
-                                            <div class="price"><i>¥</i><span><{$vo.price}></span></div>
-                                        </div>
-                                    </div>
-                                    <div class="showInfo2">"绿色滋养，纯正美味"</div>
-                                </li>
-                            </volist>
-                        </ul>
-                    </div>
-                    <!--<div class="nextView"><img src="__PUBLIC__/images/nextViewBtn.jpg" width="208" height="23" /></div>-->
-                </div>
-            </div>
-            <!-- 关联商品显示 结束 -->
-
-        </div>
-
-        <div class="main_r">
-            <div class="proTabBox">
-                <ul>
-                    <li class="on">产品详情</li>
-                    <!--<li>查看评论</li>-->
-                </ul>
-            </div>
-            <div class="proTabBox2">
-                <ul>
-                    <li class="on">产品详情</li>
-                    <!--<li>查看评论</li>-->
-                </ul>
-                <div id="fixlayer" class="deal" style="width:152px;">
-                    <input type="button" id="shopcartbtn2" class="addShopCart" style="width:128px !important;height:33px;margin-left:20px;background-repeat:no-repeat;background-image:url('../images/addShopCartBtn2sm.jpg');background-position:-128px 0px;" />
-                </div>
-            </div>
-            <div class="productCont" >
-                <{$info.detail}>
-            </div>
-
-            <!--
-            <div class="productCont" style="display:none;">
-                <div class="gdcomment clearfix">
-                    <div class="totalComment" >合计评论（<span id="totalCommentCount">0</span>条）</div>
-                    <div class="gdcomment-1">
-                        <div class="rate"><strong id="commentGoodPercentageTotal">0%</strong><P>好评度</P></div>
-                        <div class="percent">
-                            <dl>
-                                <dt>满意</dt>
-                                <dd class="d1">
-                                    <div style="width:100%;" id="commentGoodPercentageWidth"></div>
-                                </dd>
-                                <dd class="d2"><strong id="commentGoodPercentage">0%</strong></dd>
-                            </dl>
-                            <dl>
-                                <dt>一般</dt>
-                                <dd class="d1">
-                                    <div style="width:0%;" id="commentRatingPercentageWidth"></div>
-                                </dd>
-                                <dd class="d2"><strong id="commentRatingPercentage">0%</strong></dd>
-                            </dl>
-                            <dl>
-                                <dt>不满意</dt>
-                                <dd class="d1">
-                                    <div style="width:0%;" id="commentBadPercentageWidth"></div>
-                                </dd>
-                                <dd class="d2"><strong id="commentBadPercentage">0%</strong></dd>
-                            </dl>
-                        </div>
-                        <div class="deal">
-                            <P>发表评论好换积分</P>
-                            <input name="" type="button" class="commentBtn" />
-                        </div>
-                    </div>
-
-                    <input type="hidden" value="211598" id="pkgProduct" />
-                    <div id="item_comment">
-
-
-
-                    </div>
-
-                    <div class="pageWarpper" id="commentNextPage">  </div>
-
-                </div>
-
-            </div>
-
-            -->
-        </div>
-        <div class="line"></div>
-        <div class="security">
-            <ul class="security_tab clearfix">
-                <li class="on"><img src="__PUBLIC__/images/security1.gif" /></li>
-                <li><img src="__PUBLIC__/images/security2.gif" /></li>
-                <li><img src="__PUBLIC__/images/security3.gif" /></li>
-                <li><img src="__PUBLIC__/images/security4.gif" /></li>
-                <li><img src="__PUBLIC__/images/security5.gif" /></li>
-            </ul>
-            <div class="security_cont"> <img src="__PUBLIC__/images/security_show1.gif" /> </div>
-            <div class="security_cont" style=" display:none;"> <img src="__PUBLIC__/images/security_show2.gif" /> </div>
-            <div class="security_cont" style=" display:none;"> <img src="__PUBLIC__/images/security_show3.gif" /> </div>
-            <div class="security_cont" style=" display:none;"> <img src="__PUBLIC__/images/security_show4.gif" /> </div>
-            <div class="security_cont" style=" display:none;"> <img src="__PUBLIC__/images/security_show5.gif" /> </div>
-        </div> </div>
-</div>
-
-<script language="javascript">
-
-    var inventorydata;
-    function chooseprovince(geoid) {
-        chgcity();
-        html = '<ul class="area-list">\r\n';
-        for (i = 0; i < inventorydata.length; i++) {
-            if (inventorydata[i].geoid == geoid) {
-                $("#stock_province_link").html("<em>" + inventorydata[i].geoname + "</em><i></i>");
-                $("#stock_city_link").html("<em>请选择</em><i></i>");
-                for (j = 0; j < inventorydata[i].subgeo.length; j++) {
-                    html += '    <li><a data-value="' + inventorydata[i].subgeo[j].geoid + '" href="javascript:choosecity(' + inventorydata[i].subgeo[j].geoid + ');">' + inventorydata[i].subgeo[j].geoname + '</a></li>\r\n';
-                }
-            }
-        }
-        html += '</ul>\r\n';
-        $("#stock_city_item").html(html);
-    }
-
-
-
-    function search_product(id) {
-        var key = $.trim($("#"+id).val());
-        if (key == "") {
-            key=$.trim($("#"+id).attr("placeholder"));
-        }
-        window.location.href = "/search.html?keyword=" + key;
-    }
-
-    $(function() {
-
-        $(".jqzoom").jqueryzoom({
-            xzoom:400,
-            yzoom:400,
-            offset:10,
-            position:"right",
-            preload:1,
-            lens:1
-        });
-        $("#spec-list").jdMarquee({
-            deriction:"left",
-            width:314,
-            height:95,
-            step:2,
-            speed:4,
-            delay:10,
-            control:true,
-            _front:"#spec-right",
-            _back:"#spec-left"
-        });
-
-        $("#spec-list img").bind("mouseover",function() {
-            var src=$(this).attr("src");
-            $("#spec-n1 img").eq(0).attr({
-                src:src.replace("\/n5\/","\/n1\/"),
-                jqimg:src.replace("\/n5\/","\/n0\/")
-            });
-            $(this).css({
-                "border":"2px solid #ff6600",
-                "padding":"1px"
-            });
-        }).bind("mouseout",function() {
-            $(this).css({
-                "border":"1px solid #ccc",
-                "padding":"2px"
-            });
-        });
-
-        $("#spec-list img").bind("mouseover",function() {
-            var src = $(this).attr("src");
-            $("#spec-n1 img").eq(0).attr({
-                src:src.replace("\/n5\/","\/n1\/"),
-                jqimg:src.replace("\/n5\/","\/n0\/")
-            });
-            $(this).css({
-                "border":"2px solid #ff6600",
-                "padding":"1px"
-            });
-        }).bind("mouseout",function(){
-            $(this).css({
-                "border":"1px solid #ccc",
-                "padding":"2px"
-            });
-        });
-
-    });
-</script>
-<script type="text/javascript" src="__PUBLIC__/js/base.js"></script>
-<script type="text/javascript" src="__PUBLIC__/js/lib.js"></script>
-<script type="text/javascript" src="__PUBLIC__/js/163css.js"></script>
-
-
+<link type="text/css" rel="stylesheet" href="__PUBLIC__/css/common.css" />
+<link type="text/css" rel="stylesheet" href="__PUBLIC__/css/productdetail.css">
+<link type="text/css" rel="stylesheet" href="__PUBLIC__/css/imgZoon.css">
+<link type="text/css" rel="stylesheet" href="__PUBLIC__/css/leftCommon.css" />
+
+
+<input type="hidden" value="images/1461637193583.jpg" id="_page_detail_product_image" />
+
+<input type="hidden" value="<{$info.buy_price}>" id="_page_detail_product_price" />
+<input type="hidden" value="<{$info.name}>" id="_page_detail_product_name" />
+<input type="hidden" value="<{$info.gid}>" id="_page_detail_item_skuid" />
+<input type="hidden" value="<{$info.type}>" id="_page_detail_product_category_name" />
+<input type="hidden" value="<{$info.cid}>" id="_page_detail_product_category_code" />
+<input type="hidden" value="<{$info.gid}>" id="_page_detail_product_code" />
+
+<div class="breads" style="height:32px;line-height:32px;">
+    <i class="breads_icon"></i>
+    <a href="<{:U('index/index')}>">首页</a> &gt;
+    <a href="<{:U('goods/index')}>?type=<{$info.cid}>"><{$info.type}></a> &gt;
+    <a href="#"><{$info.name}></a> &gt;
+
+    <b></b>
+</div>
+<div class="main mt35 clearfix">
+    <div class="prodectDetailBox clearfix">
+        <div class="prodectDetailBox_l">
+            <div id=preview>
+                <div class=jqzoom id=spec-n1>
+                    <img height=360 src="__ROOT__/upload/<{$info.img}>" jqimg="__ROOT__/upload/<{$info.img}>" width=360 />
+                </div>
+                <div id=spec-n5>
+                    <div class=control id=spec-left><img src="__PUBLIC__/images/left.jpg" /></div>
+                    <div id=spec-list>
+                        <ul class=list-h>
+                            <li><img src="__ROOT__/upload/<{$info.img}>"></li>
+                        </ul>
+                    </div>
+                    <div class=control id=spec-right><img src="__PUBLIC__/images/right.jpg" /></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="prodectDetailBox_r" style="width:602px;">
+            <div class="pro_name"><{$info.name}></div>
+            <!--<div class="pro_des">鲜嫩爽口，营养美味</div>-->
+            <div class="pro_info2 clearfix" style="width:602px;">
+                <ul style="overflow:hidden;margin-top:4px;margin-bottom:4px;height:90px;max-height:90px;">
+                </ul>
+            </div>
+            <div class="pro_info" style="width:600px;">
+                <div class="part_spec clearfix">
+                    <div class="part_specTit">市场价：<{$info.market_price}></div>
+                </div>
+
+                <div class="part_spec clearfix">
+                    <div class="part_specTit">库存：<{$info.left_num}></div>
+                </div>
+
+                <div class="part_deal">
+                    <table border=0 cellspacing=0 cellpadding=0>
+                        <tr>
+                            <td height=45 valign="middle" class="part_price" style="padding:0;">
+                                <div style="height:45px;line-height:45px;"><i class="price">¥</i>&nbsp;<span class="price"><{$info.buy_price}></span></div>
+                            </td>
+                            <td width=10></td>
+                            <td height=45 valign="middle" class="addNumBox" style="padding:0;line-height:45px;">
+                                <p><input type="text" value="1" class="inputBorder" style="font-size:18px;font-weight:normal;color:#666;" id="tonysfarm_product211598"></p>
+                                <p><input type="button" class="add"><input type="button" class="minus"></p>
+                            </td>
+                            <td height=45 valign="middle" style="padding:0;line-height:45px;">
+                                <input type="button" id="shopcartbtn" style="background-image:url('__PUBLIC__/images/addShopCartBtn2.jpg');background-position:-160px 0px;" class="addShopCart" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="productDeatil_c clearfix">
+        <div class="main_l">
+            <div class="leftMenuWarp">
+                <div class="leftMenu_tit">优选食材</div>
+                <div class="leftMenu_cont">
+                    <ul class="menuList">
+                        <volist name="goodsType" id="v">
+                            <li><a href="<{:U('goods/index')}>?type=<{$key}>" class="Menu Menu2" target="_blank"><{$v}></a></li>
+                        </volist>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 关联商品显示 开始 -->
+            <div class="leftProView">
+                <div class="leftProView_title" id="assozonename1">看了该商品的用户还看了</div>
+                <div class="leftProView_cont clearfix">
+                    <!--<div class="preView"><img src="__PUBLIC__/images/preViewBtn.jpg" width="208" height="23" /></div>-->
+                    <div class="viewBox">
+                        <ul class="proList" id="assozoneitem1">
+                            <volist name="hots" id="vo">
+                                <li>
+                                    <div class="showPic"><a href="<{:U('goods/item')}>?id=<{$vo.gid}>" title="<{$vo.name}>" target="_blank"><img src="__ROOT__/upload/<{$vo.img}>"></a></div>
+                                    <div class="showInfo clearfix">
+                                        <div class="showInfo_col1">
+                                            <div class="name"><a href="<{:U('goods/item')}>?id=<{$vo.gid}>" title="<{$vo.name}>" target="_blank"><{$vo.name}></a></div>
+                                        </div>
+                                        <div class="showInfo_col2">
+                                            <div class="price"><i>¥</i><span><{$vo.price}></span></div>
+                                        </div>
+                                    </div>
+                                    <div class="showInfo2">"绿色滋养，纯正美味"</div>
+                                </li>
+                            </volist>
+                        </ul>
+                    </div>
+                    <!--<div class="nextView"><img src="__PUBLIC__/images/nextViewBtn.jpg" width="208" height="23" /></div>-->
+                </div>
+            </div>
+            <!-- 关联商品显示 结束 -->
+
+        </div>
+
+        <div class="main_r">
+            <div class="proTabBox">
+                <ul>
+                    <li class="on">产品详情</li>
+                    <!--<li>查看评论</li>-->
+                </ul>
+            </div>
+            <div class="proTabBox2">
+                <ul>
+                    <li class="on">产品详情</li>
+                    <!--<li>查看评论</li>-->
+                </ul>
+                <div id="fixlayer" class="deal" style="width:152px;">
+                    <input type="button" id="shopcartbtn2" class="addShopCart" style="width:128px !important;height:33px;margin-left:20px;background-repeat:no-repeat;background-image:url('../images/addShopCartBtn2sm.jpg');background-position:-128px 0px;" />
+                </div>
+            </div>
+            <div class="productCont" >
+                <{$info.detail}>
+            </div>
+
+            <!--
+            <div class="productCont" style="display:none;">
+                <div class="gdcomment clearfix">
+                    <div class="totalComment" >合计评论（<span id="totalCommentCount">0</span>条）</div>
+                    <div class="gdcomment-1">
+                        <div class="rate"><strong id="commentGoodPercentageTotal">0%</strong><P>好评度</P></div>
+                        <div class="percent">
+                            <dl>
+                                <dt>满意</dt>
+                                <dd class="d1">
+                                    <div style="width:100%;" id="commentGoodPercentageWidth"></div>
+                                </dd>
+                                <dd class="d2"><strong id="commentGoodPercentage">0%</strong></dd>
+                            </dl>
+                            <dl>
+                                <dt>一般</dt>
+                                <dd class="d1">
+                                    <div style="width:0%;" id="commentRatingPercentageWidth"></div>
+                                </dd>
+                                <dd class="d2"><strong id="commentRatingPercentage">0%</strong></dd>
+                            </dl>
+                            <dl>
+                                <dt>不满意</dt>
+                                <dd class="d1">
+                                    <div style="width:0%;" id="commentBadPercentageWidth"></div>
+                                </dd>
+                                <dd class="d2"><strong id="commentBadPercentage">0%</strong></dd>
+                            </dl>
+                        </div>
+                        <div class="deal">
+                            <P>发表评论好换积分</P>
+                            <input name="" type="button" class="commentBtn" />
+                        </div>
+                    </div>
+
+                    <input type="hidden" value="211598" id="pkgProduct" />
+                    <div id="item_comment">
+
+
+
+                    </div>
+
+                    <div class="pageWarpper" id="commentNextPage">  </div>
+
+                </div>
+
+            </div>
+
+            -->
+        </div>
+        <div class="line"></div>
+        <div class="security">
+            <ul class="security_tab clearfix">
+                <li class="on"><img src="__PUBLIC__/images/security1.gif" /></li>
+                <li><img src="__PUBLIC__/images/security2.gif" /></li>
+                <li><img src="__PUBLIC__/images/security3.gif" /></li>
+                <li><img src="__PUBLIC__/images/security4.gif" /></li>
+                <li><img src="__PUBLIC__/images/security5.gif" /></li>
+            </ul>
+            <div class="security_cont"> <img src="__PUBLIC__/images/security_show1.gif" /> </div>
+            <div class="security_cont" style=" display:none;"> <img src="__PUBLIC__/images/security_show2.gif" /> </div>
+            <div class="security_cont" style=" display:none;"> <img src="__PUBLIC__/images/security_show3.gif" /> </div>
+            <div class="security_cont" style=" display:none;"> <img src="__PUBLIC__/images/security_show4.gif" /> </div>
+            <div class="security_cont" style=" display:none;"> <img src="__PUBLIC__/images/security_show5.gif" /> </div>
+        </div> </div>
+</div>
+
+<script language="javascript">
+
+    var inventorydata;
+    function chooseprovince(geoid) {
+        chgcity();
+        html = '<ul class="area-list">\r\n';
+        for (i = 0; i < inventorydata.length; i++) {
+            if (inventorydata[i].geoid == geoid) {
+                $("#stock_province_link").html("<em>" + inventorydata[i].geoname + "</em><i></i>");
+                $("#stock_city_link").html("<em>请选择</em><i></i>");
+                for (j = 0; j < inventorydata[i].subgeo.length; j++) {
+                    html += '    <li><a data-value="' + inventorydata[i].subgeo[j].geoid + '" href="javascript:choosecity(' + inventorydata[i].subgeo[j].geoid + ');">' + inventorydata[i].subgeo[j].geoname + '</a></li>\r\n';
+                }
+            }
+        }
+        html += '</ul>\r\n';
+        $("#stock_city_item").html(html);
+    }
+
+
+
+    function search_product(id) {
+        var key = $.trim($("#"+id).val());
+        if (key == "") {
+            key=$.trim($("#"+id).attr("placeholder"));
+        }
+        window.location.href = "/search.html?keyword=" + key;
+    }
+
+    $(function() {
+
+        $(".jqzoom").jqueryzoom({
+            xzoom:400,
+            yzoom:400,
+            offset:10,
+            position:"right",
+            preload:1,
+            lens:1
+        });
+        $("#spec-list").jdMarquee({
+            deriction:"left",
+            width:314,
+            height:95,
+            step:2,
+            speed:4,
+            delay:10,
+            control:true,
+            _front:"#spec-right",
+            _back:"#spec-left"
+        });
+
+        $("#spec-list img").bind("mouseover",function() {
+            var src=$(this).attr("src");
+            $("#spec-n1 img").eq(0).attr({
+                src:src.replace("\/n5\/","\/n1\/"),
+                jqimg:src.replace("\/n5\/","\/n0\/")
+            });
+            $(this).css({
+                "border":"2px solid #ff6600",
+                "padding":"1px"
+            });
+        }).bind("mouseout",function() {
+            $(this).css({
+                "border":"1px solid #ccc",
+                "padding":"2px"
+            });
+        });
+
+        $("#spec-list img").bind("mouseover",function() {
+            var src = $(this).attr("src");
+            $("#spec-n1 img").eq(0).attr({
+                src:src.replace("\/n5\/","\/n1\/"),
+                jqimg:src.replace("\/n5\/","\/n0\/")
+            });
+            $(this).css({
+                "border":"2px solid #ff6600",
+                "padding":"1px"
+            });
+        }).bind("mouseout",function(){
+            $(this).css({
+                "border":"1px solid #ccc",
+                "padding":"2px"
+            });
+        });
+
+    });
+</script>
+<script type="text/javascript" src="__PUBLIC__/js/base.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/lib.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/163css.js"></script>
+
+

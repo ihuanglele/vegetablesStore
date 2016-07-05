@@ -1,49 +1,49 @@
-<form class="form-horizontal" action="<{:U('index')}>" method="get">
-    <div class="row">
-        <div class="col-xs-5 col-sm-offset-3">
-            <div class="form-group">
-                <label class="sr-only" for="user">Amount (in dollars)</label>
-                <div class="input-group">
-                    <div class="input-group-addon">用户名</div>
-                    <input type="text" class="form-control" id="user" name="user" placeholder="填写用户名" value="<{$user}>">
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-2 ">
-            <button type="submit" class="btn btn-primary">搜索</button>
-        </div>
-    </div>
-</form>
-
-<div class="row">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            管理员列表
-        </div>
-        <table class="table">
-            <thead>
-            <tr>
-                <th>用户ID</th>
-                <th>用户名</th>
-                <th>添加时间</th>
-                <th>角色</th>
-                <th>删除</th>
-                <th>详情</th>
-            </tr>
-            </thead>
-            <tbody>
-            <volist name="list" id="vo">
-                <tr>
-                    <td><{$vo.aid}></td>
-                    <td><{$vo.name}></td>
-                    <td><{$vo.time|Mydate}></td>
-                    <td><{$AdminRole[$vo['role']]}></td>
-                    <td><a class="deleteA" href="<{:U('deluser')}>?id=<{$vo.aid}>" >删除</a></td>
-                    <td><a href="<{:U('detail')}>?id=<{$vo.aid}>">修改</a> </td>
-                </tr>
-            </volist>
-            </tbody>
-        </table>
-    </div>
-    <div><{$page}></div>
+<form class="form-horizontal" action="<{:U('index')}>" method="get">
+    <div class="row">
+        <div class="col-xs-5 col-sm-offset-3">
+            <div class="form-group">
+                <label class="sr-only" for="user">Amount (in dollars)</label>
+                <div class="input-group">
+                    <div class="input-group-addon">用户名</div>
+                    <input type="text" class="form-control" id="user" name="user" placeholder="填写用户名" value="<{$user}>">
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-2 ">
+            <button type="submit" class="btn btn-primary">搜索</button>
+        </div>
+    </div>
+</form>
+
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            管理员列表
+        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>用户ID</th>
+                <th>用户名</th>
+                <th>添加时间</th>
+                <th>角色</th>
+                <th>删除</th>
+                <th>详情</th>
+            </tr>
+            </thead>
+            <tbody>
+            <volist name="list" id="vo">
+                <tr>
+                    <td><{$vo.aid}></td>
+                    <td><{$vo.name}></td>
+                    <td><{$vo.time|Mydate}></td>
+                    <td><{$AdminRole[$vo['role']]}></td>
+                    <td><a class="deleteA" href="<{:U('deluser')}>?id=<{$vo.aid}>" >删除</a></td>
+                    <td><a href="<{:U('detail')}>?id=<{$vo.aid}>">修改</a> </td>
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+    </div>
+    <div><{$page}></div>
 </div>

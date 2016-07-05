@@ -1,0 +1,466 @@
+<include file="Public:pcHeader" />
+<link href="__PUBLIC__/css/shopcart.css" rel="stylesheet" />
+<link href="__PUBLIC__/css/login.css" rel="stylesheet" />
+<style>
+    #loginWarp{
+        position: absolute;
+        top:0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        background: rgba(12,12,12,0.5);
+        z-index: 9999;
+    }
+</style>
+<div class="main">
+    <div class="orderConfirm_h">
+        <div class="orderConfirm_h_l">
+            <a href="<{:U('index/index')}>">
+                <img src="__PUBLIC__/images/logo.jpg" width="205" height="84"></a></div>
+        <div class="orderConfirm_h_r">
+            <ul class="shopProgressBar">
+                <li><a href="<{:U('index/cart')}>" class="step1_on"></a></li>
+                <li><a href="javascript:void(0)" class="step_line"></a></li>
+                <li><a href="javascript:void(0)" class="step2"></a></li>
+                <li><a href="javascript:void(0)" class="step_line"></a></li>
+                <li><a href="javascript:void(0)" class="step3"></a></li>
+            </ul>
+
+        </div>
+    </div>
+    <div class="orderConfirm_h2"><span>-我的购物车-</span></div>
+
+
+
+    <div class="shopCartList_tit" id="shopCartHeader">
+        <ul>
+            <li class="check"></li>
+            <li class="productName">商品名</li>
+            <li class="price">单价</li>
+            <li class="num">购买数量</li>
+            <li class="subtotal">小计</li>
+            <li class="dealwith"><i></i></li>
+        </ul>
+    </div>
+    <div class="shopCartList">
+        <form action="<{:U('user/cart')}>" id="form" method="post">
+            <ul id="shoppingItemTableBody">
+            <volist name="data" id="vo">
+                <li id="item<{$vo.gid}>">
+                    <div class="promotion clearfix">
+                        <div class="promotion_l">
+                            <label>
+                                <neq name="vo.status" value="2">缺货</neq>
+                            </label>
+                        </div>
+                        <div class="promotion_r">
+                            <a href="#" class="deleteShoppingCartItem"  itemid="<{$vo.gid}>">删除</a> </div></div>
+                    <div class="proInfo clearfix">
+                        <div class="productName">
+                            <a href="<{:U('goods/item')}>?id=<{$vo.gid}>" class="showPic">
+                                <img src="__ROOT__/upload/<{$vo.img}>"></a>
+                            <p class="name">
+                                <a href="<{:U('goods/item')}>?id=<{$vo.gid}>"><{$vo.name}></a>
+                            </p>
+                            <p class="des"></p>
+                        </div>
+                        <eq name="vo.status" value="2">
+                            <div class="price"><{$vo.price}></div>
+                            <div class="num">
+                                <div class="addNumBox">
+                                    <input name="gid[]" type="hidden" value="<{$vo.gid}>">
+                                    <input class="minus" name="" type="button">
+                                    <input value="<{$vo.num}>" class="inputBorder" name="num[]" type="text">
+                                    <input class="add" name="" type="button">
+                                </div>
+                            </div>
+                            <div class="subtotal">
+
+                            </div>
+                            <div class="dealwith"></div>
+                        </eq>
+                    </div>
+                </li>
+            </volist>
+        </ul>
+        </form>
+    </div>
+
+<div id="shopCartFooter">
+    <div class="shopCart_b">
+        <div class="shopCart_b_r"><p>订单小计：￥<span id="shopCartXiaojiPrice">0</span></p></div>
+    </div>
+
+    <div class="shopCart_goodsNum">已选择<span id="shoppingCartCount">1</span>件商品</div>
+    <div class="shopCart_freight">
+        <p>配运费：￥<span id="shoppingCartFreight"><{:readConf('yunfei')}></span></p>
+        <!--<p>再购买<span id="shopCartRetryPriceSec">0</span>元，免配送费：<b>￥</b><span>20</span></p>-->
+    </div>
+    <div class="shopCart_totalAmount">总计金额：<b>￥</b><span id="shopCartTotalPrice">0</span>(不含运费)</div>
+    <div class="shopCart_settle">
+        <a href="<{:U('goods/index')}>">继续购物</a>
+        <input name="" type="button" class="settlementBtn" id="goSettlement">
+    </div>
+</div>
+
+<script>
+    isLogin = <empty name='Think.session.uid'>false<else />true</empty>;
+    $(window).ready(function(){
+        //更新价格
+        updatePrice();
+        $('.add').on('click',updatePrice);
+        $('.minus').on('click',updatePrice);
+
+        //删除商品
+        $('.deleteShoppingCartItem').click(function(){
+            var gid = $(this).attr('itemid');
+            $.ajax({
+                url:base_path + '/common/delCart',
+                data:{
+                    id:gid
+                },
+                success:function(res){
+                    if(res.status){
+                        $('#item'+gid).remove();
+                        updateCartNum(res.info);
+                        updatePrice();
+                    }
+                }
+            })
+        })
+
+        //点击提交
+        $('#goSettlement').click(function(){
+            if(isLogin){//提交订单
+                $('#form').submit();
+            }else{  //显示登录框
+                $('body').css('overflow','hidden');
+                $('#loginWarp').css('display','block');
+            }
+        })
+    })
+
+    updatePrice = function(){
+        var shopCartXiaojiPrice = 0;
+        var shoppingCartCount = 0;
+        var shopCartRetryPriceSec = 0;
+        var shopCartTotalPrice = 0;
+
+        $('#shoppingItemTableBody>li').each(function(){
+            var num = $('input[name="num[]"]',$(this)).val();
+            var price = $('.price',$(this)).html();
+            var subtotal = numMulti(num, price);
+            $('.subtotal',$(this)).html(subtotal);
+            shopCartXiaojiPrice += subtotal;
+            shoppingCartCount++;
+        })
+        $('#shopCartXiaojiPrice').html(shopCartXiaojiPrice);
+        $('#shoppingCartCount').html(shoppingCartCount);
+        $('#shopCartTotalPrice').html(shopCartXiaojiPrice);
+    }
+
+    /**
+     * 乘法运算，避免数据相乘小数点后产生多位数和计算精度损失。
+     *
+     * @param num1被乘数 | num2乘数
+     */
+    function numMulti(num1, num2) {
+        var baseNum = 0;
+        try {
+            baseNum += num1.toString().split(".")[1].length;
+        } catch (e) {
+        }
+        try {
+            baseNum += num2.toString().split(".")[1].length;
+        } catch (e) {
+        }
+        return Number(num1.toString().replace(".", "")) * Number(num2.toString().replace(".", "")) / Math.pow(10, baseNum);
+    };
+
+
+    $(function(){
+
+        //登录注册tab切换
+
+        $("#loginTab").live("click",function(){
+
+            $(this).addClass("curr");
+
+            $("#regTab").removeClass("curr");
+
+            $(".log").show();
+
+            $(".reg").hide();
+
+            $("#div_active").hide();
+
+        });
+
+
+
+        $("#regTab").live("click",function(){
+
+
+
+            $(this).addClass("curr");
+
+            $("#loginTab").removeClass("curr");
+
+            $(".reg").show();
+
+            $(".log").hide();
+
+            $("#div_active").hide();
+
+        });
+
+
+
+
+
+        $("#emailReg").live("click",function(){
+
+            resetEmailRegForm();
+
+            $(".emailRegT").show();
+
+            $(".phoneRegT").hide();
+
+        });
+
+
+
+        $("#phoneReg").live("click",function(){
+
+            resetMobileRegForm();
+
+            $(".phoneRegT").show();
+
+            $(".emailRegT").hide();
+
+        });
+
+
+
+    })
+
+    //关闭登录注册
+    closeRegisterDialog = function(){
+        $('body').css('overflow','auto');
+        $('#loginWarp').css('display','none');
+    }
+
+    //处理登录
+    function pgLogin(){
+        var dom = $('#login');
+        var phone = $('input[name="phone"]',dom).val();
+        var password = $('input[name="password"]',dom).val();
+        if(phone==''){
+            alert('请填写手机号');return false;
+        }
+        if(password==''){
+            alert('请填写密码');return false;
+        }
+        $.ajax({
+            'url':"<{:U('common/loginPost')}>",
+            data:{
+                'phone':phone,
+                'password':password
+            },
+            'type':'POST',
+            'dataType':'json',
+            'success':function(res){
+                doRes(res);
+            }
+        });
+
+    }
+
+
+    //处理注册
+    function pgRegister(){
+        var dom = $('#reg');
+        var phone = $('input[name="phone"]',dom).val();
+        var password = $('input[name="password"]',dom).val();
+        var password2 = $('input[name="password2"]',dom).val();
+        if(phone==''){
+            alert('请填写手机号');return false;
+        }
+        if(password==''){
+            alert('请填写密码');return false;
+        }
+        if(password!=password2){
+            alert('两次密码不一致');return false;
+        }
+        $.ajax({
+            'url':"<{:U('common/regPost')}>",
+            data:{
+                'phone':phone,
+                'password':password
+            },
+            'type':'POST',
+            'dataType':'json',
+            'success':function(res){
+                doRes(res);
+            }
+        });
+    }
+
+    //处理提交返回的数据
+    function doRes(res){
+        if(res.status){
+            isLogin = true;
+            closeRegisterDialog();
+            //window.location.href = res.url;
+        }else{
+            alert(res.info);
+        }
+    }
+
+</script>
+</div>
+
+<div id="loginWarp" style="display: none;">
+    <div class="loginTip">
+        <div class="tit">
+            <span></span>
+            <a href="javascript:void(0)" onclick="closeRegisterDialog()"></a>
+        </div>
+        <div class="loginTab_warp clearfix">
+            <ul class="loginTab">
+                <li id="loginTab" class="curr">
+                    <a href="javascript:void(0)">-登录-</a></li>
+                <li id="regTab">
+                    <a href="javascript:void(0)">-注册-</a></li>
+            </ul>
+        </div>
+        <div class="login_warp clearfix">
+            <div class="login">
+                <div class="log">
+                    <table id="login" width="100%" border="0" cellspacing="0" cellpadding="0" class="loginT">
+                        <tbody><tr>
+
+                            <td class="cols1"><b>*</b>手机：</td>
+
+                            <td class="cols2">
+
+                                <input name="phone" type="text" class="bordersty1">
+
+                                <p id="user_name_login_page_message"></p>
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td class="cols1"><b>*</b>密码：</td>
+
+                            <td class="cols2">
+
+                                <input name="password" type="password" class="bordersty1" >
+
+                                <p id="passwd_login_page_message"></p>
+
+                            </td>
+
+                        </tr>
+
+
+
+                        <tr>
+
+                            <td class="cols1">&nbsp;</td>
+
+                            <td class="cols2 cols2_h2">
+
+                                <div class="operateBox">
+
+                                    <p id="login_error"></p>
+
+                                    <input name="" type="button" class="loginBtn" onclick="pgLogin()">
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+
+                        </tbody></table>
+
+                </div>
+                <div id="reg" class="reg" style="display: none;">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="phoneRegT" >
+
+                        <tbody><tr>
+
+                            <td class="cols1"><b>*</b>手机：</td>
+
+                            <td class="cols2">
+
+                                <input name="phone" type="text" class="bordersty1" id="mobile_input">
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td class="cols1"><b>*</b>密码：</td>
+
+                            <td class="cols2"><input name="password" type="password" class="bordersty1">
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td class="cols1"><b>*</b>确认密码：</td>
+
+                            <td class="cols2"><input name="password2" type="password" class="bordersty1">
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td class="cols1">&nbsp;</td>
+
+                            <td class="cols2 cols2_h"><div class="operateBox">
+
+                                <input name="" type="checkbox" value="" checked="checked">
+
+                                &nbsp;<a href="" target="_blank">我已阅读多利农庄服务条例</a></div></td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td class="cols1">&nbsp;</td>
+
+                            <td class="cols2"><div class="operateBox">
+
+                                <p id="phoneReg_error"></p>
+
+                                <input name="" type="button" class="regBtn" onclick="pgRegister()">
+
+                            </div></td>
+
+                        </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<include file="Public:pcFooter" />

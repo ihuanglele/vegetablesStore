@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            后台通知
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal" action="<{:U('note')}>" method="post" enctype="multipart/form-data">
+                <div class="row ">
+                    <div class="col-xs-8 col-xs-offset-1">
+                        <p class="form-control-static">后台通知</p>
+                    </div>
+                    <div class="clo-xs-2">
+                        <input class="btn btn-info" name="submit" type="submit" value="更新" />
+                    </div>
+                </div>
+                <div class="row myrow">
+                    <div class="col-xs-10 col-xs-offset-1">
+                        <script type="text/plain" name="note" id="editor" style="width:100%;height:500px;"><{$note}></script>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<include file="Public:umeditor" />

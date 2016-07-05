@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>微信提现</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="__PUBLIC__/css/mui.min.css">
+</head>
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <h1 class="mui-title">微信提现</h1>
+</header>
+<div class="mui-content">
+    <div class="mui-content-padded">
+        <form class="form-inline" id="getCash" method="post" action="<{:U('user/getCash')}>" >
+            <div class="mui-input-row">
+                <input class="form-control" placeholder="余额<{$uMoney}>,最低提现<{$CashRate.money}>" name="money" type="text" >
+            </div>
+            <button type="button" onclick="postCheck()" class="mui-btn mui-btn-danger mui-btn-block" style="padding: 5px 0;">马上提现</button>
+        </form>
+    </div>
+
+    <div class="mui-title">提现记录</div>
+    <ul class="mui-table-view mui-table-view-chevron">
+        <volist name="list" id="vo">
+            <li class="mui-table-view-cell mui-media mui-collapse">
+                <a class="mui-navigate-right">
+                    <{$vo.money}>
+                </a>
+                <ul class="mui-table-view mui-table-view-chevron">
+                    <li class="mui-table-view-cell">时间：<{$vo.time}></li>
+                    <li class="mui-table-view-cell">单号：<{$vo.trade}></li>
+                </ul>
+            </li>
+        </volist>
+    </ul>
+    <div class="mui-content-padded">
+        <{$page}>
+    </div>
+</div>
+</body>
+<script src="__PUBLIC__/js/mui.min.js"></script>
+<script src="__PUBLIC__/js/jquery-2.1.1.min.js"></script>
+<script>
+    mui.init({
+        swipeBack:true //启用右滑关闭功能
+    });
+    rate = "<{$CashRate.rate}>";
+    limit = "<{$CashRate.money}>";
+    uMoney = <{$uMoney}>;
+
+    $(window).ready(function(){
+
+    })
+
+    postCheck = function(){
+        var v = $('input[name="money"]').val();
+        if(isNaN(v)){
+            mui.toast('请填写正常的金额');return false;
+        }
+        if(v<limit){
+            mui.toast('不能低于最低提现金额');return false;
+        }
+        if(v>uMoney){
+            mui.toast('提现金额高于账户余额');return false;
+        }
+        var btnArray = ['是', '否'];
+        mui.confirm('提现将扣除'+rate+'%的手续费，确认？', '提现', btnArray, function(e) {
+            if (e.index == 0) {
+                $('#getCash').submit();
+            } else {
+                return false;
+            }
+        })
+    }
+
+
+</script>
+</html>

@@ -6,18 +6,10 @@
  * Description:
  */
 
-
 namespace Home\Controller;
-
 use Think\Controller;
 
-
-
-class CommonController extends Controller
-
-{
-
-
+class CommonController extends Controller{
 
     public function _initialize(){
 
@@ -30,8 +22,6 @@ class CommonController extends Controller
         $this->assign('Cat',C('HelpCat'));
 
     }
-
-
 
     public function login(){
 
@@ -54,7 +44,6 @@ class CommonController extends Controller
     }
 
     //处理登录
-
     public function loginPost(){
         if(IS_AJAX){
             $phone = I('post.phone');
@@ -73,7 +62,6 @@ class CommonController extends Controller
     }
 
     //用户注册
-
     public function regPost(){
         if(IS_AJAX){
             $phone = I('post.phone');
@@ -99,5 +87,50 @@ class CommonController extends Controller
         }
     }
 
+    //添加到购物车里面，返回购物车里面商品的数量
+    public function addCart(){
+        $id = I('get.id', 0, 'number_int');
+        $num = I('get.num', 0, 'number_int');
+        if ($id == 0 || $num == 0) {
+            $this->error('参数错误');
+        }
+        $cart = session('cart');
+        if (is_array($cart)) {
+            if (array_key_exists($id, $cart)) {
+                $cart[$id] += $num;
+            } else {
+                $cart[$id] = $num;
+            }
+        } else {
+            $cart[$id] = $num;
+        }
+        $count = count($cart);
+        session('cart', $cart);
+        $this->success($count);
+    }
+
+    //删除购物车里面的商品
+    public function delCart(){
+        $id = I('get.id', 0, 'number_int');
+        if ($id == 0) {
+            $this->error('参数错误');
+        }
+        $cart = session('cart');
+        if (is_array($cart)) {
+            if (array_key_exists($id, $cart)) {
+                unset($cart[$id]);
+            }
+        }
+        $count = count($cart);
+        session('cart', $cart);
+        $this->success($count);
+    }
+
+    //获取购物车里面商品的数量
+    public function getCartNum(){
+        $cart = session('cart');
+        $count = count($cart);
+        echo ($count);
+    }
 
 }

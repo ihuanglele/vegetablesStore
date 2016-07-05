@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>会员中心</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="__PUBLIC__/css/mui.min.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1465727272_4824731.css" />
+    <script src="__PUBLIC__/js/mui.min.js"></script>
+    <script src="__PUBLIC__/js/jquery-2.1.1.min.js"></script>
+    <style>
+        .info-head-box{
+            background-color: #EA4F23;
+            text-align: center;
+            color:floralwhite;
+            padding: 20px 0px 10px;
+            position: relative;
+        }
+        .info-head-box .info-img{
+            margin: 10px auto 0px;
+        }
+        .headimg{
+            height: 100px;
+            border: 1px solid #ddd;
+            border-radius: 50px;
+        }
+        .info-count{
+            font-family: sans-serif;
+            font-weight: bolder;
+        }
+        .info-count .mui-grid-view.mui-grid-9{
+            background-color: #fff;
+        }
+        .info-count .mui-grid-view.mui-grid-9 .mui-table-view-cell {
+            padding: 0px 15px;
+        }
+        .mui-bar-nav~.mui-content{
+            padding-top: 10px;
+        }
+        .mui-slider-item img{
+            height: 60px;
+        }
+        .menu {
+            margin-top: 10px;
+            background: #fff;
+        }
+        .menu .mui-grid-view.mui-grid-9{
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="info-head-box">
+    <div class="info-img">
+        <img class="headimg" src="<{$info.headimgurl}>" />
+    </div>
+    <div class="info-score">
+        <h4><{$info.nickname}></h4>
+        <h4><{$VipMap[$info['vip']]}></h4>
+    </div>
+</div>
+<div class="info-count">
+    <ul class="mui-table-view mui-grid-view mui-grid-9">
+        <li class="mui-table-view-cell mui-media mui-col-xs-4">
+            <a href="<{:U('user/team')}>">
+                <span><{$team}></span>
+                <div class="">我的下属</div></a>
+        </li>
+        <li class="mui-table-view-cell mui-media mui-col-xs-4">
+            <a href="<{:U('user/getCash')}>">
+                <span><{$info.money}></span>
+                <div class="">账户余额</div></a>
+        </li>
+        <li class="mui-table-view-cell mui-media mui-col-xs-4">
+            <gt name="PackL" value="0">
+                <a href="<{:U('user/redpack')}>?status=1">
+                    <span><{$Pack}><span class="mui-badge mui-badge-danger"><{$PackL}></span></span>
+                    <div class="">我的红包</div></a>
+                <else/>
+                <a href="<{:U('user/redpack')}>">
+                    <span><{$Pack}></span>
+                    <div class="">我的红包</div></a>
+            </gt>
+        </li>
+    </ul>
+</div>
+<div class="mui-content">
+
+    <!--九宫格菜单-->
+    <div class="menu">
+        <ul class="mui-table-view mui-grid-view mui-grid-9">
+            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4"><a href="<{:U('user/self')}>">
+                <span class="mui-icon iconfont icon-self"></span>
+                <div class="mui-media-body">我的资料</div></a></li>
+
+            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4"><a href="<{:U('user/pay')}>">
+                <span class="mui-icon iconfont icon-money"></span>
+                <div class="mui-media-body">在线充值</div></a></li>
+
+            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4"><a href="<{:U('user/link')}>">
+                <span class="mui-icon iconfont icon-link"></span>
+                <div class="mui-media-body">我的推广</div></a></li>
+
+
+            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4"><a  href="<{:U('user/agent')}>">
+                <span class="mui-icon iconfont icon-plane"></span>
+                <div class="mui-media-body">升级代理</div></a></li>
+
+            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4"><a href="<{:U('user/group')}>">
+                <span class="mui-icon iconfont icon-team"></span>
+                <div class="mui-media-body">我的团队</div></a></li>
+
+            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4"><a href="<{:U('user/order')}>">
+                <span class="mui-icon iconfont icon-order"></span>
+                <div class="mui-media-body">我的订单</div></a></li>
+
+            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4"><a href="<{:U('index/index')}>">
+                <span class="mui-icon iconfont icon-vip"></span>
+                <div class="mui-media-body">升级会员</div></a></li>
+
+            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4"><a href="<{:U('user/redpack')}>">
+                <span class="mui-icon iconfont icon-redpack"></span>
+                <div class="mui-media-body">我的红包</div></a></li>
+        </ul>
+    </div>
+
+</div>
+
+<script>
+
+</script>
+</body>
+</html>

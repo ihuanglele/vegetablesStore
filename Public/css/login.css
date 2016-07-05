@@ -1,458 +1,1 @@
-@charset "utf-8";
-/* CSS Document */
-
-
-/*banner*/
-.banner{ width:100%; text-align:center;}
-
-/*登录注册*/
-.main{ width:1010px; margin:0 auto;}
-
-.breadCrumbs{ width:100%; color:#719B6B; padding-top:20px;}
-
-.loginTab_warp{width:1010px; height:86px; margin-top:25px;}
-
-.loginTab_warp .loginTab{ width:100%; margin-top:30px;}
-.loginTab_warp .loginTab li{ display:inline-block; background:#fff; padding:0 0px;  float:left;  border-bottom:2px solid #4A4A4A; height:35px; line-height:35px;}
-
-.loginTab_warp .loginTab li#loginTab{ width:200px; text-align:center;}
-.loginTab_warp .loginTab li#regTab{ width:755px; margin-left:10px; padding-left:45px;}
-
-.loginTab_warp .loginTab li a{ font-size:18px; display:inline-block; padding:0 40px; height:35px;}
-
-.loginTab_warp .loginTab li.curr{ color:#509A41; border-bottom:2px solid #509A41;} 
-.loginTab_warp .loginTab li.curr a{ color:#509A41;}
-.adds{margin:0 auto;}
-
-/*
-.login_h .login_h_r .shopProgressBar{}
-.login_h .login_h_r .shopProgressBar li{ float:left; margin-left:10px;}
-.login_h .login_h_r .shopProgressBar li a{ display:inline-block; width:74px; height:74px;}
-.login_h .login_h_r .shopProgressBar li a.step1{ background:url(../images/shop_step1.jpg) no-repeat;}
-.login_h .login_h_r .shopProgressBar li a.step2{ background:url(../images/shop_step2.jpg) no-repeat;}
-.login_h .login_h_r .shopProgressBar li a.step3{ background:url(../images/shop_step3.jpg) no-repeat;}
-.login_h .login_h_r .shopProgressBar li a.step4{ background:url(../images/shop_step4.jpg) no-repeat;}
-
-.login_h .login_h_r .shopProgressBar li a.step_line{ background:url(../images/shop_stepLine.jpg) no-repeat; width:34px; height:21px; margin-top:27px;}
-*/
-
-
-.login_warp{width:1010px; margin-top:15px; padding-bottom:90px;}
-.login_warp .login{ width:555px; float:left;}
-.login_warp .lgon_r_ad{ width:450px; float:right;}
-
-.login_warp .login .log{ width:555px; }
-.login_warp .login .reg{ width:555px; display:none;}
-
-.login_warp .login .loginT{ width:555px; margin-top:55px; }
-.login_warp .login .loginT tr {}
-.login_warp .login .loginT tr td{ padding:0px 0px 0px 0px;}
-.login_warp .login .loginT tr td.cols1{ width:190px; text-align:right; vertical-align:top; font-size:14px; padding-right:8px;}
-.login_warp .login .loginT tr td.cols2{ width:365px; text-align:left; vertical-align:top; height:65px; }
-.login_warp .login .loginT tr td.cols2_h{ height:20px;}
-.login_warp .login .loginT tr td.cols2_h2{ height:65px; vertical-align:middle;}
-
-.login_warp .login .loginT tr td.cols1 b{ color:#478224; margin-right:8px;}
-
-.login_warp .login .loginT tr td.cols2 .bordersty1{ width:245px; height:24px; border:1px solid #EBEBEB; padding:0px 5px; }
-.login_warp .login .loginT tr td.cols2 .bordersty2{ width:80px; height:24px; border:1px solid #EBEBEB; padding:0px 5px; }
-.login_warp .login .loginT tr td.cols2 p{ height:26px; line-height:26px; color:#F00; display:block;}
-.login_warp .login .loginT tr td.cols2 p#login_error{ height:26px; line-height:26px; color:#F00; display:block;}
-.login_warp .login .loginT tr td.cols2 a{ color:#478224; margin-left:5px;}
-
-.login_warp .login .loginT tr td.cols2 .operateBox{ width:255px; text-align:right; color:#478224;}
-.login_warp .login .loginT tr td.cols2 .loginBtn{ background:url(../images/loginBtn.jpg) no-repeat; width:137px; height:36px;}
-
-.login_warp .login .loginT tr td.cols2 .operateBox .fastLogin_txt{ width:255px; margin-top:20px; font-size:14px;}
-.login_warp .login .loginT tr td.cols2 .operateBox .fastLogin{ width:255px; margin-top:5px; }
-
-.login_warp .login .loginT tr td.fastLoginBox{}
-.login_warp .login .loginT tr td.fastLoginBox .fastLogin{ margin-left:150px !important;}
-.login_warp .login .loginT tr td.fastLoginBox .fastLogin a{ margin:0 3px;}
-
-.login_warp .login .phoneRegT{ width:555px; margin-top:55px; }
-.login_warp .login .phoneRegT tr {}
-.login_warp .login .phoneRegT tr td{ padding:0px 0px 0px 0px;}
-.login_warp .login .phoneRegT tr td.cols1{ width:190px; text-align:right; vertical-align:top; font-size:14px; padding-right:8px;}
-.login_warp .login .phoneRegT tr td.cols2{ width:365px; text-align:left; vertical-align:top; height:65px; }
-.login_warp .login .phoneRegT tr td.cols2_h{ height:20px;}
-.login_warp .login .phoneRegT tr td.cols2_h2{ height:65px; vertical-align:middle;}
-
-.login_warp .login .phoneRegT tr td.cols1 b{ color:#478224; margin-right:8px;}
-
-.login_warp .login .phoneRegT tr td.cols2 .bordersty1{ width:245px; height:24px; border:1px solid #EBEBEB; padding:0px 5px; }
-.login_warp .login .phoneRegT tr td.cols2 .bordersty2{ width:80px; height:24px; border:1px solid #EBEBEB; padding:0px 5px; }
-
-.login_warp .login .phoneRegT tr td.cols2 p{ height:26px; line-height:26px; color:#F00; display:block;}
-.login_warp .login .phoneRegT tr td.cols2 p#phoneReg_error{ height:26px; line-height:26px; color:#F00; display:block;}
-.login_warp .login .phoneRegT tr td.cols2 a{ color:#478224; margin-left:5px;}
-.login_warp .login .phoneRegT tr td.cols2 span{ display:none;}
-.login_warp .login .phoneRegT tr td.cols2 span b{ color:#478224; margin-left:5px;}
-
-.login_warp .login .phoneRegT tr td.cols2 .operateBox{ width:255px; text-align:right; }
-.login_warp .login .phoneRegT tr td.cols2 .operateBox a{ width:255px; color:#478224;}
-.login_warp .login .phoneRegT tr td.cols2 .regBtn{ background:url(../images/regBtn.jpg) no-repeat; width:135px; height:35px;}
-
-
-
-
-.login_warp .login .emailRegT{ width:555px; margin-top:55px; display:none; }
-.login_warp .login .emailRegT tr {}
-.login_warp .login .emailRegT tr td{ padding:0px 0px 0px 0px;}
-.login_warp .login .emailRegT tr td.cols1{ width:190px; text-align:right; vertical-align:top; font-size:14px; padding-right:8px;}
-.login_warp .login .emailRegT tr td.cols2{ width:365px; text-align:left; vertical-align:top; height:65px; }
-.login_warp .login .emailRegT tr td.cols2_h{ height:20px;}
-.login_warp .login .emailRegT tr td.cols2_h2{ height:65px; vertical-align:middle;}
-
-.login_warp .login .emailRegT tr td.cols1 b{ color:#478224; margin-right:8px;}
-
-.login_warp .login .emailRegT tr td.cols2 .bordersty1{ width:245px; height:24px; border:1px solid #EBEBEB; padding:0px 5px; }
-.login_warp .login .emailRegT tr td.cols2 .bordersty2{ width:80px; height:24px; border:1px solid #EBEBEB; padding:0px 5px; }
-
-.login_warp .login .emailRegT tr td.cols2 p{ height:26px; line-height:26px; color:#F00; display:block;}
-.login_warp .login .emailRegT tr td.cols2 p#emailReg_error{ height:26px; line-height:26px; color:#F00; display:block;}
-.login_warp .login .emailRegT tr td.cols2 a{ color:#478224; margin-left:5px;}
-.login_warp .login .emailRegT tr td.cols2 span{ display:none;}
-.login_warp .login .emailRegT tr td.cols2 span b{ color:#478224; margin-left:5px;}
-
-.login_warp .login .emailRegT tr td.cols2 .operateBox{ width:255px; text-align:right; }
-.login_warp .login .emailRegT tr td.cols2 .operateBox a{ width:255px; color:#478224;}
-.login_warp .login .emailRegT tr td.cols2 .regBtn{ background:url(../images/regBtn.jpg) no-repeat; width:135px; height:35px;}
-
-
-
-
-/*登录注册*/
-.loginTip{ width:530px; height:500px; margin:0 auto; border:1px solid #ccc; box-shadow:0px 0px 5px #ccc; position:fixed; z-index:9999; left:50%; top:50%; margin-left:-250px; margin-top:-250px; background:#fff; display:none;}
-.loginTip .tit{ width:100%; height:30px; background:#519236;line-height:30px; position:relative;}
-.loginTip .tit span{ font-size:16px; color:#fff; padding-left:20px;}
-.loginTip .tit a{ background:url(../images/closeBtn.png) no-repeat; width:35px; height:33px; display:inline-block; position:absolute; right:-15px; top:-10px; z-index:999999;}
-.loginTip .loginTab_warp{width:530px; height:auto !important; margin-top:10px; }
-
-.loginTip .loginTab_warp .loginTab{ width:100%; margin-top:0px;}
-.loginTip .loginTab_warp .loginTab li{ display:inline-block; background:#fff; padding:0 0px;  float:left;  border-bottom:2px solid #4A4A4A; height:35px; line-height:35px;}
-
-.loginTip .loginTab_warp .loginTab li#loginTab{ width:50%; text-align:center;}
-.loginTip .loginTab_warp .loginTab li#regTab{ width:50%; margin-left:0px; padding-left:0px;}
-
-.loginTip .loginTab_warp .loginTab li a{ font-size:16px; display:inline-block; padding:0 40px; height:35px;}
-
-.loginTip .loginTab_warp .loginTab li.curr{ color:#509A41; border-bottom:2px solid #509A41;} 
-.loginTip .loginTab_warp .loginTab li.curr a{ color:#509A41;}
-
-
-.loginTip .login_warp{width:530px; margin-top:10px; padding-bottom:0px;}
-.loginTip .login_warp .login{ width:530px; float:left;}
-
-.loginTip .login_warp .login .log{ width:530px; }
-.loginTip .login_warp .login .reg{ width:530px; display:none;}
-
-.loginTip .login_warp .login .loginT{ width:530px; margin-top:20px; }
-.loginTip .login_warp .login .loginT tr {}
-.loginTip .login_warp .login .loginT tr td{ padding:0px 0px 0px 0px;}
-.loginTip .login_warp .login .loginT tr td.cols1{ width:140px; text-align:right; vertical-align:top; font-size:14px; padding-right:8px;}
-.loginTip .login_warp .login .loginT tr td.cols2{ width:365px; text-align:left; vertical-align:top; height:50px; }
-.loginTip .login_warp .login .loginT tr td.cols2_h{ height:20px;}
-.loginTip .login_warp .login .loginT tr td.cols2_h2{ height:65px; vertical-align:middle;}
-
-.loginTip .login_warp .login .loginT tr td.cols1 b{ color:#478224; margin-right:8px;}
-
-.loginTip .login_warp .login .loginT tr td.cols2 .bordersty1{ width:245px; height:24px; border:1px solid #EBEBEB; padding:0px 5px; }
-.loginTip .login_warp .login .loginT tr td.cols2 .bordersty2{ width:80px; height:24px; border:1px solid #EBEBEB; padding:0px 5px; }
-.loginTip .login_warp .login .loginT tr td.cols2 p{ height:26px; line-height:26px; color:#F00; display:block;}
-.loginTip .login_warp .login .loginT tr td.cols2 p#login_error{ height:26px; line-height:26px; color:#F00; display:block;}
-.loginTip .login_warp .login .loginT tr td.cols2 a{ color:#478224; margin-left:5px;}
-
-.loginTip .login_warp .login .loginT tr td.cols2 .operateBox{ width:255px; text-align:right; color:#478224;}
-.loginTip .login_warp .login .loginT tr td.cols2 .loginBtn{ background:url(../images/loginBtn.jpg) no-repeat; width:137px; height:36px;}
-
-.loginTip .login_warp .login .loginT tr td.cols2 .operateBox .fastLogin_txt{ width:255px; margin-top:20px; font-size:14px;}
-.loginTip .login_warp .login .loginT tr td.cols2 .operateBox .fastLogin{ width:255px; margin-top:5px; }
-
-.loginTip .login_warp .login .loginT tr td.fastLoginBox{}
-.loginTip .login_warp .login .loginT tr td.fastLoginBox .fastLogin{ margin-left:110px !important;}
-.loginTip .login_warp .login .loginT tr td.fastLoginBox .fastLogin a{ margin:0 3px;}
-
-.loginTip .login_warp .login .phoneRegT{ width:530px; margin-top:20px; }
-.loginTip .login_warp .login .phoneRegT tr {}
-.loginTip .login_warp .login .phoneRegT tr td{ padding:0px 0px 0px 0px;}
-.loginTip .login_warp .login .phoneRegT tr td.cols1{ width:140px; text-align:right; vertical-align:top; font-size:14px; padding-right:8px;}
-.loginTip .login_warp .login .phoneRegT tr td.cols2{ width:365px; text-align:left; vertical-align:top; height:50px; }
-.loginTip .login_warp .login .phoneRegT tr td.cols2_h{ height:20px;}
-.loginTip .login_warp .login .phoneRegT tr td.cols2_h2{ height:65px; vertical-align:middle;}
-
-.loginTip .login_warp .login .phoneRegT tr td.cols1 b{ color:#478224; margin-right:8px;}
-
-.loginTip .login_warp .login .phoneRegT tr td.cols2 .bordersty1{ width:245px; height:24px; border:1px solid #EBEBEB; padding:0px 5px; }
-.loginTip .login_warp .login .phoneRegT tr td.cols2 .bordersty2{ width:80px; height:24px; border:1px solid #EBEBEB; padding:0px 5px; }
-
-.loginTip .login_warp .login .phoneRegT tr td.cols2 p{ height:26px; line-height:26px; color:#F00; display:block;}
-.loginTip .login_warp .login .phoneRegT tr td.cols2 p#phoneReg_error{ height:26px; line-height:26px; color:#F00; display:block;}
-.loginTip .login_warp .login .phoneRegT tr td.cols2 a{ color:#478224; margin-left:5px;}
-.loginTip .login_warp .login .phoneRegT tr td.cols2 span{ display:none;}
-.loginTip .login_warp .login .phoneRegT tr td.cols2 span b{ color:#478224; margin-left:5px;}
-
-.loginTip .login_warp .login .phoneRegT tr td.cols2 .operateBox{ width:255px; text-align:right; }
-.loginTip .login_warp .login .phoneRegT tr td.cols2 .operateBox a{ width:255px; color:#478224;}
-.loginTip .login_warp .login .phoneRegT tr td.cols2 .regBtn{ background:url(../images/regBtn.jpg) no-repeat; width:135px; height:35px;}
-
-
-
-
-.loginTip .login_warp .login .emailRegT{ width:530px; margin-top:20px; display:none; }
-.loginTip .login_warp .login .emailRegT tr {}
-.loginTip .login_warp .login .emailRegT tr td{ padding:0px 0px 0px 0px;}
-.loginTip .login_warp .login .emailRegT tr td.cols1{ width:140px; text-align:right; vertical-align:top; font-size:14px; padding-right:8px;}
-.loginTip .login_warp .login .emailRegT tr td.cols2{ width:365px; text-align:left; vertical-align:top; height:50px; }
-.loginTip .login_warp .login .emailRegT tr td.cols2_h{ height:20px;}
-.loginTip .login_warp .login .emailRegT tr td.cols2_h2{ height:65px; vertical-align:middle;}
-
-.loginTip .login_warp .login .emailRegT tr td.cols1 b{ color:#478224; margin-right:8px;}
-
-.loginTip .login_warp .login .emailRegT tr td.cols2 .bordersty1{ width:245px; height:24px; border:1px solid #EBEBEB; padding:0px 5px; }
-.loginTip .login_warp .login .emailRegT tr td.cols2 .bordersty2{ width:80px; height:24px; border:1px solid #EBEBEB; padding:0px 5px; }
-
-.loginTip .login_warp .login .emailRegT tr td.cols2 p{ height:26px; line-height:26px; color:#F00; display:block;}
-.loginTip .login_warp .login .emailRegT tr td.cols2 p#emailReg_error{ height:26px; line-height:26px; color:#F00; display:block;}
-.loginTip .login_warp .login .emailRegT tr td.cols2 a{ color:#478224; margin-left:5px;}
-.loginTip .login_warp .login .emailRegT tr td.cols2 span{ display:none;}
-.loginTip .login_warp .login .emailRegT tr td.cols2 span b{ color:#478224; margin-left:5px;}
-
-.loginTip .login_warp .login .emailRegT tr td.cols2 .operateBox{ width:255px; text-align:right; }
-.loginTip .login_warp .login .emailRegT tr td.cols2 .operateBox a{ width:255px; color:#478224;}
-.loginTip .login_warp .login .emailRegT tr td.cols2 .regBtn{ background:url(../images/regBtn.jpg) no-repeat; width:135px; height:35px;}
-
-
-
-.loginTip .login_warp a:hover{ color:#F00 !important; text-decoration:underline;}
-
-
-/*邮箱激活*/
-#win2 {width:530px;height:500px; border:1px solid #ccc; box-shadow:0px 0px 5px #ccc; background: #fff;position:fixed;left: 50%;top: 50%;margin-left:-250px; margin-top:-250px; display:none;z-index:10006; }
-#win2 .tit{ width:100%; height:30px; background:#519236;line-height:30px; position:relative;}
-#win2 .tit span{ font-size:16px; color:#fff; padding-left:20px;}
-#win2 .tit a{ background:url(../images/closeBtn.png) no-repeat; width:35px; height:33px; display:inline-block; position:absolute; right:-15px; top:-10px; z-index:999999;}
-
-#win2 .win_cont{ width:530px; height:auto !important; margin-top:10px; }
-
-#win2 .win_cont .success_warp{ width:500px; float:left; padding-top:40px;}
-#win2 .win_cont .success_warp .success{ width:400px; float:left; padding:10px 0px 0px 50px;}
-#win2 .win_cont .success_warp .success .part1{ width:330px; background:url(../images/email_icon.jpg) no-repeat left 10px; padding-left:60px; line-height:20px; font-family:微软雅黑; color:#010004; font-size:14px; float:left;}
-#win2 .win_cont .success_warp .success .part2{ width:390px; text-align:center; float:left; padding-top:15px;}
-#win2 .win_cont .success_warp .success .part2 img{ cursor:pointer;}
-#win2 .win_cont .success_warp .success .part3{ width:388px; float:left; margin-top:50px; background:#FCFCE0; border:1px solid #DCDED3; padding:10px 10px 30px 10px;}
-#win2 .win_cont .success_warp .success .part3 strong{ font-size:14px;}
-#win2 .win_cont .success_warp .success .part3 p{ line-height:18px; margin-top:8px;}
-#win2 .win_cont .success_warp .success .part3 p a{ color:#0187CE;}
-
-
-
-#win3 {width:530px;height:500px; border:1px solid #ccc; box-shadow:0px 0px 5px #ccc; background: #fff;position:fixed;left: 50%;top: 50%;margin-left:-250px; margin-top:-250px; display:none;z-index:10006; }
-#win3 .tit{ width:100%; height:30px; background:#519236;line-height:30px; position:relative;}
-#win3 .tit span{ font-size:16px; color:#fff; padding-left:20px;}
-#win3 .tit a{ background:url(../images/closeBtn.png) no-repeat; width:35px; height:33px; display:inline-block; position:absolute; right:-15px; top:-10px; z-index:999999;}
-
-#win3 .win_cont{ width:450px; padding-top:40px; margin:0 auto;}
-#win3 .loginerror{color: #FF0000; height: 24px; line-height: 24px; margin-bottom: -16px; margin-left: 30px; margin-top: 0px;}
-#win3 .win_cont .success_warp{ width:450px; float:left; padding-top:40px;}
-#win3 .win_cont .success_warp .success{ width:390px; float:left; padding:10px 30px 0px 30px;}
-
-#win3 #user_name_bind_login {border:#CCC 1px solid;height:28px;line-height:28px;padding-left:5px;padding-right:32px;/*background-image:url(../images/one4.jpg);background-repeat:no-repeat;background-position:304px 7px;*/font-size:15px;font-family:Arial;}
-#win3 #passwd_bind_login {border:#CCC 1px solid;height:28px;line-height:28px;padding-left:5px;padding-right:32px;/*background-image:url(../images/one5.jpg);background-repeat:no-repeat;background-position:304px 7px;*/font-size:15px;font-family:Arial;}
-
-
-.check_yes {background:url(../images/true.jpg);width:13px;height:13px;float:left;margin-right:5px;}
-.check_no {background:url(../images/warning.jpg);width:14px;height:14px;float:left;margin-right:5px;}
-
-
-
-
-
-/*注册成功 关联套餐*/
-.relationWin {width:600px;height:370px;  background: #fff;position:fixed;left: 50%;top: 50%;margin: -180px -300px 0; z-index: 10006; 
-border: 6px solid rgba(0, 0, 0, 0.1);
-border-radius: 5px;
--moz-border-radius: 5px;
--webkit-border-radius: 5px;
-}
-
-.relationMain{width: 550px;padding: 15px 25px;}
-.relationMain .relation_statue{ text-align:center; font-size:22px; font-family:"微软雅黑"; padding:15px 0px 25px 0px; color:#474E5D;}
-.relationMain .relation_text{ color:#8E8E8E; padding-bottom:25px; padding:0 10px 15px 10px; font-family:"微软雅黑"; font-size:16px;}
-.relationMain .relation_info{ width:405px; padding:0 10px;}
-.relationMain .relation_info img{ float:left; margin-right:15px; display:block; width:115px; height:115px;}
-.relationMain .relation_info p{ float:left; width:275px; line-height:29px; color:#666666;}
-.relationMain .relation_info p strong{ margin-right:17px;}
-.relationMain .relation_line{ background:url(../images/relation_xian.jpg) repeat-x; width:100%; height:7px; margin:18px 0px 25px 0px;}
-.relationMain .relation_btn{ text-align:center;}
-.relationMain .relation_btn input{ background:#EF5A50; width:200px; height:50px; border-radius:3px; border:none; color:#fff; font-size:16px;  font-family:"微软雅黑"; font-weight:bold;}
-
-
-.relationStep1{width: 565px;padding: 15px 15px 15px 20px;}
-.relationStep1 .relation_statue{ text-align:center; font-size:22px; font-family:"微软雅黑"; padding:15px 0px 25px 0px; color:#474E5D;}
-
-.relationStep1 .stepl{ width:392px; float:left;}
-.relationStep1 .stepr{ width:140px; float:right;}
-.relationStep1 .relation_text{ color:#8E8E8E; padding-bottom:25px; padding:0 10px 15px 10px; font-family:"微软雅黑"; font-size:16px;}
-.relationStep1 .relation_info{ width:405px; padding:0 10px;}
-.relationStep1 .relation_info img{ float:left; margin-right:15px; display:block; width:115px; height:115px;}
-.relationStep1 .relation_info p{ float:left; width:275px; line-height:29px; color:#666666;}
-.relationStep1 .relation_info p strong{ margin-right:17px;}
-.relationStep1 .relation_add{ width:405px; padding:0 10px;}
-.relationStep1 .relation_add input{ width:155px; height:22px; border:1px solid #ccc; line-height:22px; margin-top:12px; margin-left:10px;}
-.relationStep1 .relation_line{ background:url(../images/relation_xian.jpg) repeat-x; width:100%; height:7px; margin:18px 0px 25px 0px;}
-.relationStep1 .relation_btn{ text-align:right;}
-.relationStep1 .relation_btn input{ background:#EF5A50; width:90px; height:28px; border-radius:3px; border:none; color:#fff; font-size:14px;  font-family:"微软雅黑"; font-weight:bold;}
-
-.relationStep1 .stepr .stepbar{ background:url(../images/relationSprites.jpg) no-repeat; width:140px; height:220px;}
-
-
-/*公共*/
-.formbox{zoom:1;overflow:hidden;}
-.formbox .loginwin{padding-bottom:10px;}
-.formbox fieldset{border:none;}
-.formbox .propinfo{position:absolute;right:20px;top:15px;}
-.formbox .propinfo img{width:173px;height:111px;}
-.formbox .entry{margin-bottom:20px;position:relative; }
-.formbox .entry .placeholder{position:absolute;top:5px;*top:7px;left:10px;color:#BBB;font-size:14px;}
-.formbox .entry .tips{margin-left:10px;} 
-.formbox h3{margin-bottom:15px;color:#555;}
-.formbox label{color:#565656;display:inline-block;*display:inline;*zoom:1;vertical-align:middle;font-size:14px;padding:0 5px;width:80px;text-align:right;}
-.formbox .loginwin label{width:60px;}
-.formbox .loginbtn{margin-bottom:10px;}
-.formbox .form_btn_m .form_btn_text{font-size:14px;}
-.formbox .form_input{width:200px;_width:230px;margin-right:5px;}
-.formbox .save{margin:0;margin:-10px 0 20px 0;}
-.formbox .save label{padding:0;width:50px;text-align:left;font-size:12px;}
-.formbox .save a{position:relative;top:1px;*top:-1px;}
-.formbox .regbtn a{vertical-align:middle;display:inline-block;*display:inline;*zoom:1;width:130px;height:45px;background:url(../images/reg.png) no-repeat 0 -70px;}
-.formbox .regbtn a:hover{background-position:-150px -70px;}
-.formbox .regbtn a:active{background-position:-300px -70px;}
-.formbox .terms{padding-left:98px;}
-.formbox .regbtn{padding-left:98px;}
-.formbox .regbtn em{display:none;}
-.formbox .codearea .form_input{width:140px;}
-.formbox .msg{display:block;color:#909090;float: right;width:118px;}
-.formbox .msg .ico__error,.formbox .msg .ico__pass{margin-right:5px;}
-.formbox .error{color:#ff0000; margin-top:6px; _margin-top:-25px;*margin-top:-25px;}
-.formbox .success{color:#909090;margin-top:6px;}
-.formbox .pswd_state{margin:0 5px;position:relative;zoom:1;vertical-align:middle;display:inline-block;*display:inline;*zoom:1;width:124px;height:10px;background-color:#ececec;border:1px solid #8fd1ff;}
-.formbox .pswd_state_def{border:1px solid #c7c7c7;}
-.formbox .pswd_state .level{position:absolute;top:1px;left:1px;width:40px;height:8px;display:inline-block;*display:inline;*zoom:1;overflow:hidden;}
-.formbox .pswd_state .level_1{background-color:#8fd1ff;}
-.formbox .pswd_state .level_2{background-color:#43b1fe;left:42px;}
-.formbox .pswd_state .level_3{background-color:#3399e0;left:83px;}
-.formbox .pswd_state .level_0{background-color:#c7c7c7;}
-.formbox .pswd_state .level_0_1{background-color:#a0a0a0;left:42px;}
-.formbox .pswd_state .level_0_2{background-color:#898989;left:83px;}
-.formbox .strength{padding-left:98px;padding-top:10px;color:#909090;}
-.formbox .userbase{height:50px;margin-bottom:20px;}
-.formbox .userbase .avatar{float:left;width:50px;height:50px;margin-right:10px;}
-.formbox .userbase li{fonoverflow:hidden;zoom:1;font-size:14px;margin-bottom:5px;}
-.formbox .userbase .tips{color:#909090;font-size:12px;}
-.formbox .userbase .avatar img{display:block;width:50px;height:50px;}
-.formbox .notice{margin-left:98px;margin-top:10px;width:290px;padding:5px 10px;background:#fffcce;border:1px solid #d1be9d;color:#909090;}
-.formbox .notice a{margin-left:10px;}
-.formbox .loginbind a{display:inline-block;*display:inline;*zoom:1;vertical-align:middle;width:130px;height:45px;background:url(../images/reg.png) no-repeat 0 -230px;}
-.formbox .loginbind a:hover{background-position:-150px -230px;}
-.formbox .loginbind a:active{background-position:-300px -230px;}
-.formbox .loginbind em{display:none;}
-
-.formbox .messalert{ background:#efefef; margin-top:10px; padding:5px; display:none;}
-.formbox .messalert span{ color:#F00;}
-
-.formbox .cardloginbox .welcome{ font-size:16px; padding-bottom:8px; padding-left:50px; padding-top:20px;}
-.formbox .cardloginbox .welcome_des{color:#B6B6B6; padding-bottom:25px;padding-left:50px;}
-.formbox .cardloginbox .tips{ color:#3399E0; font-size:12px; height:20px; line-height:20px; margin-left:0px !important;}
-
-/*#email_input {border:#CCC 1px solid;height:28px;line-height:28px;padding-left:5px;padding-right:32px;background-image:url(../images/email.gif);background-repeat:no-repeat;background-position:209px 4px;font-size:15px;font-family:Arial;}
-#mobile_input {border:#CCC 1px solid;height:28px;line-height:28px;padding-left:5px;padding-right:32px;background-image:url(../images/mobile.gif);background-repeat:no-repeat;background-position:209px 4px;font-size:15px;font-family:Arial;}
-#password1 {border:#CCC 1px solid;height:28px;line-height:28px;padding-left:5px;padding-right:32px;background-image:url(../images/one5.jpg);background-repeat:no-repeat;background-position:214px 7px;font-size:15px;font-family:Arial;}
-#password2 {border:#CCC 1px solid;height:28px;line-height:28px;padding-left:5px;padding-right:32px;font-size:15px;font-family:Arial;}
-#loginJCaptcha {border:#CCC 1px solid;height:28px;line-height:28px;padding-left:5px;padding-right:32px;font-size:15px;font-family:Arial;}
-#smsJCaptcha{border:#CCC 1px solid;height:28px;line-height:28px;padding-left:5px;padding-right:32px;font-size:15px;font-family:Arial;}
-#user_name_login {border:#CCC 1px solid;height:28px;line-height:28px;padding-left:5px;padding-right:32px;background-image:url(../images/one4.jpg);background-repeat:no-repeat;background-position:304px 7px;font-size:15px;font-family:Arial;}
-#mobile_login {border:#CCC 1px solid;height:28px;line-height:28px;padding-left:5px;padding-right:32px;background-image:url(../images/mobile.gif);background-repeat:no-repeat;background-position:304px 3px;font-size:15px;font-family:Arial;}
-#passwd_login {border:#CCC 1px solid;height:28px;line-height:28px;padding-left:5px;padding-right:32px;background-image:url(../images/one5.jpg);background-repeat:no-repeat;background-position:304px 7px;font-size:15px;font-family:Arial;}*/
-.dengluBtn{ width:100%; text-align:center; }
-.btn-login{cursor: pointer; font-family: "微软雅黑"; height: 47px; line-height: 34px; margin: 10px 0px 30px 0px; text-indent: -9999px; width: 150px;background:url(../images/login-img3.png)  no-repeat 0 0; *text-indent:0px; _text-indent:0px;line-height:0; font-size:0; *margin-top:0px;}
-.btn-login:hover {background:url(../images/login-img3.png) no-repeat 0 -47px;}
-
-.btn-login2{cursor: pointer; font-family: "微软雅黑"; height: 47px; line-height: 34px; margin: 40px 15px 52px 0px; text-indent: -9999px; width: 150px;background:url(../images/login-img3.png)  no-repeat 0 0;cursor:pointer;  *text-indent:0px; _text-indent:0px;line-height:0; font-size:0;}
-.btn-login2:hover {background:url(../images/login-img3.png) no-repeat 0 -47px;}
-
-.btn-regist {background: url("../images/regist-btn.png") no-repeat scroll 0 0 transparent;font-family: "微软雅黑";height: 47px;line-height: 34px; text-indent: -9999px; width: 170px;cursor:pointer;  *text-indent:0px; _text-indent:0px;line-height:0; font-size:0;}
-.btn-regist:hover {background:url(../images/regist-btn.png) no-repeat 0 -47px;}
-
-
-
-
-/*登陆注册page*/
-#win2_page {width:530px;height:500px; background: #fff; display:none;z-index:10006; }
-
-#win2_page .win_cont{ width:530px; height:auto !important; margin-top:10px; }
-
-#win2_page .win_cont .success_warp{ width:500px; float:left; padding-top:40px;}
-#win2_page .win_cont .success_warp .success{ width:400px; float:left; padding:10px 0px 0px 50px;}
-#win2_page .win_cont .success_warp .success .part1{ width:330px; background:url(../images/email_icon.jpg) no-repeat left 10px; padding-left:60px; line-height:20px; font-family:微软雅黑; color:#010004; font-size:14px; float:left;}
-#win2_page .win_cont .success_warp .success .part2{ width:390px; text-align:center; float:left; padding-top:15px;}
-#win2_page .win_cont .success_warp .success .part2 img{ cursor:pointer;}
-#win2_page .win_cont .success_warp .success .part3{ width:388px; float:left; margin-top:50px; background:#FCFCE0; border:1px solid #DCDED3; padding:10px 10px 30px 10px;}
-#win2_page .win_cont .success_warp .success .part3 strong{ font-size:14px;}
-#win2_page .win_cont .success_warp .success .part3 p{ line-height:18px; margin-top:8px;}
-#win2_page .win_cont .success_warp .success .part3 p a{ color:#0187CE;}
-
-
-/*账户升级page*/
-#win3_page {width:530px;height:500px; display:none; }
-#win3_page .win_cont{ width:450px; padding-top:40px; margin:0 auto;}
-#win3_page .loginerror{color: #FF0000; height: 24px; line-height: 24px; margin-bottom: -16px; margin-left: 30px; margin-top: 0px;}
-#win3_page .win_cont .success_warp{ width:450px; float:left; padding-top:40px;}
-#win3_page .win_cont .success_warp .success{ width:390px; float:left; padding:10px 30px 0px 30px;}
-
-#win3_page #user_name_bind_login {border:#CCC 1px solid;height:28px;line-height:28px;padding-left:5px;padding-right:32px;/*background-image:url(../images/one4.jpg);background-repeat:no-repeat;background-position:304px 7px;*/font-size:15px;font-family:Arial;}
-#win3_page #passwd_bind_login {border:#CCC 1px solid;height:28px;line-height:28px;padding-left:5px;padding-right:32px;/*background-image:url(../images/one5.jpg);background-repeat:no-repeat;background-position:304px 7px;*/font-size:15px;font-family:Arial;}
-
-
-.check_yes {background:url(../images/true.jpg);width:13px;height:13px;float:left;margin-right:5px;}
-.check_no {background:url(../images/warning.jpg);width:14px;height:14px;float:left;margin-right:5px;}
-
-
-
-/*防伪码提示*/
-.codeTip{ width:350px; height:170px; margin:0 auto; border:1px solid #ccc; box-shadow:0px 0px 5px #ccc; position:fixed; z-index:99999999; left:50%; top:50%; margin-left:-140px; margin-top:-90px; background:#fff; display:none;}
-.codeTip .tit{ width:100%; height:30px; background:#519236;line-height:30px; position:relative;}
-.codeTip .tit span{ font-size:16px; color:#fff; padding-left:20px;}
-.codeTip .tit a{ background:url(../images/closeBtn.png) no-repeat; width:35px; height:33px; display:inline-block; position:absolute; right:-15px; top:-10px; z-index:999999;}
-
-
-.codeTip .code_warp{width:350px; height:70px; text-align:center; color:#598D2B; padding-top:20px;}
-.codeTip .code_warp p{ margin-bottom:9px; font-size:16px;}
-.codeTip .code_warp p span{ color:#EDAC2A; margin:0 3px;}
-
-.codeTip .code_warp .codeT{ width:350px; }
-.codeTip .code_warp .codeT tr { }
-.codeTip .code_warp .codeT tr td{ padding:0px 0px 0px 0px;}
-
-.codeTip .code_warp .codeT tr td.cols1{ width:72px; text-align:right; vertical-align:top; font-size:14px; padding-right:3px; padding-top:5px;}
-.codeTip .code_warp .codeT tr td.cols2{ width:115px; text-align:left; vertical-align:top; }
-.codeTip .code_warp .codeT tr td.cols3{ width:150px; text-align:left; vertical-align:top; }
-
-.codeTip .code_warp .codeT tr td.cols1 b{ color:#478224; margin-right:8px;}
-.codeTip .code_warp .codeT tr td.cols2 .bordersty2{ width:103px; height:35px; border:1px solid #EBEBEB; padding:0px 0px 0px 5px; }
-.codeTip .code_warp .codeT tr td.cols2 .bordersty2_wrong{ border:1px solid #ff4646;}
-.codeTip .code_warp .codeT tr td.cols3 img{ border:1px solid #efefef;}
-
-.inputForm{ position:relative; width:110px;}
-.code_right {display:none;position: absolute;top: 1px;right:2px;width: 25px;height:35px;background: #FFF url(../images/regist2.png) no-repeat 0 -35px;}
-.code_wrong {display:none;position: absolute;top: 1px;right:2px;width: 25px;height: 35px;background: #FFF url(../images/regist2.png) no-repeat 0 -87px;}
-
-
-.codeTip .code_warp .codeT tr td p{  color:#F00; display:block; text-align:left; font-size:12px;}
-.codeTip .code_warp .codeT tr td p#login_error{  color:#F00; display:block;}
-
-
-.codeTip .footer{ width:350px; height:49px; background:#E3ECDB; border-top:1px dashed #598D2B; text-align:center; display:block;}
-.codeTip .footer .confirmNotice{ background:url(../images/confirmNotice.jpg) no-repeat; width:86px; height:31px; margin-top:10px;}
-
-
+@charset "utf-8";/* CSS Document *//*banner*/.banner{ width:100%; text-align:center;}/*登录注册*/.main{ width:1010px; margin:0 auto;}.breadCrumbs{ width:100%; color:#719B6B; padding-top:20px;}.loginTab_warp{width:1010px; height:86px; margin-top:25px;}.loginTab_warp .loginTab{ width:100%; margin-top:30px;}.loginTab_warp .loginTab li{ display:inline-block; background:#fff; padding:0 0px;  float:left;  border-bottom:2px solid #4A4A4A; height:35px; line-height:35px;}.loginTab_warp .loginTab li#loginTab{ width:200px; text-align:center;}.loginTab_warp .loginTab li#regTab{ width:755px; margin-left:10px; padding-left:45px;}.loginTab_warp .loginTab li a{ font-size:18px; display:inline-block; padding:0 40px; height:35px;}.loginTab_warp .loginTab li.curr{ color:#509A41; border-bottom:2px solid #509A41;}.loginTab_warp .loginTab li.curr a{ color:#509A41;}.adds{margin:0 auto;}/*.login_h .login_h_r .shopProgressBar{}.login_h .login_h_r .shopProgressBar li{ float:left; margin-left:10px;}.login_h .login_h_r .shopProgressBar li a{ display:inline-block; width:74px; height:74px;}.login_h .login_h_r .shopProgressBar li a.step1{ background:url(../images/shop_step1.jpg) no-repeat;}.login_h .login_h_r .shopProgressBar li a.step2{ background:url(../images/shop_step2.jpg) no-repeat;}.login_h .login_h_r .shopProgressBar li a.step3{ background:url(../images/shop_step3.jpg) no-repeat;}.login_h .login_h_r .shopProgressBar li a.step4{ background:url(../images/shop_step4.jpg) no-repeat;}.login_h .login_h_r .shopProgressBar li a.step_line{ background:url(../images/shop_stepLine.jpg) no-repeat; width:34px; height:21px; margin-top:27px;}*/.login_warp{width:1010px; margin-top:15px; padding-bottom:90px;}.login_warp .login{ width:555px; float:left;}.login_warp .lgon_r_ad{ width:450px; float:right;}.login_warp .login .log{ width:555px; }.login_warp .login .reg{ width:555px; display:none;}.login_warp .login .loginT{ width:555px; margin-top:55px; }.login_warp .login .loginT tr {}.login_warp .login .loginT tr td{ padding:0px 0px 0px 0px;}.login_warp .login .loginT tr td.cols1{ width:190px; text-align:right; vertical-align:top; font-size:14px; padding-right:8px;}.login_warp .login .loginT tr td.cols2{ width:365px; text-align:left; vertical-align:top; height:65px; }.login_warp .login .loginT tr td.cols2_h{ height:20px;}.login_warp .login .loginT tr td.cols2_h2{ height:65px; vertical-align:middle;}.login_warp .login .loginT tr td.cols1 b{ color:#478224; margin-right:8px;}.login_warp .login .loginT tr td.cols2 .bordersty1{ width:245px; height:24px; border:1px solid #EBEBEB; padding:0px 5px; }.login_warp .login .loginT tr td.cols2 .bordersty2{ width:80px; height:24px; border:1px solid #EBEBEB; padding:0px 5px; }.login_warp .login .loginT tr td.cols2 p{ height:26px; line-height:26px; color:#F00; display:block;}.login_warp .login .loginT tr td.cols2 p#login_error{ height:26px; line-height:26px; color:#F00; display:block;}.login_warp .login .loginT tr td.cols2 a{ color:#478224; margin-left:5px;}.login_warp .login .loginT tr td.cols2 .operateBox{ width:255px; text-align:right; color:#478224;}.login_warp .login .loginT tr td.cols2 .loginBtn{ background:url(../images/loginBtn.jpg) no-repeat; width:137px; height:36px;}.login_warp .login .loginT tr td.cols2 .operateBox .fastLogin_txt{ width:255px; margin-top:20px; font-size:14px;}.login_warp .login .loginT tr td.cols2 .operateBox .fastLogin{ width:255px; margin-top:5px; }.login_warp .login .loginT tr td.fastLoginBox{}.login_warp .login .loginT tr td.fastLoginBox .fastLogin{ margin-left:150px !important;}.login_warp .login .loginT tr td.fastLoginBox .fastLogin a{ margin:0 3px;}.login_warp .login .phoneRegT{ width:555px; margin-top:55px; }.login_warp .login .phoneRegT tr {}.login_warp .login .phoneRegT tr td{ padding:0px 0px 0px 0px;}.login_warp .login .phoneRegT tr td.cols1{ width:190px; text-align:right; vertical-align:top; font-size:14px; padding-right:8px;}.login_warp .login .phoneRegT tr td.cols2{ width:365px; text-align:left; vertical-align:top; height:65px; }.login_warp .login .phoneRegT tr td.cols2_h{ height:20px;}.login_warp .login .phoneRegT tr td.cols2_h2{ height:65px; vertical-align:middle;}.login_warp .login .phoneRegT tr td.cols1 b{ color:#478224; margin-right:8px;}.login_warp .login .phoneRegT tr td.cols2 .bordersty1{ width:245px; height:24px; border:1px solid #EBEBEB; padding:0px 5px; }.login_warp .login .phoneRegT tr td.cols2 .bordersty2{ width:80px; height:24px; border:1px solid #EBEBEB; padding:0px 5px; }.login_warp .login .phoneRegT tr td.cols2 p{ height:26px; line-height:26px; color:#F00; display:block;}.login_warp .login .phoneRegT tr td.cols2 p#phoneReg_error{ height:26px; line-height:26px; color:#F00; display:block;}.login_warp .login .phoneRegT tr td.cols2 a{ color:#478224; margin-left:5px;}.login_warp .login .phoneRegT tr td.cols2 span{ display:none;}.login_warp .login .phoneRegT tr td.cols2 span b{ color:#478224; margin-left:5px;}.login_warp .login .phoneRegT tr td.cols2 .operateBox{ width:255px; text-align:right; }.login_warp .login .phoneRegT tr td.cols2 .operateBox a{ width:255px; color:#478224;}.login_warp .login .phoneRegT tr td.cols2 .regBtn{ background:url(../images/regBtn.jpg) no-repeat; width:135px; height:35px;}.login_warp .login .emailRegT{ width:555px; margin-top:55px; display:none; }.login_warp .login .emailRegT tr {}.login_warp .login .emailRegT tr td{ padding:0px 0px 0px 0px;}.login_warp .login .emailRegT tr td.cols1{ width:190px; text-align:right; vertical-align:top; font-size:14px; padding-right:8px;}.login_warp .login .emailRegT tr td.cols2{ width:365px; text-align:left; vertical-align:top; height:65px; }.login_warp .login .emailRegT tr td.cols2_h{ height:20px;}.login_warp .login .emailRegT tr td.cols2_h2{ height:65px; vertical-align:middle;}.login_warp .login .emailRegT tr td.cols1 b{ color:#478224; margin-right:8px;}.login_warp .login .emailRegT tr td.cols2 .bordersty1{ width:245px; height:24px; border:1px solid #EBEBEB; padding:0px 5px; }.login_warp .login .emailRegT tr td.cols2 .bordersty2{ width:80px; height:24px; border:1px solid #EBEBEB; padding:0px 5px; }.login_warp .login .emailRegT tr td.cols2 p{ height:26px; line-height:26px; color:#F00; display:block;}.login_warp .login .emailRegT tr td.cols2 p#emailReg_error{ height:26px; line-height:26px; color:#F00; display:block;}.login_warp .login .emailRegT tr td.cols2 a{ color:#478224; margin-left:5px;}.login_warp .login .emailRegT tr td.cols2 span{ display:none;}.login_warp .login .emailRegT tr td.cols2 span b{ color:#478224; margin-left:5px;}.login_warp .login .emailRegT tr td.cols2 .operateBox{ width:255px; text-align:right; }.login_warp .login .emailRegT tr td.cols2 .operateBox a{ width:255px; color:#478224;}.login_warp .login .emailRegT tr td.cols2 .regBtn{ background:url(../images/regBtn.jpg) no-repeat; width:135px; height:35px;}/*登录注册*/.loginTip{ width:530px; height:500px; margin:0 auto; border:1px solid #ccc; box-shadow:0px 0px 5px #ccc; position:fixed; z-index:9999; left:50%; top:50%; margin-left:-250px; margin-top:-250px; background:#fff;}.loginTip .tit{ width:100%; height:30px; background:#519236;line-height:30px; position:relative;}.loginTip .tit span{ font-size:16px; color:#fff; padding-left:20px;}.loginTip .tit a{ background:url(../images/closeBtn.png) no-repeat; width:35px; height:33px; display:inline-block; position:absolute; right:-15px; top:-10px; z-index:999999;}.loginTip .loginTab_warp{width:530px; height:auto !important; margin-top:10px; }.loginTip .loginTab_warp .loginTab{ width:100%; margin-top:0px;}.loginTip .loginTab_warp .loginTab li{ display:inline-block; background:#fff; padding:0 0px;  float:left;  border-bottom:2px solid #4A4A4A; height:35px; line-height:35px;}.loginTip .loginTab_warp .loginTab li#loginTab{ width:50%; text-align:center;}.loginTip .loginTab_warp .loginTab li#regTab{ width:50%; margin-left:0px; padding-left:0px;}.loginTip .loginTab_warp .loginTab li a{ font-size:16px; display:inline-block; padding:0 40px; height:35px;}.loginTip .loginTab_warp .loginTab li.curr{ color:#509A41; border-bottom:2px solid #509A41;}.loginTip .loginTab_warp .loginTab li.curr a{ color:#509A41;}.loginTip .login_warp{width:530px; margin-top:10px; padding-bottom:0px;}.loginTip .login_warp .login{ width:530px; float:left;}.loginTip .login_warp .login .log{ width:530px; }.loginTip .login_warp .login .reg{ width:530px; display:none;}.loginTip .login_warp .login .loginT{ width:530px; margin-top:20px; }.loginTip .login_warp .login .loginT tr {}.loginTip .login_warp .login .loginT tr td{ padding:0px 0px 0px 0px;}.loginTip .login_warp .login .loginT tr td.cols1{ width:140px; text-align:right; vertical-align:top; font-size:14px; padding-right:8px;}.loginTip .login_warp .login .loginT tr td.cols2{ width:365px; text-align:left; vertical-align:top; height:50px; }.loginTip .login_warp .login .loginT tr td.cols2_h{ height:20px;}.loginTip .login_warp .login .loginT tr td.cols2_h2{ height:65px; vertical-align:middle;}.loginTip .login_warp .login .loginT tr td.cols1 b{ color:#478224; margin-right:8px;}.loginTip .login_warp .login .loginT tr td.cols2 .bordersty1{ width:245px; height:24px; border:1px solid #EBEBEB; padding:0px 5px; }.loginTip .login_warp .login .loginT tr td.cols2 .bordersty2{ width:80px; height:24px; border:1px solid #EBEBEB; padding:0px 5px; }.loginTip .login_warp .login .loginT tr td.cols2 p{ height:26px; line-height:26px; color:#F00; display:block;}.loginTip .login_warp .login .loginT tr td.cols2 p#login_error{ height:26px; line-height:26px; color:#F00; display:block;}.loginTip .login_warp .login .loginT tr td.cols2 a{ color:#478224; margin-left:5px;}.loginTip .login_warp .login .loginT tr td.cols2 .operateBox{ width:255px; text-align:right; color:#478224;}.loginTip .login_warp .login .loginT tr td.cols2 .loginBtn{ background:url(../images/loginBtn.jpg) no-repeat; width:137px; height:36px;}.loginTip .login_warp .login .loginT tr td.cols2 .operateBox .fastLogin_txt{ width:255px; margin-top:20px; font-size:14px;}.loginTip .login_warp .login .loginT tr td.cols2 .operateBox .fastLogin{ width:255px; margin-top:5px; }.loginTip .login_warp .login .loginT tr td.fastLoginBox{}.loginTip .login_warp .login .loginT tr td.fastLoginBox .fastLogin{ margin-left:110px !important;}.loginTip .login_warp .login .loginT tr td.fastLoginBox .fastLogin a{ margin:0 3px;}.loginTip .login_warp .login .phoneRegT{ width:530px; margin-top:20px; }.loginTip .login_warp .login .phoneRegT tr {}.loginTip .login_warp .login .phoneRegT tr td{ padding:0px 0px 0px 0px;}.loginTip .login_warp .login .phoneRegT tr td.cols1{ width:140px; text-align:right; vertical-align:top; font-size:14px; padding-right:8px;}.loginTip .login_warp .login .phoneRegT tr td.cols2{ width:365px; text-align:left; vertical-align:top; height:50px; }.loginTip .login_warp .login .phoneRegT tr td.cols2_h{ height:20px;}.loginTip .login_warp .login .phoneRegT tr td.cols2_h2{ height:65px; vertical-align:middle;}.loginTip .login_warp .login .phoneRegT tr td.cols1 b{ color:#478224; margin-right:8px;}.loginTip .login_warp .login .phoneRegT tr td.cols2 .bordersty1{ width:245px; height:24px; border:1px solid #EBEBEB; padding:0px 5px; }.loginTip .login_warp .login .phoneRegT tr td.cols2 .bordersty2{ width:80px; height:24px; border:1px solid #EBEBEB; padding:0px 5px; }.loginTip .login_warp .login .phoneRegT tr td.cols2 p{ height:26px; line-height:26px; color:#F00; display:block;}.loginTip .login_warp .login .phoneRegT tr td.cols2 p#phoneReg_error{ height:26px; line-height:26px; color:#F00; display:block;}.loginTip .login_warp .login .phoneRegT tr td.cols2 a{ color:#478224; margin-left:5px;}.loginTip .login_warp .login .phoneRegT tr td.cols2 span{ display:none;}.loginTip .login_warp .login .phoneRegT tr td.cols2 span b{ color:#478224; margin-left:5px;}.loginTip .login_warp .login .phoneRegT tr td.cols2 .operateBox{ width:255px; text-align:right; }.loginTip .login_warp .login .phoneRegT tr td.cols2 .operateBox a{ width:255px; color:#478224;}.loginTip .login_warp .login .phoneRegT tr td.cols2 .regBtn{ background:url(../images/regBtn.jpg) no-repeat; width:135px; height:35px;}.loginTip .login_warp .login .emailRegT{ width:530px; margin-top:20px; display:none; }.loginTip .login_warp .login .emailRegT tr {}.loginTip .login_warp .login .emailRegT tr td{ padding:0px 0px 0px 0px;}.loginTip .login_warp .login .emailRegT tr td.cols1{ width:140px; text-align:right; vertical-align:top; font-size:14px; padding-right:8px;}.loginTip .login_warp .login .emailRegT tr td.cols2{ width:365px; text-align:left; vertical-align:top; height:50px; }.loginTip .login_warp .login .emailRegT tr td.cols2_h{ height:20px;}.loginTip .login_warp .login .emailRegT tr td.cols2_h2{ height:65px; vertical-align:middle;}.loginTip .login_warp .login .emailRegT tr td.cols1 b{ color:#478224; margin-right:8px;}.loginTip .login_warp .login .emailRegT tr td.cols2 .bordersty1{ width:245px; height:24px; border:1px solid #EBEBEB; padding:0px 5px; }.loginTip .login_warp .login .emailRegT tr td.cols2 .bordersty2{ width:80px; height:24px; border:1px solid #EBEBEB; padding:0px 5px; }.loginTip .login_warp .login .emailRegT tr td.cols2 p{ height:26px; line-height:26px; color:#F00; display:block;}.loginTip .login_warp .login .emailRegT tr td.cols2 p#emailReg_error{ height:26px; line-height:26px; color:#F00; display:block;}.loginTip .login_warp .login .emailRegT tr td.cols2 a{ color:#478224; margin-left:5px;}.loginTip .login_warp .login .emailRegT tr td.cols2 span{ display:none;}.loginTip .login_warp .login .emailRegT tr td.cols2 span b{ color:#478224; margin-left:5px;}.loginTip .login_warp .login .emailRegT tr td.cols2 .operateBox{ width:255px; text-align:right; }.loginTip .login_warp .login .emailRegT tr td.cols2 .operateBox a{ width:255px; color:#478224;}.loginTip .login_warp .login .emailRegT tr td.cols2 .regBtn{ background:url(../images/regBtn.jpg) no-repeat; width:135px; height:35px;}.loginTip .login_warp a:hover{ color:#F00 !important; text-decoration:underline;}/*邮箱激活*/#win2 {width:530px;height:500px; border:1px solid #ccc; box-shadow:0px 0px 5px #ccc; background: #fff;position:fixed;left: 50%;top: 50%;margin-left:-250px; margin-top:-250px; display:none;z-index:10006; }#win2 .tit{ width:100%; height:30px; background:#519236;line-height:30px; position:relative;}#win2 .tit span{ font-size:16px; color:#fff; padding-left:20px;}#win2 .tit a{ background:url(../images/closeBtn.png) no-repeat; width:35px; height:33px; display:inline-block; position:absolute; right:-15px; top:-10px; z-index:999999;}#win2 .win_cont{ width:530px; height:auto !important; margin-top:10px; }#win2 .win_cont .success_warp{ width:500px; float:left; padding-top:40px;}#win2 .win_cont .success_warp .success{ width:400px; float:left; padding:10px 0px 0px 50px;}#win2 .win_cont .success_warp .success .part1{ width:330px; background:url(../images/email_icon.jpg) no-repeat left 10px; padding-left:60px; line-height:20px; font-family:微软雅黑; color:#010004; font-size:14px; float:left;}#win2 .win_cont .success_warp .success .part2{ width:390px; text-align:center; float:left; padding-top:15px;}#win2 .win_cont .success_warp .success .part2 img{ cursor:pointer;}#win2 .win_cont .success_warp .success .part3{ width:388px; float:left; margin-top:50px; background:#FCFCE0; border:1px solid #DCDED3; padding:10px 10px 30px 10px;}#win2 .win_cont .success_warp .success .part3 strong{ font-size:14px;}#win2 .win_cont .success_warp .success .part3 p{ line-height:18px; margin-top:8px;}#win2 .win_cont .success_warp .success .part3 p a{ color:#0187CE;}#win3 {width:530px;height:500px; border:1px solid #ccc; box-shadow:0px 0px 5px #ccc; background: #fff;position:fixed;left: 50%;top: 50%;margin-left:-250px; margin-top:-250px; display:none;z-index:10006; }#win3 .tit{ width:100%; height:30px; background:#519236;line-height:30px; position:relative;}#win3 .tit span{ font-size:16px; color:#fff; padding-left:20px;}#win3 .tit a{ background:url(../images/closeBtn.png) no-repeat; width:35px; height:33px; display:inline-block; position:absolute; right:-15px; top:-10px; z-index:999999;}#win3 .win_cont{ width:450px; padding-top:40px; margin:0 auto;}#win3 .loginerror{color: #FF0000; height: 24px; line-height: 24px; margin-bottom: -16px; margin-left: 30px; margin-top: 0px;}#win3 .win_cont .success_warp{ width:450px; float:left; padding-top:40px;}#win3 .win_cont .success_warp .success{ width:390px; float:left; padding:10px 30px 0px 30px;}#win3 #user_name_bind_login {border:#CCC 1px solid;height:28px;line-height:28px;padding-left:5px;padding-right:32px;/*background-image:url(../images/one4.jpg);background-repeat:no-repeat;background-position:304px 7px;*/font-size:15px;font-family:Arial;}#win3 #passwd_bind_login {border:#CCC 1px solid;height:28px;line-height:28px;padding-left:5px;padding-right:32px;/*background-image:url(../images/one5.jpg);background-repeat:no-repeat;background-position:304px 7px;*/font-size:15px;font-family:Arial;}.check_yes {background:url(../images/true.jpg);width:13px;height:13px;float:left;margin-right:5px;}.check_no {background:url(../images/warning.jpg);width:14px;height:14px;float:left;margin-right:5px;}/*注册成功 关联套餐*/.relationWin {width:600px;height:370px;  background: #fff;position:fixed;left: 50%;top: 50%;margin: -180px -300px 0; z-index: 10006;    border: 6px solid rgba(0, 0, 0, 0.1);    border-radius: 5px;    -moz-border-radius: 5px;    -webkit-border-radius: 5px;}.relationMain{width: 550px;padding: 15px 25px;}.relationMain .relation_statue{ text-align:center; font-size:22px; font-family:"微软雅黑"; padding:15px 0px 25px 0px; color:#474E5D;}.relationMain .relation_text{ color:#8E8E8E; padding-bottom:25px; padding:0 10px 15px 10px; font-family:"微软雅黑"; font-size:16px;}.relationMain .relation_info{ width:405px; padding:0 10px;}.relationMain .relation_info img{ float:left; margin-right:15px; display:block; width:115px; height:115px;}.relationMain .relation_info p{ float:left; width:275px; line-height:29px; color:#666666;}.relationMain .relation_info p strong{ margin-right:17px;}.relationMain .relation_line{ background:url(../images/relation_xian.jpg) repeat-x; width:100%; height:7px; margin:18px 0px 25px 0px;}.relationMain .relation_btn{ text-align:center;}.relationMain .relation_btn input{ background:#EF5A50; width:200px; height:50px; border-radius:3px; border:none; color:#fff; font-size:16px;  font-family:"微软雅黑"; font-weight:bold;}.relationStep1{width: 565px;padding: 15px 15px 15px 20px;}.relationStep1 .relation_statue{ text-align:center; font-size:22px; font-family:"微软雅黑"; padding:15px 0px 25px 0px; color:#474E5D;}.relationStep1 .stepl{ width:392px; float:left;}.relationStep1 .stepr{ width:140px; float:right;}.relationStep1 .relation_text{ color:#8E8E8E; padding-bottom:25px; padding:0 10px 15px 10px; font-family:"微软雅黑"; font-size:16px;}.relationStep1 .relation_info{ width:405px; padding:0 10px;}.relationStep1 .relation_info img{ float:left; margin-right:15px; display:block; width:115px; height:115px;}.relationStep1 .relation_info p{ float:left; width:275px; line-height:29px; color:#666666;}.relationStep1 .relation_info p strong{ margin-right:17px;}.relationStep1 .relation_add{ width:405px; padding:0 10px;}.relationStep1 .relation_add input{ width:155px; height:22px; border:1px solid #ccc; line-height:22px; margin-top:12px; margin-left:10px;}.relationStep1 .relation_line{ background:url(../images/relation_xian.jpg) repeat-x; width:100%; height:7px; margin:18px 0px 25px 0px;}.relationStep1 .relation_btn{ text-align:right;}.relationStep1 .relation_btn input{ background:#EF5A50; width:90px; height:28px; border-radius:3px; border:none; color:#fff; font-size:14px;  font-family:"微软雅黑"; font-weight:bold;}.relationStep1 .stepr .stepbar{ background:url(../images/relationSprites.jpg) no-repeat; width:140px; height:220px;}/*公共*/.formbox{zoom:1;overflow:hidden;}.formbox .loginwin{padding-bottom:10px;}.formbox fieldset{border:none;}.formbox .propinfo{position:absolute;right:20px;top:15px;}.formbox .propinfo img{width:173px;height:111px;}.formbox .entry{margin-bottom:20px;position:relative; }.formbox .entry .placeholder{position:absolute;top:5px;*top:7px;left:10px;color:#BBB;font-size:14px;}.formbox .entry .tips{margin-left:10px;}.formbox h3{margin-bottom:15px;color:#555;}.formbox label{color:#565656;display:inline-block;*display:inline;*zoom:1;vertical-align:middle;font-size:14px;padding:0 5px;width:80px;text-align:right;}.formbox .loginwin label{width:60px;}.formbox .loginbtn{margin-bottom:10px;}.formbox .form_btn_m .form_btn_text{font-size:14px;}.formbox .form_input{width:200px;_width:230px;margin-right:5px;}.formbox .save{margin:0;margin:-10px 0 20px 0;}.formbox .save label{padding:0;width:50px;text-align:left;font-size:12px;}.formbox .save a{position:relative;top:1px;*top:-1px;}.formbox .regbtn a{vertical-align:middle;display:inline-block;*display:inline;*zoom:1;width:130px;height:45px;background:url(../images/reg.png) no-repeat 0 -70px;}.formbox .regbtn a:hover{background-position:-150px -70px;}.formbox .regbtn a:active{background-position:-300px -70px;}.formbox .terms{padding-left:98px;}.formbox .regbtn{padding-left:98px;}.formbox .regbtn em{display:none;}.formbox .codearea .form_input{width:140px;}.formbox .msg{display:block;color:#909090;float: right;width:118px;}.formbox .msg .ico__error,.formbox .msg .ico__pass{margin-right:5px;}.formbox .error{color:#ff0000; margin-top:6px; _margin-top:-25px;*margin-top:-25px;}.formbox .success{color:#909090;margin-top:6px;}.formbox .pswd_state{margin:0 5px;position:relative;zoom:1;vertical-align:middle;display:inline-block;*display:inline;*zoom:1;width:124px;height:10px;background-color:#ececec;border:1px solid #8fd1ff;}.formbox .pswd_state_def{border:1px solid #c7c7c7;}.formbox .pswd_state .level{position:absolute;top:1px;left:1px;width:40px;height:8px;display:inline-block;*display:inline;*zoom:1;overflow:hidden;}.formbox .pswd_state .level_1{background-color:#8fd1ff;}.formbox .pswd_state .level_2{background-color:#43b1fe;left:42px;}.formbox .pswd_state .level_3{background-color:#3399e0;left:83px;}.formbox .pswd_state .level_0{background-color:#c7c7c7;}.formbox .pswd_state .level_0_1{background-color:#a0a0a0;left:42px;}.formbox .pswd_state .level_0_2{background-color:#898989;left:83px;}.formbox .strength{padding-left:98px;padding-top:10px;color:#909090;}.formbox .userbase{height:50px;margin-bottom:20px;}.formbox .userbase .avatar{float:left;width:50px;height:50px;margin-right:10px;}.formbox .userbase li{fonoverflow:hidden;zoom:1;font-size:14px;margin-bottom:5px;}.formbox .userbase .tips{color:#909090;font-size:12px;}.formbox .userbase .avatar img{display:block;width:50px;height:50px;}.formbox .notice{margin-left:98px;margin-top:10px;width:290px;padding:5px 10px;background:#fffcce;border:1px solid #d1be9d;color:#909090;}.formbox .notice a{margin-left:10px;}.formbox .loginbind a{display:inline-block;*display:inline;*zoom:1;vertical-align:middle;width:130px;height:45px;background:url(../images/reg.png) no-repeat 0 -230px;}.formbox .loginbind a:hover{background-position:-150px -230px;}.formbox .loginbind a:active{background-position:-300px -230px;}.formbox .loginbind em{display:none;}.formbox .messalert{ background:#efefef; margin-top:10px; padding:5px; display:none;}.formbox .messalert span{ color:#F00;}.formbox .cardloginbox .welcome{ font-size:16px; padding-bottom:8px; padding-left:50px; padding-top:20px;}.formbox .cardloginbox .welcome_des{color:#B6B6B6; padding-bottom:25px;padding-left:50px;}.formbox .cardloginbox .tips{ color:#3399E0; font-size:12px; height:20px; line-height:20px; margin-left:0px !important;}/*#email_input {border:#CCC 1px solid;height:28px;line-height:28px;padding-left:5px;padding-right:32px;background-image:url(../images/email.gif);background-repeat:no-repeat;background-position:209px 4px;font-size:15px;font-family:Arial;}#mobile_input {border:#CCC 1px solid;height:28px;line-height:28px;padding-left:5px;padding-right:32px;background-image:url(../images/mobile.gif);background-repeat:no-repeat;background-position:209px 4px;font-size:15px;font-family:Arial;}#password1 {border:#CCC 1px solid;height:28px;line-height:28px;padding-left:5px;padding-right:32px;background-image:url(../images/one5.jpg);background-repeat:no-repeat;background-position:214px 7px;font-size:15px;font-family:Arial;}#password2 {border:#CCC 1px solid;height:28px;line-height:28px;padding-left:5px;padding-right:32px;font-size:15px;font-family:Arial;}#loginJCaptcha {border:#CCC 1px solid;height:28px;line-height:28px;padding-left:5px;padding-right:32px;font-size:15px;font-family:Arial;}#smsJCaptcha{border:#CCC 1px solid;height:28px;line-height:28px;padding-left:5px;padding-right:32px;font-size:15px;font-family:Arial;}#user_name_login {border:#CCC 1px solid;height:28px;line-height:28px;padding-left:5px;padding-right:32px;background-image:url(../images/one4.jpg);background-repeat:no-repeat;background-position:304px 7px;font-size:15px;font-family:Arial;}#mobile_login {border:#CCC 1px solid;height:28px;line-height:28px;padding-left:5px;padding-right:32px;background-image:url(../images/mobile.gif);background-repeat:no-repeat;background-position:304px 3px;font-size:15px;font-family:Arial;}#passwd_login {border:#CCC 1px solid;height:28px;line-height:28px;padding-left:5px;padding-right:32px;background-image:url(../images/one5.jpg);background-repeat:no-repeat;background-position:304px 7px;font-size:15px;font-family:Arial;}*/.dengluBtn{ width:100%; text-align:center; }.btn-login{cursor: pointer; font-family: "微软雅黑"; height: 47px; line-height: 34px; margin: 10px 0px 30px 0px; text-indent: -9999px; width: 150px;background:url(../images/login-img3.png)  no-repeat 0 0; *text-indent:0px; _text-indent:0px;line-height:0; font-size:0; *margin-top:0px;}.btn-login:hover {background:url(../images/login-img3.png) no-repeat 0 -47px;}.btn-login2{cursor: pointer; font-family: "微软雅黑"; height: 47px; line-height: 34px; margin: 40px 15px 52px 0px; text-indent: -9999px; width: 150px;background:url(../images/login-img3.png)  no-repeat 0 0;cursor:pointer;  *text-indent:0px; _text-indent:0px;line-height:0; font-size:0;}.btn-login2:hover {background:url(../images/login-img3.png) no-repeat 0 -47px;}.btn-regist {background: url("../images/regist-btn.png") no-repeat scroll 0 0 transparent;font-family: "微软雅黑";height: 47px;line-height: 34px; text-indent: -9999px; width: 170px;cursor:pointer;  *text-indent:0px; _text-indent:0px;line-height:0; font-size:0;}.btn-regist:hover {background:url(../images/regist-btn.png) no-repeat 0 -47px;}/*登陆注册page*/#win2_page {width:530px;height:500px; background: #fff; display:none;z-index:10006; }#win2_page .win_cont{ width:530px; height:auto !important; margin-top:10px; }#win2_page .win_cont .success_warp{ width:500px; float:left; padding-top:40px;}#win2_page .win_cont .success_warp .success{ width:400px; float:left; padding:10px 0px 0px 50px;}#win2_page .win_cont .success_warp .success .part1{ width:330px; background:url(../images/email_icon.jpg) no-repeat left 10px; padding-left:60px; line-height:20px; font-family:微软雅黑; color:#010004; font-size:14px; float:left;}#win2_page .win_cont .success_warp .success .part2{ width:390px; text-align:center; float:left; padding-top:15px;}#win2_page .win_cont .success_warp .success .part2 img{ cursor:pointer;}#win2_page .win_cont .success_warp .success .part3{ width:388px; float:left; margin-top:50px; background:#FCFCE0; border:1px solid #DCDED3; padding:10px 10px 30px 10px;}#win2_page .win_cont .success_warp .success .part3 strong{ font-size:14px;}#win2_page .win_cont .success_warp .success .part3 p{ line-height:18px; margin-top:8px;}#win2_page .win_cont .success_warp .success .part3 p a{ color:#0187CE;}/*账户升级page*/#win3_page {width:530px;height:500px; display:none; }#win3_page .win_cont{ width:450px; padding-top:40px; margin:0 auto;}#win3_page .loginerror{color: #FF0000; height: 24px; line-height: 24px; margin-bottom: -16px; margin-left: 30px; margin-top: 0px;}#win3_page .win_cont .success_warp{ width:450px; float:left; padding-top:40px;}#win3_page .win_cont .success_warp .success{ width:390px; float:left; padding:10px 30px 0px 30px;}#win3_page #user_name_bind_login {border:#CCC 1px solid;height:28px;line-height:28px;padding-left:5px;padding-right:32px;/*background-image:url(../images/one4.jpg);background-repeat:no-repeat;background-position:304px 7px;*/font-size:15px;font-family:Arial;}#win3_page #passwd_bind_login {border:#CCC 1px solid;height:28px;line-height:28px;padding-left:5px;padding-right:32px;/*background-image:url(../images/one5.jpg);background-repeat:no-repeat;background-position:304px 7px;*/font-size:15px;font-family:Arial;}.check_yes {background:url(../images/true.jpg);width:13px;height:13px;float:left;margin-right:5px;}.check_no {background:url(../images/warning.jpg);width:14px;height:14px;float:left;margin-right:5px;}/*防伪码提示*/.codeTip{ width:350px; height:170px; margin:0 auto; border:1px solid #ccc; box-shadow:0px 0px 5px #ccc; position:fixed; z-index:99999999; left:50%; top:50%; margin-left:-140px; margin-top:-90px; background:#fff; display:none;}.codeTip .tit{ width:100%; height:30px; background:#519236;line-height:30px; position:relative;}.codeTip .tit span{ font-size:16px; color:#fff; padding-left:20px;}.codeTip .tit a{ background:url(../images/closeBtn.png) no-repeat; width:35px; height:33px; display:inline-block; position:absolute; right:-15px; top:-10px; z-index:999999;}.codeTip .code_warp{width:350px; height:70px; text-align:center; color:#598D2B; padding-top:20px;}.codeTip .code_warp p{ margin-bottom:9px; font-size:16px;}.codeTip .code_warp p span{ color:#EDAC2A; margin:0 3px;}.codeTip .code_warp .codeT{ width:350px; }.codeTip .code_warp .codeT tr { }.codeTip .code_warp .codeT tr td{ padding:0px 0px 0px 0px;}.codeTip .code_warp .codeT tr td.cols1{ width:72px; text-align:right; vertical-align:top; font-size:14px; padding-right:3px; padding-top:5px;}.codeTip .code_warp .codeT tr td.cols2{ width:115px; text-align:left; vertical-align:top; }.codeTip .code_warp .codeT tr td.cols3{ width:150px; text-align:left; vertical-align:top; }.codeTip .code_warp .codeT tr td.cols1 b{ color:#478224; margin-right:8px;}.codeTip .code_warp .codeT tr td.cols2 .bordersty2{ width:103px; height:35px; border:1px solid #EBEBEB; padding:0px 0px 0px 5px; }.codeTip .code_warp .codeT tr td.cols2 .bordersty2_wrong{ border:1px solid #ff4646;}.codeTip .code_warp .codeT tr td.cols3 img{ border:1px solid #efefef;}.inputForm{ position:relative; width:110px;}.code_right {display:none;position: absolute;top: 1px;right:2px;width: 25px;height:35px;background: #FFF url(../images/regist2.png) no-repeat 0 -35px;}.code_wrong {display:none;position: absolute;top: 1px;right:2px;width: 25px;height: 35px;background: #FFF url(../images/regist2.png) no-repeat 0 -87px;}.codeTip .code_warp .codeT tr td p{  color:#F00; display:block; text-align:left; font-size:12px;}.codeTip .code_warp .codeT tr td p#login_error{  color:#F00; display:block;}.codeTip .footer{ width:350px; height:49px; background:#E3ECDB; border-top:1px dashed #598D2B; text-align:center; display:block;}.codeTip .footer .confirmNotice{ background:url(../images/confirmNotice.jpg) no-repeat; width:86px; height:31px; margin-top:10px;}

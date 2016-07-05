@@ -1,0 +1,125 @@
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading">当前轮播图</div>
+        <div class="panel-body">
+            <form method="post" action="<{:U('carousel/update')}>" class="form-horizontal">
+                <div id="mean">
+                    <volist name="list" id="vo">
+                        <div class="form-group col-sm-6">
+                            <div class="input-group">
+                                <div class="input-group-addon">图片名</div>
+                                <input type="text" name="pics[]" class="form-control" value="<{$vo.pic}>" placeholder="填写下面图片名">
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <div class="input-group">
+                                <div class="input-group-addon">地址</div>
+                                <input type="text" name="urls[]" class="form-control" value="<{$vo.url}>"  placeholder="http://">
+                            </div>
+                        </div>
+                    </volist>
+                    <div class="form-group col-sm-6">
+                        <div class="input-group">
+                            <div class="input-group-addon">图片名</div>
+                            <input type="text" name="pics[]" class="form-control"  placeholder="填写下面图片名">
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <div class="input-group">
+                            <div class="input-group-addon">地址</div>
+                            <input type="text" name="urls[]" class="form-control"  placeholder="http://">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2 col-sm-offset-4">
+                    <button class="btn btn-primary" type="button" id="addGroup">添加一组</button>
+                </div>
+                <div class="col-sm-2 col-sm-offset-4">
+                    <button class="btn btn-info" type="submit" name="submit">更新</button>
+                </div>
+            </form>
+        </div>
+        <div class="panel-footer">
+            <form method="post" id="upload" class="form-inline" enctype="multipart/form-data" action="<{:U('carousel/upload')}>">
+                <input class="form-control" type="file" name="file" placeholder="选择图片" />
+                <button class="btn btn-danger" type="submit">上传</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading">所有图片</div>
+        <div class="panel-body">
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>图片名字</th>
+                    <th>宽*高</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody id="pics">
+                <volist name="pics" id="vo">
+                    <tr data-pic="<{$vo.path}>">
+                        <td><{$vo.path}></td>
+                        <td><{$vo.width}>*<{$vo.height}></td>
+                        <td>
+                            <a href="#" class="view" data-pic="<{$vo.path}>">查看</a>
+                            <a href="#" class="del" data-pic="<{$vo.path}>">删除</a>
+                        </td>
+                    </tr>
+                </volist>
+                </tbody>
+            </table>
+        </div>
+        <div class="panel-footer">
+            <img id="viewPic" title="" alt="" src="" />
+        </div>
+    </div>
+</div>
+<style>
+    #viewPic{
+        width: 100%;
+        max-height: 300px;
+        cursor: pointer;
+    }
+</style>
+<script>
+    var img = $('#viewPic');
+    var pics = $('#pics');
+    $(window).ready(function(){
+        //点击查看一个图片
+        $('.view').click(function(){
+            var path = $(this).attr('data-pic');
+            img.attr('src','__PUBLIC__/carousel/'+path).attr('alt',path).attr('title',path);
+            return false;
+        })
+        //添加一组
+        $('#addGroup').click(function(){
+            var html = '<div class="form-group col-sm-6"> <div class="input-group"> <div class="input-group-addon">图片名</div> <input type="text" name="pics[]" class="form-control"  placeholder="填写下面图片名"> </div> </div> <div class="form-group col-sm-6"> <div class="input-group"> <div class="input-group-addon">地址</div> <input type="text" name="urls[]" class="form-control"  placeholder="http://"> </div> </div>';
+            $('#mean').append(html);
+        })
+        //删除一个图片
+        $('.del').click(function(){
+            if(confirm('确定删除？')){
+                var path = $(this).attr('data-pic');
+                $.ajax({
+                    url:"<{:U('carousel/del')}>",
+                    data:{
+                        path:path
+                    },
+                    success:function(data){
+                        if(data){
+                            $('tr[data-pic="'+data+'"]',pics).remove();
+                        }else{
+                            alert('删除失败，请刷新后重试');
+                        }
+                    }
+                })
+            }
+            return false;
+        })
+    })
+</script>

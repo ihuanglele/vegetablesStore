@@ -1,0 +1,83 @@
+<body>
+<div class="altmsg" name="off"><h4>删除成功</h4></div>
+<div id="a-wrap" style="overflow:hidden">
+    <section id="section" class="section">
+        <header id="header" class="header">
+            <nav class="nav bdb">
+                <div href="" class="note">购物车总共有: <b class="a-color" id="itemSize">0</b>件商品</div>
+                <div class="item nav-delete" id="navDelete" data-state="close">删除</div>
+            </nav>
+        </header>
+        <article id="article" class="article pf">
+            <form id="form" action="<{:U('UserM/cart')}>" method="post">
+                <ul class="card-list" id="card-list">
+                    <volist name="data" id="vo">
+                        <li class="card-item" id="item<{$vo.gid}>">
+                            <div class="product-list list-product bd">
+                                <div class="p-item">
+                                    <div class="item-wrap">
+                                        <a class="p-img"
+                                           href="<{:U('mobile/item')}>?id=<{$vo.gid}>"><img
+                                                src="__ROOT__/upload/<{$vo.img}>" alt=""></a>
+
+                                        <div class="p-cont">
+                                            <div class="ptit">
+                                                <div class="mtit"><{$vo.name}></div>
+                                            </div>
+                                            <div class="pinfo">
+                                                <input name="gid[]" type="hidden" value="<{$vo.gid}>" />
+                                                <div class="price">¥<span class="buy_price"><{$vo.price}></span></div>
+                                                <div class="num num-control num-cart" data-note="菜箱模式下的加减控件">
+                                                    <span class="minus"></span>
+                                                    <input class="nums buyNum" name="num[]" type="tel" value="<{$vo.num}>" readonly="readonly">
+                                                    <span class="plus"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="del-btn" data-id="<{$vo.gid}>"><i>删除</i></div>
+                                </div>
+                            </div>
+                        </li>
+                    </volist>
+                </ul>
+            </form>
+        </article>
+        <footer class="footer fxb">
+            <nav class="nav cart-footer">
+                <div class="note">
+                    <p>
+                        <small>运费 : ¥<font id="favourable"><{:readConf('yunfei')}></font></small>
+                    </p>
+                    <p>总计 : <b class="a-color" id="amountMoney">¥0</b></p>
+                </div>
+                <a href="javascript:;" class="join-pay">去结算</a>
+            </nav>
+        </footer>
+    </section>
+    <script src="__PUBLIC__/js/fx.js"></script>
+    <script src="__PUBLIC__/js/myCart.js"></script>
+
+    <!--<div id="my_mask" style="transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1); display: none;">
+        &lt;!&ndash; 遮罩弹框 &ndash;&gt;
+        &lt;!&ndash;<div class="pop pop-anima">
+              <p id="msg">系统繁忙</p>
+              <hr>
+              <p><span><a href="javascript:;" id="btnLeft"></a></span><span><a href="javascript:;" id="btnRight"></a></span></p>
+         </div>&ndash;&gt;
+        <div id="loading"
+             style="text-align:center;margin-left:auto; margin-right:auto;border:0px solid #5ea626;width:30%;color:red;">
+            <img src="__PUBLIC__/images/loadingPic.gif"><br>
+            <small>正在努力加载...</small>
+        </div>
+    </div>-->
+    <script src="__PUBLIC__/js/mask.js"></script>
+    <script>
+        M.show();
+        $(window).ready(function(){
+            refreshCartInfo();
+        })
+    </script>
+    <div></div>
+</div>
+</body>

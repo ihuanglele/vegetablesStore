@@ -12,11 +12,10 @@
 
  */
 
-
-
 namespace Home\Controller;
+use Think\Controller;
 
-class UserMController extends CommonController
+class UserMController extends Controller
 {
     private $uid = null;
 
@@ -24,7 +23,7 @@ class UserMController extends CommonController
      * 初始化，判断是否登录了
      */
     public function _initialize(){
-        parent::_initialize();
+//        parent::_initialize();
         $this->uid = session('uid');
         if(!$this->uid){
             if(strtolower(ACTION_NAME)!='login'){
@@ -199,6 +198,32 @@ class UserMController extends CommonController
 
     }
 
+
+    //确认订单
+    public function cart(){
+        if(IS_POST){
+            layout(false);
+            $gidArr = I('post.gid');
+            $numArr = I('post.num');
+            $gInfo = M('goods')->where(array('gid'=>array('in',$gidArr)))->getField('gid,name,buy_price as price,status,left_num,img',true);
+            $data = array();
+            foreach($gidArr as $k=>$v){
+                $i['gid'] = $v;
+                $i['num'] = $numArr[$k];
+                $i['name'] = $gInfo[$v]['name'];
+                $i['price'] = $gInfo[$v]['price'];
+                $i['status'] = $gInfo[$v]['status'];
+                $i['left_num'] = $gInfo[$v]['left_num'];
+                $i['img'] = $gInfo[$k]['img'];
+                $data[] = $i;
+            }
+            $this->assign('data',$data);
+            $this->display('cart');
+        }else{
+            $this->redirect('index/index');
+        }
+
+    }
 
     /**
      * 购买商品

@@ -1,0 +1,127 @@
+<body class="g-bg" style="height:100%">
+<div id="a-wrap">
+    <div class="share-mask fav" id="shareMask">
+        <div class="close" id="shareClose"></div>
+    </div>
+    <section id="section" class="section">
+        <header id="header" class="header">
+            <div class="search">
+                <div class="input-wrap">
+                    <form action="" method="post">
+                        <input type="text" name="productName" placeholder="请输入产品名称"/>
+                    </form>
+                </div>
+            </div>
+        </header>
+        <article id="article" class="article" style="padding-bottom:50px">
+            <div id="focus" class="focus index-banner"><!-- 轮播图展示 -->
+                <!--<div class="icon favicons" id="faviconsIcon" data-note="收藏按钮">收藏</div>-->
+                <div class="hd">
+                    <ul></ul>
+                </div>
+                <div class="bd">
+                    <ul>
+                        <volist name="slides" id="vo">
+                            <li>
+                                <a href="<{$vo.url}>">
+                                    <img src="__ROOT__/Public/carousel/<{$vo.pic}>" _src="__ROOT__/Public/carousel/<{$vo.pic}>" onerror="javascript:this.src='__PUBLIC__/images/logo_bg.png'"/>
+                                </a></li>
+                        </volist>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-list" id="floor">
+                <volist name="lists" id="vo">
+                    <div class="card-list">
+                        <div class="card-item">
+                            <div class="list-tit"><{$vo.title}><a href="<{:U('mobile/goodList')}>?type<{$vo.cid}>" class="more">更多</a></div>
+                            <div class="product-list list-index">
+                                <volist name="vo.data" id="v">
+                                    <a class="p-item" href="<{:U('mobile/item')}>?id=<{$v.gid}>">
+                                        <div class="p-img"><img src="__PUBLIC__/images/logo_bg.png" alt="" data-echo="__ROOT__/upload/<{$v.img}>"></div>
+                                        <div class="p-cont">
+                                            <div class="ptit">
+                                                <!--<div class="mtit">多利农庄有机山珍礼盒 </div>-->
+                                                <div class="atit"><{$v.name}></div>
+                                            </div>
+                                            <div class="pinfo">
+                                                <div class="price">￥<{$v.price}><del></del></div>
+                                                <div class="num"></div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </volist>
+                            </div>
+                        </div>
+                    </div>
+                </volist>
+            </div>
+        </article>
+        <footer class="footer fxb">
+
+            <nav class='nav'>
+
+                <a href="/" class="item nav-home on">首页</a>
+
+                <a href="/list.html" class="item nav-classify ">分类</a>
+
+                <a href="#" class="item nav-cart "><i id="cartCount"></i>购物车</a>
+
+                <a href=#" class="item nav-mytony ">我的多利</a>
+
+            </nav>
+
+        </footer>
+
+        <script type="text/javascript">
+            $(window).ready(function(){
+                getCartNum();
+
+            })
+            // 查询购物车商品数量
+           getCartNum = function(){
+               $.ajax({
+                   type:'get',
+                   url:base_path +'/common/getCartNum',
+                   data:null,
+                   success:function(result){
+                       $("#cartCount").html(result);
+                   }
+               });
+           }
+
+        </script>
+
+    </section>
+    <script src="__PUBLIC__/js/fx.js"></script>
+    <script src="__PUBLIC__/js/TouchSlide.1.1.js"></script>
+    <script>
+        //轮播图
+        TouchSlide({
+            slideCell:"#focus",
+            titCell:".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
+            mainCell:".bd ul",
+            interTime:5000,
+            effect:"leftLoop",
+            autoPlay:true,//自动播放
+            autoPage:true, //自动分页
+            switchLoad:"_src", //切换加载，真实图片路径为"_src"
+            pnLoop:true
+        });
+        //收藏提示
+        var $shareMask=$('#shareMask');
+        var openMask =function(){
+            $shareMask.css({'display':'block','opacity':'0'}).animate({'opacity':1},500,'ease')
+        }
+        var closeMask = function(){
+            $shareMask.animate({'opacity':0},500,'ease');
+            setTimeout(function(){
+                $shareMask.css({'display':'none','opacity':'0'})
+            },500)
+        }
+        $('#faviconsIcon').on('click',openMask)
+        $('#shareClose').on('click',closeMask)
+        echo.init({offset: 100,throttle: 250});
+    </script>
+</div>
+</body>

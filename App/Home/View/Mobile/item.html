@@ -1,0 +1,365 @@
+<body>
+<!--<div class="altmsg" name="off"><h4 id="tipMsg">收藏成功</h4></div>-->
+<div id="a-wrap">
+    <section id="section" class="section">
+        <div class="share-mask" id="shareMask">
+            <div class="close" id="shareClose"></div>
+        </div>
+        <article id="article" class="article" style="padding-bottom:50px">
+            <ul class="card-list">
+                <li class="card-item" style="margin-top:0px;border-top:0">
+                    <div id="focus" class="focus"><!-- 轮播图展示 -->
+                        <div class="icon share" id="shareIcon" data-note="分享按钮">分享</div>
+                        <div class="hd">
+                            <ul>
+                                <li class="on">1</li>
+                            </ul>
+                        </div>
+                        <div class="bd">
+                            <div class="tempWrap" style="overflow:hidden; position:relative;">
+                                <ul style="width: 870px; position: relative; overflow: hidden; padding: 0px; margin: 0px; transition-duration: 200ms; transform: translate(0px, 0px) translateZ(0px);">
+                                    <li style="display: table-cell; vertical-align: top; width: 435px;"><a
+                                            href="javascript:;"><img
+                                            src="__ROOT__/upload/<{$info.img}>"></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-pd-price" data-note="详情价格">
+                        <div class="pinfo">
+                            <div class="price"><h1 id="price_show"><{$info.buy_price}></h1></div>
+                            <!-- 如果是产品模式,则打开注释,加减控件去除 -->
+                            <!-- <div class="num" data-state="产品模式下的提示"><h4>已节省¥119.00</h4></div> -->
+                            <div class="num num-control" data-note="菜箱模式下的加减控件">
+                                <span class="minus minus_disabled" id="minus"></span>
+                                <input class="nums" id="buyNum" type="tel" value="1">
+                                <span class="plus" id="plus"></span>
+                            </div>
+                        </div>
+                        <div class="piner">
+                            <div class="ptit">
+                                <div class="mtit"><{$info.name}></div>
+                                <!--<div class="atit">有机精选，健康生活，送礼精品</div>-->
+                            </div>
+                            <div class="pfav off" data-state="off" id="pFavorites"></div>
+                        </div>
+                    </div>
+                </li>
+               <!-- <li class="card-item">
+                    <div class="item-spec" data-note="规格选择">
+                        <div class="item-tit a-txt m">商品规格</div>
+                        <div class="item-block" data-note="模块流" id="itemBlock">
+                            <div class="item-cont on" value="2721">
+                                <i class="cont-box">1盒</i>
+                            </div>
+                        </div>
+                    </div>
+                </li>-->
+                <li class="card-item tabBox" id="tabBox1">
+                    <ul class="item-tab hd" data-note="切换栏目">
+                        <li class="item-cont">商品介绍</li>
+                        <!--<li class="item-cont">商品参数</li>
+                        <li class="item-cont">用户评价</li>-->
+                    </ul>
+                    <div class="bd" id="tabBox1-bd">
+                        <div class="con">
+                            <ul>
+                                <li class="item-img-detail" data-note="商品介绍" style="display:block" id="intro">
+                                    <{$info.detail}>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--<div class="con">
+                            <ul>
+                                <li class="item-block" data-note="商品参数" style="display:block" id="productParam">
+                                    <div class="vege-detail"></div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="con">
+                            <ul>
+                                <li id="item-comment" class="item-comment" data-note="用户评论" style="display:block">
+                                </li>
+                            </ul>
+                        </div>-->
+                    </div>
+                </li>
+            </ul>
+        </article>
+        <footer class="footer fxb">
+            <nav class="nav">
+                <a href="/index" class="item nav-home">首页</a>
+                <a href="javascript:;" class="join-cart">加入购物车</a>
+            </nav>
+        </footer>
+    </section>
+
+    <script src="__PUBLIC__/js/TouchSlide.1.1.js?v=d2c5c750-f1ff-4c97-bcf0-b3cce04363f9"></script>
+    <script src="__PUBLIC__/js/fx.js?v=d2c5c750-f1ff-4c97-bcf0-b3cce04363f9"></script>
+    <script>
+    </script>
+    <script type="text/javascript">
+        // 设置需要加载标志,默认初始为加载
+        var loadComment = false;
+        //轮播图
+        TouchSlide({
+            slideCell: "#focus",
+            titCell: ".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
+            mainCell: ".bd ul",
+            effect: "left",
+            autoPlay: true,//自动播放
+            autoPage: true, //自动分页
+            switchLoad: "_src" //切换加载，真实图片路径为"_src"
+        });
+        /**
+         * 收藏成功提示
+         */
+        function showAddResult(obj) {
+            if ($('.altmsg').attr('name') == 'off') {
+                $('.altmsg').attr('name', 'on').removeClass('altmsg-anima-off').addClass('altmsg-anima');
+                setTimeout(function () {
+                    $('.altmsg').removeClass('altmsg-anima').addClass('altmsg-anima-off').attr('name', 'off');
+                }, 1000);
+            } else {
+                $('.altmsg').attr('name', 'off').removeClass('altmsg-anima');
+            }
+        }
+
+        //收藏按钮，这里需要像后台发送ajax请求，触发处理动作
+        $('#pFavorites').on('click', function () {
+            if ($(this).attr('data-state') == 'off') {
+                var url = "/favorite/addFavorite?ajax=true";
+                doFavorite('2721', url, 'add', $(this));
+            } else { 	// 取消收藏
+                var url = "/favorite/deleteFavoriteByProductId?ajax=true";
+                doFavorite('2721', url, 'delete', $(this));
+            }
+        });
+
+        /**
+         * 指定用户收藏指定商品
+         * productId 商品Id
+         * status 收藏状态
+         */
+        function doFavorite(productId, url, flag, obj) {
+            $.ajax({
+                type: 'post',
+                url: base_path + url,
+                data: {"productId": productId},
+                success: function (result) {
+                    if (result == '1') {
+                        if (flag == 'add') {
+                            obj.attr('data-state', 'on').addClass('on');
+                            $("#tipMsg").text('收藏成功');
+                            showAddResult();
+                        } else {
+                            obj.attr('data-state', 'off').removeClass('on');
+                            $("#tipMsg").text('成功取消收藏');
+                            showAddResult();
+                        }
+                    } else if (result == '0') {
+                        var currentUrl = window.location.href;
+                        window.location.href = base_path + "/user/toLogin?sendUrl=" + currentUrl;
+                    } else {
+                        alert(result);
+                    }
+                }
+            });
+        }
+
+        //规格选择
+        $('#itemBlock .item-cont').on('click', function () {
+            $(this).siblings().removeClass('on')
+            $(this).addClass('on');
+            // 需要action动作
+            //$("#productId").val($(this).attr("value"));
+            // 重新发送请求对应规格商品id的详情页
+            window.location.href = base_path + "/product/toProductDetail?productId=" + $(this).attr("value");
+        });
+
+
+        //购买数量修改
+        var $valText = $('#buyNum');
+        //增加购买数量
+        var plus = function () {
+            val = $valText.val();
+            $valText.val(++val);
+            $('.minus').removeClass('minus_disabled');
+            // 修改显示价格
+            //var finalPrice = (parseFloat('128.00')*$valText.val()).toFixed(2);
+            // $("#price_show").text(finalPrice);
+        }
+        var minus = function () {
+            val = $valText.val();
+            if (val < 2)
+                return;
+            if (val < 3) {
+                $('.minus').addClass('minus_disabled');
+            }
+            $valText.val(--val);
+            // 修改显示价格
+            //var finalPrice = (parseFloat('128.00')*$valText.val()).toFixed(2);
+            //$("#price_show").text(finalPrice);
+        }
+        $('.minus').on('click', minus);
+        $('.plus').on('click', plus);
+
+        // 手动修改商品数量事件
+        $("#buyNum").on('blur', function () {
+            var num = $(this).val();
+            if (isNaN(num) || parseInt(num) <= 1) {
+                $(this).val(1);
+                $('.minus').addClass('minus_disabled');
+            } else {
+                $('.minus').removeClass('minus_disabled');
+            }
+            //var finalPrice = (parseFloat('128.00')*$valText.val()).toFixed(2);
+            //$("#price_show").text(finalPrice);
+        });
+
+        //分享提示
+        var $shareMask = $('#shareMask');
+        var openMask = function () {
+            $shareMask.css({'display': 'block', 'opacity': '0'}).animate({'opacity': 1}, 500, 'ease')
+        }
+        var closeMask = function () {
+            $shareMask.animate({'opacity': 0}, 500, 'ease');
+            setTimeout(function () {
+                $shareMask.css({'display': 'none', 'opacity': '0'})
+            }, 500)
+        }
+        $('#shareIcon').on('click', openMask);
+        $('#shareClose').on('click', closeMask);
+
+        var changeTab = function () {
+            $(this).siblings().removeClass('on')
+            $(this).addClass('on');
+            var num = $(this).parent().children('li').index(this);
+            var con_num = $(this).parents('.tabBox').find('.con').eq(num);
+            var idName = con_num.find("ul li").attr("id");
+            if (num == 1) {
+                var params = "";
+                $("#productParam").find(".vege-detail").html(params);
+            } else if (num == 2 && !loadComment) {
+                obtainUserComments(2721);
+            }
+            con_num.show();
+            con_num.siblings('.con').hide()
+        }
+        /**
+         * 为切换tab绑定点击事件
+         */
+        $(".item-cont").on("click", changeTab);
+
+        /**
+         * 获取指定商品id的用户评论
+         */
+        function obtainUserComments(productId) {
+            $.ajax({
+                type: 'post',
+                url: base_path + '/product/obtainComments?ajax=true',
+                data: {"productId": productId},
+                success: function (data) {
+                    loadComment = true;
+                    var commentStr = "";
+                    if (data != null && data.length > 0) {
+                        $.each(data, function (index, item) {
+                            //var commentStr+="<div class=\"iteam-cont\"><div class=\"us-hd\"><div class=\"us-score start-4\"></div><div class=\"us-name\">"+item.memberId+"</div></div><div class=\"us-comm\">"+item.commentContent+"</div><div class=\"us-time\">"+item.commentTime+"</div></div>";
+                            commentStr += '';
+                        });
+                    } else {
+
+                        commentStr += "<div class=\"iteam-cont\"><div class=\"us-hd\"><div class=\"us-score\"></div><div class=\"us-name\"></div></div><div class=\"us-comm\" style=\"text-align: center;\">本商品暂时没有评论</div><div class=\"us-time\"></div></div>";
+                    }
+                    $("#item-comment").append(commentStr);
+                }
+            });
+        }
+
+        // 指定加入购物车操作
+        var addIntoCart = function () {
+            var productId = '<{$info.gid}>';
+            var productNum = $("#buyNum").val();
+            $.ajax({
+                type: 'get',
+                url: base_path + '/common/addCart',
+                data: {"id": productId, "num": productNum},
+                success: function (result) {
+                    if (result.info) {
+                        window.location.href = base_path + "/Mobile/cart/";
+                    } else {
+                        // 添加购物车失败
+                        alert("添加购物车失败");
+                    }
+                }
+            });
+            event.preventDefault();//阻止a标签href事件
+        }
+        // 为立即订购按钮绑定事件，判断用户是否已登录
+        $('.join-cart').on('click', addIntoCart);
+    </script>
+    <script>
+        var imgUrl = "http://www.tonysfarm.com/upload/1461204241182.jpg";
+        var lineLink = "http://m.tonysfarm.com/product/toProductDetail?productId=2721";
+        var descContent = '有机精选，健康生活，送礼精品';
+        var shareTitle = '多利农庄有机山珍礼盒';
+        var appid = '';
+
+        (function () {
+            var onBridgeReady = function () {
+                //发送到朋友圈
+                WeixinJSBridge.on('menu:share:timeline', function (argv) {
+                    WeixinJSBridge.invoke('shareTimeline', {
+                        "img_url": imgUrl,
+                        "img_width": "120",
+                        "img_height": "120",
+                        "link": lineLink,
+                        "desc": descContent,
+                        "title": shareTitle
+                    }, function (res) {
+                        (dataForWeixin.callback)();
+                    });
+                });
+                // 发送给某一具体朋友
+                WeixinJSBridge.on('menu:share:appmessage', function (argv) {
+                    WeixinJSBridge.invoke('sendAppMessage', {
+                        "appid": appid,
+                        "img_url": imgUrl,
+                        "img_width": "120",
+                        "img_height": "120",
+                        "link": lineLink,
+                        "desc": descContent,
+                        "title": shareTitle
+                    }, function (res) {
+                        (dataForWeixin.callback)();
+                    });
+                });
+            };
+            if (document.addEventListener) {
+                document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+            } else if (document.attachEvent) {
+                document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+                document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+            }
+        })();
+    </script>
+    
+    <div id="my_mask" style="transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1); display: none;">
+        <!-- 遮罩弹框 -->
+        <!--<div class="pop pop-anima">
+              <p id="msg">系统繁忙</p>
+              <hr>
+              <p><span><a href="javascript:;" id="btnLeft"></a></span><span><a href="javascript:;" id="btnRight"></a></span></p>
+         </div>-->
+        <!--<div id="loading"
+             style="text-align:center;margin-left:auto; margin-right:auto;border:0px solid #5ea626;width:30%;color:red;">
+            <img src="__PUBLIC__/images/loadingPic.gif"><br>
+            <small>正在努力加载...</small>
+        </div>-->
+    </div>
+    <script src="__PUBLIC__/js/mask.js"></script>
+    <script>M.show();</script>
+    <div></div>
+   
+</div>
+</body>

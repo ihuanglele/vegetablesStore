@@ -7,10 +7,12 @@
  */
 namespace Admin\Controller;
 class CarouselController extends CommonController{
+
     public function _initialize(){
         parent::_initialize();
         $this->checkRole(1);
     }
+
     public function index(){
         $this->carousel();
     }
@@ -38,6 +40,7 @@ class CarouselController extends CommonController{
         $this->assign('list',$mean);
         $this->display('carousel');
     }
+
     public function del(){
         $path = THINK_PATH.'../Public/carousel/'.I('get.path');
         if(unlink($path)){
@@ -62,6 +65,7 @@ class CarouselController extends CommonController{
             $this->error('上传失败');
         }
     }
+
     /**
      * 更新轮播图菜单
      */
@@ -80,6 +84,7 @@ class CarouselController extends CommonController{
         $this->carousel();
         die;
     }
+
     /**
      * 获取一个路径下面所有文件列表
      * @param $dir 路径
@@ -104,4 +109,51 @@ class CarouselController extends CommonController{
         }
         return $fileArray;
     }
+
+    /**
+     * 手机版首页轮播图
+     */
+    public function carouselM(){
+        $path = THINK_PATH.'../Public/carousel/';
+        $pics = $this->getFile($path);
+        $image = new \Think\Image();
+        $picsInfo = array();
+        if(!empty($pics)) {
+            foreach ($pics as $pic) {
+                if(preg_match('/\.[jpg]|[gif][jpeg]|[png]$/i',$pic)) {
+                    $temp['path'] = $pic;
+                    $image->open(THINK_PATH.'../Public/carousel/' . $pic);
+                    $temp['height'] = $image->height();
+                    $temp['width'] = $image->width();
+                    $picsInfo[] = $temp;
+                }
+            }
+        }
+        $this->assign('pics',$picsInfo);
+        $mean = json_decode(readConf('carouselMJson'),true);
+        $this->assign('list',$mean);
+        $this->display('carouselM');
+    }
+
+
+    /**
+     * 更新轮播图菜单
+     */
+    public function updateM(){
+        $pics = $_POST['pics'];
+        $urls = $_POST['urls'];
+        $data = array();
+        foreach($urls as $k=>$v){
+            if($v){
+                $t['url'] = $v;
+                $t['pic'] = $pics[$k];
+                $data[] = $t;
+            }
+        }
+        writeConf('carouselMJson',json_encode($data,true));
+        $this->carouselM();
+        die;
+    }
+
+
 }

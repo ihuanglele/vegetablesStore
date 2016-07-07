@@ -1,0 +1,64 @@
+<body class="g-bg" style="height:100%">
+<div id="a-wrap" style="height:100%">
+
+    <section id="section" class="section" style="position: relative;height: 100%;min-height:470px">
+        <article id="article" class="article">
+            <div class="login-regist">
+                <div class="lr-header"></div>
+                <div class="lr-logo"></div>
+                <div class="dialog" style="display: none;">
+                    <div class="box tc" id="dialog_box_tc"></div>
+                </div>
+                <div class="form-list p">
+                    <input type="hidden" id="pagefrom" name="pagefrom" value="">
+                    <input type="hidden" id="openId" name="openId" value="">
+                    <ul>
+                        <li class="fl-item">
+                            <b class="name">
+                                <input type="text" class="input-style" id="phone" placeholder="手机号"></b></li>
+                        <li class="fl-item">
+                            <b class="name">
+                                <input type="password" id="password" class="input-style" placeholder="请输入密码"></b></li>
+                    </ul>
+                </div>
+                <a href="javascript:;" id="btnLogin" class="login">微信=>登录</a>
+            </div>
+        </article>
+        <footer class="" style="position:absolute;bottom:0px;width: 100%;">
+            <div class="nav tc a-txt">
+                <a href="<{:U('mobile/bindReg')}>" class="a-txt">注册新账户</a>
+                <br>
+                <br>
+            </div>
+        </footer>
+    </section>
+</div>
+<script>
+    $(window).ready(function(){
+        $('#btnLogin').click(function(){
+            var phone = $('#phone').val();
+            var pwd = $('#password').val();
+            if(phone && pwd){
+                $.ajax({
+                    'url':"<{:U('common/loginPost')}>",
+                    'type':'post',
+                    'data':{
+                        phone:phone,
+                        password:pwd,
+                        'openid':'<{$openid}>'
+                    },
+                    'success':function(res){
+                        if(res.status){
+                            window.location.href = "<{:U('userM/index')}>";
+                        }else{
+                            alert(res.info);
+                        }
+                    }
+                })
+            }else{
+                alert('填写注册信息');
+            }
+        })
+    })
+</script>
+</body>

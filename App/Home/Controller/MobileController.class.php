@@ -70,4 +70,72 @@ class MobileController extends Controller{
         $this->display('cart');
     }
 
+    //登录页面
+    public function login(){
+        $this->display('login');
+    }
+
+    //注册页面
+    public function reg(){
+        $this->display('reg');
+    }
+
+    //微信登录
+    public function wxlogin(){
+        $tools = new \Org\Wxpay\UserApi();
+        $openId = $tools->GetOpenid();
+        $wxInfo = $tools->getInfo();
+        if(!$wxInfo || isset($wxInfo['errcode'])){
+            $this->error('微信授权出错',U('index/index'));
+        }
+        $info = getWxUserInfo($openId);
+        if(!$info || isset($info['errcode'])){
+            var_dump($info);die;
+            $this->error('登录出了点状况',U('index/index'));
+        }
+
+        //判断之前是否存储过用户资料
+        $M = M('user');
+        $data = array_merge($info,$wxInfo);
+        session('openid',$openId);
+        if(isset($data['headimgurl'])){
+            $data['headimgurl'] = trim($data['headimgurl'],'0').'64';
+        }
+
+        $uInfo = $M->where(array('openid'=>$openId))->field('uid')->find();
+        $uid = $uInfo['uid'];
+
+        if($uid){
+            session('uid',$uid);
+            $this->redirect('UserM/index');
+        }else{
+            //第一次登录 提示用户登录或者绑定
+            session('openid',$openId);
+            session('nickname',$data['nickname']);
+            session('headimgurl',$data['headimgurl']);
+            $this->assign('openid',$openId);
+            $this->display('bindReg');
+        }
+    }
+
+    //微信绑定注册
+    public function bindReg(){
+        $openid = session('openid');
+        if($openid) {
+            $this->assign('openid', $openid);
+            $this->display('bindReg');
+        }else{
+            $this->reg();die;
+        }
+    }
+    //微信绑定登录
+    public function bindLogin(){
+        $openid = session('openid');
+        if($openid) {
+            $this->assign('openid', $openid);
+            $this->display('bindLogin');
+        }else{
+            $this->login();die;
+        }
+    }
 }

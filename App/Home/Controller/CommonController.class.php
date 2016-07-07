@@ -52,9 +52,26 @@ class CommonController extends Controller{
             $map['password'] = md5($password);
             $info = M('user')->where($map)->field('uid,nickname')->find();
             if($info){
-                session('uid',$info['uid']);
-                session('nickname',$info['nickname']);
-                $this->success('登录成功',U('user/index'));
+                $openid = session('openid');
+                if($openid){
+                    $data['uid'] = $info['uid'];
+                    $data['nickname'] = session('nickname');
+                    $data['headimgurl'] = session('headimgurl');
+                    $data['openid'] = session('openid');
+                    session('nickname',null);
+                    session('headimgurl',null);
+                    if(M('user')->save($data)){
+                        session('uid', $info['uid']);
+                        session('nickname', $data['nickname']);
+                        $this->success('登录成功', U('user/index'));
+                    }else{
+                        $this->error('绑定失败');
+                    }
+                }else {
+                    session('uid', $info['uid']);
+                    session('nickname', $info['nickname']);
+                    $this->success('登录成功', U('user/index'));
+                }
             }else{
                 $this->error('用户名或者密码不存在');
             }
@@ -66,14 +83,25 @@ class CommonController extends Controller{
         if(IS_AJAX){
             $phone = I('post.phone');
             $password = I('post.password');
+            $openid = I('post.openid');
             $map['phone'] = $phone;
             if(M('user')->where($map)->find()){
                 $this->error('该手机号已经注册');
             }else{
-                $data['nickname'] = '匿名';
+                if($openid){
+                    $data['nickname'] = session('nickname');
+                    $data['headimgurl'] = session('headimgurl');
+                    $data['openid'] = session('openid');
+                    session('nickname',null);
+                    session('headimgurl',null);
+                }else{
+                    $data['nickname'] = '匿名';
+                    $data['openid'] = $openid;
+                    $data['headimgurl'] = '';
+                }
                 $data['phone'] = $phone;
                 $data['password'] = md5($password);
-                $data['openid'] = $data['status'] = '';
+                $data['status'] = '';
                 $data['coin'] = $data['money'] = $data['use_money'] = $data['invite_uid'] = 0;
                 $uid = M('user')->add($data);
                 if($uid){

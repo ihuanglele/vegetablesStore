@@ -29,7 +29,7 @@ class UserMController extends Controller
             if(strtolower(ACTION_NAME)!='login'){
                 session('jump',$_SERVER['REQUEST_URI']);
             }
-            $this->redict('common/login');die;
+            $this->redirect('UserM/login');die;
         }
     }
 
@@ -41,103 +41,6 @@ class UserMController extends Controller
         $goods = $Tool->getGoods(array('status'=>2),4,'sold_num desc');
         $this->assign('goods',$goods);
         $this->display('index');
-    }
-
-
-    /**
-
-     * 微信登录
-
-     */
-
-    public function login(){
-
-        $this->checkJump();
-
-        $tools = new \Org\Wxpay\UserApi();
-
-        $openId = $tools->GetOpenid();
-
-        $wxInfo = $tools->getInfo();
-
-        if(!$wxInfo || isset($wxInfo['errcode'])){
-
-            $this->error('微信授权出错',U('index/index'));
-
-        }
-
-        $info = getWxUserInfo($openId);
-
-        if(!$info || isset($info['errcode'])){
-
-            var_dump($info);die;
-
-            $this->error('登录出了点状况',U('index/index'));
-
-        }
-
-
-
-        //判断之前是否存储过用户资料
-
-        $M = M('user');
-
-        $data = array_merge($info,$wxInfo);
-
-
-
-        session('openid',$openId);
-
-
-
-        if(isset($data['headimgurl'])){
-
-            $data['headimgurl'] = trim($data['headimgurl'],'0').'64';
-
-        }
-
-        $uInfo = $M->where(array('openid'=>$openId))->field('uid,agent')->find();
-
-        $uid = $uInfo['uid'];
-
-        $jump = session('jump');
-
-        if(!$jump){
-
-            $jump = U('user/index');
-
-        }
-
-        session('jump',null);
-
-        if($uid){
-
-            session('uid',$uid);
-
-            session('agent',$uInfo['agent']);
-
-            header("Location:$jump");
-
-        }else{
-
-            //第一次登录 添加到用户表里面
-
-            $data['money'] = $data['vip'] = $data['leader'] = $data['agent'] = $data['up1'] = $data['up2'] = 0;
-
-            $r = $M->add($data);
-
-            if($r){
-
-                session('uid',$r);
-
-                session('agent',0);
-
-                header("Location:$jump");
-
-            }
-
-        }
-
     }
 
 

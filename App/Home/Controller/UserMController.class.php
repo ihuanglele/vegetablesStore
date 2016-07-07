@@ -1,15 +1,10 @@
 <?php
 /**
  * Created by PhpStorm.
-
  * author: huanglele
-
  * Date: 2016/6/16
-
  * Time: 17:10
-
  * Description:
-
  */
 
 namespace Home\Controller;
@@ -26,11 +21,11 @@ class UserMController extends Controller
 //        parent::_initialize();
         $this->uid = session('uid');
         if(!$this->uid){
-            if(strtolower(ACTION_NAME)!='login'){
-                session('jump',$_SERVER['REQUEST_URI']);
-            }
-            $this->redirect('UserM/login');die;
+            $this->redirect('mobile/login');die;
+        }else{
+            C('LAYOUT_NAME','Public/mLayout');
         }
+
     }
 
     public function index(){
@@ -44,49 +39,73 @@ class UserMController extends Controller
     }
 
 
-
-    public function checkJump(){
-
-        $referer = $_SERVER['HTTP_REFERER'];
-
-        $host = $_SERVER['HTTP_HOST'];
-
-        $patten = "/^http:\/\/$host(\/index.php)?(.*)$/i";
-
-        if(preg_match($patten,$referer,$arr)){
-
-            $uri = $arr[2];
-
-            if(!preg_match("/user\/login/i",$uri)){
-
-                session('jump',$referer);
-
+    //添加收货地址
+    public function addaddress(){
+        if(isset($_POST['action'])){
+            $id = I('post.id',0,'number_int');
+            $action = I('post.action');
+            if($action=='update' && !$id){
+                $action = 'add';
             }
-
+            $data['name'] = I('post.receiverName');
+            $data['phone'] = I('post.receiverMobile');
+            $data['address'] = I('post.address');
+            $code = array('province'=>I('post.province'),'city'=>I('post.city'),'district'=>I('post.district'),'deliveryAddress'=>I('post.deliveryAddress'));
+            $data['code'] = json_encode($code);
+            $data['uid'] = $this->uid;
+            $isDefault = I('post.isDefault');
+            $isDefault = ($isDefault=='Y') ? 1:0;
+            $data['default'] = $isDefault;
+            $M = M('address');
+            if($action=='update'){
+                $data['id'] = $id;
+                if($M->save($data)){
+                    if($isDefault){
+                        $this->setDefaultAddress($id);
+                    }
+                    $this->success('修改成功');
+                }else{
+                    $this->error('修改失败');
+                }
+            }else{
+                $id = $M->add($data);
+                if($id){
+                    if($isDefault){
+                        $this->setDefaultAddress($id);
+                    }
+                    $this->success('添加成功');
+                }else{
+                    $this->error('添加失败');
+                }
+            }
+        }else{
+            $ac = I('ac');
+            if(!$ac){
+                $ac = U('user/index');
+            }
+            $this->assign('ac',$ac);
+            $this->display('addaddress');
         }
-
     }
 
-
+    //设置默认地址
+    private function setDefaultAddress($id){
+        $map['uid'] = $this->uid;
+        $map['id'] = array('neq',$id);
+        M('address')->where($map)->setField('default',0);
+    }
 
     /**
      * 我的订单
      */
 
     public function order(){
-
         $map['uid'] = session('uid');
-
         $list = $this->getData('order',$map,'oid desc');
-
         $gids[] = 0;
-
         if(count($list)){
-
             foreach($list as $v){
-
                 $gids[] = $v['gid'];
-
             }
 
             $gInfo = M('goods')->where(array('gid'=>array('in',$gids)))->getField('gid,name,img');

@@ -39,8 +39,16 @@ class UserMController extends Controller
     }
 
 
+    //我的收货地址
+    public function myAddress(){
+        $Tool = A('Tool');
+        $map['uid'] = $this->uid;
+        $Tool->getList('address',$map,'id desc');
+        $this->display('myAddress');
+    }
+
     //添加收货地址
-    public function addaddress(){
+    public function addAddress(){
         if(isset($_POST['action'])){
             $id = I('post.id',0,'number_int');
             $action = I('post.action');
@@ -98,7 +106,6 @@ class UserMController extends Controller
     /**
      * 我的订单
      */
-
     public function order(){
         $map['uid'] = session('uid');
         $list = $this->getData('order',$map,'oid desc');
@@ -124,25 +131,40 @@ class UserMController extends Controller
     //确认订单
     public function cart(){
         if(IS_POST){
-            layout(false);
+//            layout(false);
             $gidArr = I('post.gid');
             $numArr = I('post.num');
             $gInfo = M('goods')->where(array('gid'=>array('in',$gidArr)))->getField('gid,name,buy_price as price,status,left_num,img',true);
             $data = array();
+            $goodAmount = 0;
+            $cart = array();
             foreach($gidArr as $k=>$v){
-                $i['gid'] = $v;
-                $i['num'] = $numArr[$k];
-                $i['name'] = $gInfo[$v]['name'];
-                $i['price'] = $gInfo[$v]['price'];
-                $i['status'] = $gInfo[$v]['status'];
-                $i['left_num'] = $gInfo[$v]['left_num'];
-                $i['img'] = $gInfo[$k]['img'];
-                $data[] = $i;
+                if(array_key_exists($v,$gInfo)){
+                    $cart[$k] = $v;
+                    $i['gid'] = $v;
+                    $i['num'] = $numArr[$k];
+                    $i['name'] = $gInfo[$v]['name'];
+                    $i['price'] = $gInfo[$v]['price'];
+                    $i['status'] = $gInfo[$v]['status'];
+                    $i['left_num'] = $gInfo[$v]['left_num'];
+                    $i['img'] = $gInfo[$v]['img'];
+                    $data[] = $i;
+                    $goodAmount += $i['num']*$i['price'];
+                }
             }
+            session('cart',$cart);  //更新购物车
+            $this->assign('amount',$goodAmount);//商品价格
+            $this->assign('yunfei',readConf('yunfei'));//商品价格
             $this->assign('data',$data);
+//            var_dump($gInfo,$data);die;
+
+            //查询收货地址
+            $address = M('address')->where(array('uid'=>$this->uid))->field('id,address,phone,name')->order('`default` desc')->select();
+            $this->assign('address',$address);
+
             $this->display('cart');
         }else{
-            $this->redirect('index/index');
+            $this->redirect('mobile/index');
         }
 
     }
@@ -151,86 +173,18 @@ class UserMController extends Controller
      * 购买商品
      */
     public function buy(){
-
-        $gid = I('post.gid');
-
-        $uid = session('uid');
-
-        $gInfo = M('goods')->field('gid,price,self,up1,up2,leader,status')->find($gid);
-
-        if($gInfo && $gInfo['status']==1) {
-
-            $data = $_POST;
-
-            //查询账户里面的钱够不够
-
-            $uInfo = M('user')->where(array('uid'=>$uid))->field('up1,up2,leader,agent,money,openid')->find();
-
-            $data['uid'] = $uid;
-
-            $data['time'] = time();
-
-            $data['money'] = $gInfo['price'];
-
-
-
-            //判断支付方式
-
-            $type = I('post.type');
-
-            if($type=='money'){     //余额支付
-
-                if($uInfo['money']<$gInfo['price']){$this->error('账户余额不足',U('user/pay'));die;}
-
-                //扣钱 添加订单记录  发送红包
-
-                $da1['uid'] = $uid;
-
-                $da1['money'] = $uInfo['money']-$gInfo['price'];
-
-                if($da1['vip']<$gInfo['price']) $da1['vip'] = $gInfo['price'];
-
-                M('user')->save($da1);
-
-                $data['status'] = 2;
-
-                $oid = M('order')->add($data);      //添加订单记录
-
-                onBuyEvent($oid);   //发送红包
-
-                sendOrderTempMsg($oid);
-
-                $this->success('购买成功',U('user/index'));
-
-            }else{      //微信支付
-
-                $data['uid'] = $uid;
-
-                $data['body'] = '充值';
-
-                $data['attach'] = '充值';
-
-                $data['money'] = $gInfo['price'];
-
-                $data['status'] = 1;
-
-                $oid = M('order')->add($data);
-
-                $data['oid'] = $oid;
-
-                $this->sendPayData($data);
-
-            }
-
+        $Tool = A('Tool');
+        $order = $Tool->addOrder();
+        if($order){
+            var_dump($order);
         }else{
-
-            $this->error('商品不存在');
-
+            var_dump($order);
         }
-
     }
 
-
+    public function test(){
+        echo createTrade();
+    }
 
     /**
 

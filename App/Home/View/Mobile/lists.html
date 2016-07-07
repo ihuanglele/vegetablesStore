@@ -1,0 +1,33 @@
+<body>
+
+<section id="section" class="section">
+    <article id="article" class="article" style="padding-bottom:50px">
+        <ul class="card-list">
+            <li class="list-tit">所有分类</li>
+            <li class="card-item">
+                <div class="product-list list-row">
+                    <volist name="goodsType" id="v">
+                        <div class="p-itemrow">
+                            <a class="p-item classify-item" href="<{:U('mobile/goodsList')}>?type=<{$key}>">
+                                <div class="p-img">
+                                    <img src="__PUBLIC__/images/logo_bg.png"
+                                         onerror="javascript:this.src='__PUBLIC__/images/logo_bg.png'">
+                                </div>
+                                <div class="p-cont">
+                                    <div class="ptit">
+                                        <ul>
+                                            <li class="mtit"><{$v}></li>
+                                            <li class="atit"></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </volist>
+                </div>
+            </li>
+        </ul>
+    </article>
+    <include file="Public/mFooter" on="2" />
+</section>
+</body>

@@ -161,4 +161,9 @@ class CommonController extends Controller{
         echo ($count);
     }
 
+    public function logout(){
+        session('uid',null);
+        $this->success('安全退出');
+    }
+
 }

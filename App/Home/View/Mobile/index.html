@@ -34,7 +34,7 @@
                 <volist name="lists" id="vo">
                     <div class="card-list">
                         <div class="card-item">
-                            <div class="list-tit"><{$vo.title}><a href="<{:U('mobile/goodList')}>?type<{$vo.cid}>" class="more">更多</a></div>
+                            <div class="list-tit"><{$vo.title}><a href="<{:U('mobile/goodsList')}>?type=<{$vo.type}>" class="more">更多</a></div>
                             <div class="product-list list-index">
                                 <volist name="vo.data" id="v">
                                     <a class="p-item" href="<{:U('mobile/item')}>?id=<{$v.gid}>">
@@ -57,40 +57,7 @@
                 </volist>
             </div>
         </article>
-        <footer class="footer fxb">
-
-            <nav class='nav'>
-
-                <a href="<{:U('mobile/index')}>" class="item nav-home on">首页</a>
-
-                <a href="<{:U('mobile/list')}>" class="item nav-classify ">分类</a>
-
-                <a href="<{:U('mobile/cart')}>" class="item nav-cart "><i id="cartCount"></i>购物车</a>
-
-                <a href="<{:U('UserM/index')}>" class="item nav-mytony ">我的多利</a>
-
-            </nav>
-
-        </footer>
-
-        <script type="text/javascript">
-            $(window).ready(function(){
-                getCartNum();
-
-            })
-            // 查询购物车商品数量
-           getCartNum = function(){
-               $.ajax({
-                   type:'get',
-                   url:base_path +'/common/getCartNum',
-                   data:null,
-                   success:function(result){
-                       $("#cartCount").html(result);
-                   }
-               });
-           }
-
-        </script>
+        <include file="Public/mFooter" on="1" />
 
     </section>
     <script src="__PUBLIC__/js/fx.js"></script>

@@ -1,0 +1,35 @@
+<body class="g-bg" style="height:100%">
+    <div id="a-wrap" style="overflow:hidden">
+        <div class="altmsg" name="off"><h4>删除成功</h4></div>
+        <section id="section" class="section">
+            <header id="header" class="header">
+                <nav class="nav bdb">
+                    <div class="item"></div>
+                    <div class="item nbd"></div>
+                    <div class="item nbd"></div>
+                    <a href="<{:U('UserM/addAddress')}>" class="item nav-new">新增</a>
+                </nav>
+            </header>
+            <article id="article" class="article pf">
+                <ul class="card-list">
+                    <volist name="list" id="vo">
+                        <li class="card-item" id="<{$vo.id}>">
+                            <div class="item-wrap">
+                                <a href="javascript:;" class="item-cont address nbd">
+                                    <b class="name"><{$vo.name}></b>
+                                    <b class="small"><{$vo.phone}></b>
+                                    <i class="break"><{$vo.address}> </i>
+                                </a>
+                                <a href="<{:U('editAddress')}>?id=<{$vo.id}>" class="edit"></a>
+                            </div>
+                            <div class="del-btn" value="<{$vo.id}>"><i>删除</i></div>
+                        </li>
+                    </volist>
+                </ul>
+            </article>
+            <include file="Public/mFooter" on="4" />
+        </section>
+    </div>
+    <script src="__PUBLIC__/js/fx.js"></script>
+    <script src="__PUBLIC__/js/myAddress.js"></script>
+</body>

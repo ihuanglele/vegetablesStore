@@ -1,0 +1,117 @@
+<body class="g-bg">
+<div id="a-wrap" style="height:100%">
+
+    <section id="section" class="section">
+        <article id="article" class="article pf">
+            <form action="<{:U('UserM/buy')}>" method="post">
+                <ul class="card-list">
+                    <!--收货地址-->
+                    <li class="card-item">
+                        <div class="item-cont jump">
+                            <b class="name">收货地址</b>
+                            <b class="data">
+                                <a href="<{:U('UserM/addAddress',array('ac'=>urlencode(U('mobile/cart'))))}>">管理</a>
+                            </b>
+                        </div>
+                        <div class="item-cont select-mode">
+                            <b class="name" id="seName"></b>
+                            <div class="data data-input">
+                                <div class="select-value">请选择</div>
+                                <select class="data select-area" name="address">
+                                    <volist name="address" id="vo">
+                                        <option data-name="<{$vo.name}>" data-phone="<{$vo.phone}>" data-address="<{$vo.address}>"  value="<{$vo.id}>"><{$vo.address}>-<{$vo.name}>-<{$vo.phone}></option>
+                                    </volist>
+                                </select>
+                            </div>
+                            <b class="small" id="sePhone"></b>
+                            <b class="break" id="seAddress"></b>
+                        </div>
+                    </li>
+                    <!--付款方式-->
+                    <li class="card-item">
+                        <div class="item-cont select-mode">
+                            <b class="name">支付方式</b>
+                            <div class="data data-input">
+                                <div class="select-value">微信支付</div>
+                                <select class="data select-area" name="pay">
+                                    <option value="wx">微信支付</option>
+                                </select>
+                            </div>
+                        </div>
+                    </li>
+                    <!--商品清单-->
+                    <li class="card-item">
+                        <div class="item-cont mn pn">
+                            <b class="name order-prolist">商品清单</b>
+                            <div class="product-list list-product bd break">
+                                <ul class="card-list" id="card-list">
+                                </ul>
+                                <volist name="data" id="vo">
+                                    <a class="p-item" href="javascript:;">
+                                        <div class="p-img">
+                                            <img src="__ROOT__/upload/<{$vo.img}>" alt=""></div>
+                                        <div class="p-cont">
+                                            <div class="ptit">
+                                                <div class="mtit"><{$vo.name}></div>
+                                            </div>
+                                            <div class="pinfo">
+                                                <input type="hidden" name="gid[]" value="<{$vo.gid}>">
+                                                <input type="hidden" name="num[]" value="<{$vo.num}>">
+                                                <div class="price">¥<{$vo.price}></div>
+                                                <div class="num num-count" data-note="数量计数">
+                                                    x <i><{$vo.num}></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </volist>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="card-item">
+                        <div class="item-cont">
+                            <b class="name">商品金额</b>
+                            <i class="data a-color" id="productSum" value="128.00">¥<{$amount}></i>
+                        </div>
+
+                        <div class="item-cont">
+                            <b class="name">运费</b>
+                            <i class="data a-color" id="deliveryFee" value="0.00">¥<{:$yunfei}></i>
+                        </div>
+                    </li>
+
+                </ul>
+            </form>
+        </article>
+        <footer class="footer fxb">
+            <nav class="nav">
+                <div class="note">总计: <b class="a-color" id="amountPayable" value="128.00">¥<{$amount+$yunfei}></b></div>
+                <a href="javascript:;" id="btnJoinPay" class="join-pay">提交订单</a>
+            </nav>
+        </footer>
+    </section>
+    <script type="text/javascript">
+        $(window).ready(function(){
+            changeAddr();
+            $('select[name="address"]').on('change',changeAddr);
+
+            //提交订单
+            $('#btnJoinPay').click(function(){
+                var addressId = $('select[name="address"]').val();
+                if(isNaN(addressId)){
+                    alert('请设置收货地址');return false;
+                }else {
+                    $('form').submit();
+                }
+            })
+        })
+
+        changeAddr = function(){
+            var op = $('select[name="address"] option:selected');
+            $('#seName').html(op.attr('data-name'))
+            $('#sePhone').html(op.attr('data-phone'))
+            $('#seAddress').html(op.attr('data-address'))
+        }
+    </script>
+</div>
+</body>

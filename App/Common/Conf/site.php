@@ -4,8 +4,8 @@
 return array(
 
     'Wx' => array(
-        'AppID' => 'wxcf843d2e9c7d6623',
-        'AppSecret' => '8cabd200b73c97753b67832d6674e903',
+        'AppID' => 'wxf00aa21907c10b2f',
+        'AppSecret' => '536877a49785e511d4f2dfb830ea0501',
         'Token' => 'Z60z6Z6Q1aavK30K0GVv460t30bnA606',       //微信Token(令牌)
         'EncodingAESKey' => 'HdJJKSjx0kqcheREd1zYqJnSy4OCcRHeKdJyj2hECSH',//微信消息加解密密钥
         'key' => '123456789012345678901234567890rz',

@@ -109,7 +109,7 @@
     </section>
     <script type="text/javascript">
 
-        jumpUrl = "<{$ac}>";
+        jumpUrl = "<{$ac|urldecode}>";
 
         function checkMobile(mobileNo){
             var pattern = /^1\d{10}$/;
@@ -183,11 +183,7 @@
                         data:data,
                         success:function(res){
                             if(res.status){
-                                $("#dialog_box_tc").text(data.info);
-                                $(".dialog").show();
-                                if(res.url){
-                                    window.location.href = jumpUrl;
-                                }
+                                window.location.href = jumpUrl;
                             }else{
                                 $("#dialog_box_tc").text(res.info);
                                 $(".dialog").show();

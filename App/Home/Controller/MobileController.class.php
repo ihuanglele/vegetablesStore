@@ -35,6 +35,42 @@ class MobileController extends Controller{
         $this->display('index');
     }
 
+    //分类页
+    public function lists(){
+        $goodsType = json_decode(readConf('goodsType'),true);
+        $this->assign('goodsType',$goodsType);
+        $this->display('lists');
+    }
+
+    //列表页面
+    public function goodsList(){
+        $type = I('get.type');
+        $this->assign('type',$type);
+        $this->display('goodsList');
+    }
+
+    public function getGoodsList(){
+        $p = I('p',1,'number_int');
+        $sort = I('get.sort');
+        if(!in_array($sort,array('gid','sold_num','buy_price'))){
+            $sort = 'gid';
+        }
+        $type = I('get.type');
+        if($type){
+            $map['cid'] = $type;
+        }
+        $map['status'] = 2;
+        $Tool = A('Tool');
+        $list = $Tool->getList('goods',$map,$sort.' desc','gid,img,name,buy_price as price');
+        $num = count($list);
+        $ret['status'] = 'success';
+        $ret['num'] = $num;
+        $ret['list'] = $list;
+        if($num==16)  $p++;
+        $ret['page'] = $p;
+        $this->ajaxReturn($ret);
+    }
+
     //详情页
     public function item(){
         $gid = I('get.id');
@@ -57,14 +93,16 @@ class MobileController extends Controller{
         $gInfo = M('goods')->where(array('gid'=>array('in',$gidArr)))->getField('gid,name,buy_price as price,status,left_num,img',true);
         $data = array();
         foreach($cart as $k=>$v){
-            $i['gid'] = $k;
-            $i['num'] = $v;
-            $i['name'] = $gInfo[$k]['name'];
-            $i['price'] = $gInfo[$k]['price'];
-            $i['status'] = $gInfo[$k]['status'];
-            $i['left_num'] = $gInfo[$k]['left_num'];
-            $i['img'] = $gInfo[$k]['img'];
-            $data[] = $i;
+            if(array_key_exists($k,$gInfo)){
+                $i['gid'] = $k;
+                $i['num'] = $v;
+                $i['name'] = $gInfo[$k]['name'];
+                $i['price'] = $gInfo[$k]['price'];
+                $i['status'] = $gInfo[$k]['status'];
+                $i['left_num'] = $gInfo[$k]['left_num'];
+                $i['img'] = $gInfo[$k]['img'];
+                $data[] = $i;
+            }
         }
         $this->assign('data',$data);
         $this->display('cart');

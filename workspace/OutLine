@@ -7,7 +7,7 @@ appid  wx3a7c3b2d733010db
 
 //现在用
 wxf00aa21907c10b2f
-
+536877a49785e511d4f2dfb830ea0501
 
 //临时应用
 dingyingezu@sina.com  dingyingezu123
@@ -20,6 +20,6 @@ dingyingezu@sina.com  dingyingezu123
     orders表里面的goods_info字段数据
         json_encode(array(array('gid'=>123,'pay_each_price'=>234,'buy_num'=>2),array('gid'=>124,'pay_each_price'=>2324,'buy_num'=>2)))
     orders表里面的address_info字段数据
-        json_encode(array('tel'=>'18800000000','name'=>'收货人','address'=>'北京市XXXXXX'))
+        json_encode(array('phone'=>'18800000000','name'=>'收货人','address'=>'北京市XXXXXX'))
     orders表里面的express_info字段数据
         json_encode(array('name'=>'申通快递','num'=>'1239797','time'=>time()))

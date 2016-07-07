@@ -1,0 +1,103 @@
+<body>
+<div id="a-wrap">
+    <section id="section" class="section">
+        <article id="article" class="article pf">
+            <div class="card-list">
+                <div class="card-item n-bd" style="margin-top:0px;">
+                    <!-- 内容切换开始 -->
+                    <div class="tabBox" id="tabBox1">
+                        <ul class="item-tab  prolist-tab hd mn g-bg" data-note="切换栏目">
+                            <li class="item-cont on" sort="gid">默认</li>
+                            <li class="item-cont" sort="buy_price">价格</li>
+                            <li class="item-cont" sort="sold_num">销量</li>
+                        </ul>
+                        <div class="product-list list-product bd product-list-border" id="tabBox1-bd">
+                            <ul id="goodList" class="good_list">
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+        <include file="Public/mFooter" on="2" />
+    </section>
+</div>
+<div id="loading" style="text-align:center;margin-left:auto; margin-right:auto;border:0px solid #5ea626;width:30%;color:red;">
+
+</div>
+<script src="__PUBLIC__/js/echo.js"></script>
+<script>
+
+    var page = 1;
+    var hasMore = true;
+    var sort = 'gid';
+    var type = '<{$type}>'
+    var loadGif = '<img src="__PUBLIC__/images/loadingPic.gif">';
+    $(window).ready(function(){
+
+        getGoodsList();
+
+        $(window).scroll(function(){
+            totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());
+            if ($(document).height() <= totalheight){
+                getGoodsList();
+                console.log($(window).height());
+            }
+        })
+
+        $('.item-cont').click(function(){
+            page = 1;
+            hasMore = true;
+            sort = $(this).attr('sort');
+            $('.item-cont').removeClass('on');
+            $(this).addClass('on');
+            $('#goodList').html('');
+            getGoodsList();
+        })
+
+    });
+
+    function getGoodsList(){
+        if(hasMore){
+            $.ajax({
+                url:"<{:U('Mobile/getGoodsList')}>",
+                data:{
+                    p:page,
+                    type:type,
+                    sort:sort
+                },
+                beforeSend:function(){
+                    $('#loading').html(loadGif)
+                },
+                success:function(data){
+                    hasMore = false;
+                    if(data.status=='success'){
+                        if(data.num>0){
+                            var html = '';
+
+                            $.each(data.list,function(i,vo){
+                                html += '<li><div class="p-item"><a href="<{:U('mobile/item')}>?id='+vo.gid+'" class="p-img"><img src="__ROOT__/upload/'+vo.img+'" alt="Photo"></a><div class="p-cont"><div class="ptit"><div class="mtit">'+vo.name+'</div><div class="atit"></div></div><div class="pinfo"><div class="price">￥'+vo.price+'</div><a href="<{:U('mobile/item')}>?id='+vo.gid+'"> <div class="num addcart" value="'+vo.gid+'"></div></a></div></div></div></li>'
+                            })
+                            $('#goodList').append(html);
+                            if(data.num==16){
+                                hasMore = true;
+                            }
+                        }else {
+                            $('#loading').html('到底了');
+                        }
+                        page = data.p;
+                    }else {
+                        mui.toast('系统错误');
+                    }
+                    $('#loading').html('');
+                }
+            })
+        }else {
+            ('#loading').html('没有数据了');
+        }
+    }
+</script>
+<!--<script src="__PUBLIC__/js/productList.js"></script>-->
+</body>
+

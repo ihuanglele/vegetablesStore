@@ -12,6 +12,9 @@ return array(
     'TMPL_L_DELIM' => '<{',
     'TMPL_R_DELIM' => '}>',
 
+    //加载自定义配置文件
+    'LOAD_EXT_CONFIG' => 'site',
+
     //定义模块
     'MODULE_ALLOW_LIST'    =>    array('Home','Admin'),
     'DEFAULT_MODULE'       =>    'Home',

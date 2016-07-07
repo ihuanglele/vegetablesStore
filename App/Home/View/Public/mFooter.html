@@ -1,0 +1,25 @@
+<footer class="footer fxb">
+    <nav class="nav">
+        <a href="<{:U('mobile/index')}>" class="item nav-home  <if condition="([on]==1)">on</if>">首页</a>
+        <a href="<{:U('mobile/lists')}>" class="item nav-classify <if condition="([on]==2)">on</if>">分类</a>
+        <a href="<{:U('mobile/cart')}>" class="item nav-cart <if condition="([on]==3)">on</if>"><i id="cartCount"></i>购物车</a>
+        <a href="<{:U('UserM/index')}>" class="item nav-mytony <if condition="([on]==4)">on</if>">我的多利</a>
+    </nav>
+</footer>
+<script type="text/javascript">
+    $(window).ready(function(){
+        getCartNum();
+
+    })
+    // 查询购物车商品数量
+    getCartNum = function(){
+        $.ajax({
+            type:'get',
+            url:base_path +'/common/getCartNum',
+            data:null,
+            success:function(result){
+                $("#cartCount").html(result);
+            }
+        });
+    }
+</script>

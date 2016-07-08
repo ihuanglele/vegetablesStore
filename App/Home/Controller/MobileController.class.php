@@ -115,8 +115,7 @@ class MobileController extends Controller{
     }
 
     public function test(){
-        var_dump(session('cart'));
-//        session('cart',null);
+
     }
 
     //登录页面
@@ -126,6 +125,13 @@ class MobileController extends Controller{
 
     //注册页面
     public function reg(){
+        $from_uid = I('get.from_uid');
+        if($from_uid){
+            $info = M('user')->field('uid,leader')->find($from_uid);
+            if($info){
+                session('tg',$info);
+            }
+        }
         $this->display('reg');
     }
 

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>收银台</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no, maximum-scale=1.0"/>
+    <style>
+        .btn {
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.62857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -ms-touch-action: manipulation;
+            touch-action: manipulation;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            color: #fff;
+            background-color: #5cb85c;
+            border-color: #4cae4c;
+        }
+    </style>
+</head>
+<body style="background-color:#ddd;">
+<div>
+
+  <div style="margin-top:40px;text-align:center;font-size:18px;width:100%;"><strong>商城订单</strong><div> 
+  <div  style="margin-top:30px;text-align:center;font-size:48px;width:100%; font-weight:bold;">  ￥ <{$money}></div>
+ 
+  <div style="margin-top:25px; width:100%;height:20px;padding:10px;"><span style="float:left;">收款方：</span><span style="float:right;">浩迈科技</span></div> 
+   <div style="margin-top:25px; width:100%;height:20px;padding:10px;"><span style="float:left;">商&nbsp;&nbsp;&nbsp;品：</span><span style="float:right;">浩迈商城订单</span></div>
+ 
+
+
+    <div id="btnBuyBox" class="pBtn" style="text-align:center;margin-top:100px;">
+        <a href="#" id="pay" class="btn" onclick="callpay()" style="width:80%;text-align:center;">立即支付</a>
+    </div>
+
+</div>
+<script>
+
+    <eq name='type' value='0'>jumpUrl = "<{:U('user/index')}>"</eq>
+    <eq name='type' value='1'>jumpUrl = "<{:U('user/myOrder')}>"</eq>
+    <eq name='type' value='2'>jumpUrl = "<{:U('user/checkFirstBuyJump')}>"</eq>
+
+    //调用微信JS api 支付
+    function jsApiCall()
+    {
+        WeixinJSBridge.invoke(
+                'getBrandWCPayRequest',
+        <{$jsApiParamerers}>,
+                function(res){
+//                            WeixinJSBridge.log(res.err_msg);
+                    if(res.err_msg == "get_brand_wcpay_request:ok") {
+                        setTimeout(function(){
+                            window.location.href = jumpUrl
+                        },500)
+                    }else {
+                        //用户取消支付
+                        //alert(JSON.stringify(res));
+                    }
+                }
+    );
+    }
+
+
+    function callpay()
+    {
+        if (typeof WeixinJSBridge == "undefined"){
+            if( document.addEventListener ){
+                document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+            }else if (document.attachEvent){
+                document.attachEvent('WeixinJSBridgeReady', jsApiCall);
+                document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+            }
+        }else{
+            jsApiCall();
+        }
+    }
+
+</script>
+</body>
+</html>

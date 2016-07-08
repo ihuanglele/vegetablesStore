@@ -28,6 +28,7 @@ class UserMController extends Controller
 
     }
 
+    //个人中心
     public function index(){
         $info = M('user')->find($this->uid);
         $this->assign('info',$info);
@@ -37,7 +38,6 @@ class UserMController extends Controller
         $this->assign('goods',$goods);
         $this->display('index');
     }
-
 
     //我的收货地址
     public function myAddress(){
@@ -121,8 +121,17 @@ class UserMController extends Controller
         }
     }
 
+    //我的订单
+    public function myOrder(){
+        if(IS_AJAX){
+
+        }else{
+            $this->display('myOrder');
+        }
+    }
+
     /**
-     * 我的订单
+     * 我的订单详情
      */
     public function order(){
         $map['uid'] = session('uid');
@@ -132,19 +141,63 @@ class UserMController extends Controller
             foreach($list as $v){
                 $gids[] = $v['gid'];
             }
-
             $gInfo = M('goods')->where(array('gid'=>array('in',$gids)))->getField('gid,name,img');
-
             $this->assign('gInfo',$gInfo);
-
             $this->assign('CityCode',C('CityCode'));
-
         }
-
         $this->display('order');
 
     }
 
+    //我的菜箱
+    public function myBox(){
+        $info = M('user')->where(array('uid'=>session('uid')))->field('is_store,goods')->find();
+        if($info['is_store']){
+            $ac = I('get.ac');
+            $gidArr = json_decode($info['goods'],true);
+            if(!count($gidArr)){
+                $gidArr[] = 0;
+            }
+            if($ac=='un'){//没有添加
+                $this->assign('ac','do');
+                $map['gid'] = array('NOTIN',$gidArr);
+            }else{//已添加
+                $this->assign('ac','un');
+                $map['gid'] = array('IN',$gidArr);
+            }
+            $Tool = new \Home\Controller\ToolController();
+            $list = $Tool->getGoods($map,0,'gid desc');
+            $this->assign('list',$list);
+            $this->display('myBox');
+        }else{
+            $this->error('你还不是会员',U('index'));
+        }
+    }
+
+    //处理上下货
+    public function doBox(){
+        $info = M('user')->where(array('uid'=>session('uid')))->field('is_store,goods')->find();
+        if($info['is_store']){
+            $ac = I('get.ac');
+            $id = I('get.id');
+            $gidArr = json_decode($info['goods'],true);
+
+            if($ac=='un'){//删除
+               foreach($gidArr as $k=>$v){
+                   if($v==$id){
+                       unset($gidArr[$k]);break;
+                   }
+               }
+            }else{//添加
+                $gidArr[] = $id;
+            }
+            $gidJson = json_encode(array_unique($gidArr));
+            M('user')->where(array('uid'=>session('uid')))->setField('goods',$gidJson);
+            $this->redirect('myBox',array('ac'=>$ac));
+        }else{
+            $this->error('你还不是会员',U('index'));
+        }
+    }
 
     //确认订单
     public function cart(){
@@ -191,80 +244,66 @@ class UserMController extends Controller
      * 购买商品
      */
     public function buy(){
-        $Tool = A('Tool');
+        $Tool = A('Order');
         $order = $Tool->addOrder();
         if($order){
-            var_dump($order);
+            $data['uid'] = session('uid');
+            $data['oid'] = $order['oid'];
+            $data['amount'] = $order['money'];
+            $data['body'] = '消费';
+            $data['attach'] = '消费';
+            $this->sendPayData($data);
         }else{
-            var_dump($order);
+            $this->error($order['msg']);
         }
     }
-
 
     /**
-
-     * 微信支付
-
+     * 微信充值
      */
-
     public function pay(){
-
         if(isset($_POST['money'])){
-
             $money = I('post.money',0);
-
             $uid = session('uid');
-
             if($money>0){
-
                 $data['uid'] = $uid;
-
                 $data['body'] = '充值';
-
                 $data['attach'] = '充值';
-
                 $data['money'] = $money;
-
                 $data['oid'] = 0;
-
                 $this->sendPayData($data);
-
             }else{
-
                 $this->error('输入金额有误');
-
             }
-
         }else{
-
             $this->getData('pay',array('uid'=>session('uid'),'status'=>2),'pid desc');
-
             $this->display('pay');
-
         }
-
     }
 
-
-
+    /**
+     * 发起微信支付
+     * @param $da
+     * 包含oid的为订单付款，对应的orders表里面的trade字段。
+     */
     private function sendPayData($da){
+        layout(false);
         $body = $da['body'];
         $attach = $da['attach'];
         $tag = $da['uid'];
-        $trade_no = createTradeNum();
-        $openId = session('openid');
+        $trade_no = createWxPayTrade();
         $Pay = A('Wechat');
-        $order = $Pay->pay($openId,$body,$attach,$trade_no,intval($da['money']*100),$tag);
+        $order = $Pay->pay($body,$attach,$trade_no,intval($da['amount']*100),$tag);
         if($order['result_code']=='SUCCESS'){//生成订单信息成功
+            $data['mytrade'] = $trade_no;
             $data['uid'] = $da['uid'];
             $data['oid'] = $da['oid'];
             $data['create_time'] = date('Y-m-d H:i:s');
-            $data['money'] = $da['money'];
-            $data['pid'] = $trade_no;
+            $data['amount'] = $da['amount'];
             $data['status'] = 1;
             $data['pay_time'] = 0;
             if(M('pay')->add($data)){
-                $this->assign('money',$da['money']);
+                $this->assign('money',$da['amount']);
                 $this->display('user/paySub');die;
             }else{
                 $this->error('操作失败请重试');die;
@@ -276,92 +315,74 @@ class UserMController extends Controller
     }
 
 
-
     /**
-
-     *显示提现记录
-
+     * 显示自己的推广二维码
      */
-
-    public function getCash(){
-
-        $uid = session('uid');
-
-        $uMoney = M('user')->where(array('uid'=>$uid))->getField('money');
-
-        $CashRate = S('getCashRate');
-
-        if(!$CashRate) $CashRate = array('rate'=>10,'money'=>'100');
-
-        if(isset($_POST['money'])){
-
-            $money = I('post.money',0);
-
-            if($money>0){
-
-                if($uMoney<$CashRate['money']){$this->error('低于提现最低金额');die;}
-
-                $Pay = new \Org\Wxpay\WxBizPay();
-
-                $data['openid'] = session('openid');
-
-                $data['amount'] = intval($money*(100-$CashRate['rate']));
-
-                $data['partner_trade_no'] = createBizPayNum();
-
-                $data['desc'] = '提现操作';
-
-                $res = $Pay->send($data);
-
-                if($res['result_code']=='SUCCESS'){//生成订单信息成功
-
-                    $data['uid'] = $uid;
-
-                    $data['time'] = date('Y-m-d H:i:s');
-
-                    $data['money'] = $money;
-
-                    $data['trade'] = $data['partner_trade_no'];
-
-                    $data['status'] = 2;
-
-                    if(M('pack')->add($data)){
-
-                        M('user')->where(array('uid'=>$uid))->setDec('money',$money);
-
-                        $this->success('提现成功',U('user'));
-
-                    }else{
-
-                        $this->error('操作失败请重试');die;
-
-                    }
-
-                }else{
-
-                    $this->error('操作失败请重试');die;
-
-                }
-
-            }else{
-
-                $this->error('输入金额有误');
-
-            }
-
-        }else{
-
-            $this->assign('uMoney',$uMoney);
-
-            $this->assign('CashRate',$CashRate);
-
-            $this->getData('pack',array('uid'=>session('uid'),'status'=>2),'pid desc');
-
-            $this->display('getCash');
-
-        }
-
+    public function tgQrCode(){
+        $url = U('Mobile/reg',array('from_uid'=>session('uid')),true,true);
+        $this->assign('url',$url);
+        $this->display('tgQrCode');
     }
 
-    
+    /**
+     * 我的收藏
+     */
+    public function myFav(){
+        $favorite = M('user')->where(array('uid'=>session('uid')))->getField('favorite');
+        $ac = I('get.ac');
+        $gidArr = json_decode($favorite,true);
+        if(count($gidArr)){
+            $map = array('in',$gidArr);
+            $Tool = new \Home\Controller\ToolController();
+            $list = $Tool->getGoods($map,0,'gid desc');
+        }else{
+            $list = array();
+        }
+        $this->assign('list',$list);
+        $this->display('myBox');
+    }
+
+    /**
+     *显示提现记录
+     */
+    public function getCash(){
+        $uid = session('uid');
+        $uMoney = M('user')->where(array('uid'=>$uid))->getField('money');
+        $CashRate = S('getCashRate');
+        if(!$CashRate) $CashRate = array('rate'=>10,'money'=>'100');
+        if(isset($_POST['money'])){
+            $money = I('post.money',0);
+            if($money>0){
+                if($uMoney<$CashRate['money']){$this->error('低于提现最低金额');die;}
+                $Pay = new \Org\Wxpay\WxBizPay();
+                $data['openid'] = session('openid');
+                $data['amount'] = intval($money*(100-$CashRate['rate']));
+                $data['partner_trade_no'] = createBizPayNum();
+                $data['desc'] = '提现操作';
+                $res = $Pay->send($data);
+                if($res['result_code']=='SUCCESS'){//生成订单信息成功
+                    $data['uid'] = $uid;
+                    $data['time'] = date('Y-m-d H:i:s');
+                    $data['money'] = $money;
+                    $data['trade'] = $data['partner_trade_no'];
+                    $data['status'] = 2;
+                    if(M('pack')->add($data)){
+                        M('user')->where(array('uid'=>$uid))->setDec('money',$money);
+                        $this->success('提现成功',U('user'));
+                    }else{
+                        $this->error('操作失败请重试');die;
+                    }
+                }else{
+                    $this->error('操作失败请重试');die;
+                }
+            }else{
+                $this->error('输入金额有误');
+            }
+        }else{
+            $this->assign('uMoney',$uMoney);
+            $this->assign('CashRate',$CashRate);
+            $this->getData('pack',array('uid'=>session('uid'),'status'=>2),'pid desc');
+            $this->display('getCash');
+        }
+    }
 }

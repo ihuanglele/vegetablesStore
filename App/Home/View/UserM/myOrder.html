@@ -1,0 +1,40 @@
+<body class="g-bg" style="height:100%">
+<div id="a-wrap">
+    <section id="section" class="section">
+        <article id="article" class="article pf">
+            <div class="card-list">
+                <div class="tabBox tabNavControl" id="tabBox1">
+                    <div class="card-item n-m">
+                        <input type="hidden" id="listType" value="1">
+                        <ul class="item-tab hd n-m" data-note="切换栏目">
+                            <li class="item-cont" value="1">待付款</li>
+                            <li class="item-cont" value="2">待发货</li>
+                            <li class="item-cont" value="3">已取消</li>
+                            <li class="item-cont" value="4">已完成</li>
+                        </ul>
+                    </div>
+                    <div class="bd" id="tabBox1-bd">
+                        <div class="con" data-note="切换内容一">
+                            <ul id="obligationList"></ul>
+                        </div>
+                        <div class="con">
+                            <ul id="shippedList"></ul>
+                        </div>
+                        <div class="con">
+                            <ul id="cancelList"></ul>
+                        </div>
+                        <div class="con">
+                            <ul id="finishedList"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+        <include file="Public/mFooter" on="4" />
+    </section>
+</div>
+    <script src="__PUBLIC__/js/echo.js"></script>
+    <script>
+
+    </script>
+</body>

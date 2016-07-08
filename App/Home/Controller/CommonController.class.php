@@ -95,18 +95,27 @@ class CommonController extends Controller{
                     session('nickname',null);
                     session('headimgurl',null);
                 }else{
-                    $data['nickname'] = '匿名';
+                    $data['nickname'] = $phone;
                     $data['openid'] = $openid;
                     $data['headimgurl'] = '';
                 }
+                $tg = session('tg');
+                if($tg){
+                    $data['invite_uid'] = $tg['uid'];
+                    $data['leader'] = $tg['leader'];
+                }else{
+                    $data['invite_uid'] = 0;
+                    $data['leader'] = 0;
+                }
+                $data['is_leader'] = 0;
                 $data['phone'] = $phone;
                 $data['password'] = md5($password);
                 $data['status'] = '';
-                $data['coin'] = $data['money'] = $data['use_money'] = $data['invite_uid'] = 0;
+                $data['coin'] = $data['money'] = $data['use_money'] =  0;
                 $uid = M('user')->add($data);
                 if($uid){
                     session('uid',$uid);
-                    session('nickname','匿名');
+                    session('nickname',$data['nickname']);
                     $this->success('注册成功',U('user/index'));
                 }else{
                     $this->error('注册失败请重试');

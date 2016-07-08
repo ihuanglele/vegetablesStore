@@ -46,6 +46,8 @@ class MobileController extends Controller{
     public function goodsList(){
         $type = I('get.type');
         $this->assign('type',$type);
+        $name = I('get.name');
+        $this->assign('name',$name);
         $this->display('goodsList');
     }
 
@@ -58,6 +60,10 @@ class MobileController extends Controller{
         $type = I('get.type');
         if($type){
             $map['cid'] = $type;
+        }
+        $name = I('get.name');
+        if($name){
+            $map['name'] = array('like','%'.$name.'%');
         }
         $map['status'] = 2;
         $Tool = A('Tool');
@@ -106,6 +112,11 @@ class MobileController extends Controller{
         }
         $this->assign('data',$data);
         $this->display('cart');
+    }
+
+    public function test(){
+        var_dump(session('cart'));
+//        session('cart',null);
     }
 
     //登录页面

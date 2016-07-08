@@ -89,7 +89,7 @@ class UserMController extends Controller
         }else{
             $ac = I('ac');
             if(!$ac){
-                $ac = U('user/index');
+                $ac = U('UserM/index');
             }
             $this->assign('ac',$ac);
             $this->display('addaddress');
@@ -101,6 +101,24 @@ class UserMController extends Controller
         $map['uid'] = $this->uid;
         $map['id'] = array('neq',$id);
         M('address')->where($map)->setField('default',0);
+    }
+
+    //修改收货地址
+    public function editAddress(){
+        $id = I('get.id');
+        $info = M('address')->find($id);
+        if($info && $info['uid']==session('uid')){
+            $ac = I('ac');
+            if(!$ac){
+                $ac = U('UserM/myAddress');
+            }
+            $this->assign('ac',$ac);
+            $info['code'] = json_decode($info['code'],true);
+            $this->assign('info',$info);
+            $this->display('editAddress');
+        }else{
+            $this->error('页面不存在',U('index'));
+        }
     }
 
     /**
@@ -140,7 +158,7 @@ class UserMController extends Controller
             $cart = array();
             foreach($gidArr as $k=>$v){
                 if(array_key_exists($v,$gInfo)){
-                    $cart[$k] = $v;
+                    $cart[$v] = $numArr[$k];
                     $i['gid'] = $v;
                     $i['num'] = $numArr[$k];
                     $i['name'] = $gInfo[$v]['name'];
@@ -182,9 +200,6 @@ class UserMController extends Controller
         }
     }
 
-    public function test(){
-        echo createTrade();
-    }
 
     /**
 
@@ -233,53 +248,29 @@ class UserMController extends Controller
 
 
     private function sendPayData($da){
-
         $body = $da['body'];
-
         $attach = $da['attach'];
-
         $tag = $da['uid'];
-
         $trade_no = createTradeNum();
-
         $openId = session('openid');
-
         $Pay = A('Wechat');
-
         $order = $Pay->pay($openId,$body,$attach,$trade_no,intval($da['money']*100),$tag);
-
         if($order['result_code']=='SUCCESS'){//生成订单信息成功
-
             $data['uid'] = $da['uid'];
-
             $data['oid'] = $da['oid'];
-
             $data['create_time'] = date('Y-m-d H:i:s');
-
             $data['money'] = $da['money'];
-
             $data['pid'] = $trade_no;
-
             $data['status'] = 1;
-
             $data['pay_time'] = 0;
-
             if(M('pay')->add($data)){
-
                 $this->assign('money',$da['money']);
-
                 $this->display('user/paySub');die;
-
             }else{
-
                 $this->error('操作失败请重试');die;
-
             }
-
         }else{
-
             $this->error('操作失败请重试');die;
-
         }
 
     }

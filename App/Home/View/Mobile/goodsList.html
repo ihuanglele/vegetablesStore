@@ -19,20 +19,21 @@
                     </div>
                 </div>
             </div>
+            <div id="loading" style="text-align:center;margin-left:auto; margin-right:auto;border:0px solid #5ea626;width:30%;color:red;">
+            </div>
         </article>
         <include file="Public/mFooter" on="2" />
     </section>
 </div>
-<div id="loading" style="text-align:center;margin-left:auto; margin-right:auto;border:0px solid #5ea626;width:30%;color:red;">
 
-</div>
 <script src="__PUBLIC__/js/echo.js"></script>
 <script>
 
     var page = 1;
     var hasMore = true;
     var sort = 'gid';
-    var type = '<{$type}>'
+    var type = '<{$type}>';
+    var name = "<{$name}>";
     var loadGif = '<img src="__PUBLIC__/images/loadingPic.gif">';
     $(window).ready(function(){
 
@@ -65,7 +66,8 @@
                 data:{
                     p:page,
                     type:type,
-                    sort:sort
+                    sort:sort,
+                    name:name
                 },
                 beforeSend:function(){
                     $('#loading').html(loadGif)
@@ -75,7 +77,6 @@
                     if(data.status=='success'){
                         if(data.num>0){
                             var html = '';
-
                             $.each(data.list,function(i,vo){
                                 html += '<li><div class="p-item"><a href="<{:U('mobile/item')}>?id='+vo.gid+'" class="p-img"><img src="__ROOT__/upload/'+vo.img+'" alt="Photo"></a><div class="p-cont"><div class="ptit"><div class="mtit">'+vo.name+'</div><div class="atit"></div></div><div class="pinfo"><div class="price">￥'+vo.price+'</div><a href="<{:U('mobile/item')}>?id='+vo.gid+'"> <div class="num addcart" value="'+vo.gid+'"></div></a></div></div></div></li>'
                             })
@@ -90,11 +91,11 @@
                     }else {
                         mui.toast('系统错误');
                     }
-                    $('#loading').html('');
+                    $('#loading').html('到底了');
                 }
             })
         }else {
-            ('#loading').html('没有数据了');
+            $('#loading').html('到底了');
         }
     }
 </script>

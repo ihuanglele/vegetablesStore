@@ -161,6 +161,15 @@ class CommonController extends Controller{
         echo ($count);
     }
 
+    //删除地址
+    public function delAddress(){
+        $id = I('id');
+        $map['id'] = $id;
+        $map['uid'] = session('uid');
+        $res = M('address')->where($map)->delete();
+        echo ($res);
+    }
+
     public function logout(){
         session('uid',null);
         $this->success('安全退出');

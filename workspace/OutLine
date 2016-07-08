@@ -23,3 +23,7 @@ dingyingezu@sina.com  dingyingezu123
         json_encode(array('phone'=>'18800000000','name'=>'收货人','address'=>'北京市XXXXXX'))
     orders表里面的express_info字段数据
         json_encode(array('name'=>'申通快递','num'=>'1239797','time'=>time()))
+
+
+    购物车采用session方式记录，键cart
+        array('gid'=>num,'gid'=>num);

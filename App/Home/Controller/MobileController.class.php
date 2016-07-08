@@ -82,6 +82,12 @@ class MobileController extends Controller{
         $gid = I('get.id');
         $info = M('goods')->find($gid);
         if($info){
+            $fav = session('favorite');
+            if($fav && in_array($gid,$fav)){
+                $this->assign('fav',1);
+            }else{
+                $this->assign('fav',0);
+            }
             $this->assign('info',$info);
             $this->display('item');
         }else{

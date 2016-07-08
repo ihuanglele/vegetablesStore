@@ -1,0 +1,42 @@
+<style>
+    section{
+        text-align: center;
+    }
+    .tgImg{
+        width: 60%;
+        margin: 30px auto;
+    }
+</style>
+<body style="height:100%">
+<div id="a-wrap">
+    <section id="section" class="section">
+        <article id="article" class="article pf">
+            <div class="card-list">
+                <div class="tabBox tabNavControl" id="tabBox1">
+                    <div class="card-item n-m">
+                        <ul class="item-tab hd n-m" data-note="切换栏目">
+                            <li class="item-cont">
+                                <a href="<{:U('myBox')}>?ac=do">已选</a>
+                            </li>
+                            <li class="item-cont">
+                                <a href="<{:U('myBox')}>?ac=un">未选</a>
+                            </li>
+                            <li class="item-cont on">
+                                <a href="<{:U('myBoxPic')}>">我的店铺</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="product-list list-product bd product-list-border" id="tabBox1-bd">
+                        <img class="tgImg" src="http://qr.liantu.com/api.php?text=<{$url}>">
+                    </div>
+                </div>
+            </div>
+        </article>
+        <include file="Public/mFooter" on="4" />
+    </section>
+</div>
+<script src="__PUBLIC__/js/echo.js"></script>
+<script>
+
+</script>
+</body>

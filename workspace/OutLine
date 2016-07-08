@@ -31,3 +31,4 @@ session记录值
     购物车：cart => array('gid'=>num,'gid'=>num)
     店铺推广 from_uid => uid
     注册推广 tg => array('uid'=>uid,'leader'=>uid)
+    收藏 favorite => array(gid,gid)

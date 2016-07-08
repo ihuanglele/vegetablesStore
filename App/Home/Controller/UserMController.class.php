@@ -149,6 +149,18 @@ class UserMController extends Controller
 
     }
 
+    //获取订单信息
+    public function orderList(){
+        $status = I('get.status');
+        if(!in_array($status,array(1,2,3))){
+            $status = 1;
+        }
+        $map['status'] = $status;
+        $Tool = A('Tool');
+        $list = $Tool->getList('orders',$map,'trade desc','trade,goods_info,status,goods_amount,create_time');
+        var_dump($list);
+    }
+
     //我的菜箱
     public function myBox(){
         $info = M('user')->where(array('uid'=>session('uid')))->field('is_store,goods')->find();
@@ -196,6 +208,18 @@ class UserMController extends Controller
             $this->redirect('myBox',array('ac'=>$ac));
         }else{
             $this->error('你还不是会员',U('index'));
+        }
+    }
+
+    //显示我的店铺二维码
+    public function myBoxPic(){
+        $info = M('user')->where(array('uid'=>session('uid')))->field('is_store,goods')->find();
+        if($info['is_store']){
+            $url = U('mobile/index',array('from_uid'=>$this->uid),true,true);
+            $this->assign('url',$url);
+            $this->display('myBoxPic');
+        }else{
+            $this->error('你还不是会员');
         }
     }
 
@@ -329,18 +353,20 @@ class UserMController extends Controller
      */
     public function myFav(){
         $favorite = M('user')->where(array('uid'=>session('uid')))->getField('favorite');
-        $ac = I('get.ac');
         $gidArr = json_decode($favorite,true);
+//        var_dump($gidArr);die;
         if(count($gidArr)){
-            $map = array('in',$gidArr);
+            $map['gid'] = array('IN',$gidArr);
             $Tool = new \Home\Controller\ToolController();
             $list = $Tool->getGoods($map,0,'gid desc');
         }else{
             $list = array();
         }
         $this->assign('list',$list);
-        $this->display('myBox');
+        $this->display('myFav');
     }
+
+
 
     /**
      *显示提现记录

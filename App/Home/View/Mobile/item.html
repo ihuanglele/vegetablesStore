@@ -1,5 +1,5 @@
 <body>
-<!--<div class="altmsg" name="off"><h4 id="tipMsg">收藏成功</h4></div>-->
+<div class="altmsg" name="off"><h4 id="tipMsg">收藏成功</h4></div>
 <div id="a-wrap">
     <section id="section" class="section">
         <div class="share-mask" id="shareMask">
@@ -41,7 +41,11 @@
                                 <div class="mtit"><{$info.name}></div>
                                 <!--<div class="atit">有机精选，健康生活，送礼精品</div>-->
                             </div>
-                            <div class="pfav off" data-state="off" id="pFavorites"></div>
+                            <eq name="fav" value="1">
+                                <div class="pfav on" data-state="on" id="pFavorites"></div>
+                                <else />
+                                <div class="pfav off" data-state="off" id="pFavorites"></div>
+                            </eq>
                         </div>
                     </div>
                 </li>
@@ -125,14 +129,14 @@
             }
         }
 
-        //收藏按钮，这里需要像后台发送ajax请求，触发处理动作
+                    //收藏按钮，这里需要像后台发送ajax请求，触发处理动作
         $('#pFavorites').on('click', function () {
             if ($(this).attr('data-state') == 'off') {
-                var url = "/favorite/addFavorite?ajax=true";
-                doFavorite('2721', url, 'add', $(this));
+                var ac = "do";
+                doFavorite('<{$info.gid}>', ac, $(this));
             } else { 	// 取消收藏
-                var url = "/favorite/deleteFavoriteByProductId?ajax=true";
-                doFavorite('2721', url, 'delete', $(this));
+                var ac = "un";
+                doFavorite('2721', ac, $(this));
             }
         });
 
@@ -141,14 +145,14 @@
          * productId 商品Id
          * status 收藏状态
          */
-        function doFavorite(productId, url, flag, obj) {
+        function doFavorite(productId, ac, obj) {
             $.ajax({
-                type: 'post',
-                url: base_path + url,
-                data: {"productId": productId},
+                type: 'get',
+                url: base_path + '/common/dofav',
+                data: {"id": productId, 'ac':ac},
                 success: function (result) {
-                    if (result == '1') {
-                        if (flag == 'add') {
+                    if (result.status) {
+                        if (ac == 'do') {
                             obj.attr('data-state', 'on').addClass('on');
                             $("#tipMsg").text('收藏成功');
                             showAddResult();
@@ -157,11 +161,9 @@
                             $("#tipMsg").text('成功取消收藏');
                             showAddResult();
                         }
-                    } else if (result == '0') {
-                        var currentUrl = window.location.href;
-                        window.location.href = base_path + "/user/toLogin?sendUrl=" + currentUrl;
                     } else {
-                        alert(result);
+                        $("#tipMsg").text(result.info);;
+                        window.location.href = base_path + "/UserM/login" ;
                     }
                 }
             });

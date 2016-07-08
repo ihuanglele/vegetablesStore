@@ -15,21 +15,16 @@
 </style>
 <div id="a-wrap">
     <section id="section" class="section">
+        <header id="header" class="header">
+            <nav class="nav bdb">
+                <div class="item" style="font-size: 20px;line-height: 50px;">我的收藏</div>
+            </nav>
+        </header>
         <article id="article" class="article pf">
             <div class="card-list">
                 <div class="tabBox tabNavControl" id="tabBox1">
                     <div class="card-item n-m">
-                        <ul class="item-tab hd n-m" data-note="切换栏目">
-                            <li class="item-cont <eq name='ac' value='un'>on</eq>">
-                                <a href="<{:U('myBox')}>?ac=do">已选</a>
-                            </li>
-                            <li class="item-cont <eq name='ac' value='do'>on</eq>">
-                                <a href="<{:U('myBox')}>?ac=un">未选</a>
-                            </li>
-                            <li class="item-cont">
-                                <a href="<{:U('myBoxPic')}>">我的店铺</a>
-                            </li>
-                        </ul>
+
                     </div>
                     <div class="product-list list-product bd product-list-border" id="tabBox1-bd">
                         <ul id="goodList" class="good_list">
@@ -39,21 +34,15 @@
                                         <img src="__ROOT__/upload/<{$vo.img}>" alt="<{$vo.name}>"></a>
                                         <div class="p-cont">
                                             <div class="ptit">
-                                                <div class="mtit"><{$vo.name}></div>
-                                                <div class="atit">代理价:￥<{$vo.vip_price}></div>
+                                                <a href="<{:U('mobile/item')}>?id=<{$vo.gid}>">
+                                                    <div class="mtit"><{$vo.name}></div>
+                                                </a>
                                             </div>
                                             <div class="pinfo">
                                                 <div class="price">￥<{$vo.price}></div>
-                                                <eq name="ac" value="un">
-                                                    <a href="<{:U('doBox')}>?ac=<{$ac}>&id=<{$vo.gid}>">
-                                                        <div class="num delete"></div>
-                                                    </a>
-                                                    <else />
-                                                    <a href="<{:U('doBox')}>?ac=<{$ac}>&id=<{$vo.gid}>">
-                                                        <div class="num addcart"></div>
-                                                    </a>
-                                                </eq>
-
+                                                <a href="<{:U('common/doFav')}>?ac=do&id=<{$vo.gid}>">
+                                                    <div class="num delete"></div>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>

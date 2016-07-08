@@ -24,23 +24,14 @@ class CommonController extends Controller{
     }
 
     public function login(){
-
         $id = I('get.id');
-
         if($id!=1){
-
             $Tab = '#loginTab';
-
         }else{
-
             $Tab = '#regTab';
-
         }
-
         $this->assign('Tab',$Tab);
-
         $this->display('Public/login');
-
     }
 
     //处理登录
@@ -50,7 +41,7 @@ class CommonController extends Controller{
             $password = I('post.password');
             $map['phone'] = $phone;
             $map['password'] = md5($password);
-            $info = M('user')->where($map)->field('uid,nickname')->find();
+            $info = M('user')->where($map)->field('uid,nickname,favorite')->find();
             if($info){
                 $openid = session('openid');
                 if($openid){
@@ -61,6 +52,7 @@ class CommonController extends Controller{
                     session('nickname',null);
                     session('headimgurl',null);
                     if(M('user')->save($data)){
+                        session('favorite',json_decode($info['favorite'],true));
                         session('uid', $info['uid']);
                         session('nickname', $data['nickname']);
                         $this->success('登录成功', U('user/index'));
@@ -177,6 +169,34 @@ class CommonController extends Controller{
         $map['uid'] = session('uid');
         $res = M('address')->where($map)->delete();
         echo ($res);
+    }
+
+    //处理收藏
+    public function doFav(){
+        $uid = session('uid');
+        if($uid){
+            $favorite = M('user')->where(array('uid'=>session('uid')))->getField('favorite');
+            $ac = I('get.ac');
+            $id = I('get.id');
+            $favArr = json_decode($favorite,true);
+
+            if($ac=='un'){//删除
+                foreach($favArr as $k=>$v){
+                    if($v==$id){
+                        unset($favArr[$k]);break;
+                    }
+                }
+            }else{//添加
+                $favArr[] = $id;
+            }
+            $favArr = array_unique($favArr);
+            session('favorite',$favArr);
+            $favJson = json_encode($favArr);
+            M('user')->where(array('uid'=>session('uid')))->setField('favorite',$favJson);
+            $this->success('操作成功');
+        }else{
+            $this->error('请先登录');
+        }
     }
 
     public function logout(){

@@ -106,7 +106,8 @@ class WechatController extends Controller {
     public function call(){
         $id = I('get.id');
         $Handle = A('WechatNotify');
-        $Handle->Queryorder($id);
+        $res = $Handle->Queryorder($id);
+        var_dump($res);
     }
 
 

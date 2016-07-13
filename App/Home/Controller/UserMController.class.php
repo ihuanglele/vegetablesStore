@@ -219,7 +219,6 @@ class UserMController extends Controller
         }else{
             $data = array();
         }
-
         $num = count($data);
         $ret['status'] = 'success';
         $ret['num'] = $num;

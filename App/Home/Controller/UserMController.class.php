@@ -317,7 +317,10 @@ class UserMController extends Controller
         $tag = $da['uid'];
         $trade_no = createWxPayTrade();
         $Pay = A('Wechat');
-        $order = $Pay->pay($body,$attach,$trade_no,intval($da['amount']*100),$tag);
+        $openId = session('openid');
+        if(!$openId) {$this->error('请在微信里面打开');die;}
+        $order = $Pay->pay($openId,$body,$attach,$trade_no,intval($da['amount']*100),$tag);
+
         if($order['result_code']=='SUCCESS'){//生成订单信息成功
             $data['mytrade'] = $trade_no;
             $data['uid'] = $da['uid'];

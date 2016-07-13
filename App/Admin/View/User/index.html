@@ -1,87 +1,1 @@
-<style>
-    .headimg{
-        width: 25px;
-        border-radius: 50%;
-    }
-</style>
-<form class="form-horizontal" action="<{:U('index')}>" method="get">
-    <div class="row">
-        <div class="col-xs-2">
-            <div class="form-group">
-                <label class="sr-only">用户ID</label>
-                <div class="input-group">
-                    <div class="input-group-addon">用户ID</div>
-                    <input type="text" class="form-control" id="uid" name="uid" placeholder="填写用户ID" value="<{$uid}>">
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-3">
-            <div class="form-group">
-                <label class="sr-only" for="name">用户昵称</label>
-                <div class="input-group">
-                    <div class="input-group-addon">用户昵称</div>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="填写用户昵称" value="<{$name}>">
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-3">
-            <div class="form-group">
-                <label class="sr-only" for="name">用户手机</label>
-                <div class="input-group">
-                    <div class="input-group-addon">用户手机</div>
-                    <input type="text" class="form-control" name="phone" placeholder="填写用户手机" value="<{$phone}>">
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-2">
-            <select class="form-control" name="status">
-                <option value="0">全部用户</option>
-                <volist name="Status" id="v">
-                    <option value="<{$key}>" ><{$v}></option>
-                </volist>
-            </select>
-        </div>
-        <div class="col-xs-2 ">
-            <button type="submit" class="btn btn-primary">搜索</button>
-        </div>
-    </div>
-</form>
-<script>
-    $(window).ready(function(){
-        $('select[name="status"]').val('<{$status}>');
-    })
-</script>
-<div class="row">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            用户列表
-        </div>
-        <table class="table">
-            <thead>
-            <tr>
-                <th>用户ID</th>
-                <th>头像</th>
-                <th>昵称</th>
-                <th>手机</th>
-                <th>积分</th>
-                <th>余额</th>
-                <th>更多</th>
-            </tr>
-            </thead>
-            <tbody>
-            <volist name="list" id="vo">
-                <tr>
-                    <td><{$vo.uid}></td>
-                    <td><img class="headimg" src="<{$vo.headimgurl}>" /></td>
-                    <td><{$vo.nickname}></td>
-                    <td><{$vo.phone}></td>
-                    <td><{$vo.coin}></td>
-                    <td><{$vo['money']}></td>
-                    <td><a href="<{:U('user/userInfo',array('uid'=>$vo['uid']))}>">更多</a></td>
-                </tr>
-            </volist>
-            </tbody>
-        </table>
-    </div>
-    <div><{$page}></div>
-</div>
+<style>    .headimg{        width: 25px;        border-radius: 50%;    }</style><form class="form-horizontal" action="<{:U('index')}>" method="get">    <div class="row">        <div class="col-xs-2">            <div class="form-group">                <label class="sr-only">用户ID</label>                <div class="input-group">                    <div class="input-group-addon">用户ID</div>                    <input type="text" class="form-control" id="uid" name="uid" placeholder="填写用户ID" value="<{$uid}>">                </div>            </div>        </div>        <div class="col-xs-3">            <div class="form-group">                <label class="sr-only" for="name">用户昵称</label>                <div class="input-group">                    <div class="input-group-addon">用户昵称</div>                    <input type="text" class="form-control" id="name" name="name" placeholder="填写用户昵称" value="<{$name}>">                </div>            </div>        </div>        <div class="col-xs-3">            <div class="form-group">                <label class="sr-only" for="name">用户手机</label>                <div class="input-group">                    <div class="input-group-addon">用户手机</div>                    <input type="text" class="form-control" name="phone" placeholder="填写用户手机" value="<{$phone}>">                </div>            </div>        </div>        <div class="col-xs-2">            <select class="form-control" name="type">                <option value="0">全部用户</option>                <option value="1">普通用户</option>                <option value="2">代理用户</option>                <option value="3">销售总监</option>            </select>        </div>        <div class="col-xs-2 ">            <button type="submit" class="btn btn-primary">搜索</button>        </div>    </div></form><script>    $(window).ready(function(){        $('select[name="type"]').val('<{$type}>');    })</script><div class="row">    <div class="panel panel-default">        <div class="panel-heading">            用户列表        </div>        <table class="table">            <thead>            <tr>                <th>用户ID</th>                <th>头像</th>                <th>昵称</th>                <th>手机</th>                <th>代理-总监</th>                <th>积分</th>                <th>余额</th>                <th>更多</th>            </tr>            </thead>            <tbody>            <volist name="list" id="vo">                <tr>                    <td><{$vo.uid}></td>                    <td><img class="headimg" src="<{$vo.headimgurl}>" /></td>                    <td><{$vo.nickname}></td>                    <td><{$vo.phone}></td>                    <td>                        <eq name="vo.is_store" value="1">是<else/>否</eq>-                        <eq name="vo.is_leader" value="1">是<else/>否</eq>                    </td>                    <td><{$vo.coin}></td>                    <td><{$vo['money']}></td>                    <td><a href="<{:U('user/userInfo',array('uid'=>$vo['uid']))}>">更多</a></td>                </tr>            </volist>            </tbody>        </table>    </div>    <div><{$page}></div></div>

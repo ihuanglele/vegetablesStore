@@ -1,0 +1,113 @@
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading">用户详情</div>
+        <table class="table">
+            <tbody>
+            <tr>
+                <td>网站ID：<{$info.uid}></td>
+                <td>余额：<{$info.money}></td>
+            </tr>
+            <tr>
+                <td>微信昵称：<{$info.nickname}></td>
+                <td>微信头像： <img class="headimg" src="<{$info.headimgurl}>" /></td>
+            </tr>
+            <tr>
+                <td>
+                    推荐者ID:
+                    <eq name="info.invite_uid" value="0">
+                        无
+                        <else />
+                        <a href="<{:U('userInfo')}>?uid=<{$info.invite_uid}>" target="_blank"><{$info.invite_uid}></a>
+                    </eq>
+                </td>
+                <td>
+                    所属销售总监ID:
+                    <eq name="info.leader" value="0">
+                        无
+                        <else />
+                        <a href="<{:U('userInfo')}>?uid=<{$info.leader}>" target="_blank"><{$info.leader}></a>
+                    </eq>
+                </td>
+            </tr>
+            <tr>
+                <td>积分：<{$info.coin}></td>
+                <td>
+                    <form class="form-inline" action="<{:U('user/update')}>" method="post">
+                        <input type='hidden' value="<{$info.uid}>" name="uid">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon">是否是代理</div>
+                                <select name="is_store" class="form-control">
+                                    <option value="0">否</option>
+                                    <option value="1">是</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon">销售总监</div>
+                                <select name="is_leader" class="form-control">
+                                    <option value="0">否</option>
+                                    <option value="1">是</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-warning" role="button" name="submit">更新</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!--添加自定义财务记录-->
+    <!--<div class="panel panel-default">
+        <div class="panel-heading">财务管理</div>
+        <div class="panel-body">
+            <div class="col-xs-8 col-xs-offset-2">
+                <form id="money" class="form-horizontal" name="money" action="<{:U('user/umoney')}>" method="post">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <select name="status" class="form-control">
+                                <option value="5">扣除</option>
+                                <option value="4">奖励</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-3">
+                            <input class="form-control" name="amount" placeholder="金额" type="text" />
+                        </div>
+                        <div class="col-xs-3">
+                            <input type="hidden" name="uid" value="<{$info.uid}>" />
+                            <button class="btn btn-warning" name="submit">添加记录</button>
+                        </div>
+                        <div class="col-xs-3 text-center">
+                            <a href="<{:U('money/index',array('id'=>$info['uid']))}>" target="_blank" role="button" class="btn btn-default">查看详细记录</a>
+                        </div>
+                        <div class="col-xs-12" style="margin-top: 20px;">
+                            <textarea name="note" class="form-control" placeholder="说明"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>-->
+
+</div>
+<script>
+    $(window).ready(function(){
+        $('select[name="is_leader"]').val('<{$info.is_leader}>');
+        $('select[name="is_store"]').val('<{$info.is_store}>');
+        var $moneyForm = $('#money');
+        $moneyForm.submit(function(){
+            if(isNaN($('input[name="amount"]').val())){
+                alert('请填写正确的金额');
+                return false;
+            }
+            if($('textarea[name="exp"]').val()==''){
+                if(!confirm('你没有填写记录说明，确定提交?')){
+                    return false;
+                }
+            }
+        });
+    })
+</script>

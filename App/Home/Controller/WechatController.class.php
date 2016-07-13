@@ -32,10 +32,9 @@ class WechatController extends Controller {
      * @return Wxpay\成功时返回
      * @throws Wxpay\WxPayException
      */
-    public function pay($body,$attach,$trade_no,$money,$tag){
+    public function pay($openId,$body,$attach,$trade_no,$money,$tag){
         //①、获取用户openid
         $tools = new \Org\Wxpay\JsApi();
-        $openId = $tools->GetOpenid();
 
         //②、统一下单
         $input = new \Org\Wxpay\WxPayUnifiedOrder();

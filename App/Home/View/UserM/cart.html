@@ -91,9 +91,21 @@
         </footer>
     </section>
     <script type="text/javascript">
+
+        var wx = <notempty name="Think.session.openid">true<else />false</notempty>
+
         $(window).ready(function(){
             changeAddr();
             $('select[name="address"]').on('change',changeAddr);
+
+            if(!wx){
+                $.ajax({
+                    url:"<{:U('common/getOpenId')}>",
+                    success:function(r){
+                        wx = r;
+                    }
+                })
+            }
 
             //提交订单
             $('#btnJoinPay').click(function(){
@@ -101,7 +113,11 @@
                 if(isNaN(addressId)){
                     alert('请设置收货地址');return false;
                 }else {
-                    $('form').submit();
+                    if(wx){
+                        $('form').submit();
+                    }else{
+                        alert('请在微信里面提交');
+                    }
                 }
             })
         })

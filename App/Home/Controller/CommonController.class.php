@@ -204,4 +204,20 @@ class CommonController extends Controller{
         $this->success('安全退出');
     }
 
+    public function getOpenId(){
+        $openId = session('openid');
+        if($openId){
+            die(1);
+        }else{
+            $tools = new \Org\Wxpay\JsApi();
+            $openId = $tools->GetOpenid();
+            session('openid',$openId);
+            if($openId){
+                die(1);
+            }else {
+                die(0);
+            }
+        }
+    }
+
 }

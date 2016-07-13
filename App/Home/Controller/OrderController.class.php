@@ -53,7 +53,7 @@ class OrderController
                 $i['buy_num'] = $numArr[$k];
                 $i['pay_each_price'] = $gInfo[$v]['price'];
                 $goods[] = $i;
-                $goodAmount += $i['num']*$i['pay_each_price'];
+                $goodAmount += $i['buy_num']*$i['pay_each_price'];
                 if($data['from_uid'] && in_array($v,$rewardGidArr)){
                     $r['gid'] = $v;
                     $r['buy_num'] = $numArr[$k];
@@ -112,7 +112,7 @@ class OrderController
          * 3.发佣金（如果存在）
          */
         $res = true;
-        $oInfo = M('orders')->field('trade,goods_info,uid,status,goods_amount,reward,reward_info,from_uid,yunfei')->find($oid);   //订单信息
+        $oInfo = M('orders')->field('trade,goods_info,uid,status,goods_amount,reward_amount,reward_info,from_uid,yunfei')->find($oid);   //订单信息
         $this->tradeInfo = $oInfo;
 
         if($oInfo['status']!=1) return false;   //确保订单没有处理
@@ -151,16 +151,70 @@ class OrderController
         $res = M('money')->add($moneyData);
         if(!$res) return $res;
 
+        $uInfo = M('user')->field('nickname,invite_uid,leader')->find($oInfo['uid']);
         //判断佣金信息
-        if($oInfo['reward']){
+        /**
+         * 1.商城自己买出去的会返5%给上级
+         * 2.来自推广的直接返佣金给推广的人
+         */
+        if($oInfo['from_uid']==0){  //给上级饭钱
+            if($uInfo['invite_uid']){
+                $reward = $oInfo['goods_amount']*0.05;
+                $r1 = M('user')->where(array('uid'=>$uInfo['invite_uid']))->setInc('money',$reward);
+                echo M('user')->getLastSql();
 
+                //添加用户财务记录
+                $moneyData['uid'] = $uInfo['invite_uid'];
+                $moneyData['amount'] = $reward;
+                $moneyData['time'] = time();
+                $moneyData['note'] = $uInfo['nickname'].'购物返利';
+                $moneyData['type'] = 4;
+                $r2 = M('money')->add($moneyData);
+                if($r1 && $r2){
+                    $res = true;
+                }else{
+                    $res = false;return $res;
+                }
+            }
+        }else if($oInfo['reward_amount']>0){    //来自店家 直接给店家钱
+            $reward = $oInfo['reward_amount'];
+            $r1 = M('user')->where(array('uid'=>$oInfo['from_uid']))->setInc('money',$reward);
+
+            //添加用户财务记录
+            $moneyData['uid'] = $oInfo['from_uid'];
+            $moneyData['amount'] = $reward;
+            $moneyData['time'] = time();
+            $moneyData['note'] = $uInfo['nickname'].'购物返利';
+            $moneyData['type'] = 3;
+            $r2 = M('money')->add($moneyData);
+            if($r1 && $r2){
+                $res = true;
+            }else{
+                $res = false;return $res;
+            }
+        }
+
+        //给leader返利
+        if($uInfo['leader']){
+            $reward = $oInfo['goods_amount']*0.01;
+            $r1 = M('user')->where(array('uid'=>$uInfo['leader']))->setInc('money',$reward);
+
+            //添加用户财务记录
+            $moneyData['uid'] = $uInfo['leader'];
+            $moneyData['amount'] = $reward;
+            $moneyData['time'] = time();
+            $moneyData['note'] = $uInfo['nickname'].'购物返利';
+            $moneyData['type'] = 5;
+            $r2 = M('money')->add($moneyData);
+            if($r1 && $r2){
+                $res = true;
+            }else{
+                $res = false;return $res;
+            }
         }
 
         return $res;
     }
 
-    private function doReward(){
-
-    }
 
 }

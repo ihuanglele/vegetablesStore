@@ -97,6 +97,12 @@ class MobileController extends Controller{
 
     //购物车页面
     public function cart(){
+        $openId = session('openid');
+        if(!$openId){
+            $tools = new \Org\Wxpay\JsApi();
+            $openId = $tools->GetOpenid();
+            session('openid',$openId);
+        }
         $cart = session('cart');
         $gidArr = array(0);
         foreach($cart as $k=>$v){

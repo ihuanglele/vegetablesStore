@@ -186,6 +186,7 @@ class UserMController extends Controller
             $status = 1;
         }
         $map['status'] = $status;
+        $map['uid'] = $this->uid;
         $Tool = A('Tool');
         $list = $Tool->getList('orders',$map,'trade desc','trade,goods_info,status,goods_amount,create_time');
 
@@ -226,6 +227,48 @@ class UserMController extends Controller
         if($num==16)  $p++;
         $ret['page'] = $p;
         $this->ajaxReturn($ret);
+    }
+
+    //我推荐的人
+    public function team(){
+        if(IS_AJAX){
+            $p = I('p',1,'number_int');
+            $map['invite_uid'] = session('uid');
+            $Tool = A('Tool');
+            $list = $Tool->getList('user',$map,'uid desc','nickname as name,phone,coin');
+
+            $num = count($list);
+            $ret['status'] = 'success';
+            $ret['num'] = $num;
+            $ret['list'] = $list;
+            if($num==16)  $p++;
+            $ret['page'] = $p;
+            $this->ajaxReturn($ret);
+        }else{
+            $this->display('team');
+        }
+    }
+
+    //我的财务记录
+    public function money(){
+        if(IS_AJAX){
+            $p = I('p',1,'number_int');
+            $type = I('get.type',3,'number_int');
+            $map['uid'] = session('uid');
+            $map['type'] = $type;
+            $Tool = A('Tool');
+            $list = $Tool->getList('money',$map,'mid desc','time,note,amount');
+
+            $num = count($list);
+            $ret['status'] = 'success';
+            $ret['num'] = $num;
+            $ret['list'] = $list;
+            if($num==16)  $p++;
+            $ret['page'] = $p;
+            $this->ajaxReturn($ret);
+        }else{
+            $this->display('money');
+        }
     }
 
     //我的菜箱

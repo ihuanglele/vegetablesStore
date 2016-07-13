@@ -1,0 +1,101 @@
+<body class="g-bg" style="height:100%">
+<div id="a-wrap">
+    <section id="section" class="section">
+        <article id="article" class="article pf">
+            <div class="card-list">
+                <div class="tabBox tabNavControl" id="tabBox1">
+                    <div class="card-item n-m">
+                        <input type="hidden" id="listType" value="1">
+                        <ul class="item-tab hd n-m" data-note="切换栏目">
+                            <li class="item-cont on" value="3">店铺收入</li>
+                            <li class="item-cont" value="4">团队返利</li>
+                            <li class="item-cont" value="5">团队奖励</li>
+                        </ul>
+                    </div>
+                    <div class="bd" id="tabBox1-bd">
+                        <div class="con" data-note="切换内容一">
+                            <ul id="obligationList">
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="loading" style="text-align:center;margin-left:auto; margin-right:auto;border:0px solid #5ea626;width:30%;color:red;">
+                </div>
+        </article>
+        <include file="Public/mFooter" on="4" />
+    </section>
+</div>
+<script src="__PUBLIC__/js/echo.js"></script>
+<script>
+    var page = 1;
+    var hasMore = true;
+    var type = '3';
+    var loadGif = '<img src="__PUBLIC__/images/loadingPic.gif">';
+    $(window).ready(function(){
+
+        getOrderList();
+
+        $(window).scroll(function(){
+            totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());
+            if ($(document).height() <= totalheight){
+                getGoodsList();
+                console.log($(window).height());
+            }
+        })
+
+        $('.item-cont').click(function(){
+            page = 1;
+            hasMore = true;
+            type = $(this).attr('value');
+            $('.item-cont').removeClass('on');
+            $(this).addClass('on');
+            $('#obligationList').html('');
+            getOrderList();
+        })
+
+    });
+
+    function getLocalTime(nS) {
+        return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
+    }
+
+    function getOrderList(){
+        if(hasMore){
+            $.ajax({
+                url:"<{:U('UserM/money')}>",
+                data:{
+                    p:page,
+                    type:type
+                },
+                beforeSend:function(){
+                    $('#loading').html(loadGif)
+                },
+                success:function(data){
+                    hasMore = false;
+                    if(data.status=='success'){
+                        if(data.num>0){
+                            var li = '';
+                            $.each(data.list,function(i,vo){
+                                li += '<li class="card-item"> <div class="item-wrap"> <a href="javascript:;" class="item-cont address nbd"> <b class="name">￥'+vo.amount+'</b> <b class="small">'+getLocalTime(vo.time)+'</b> <i class="break">'+vo.note+'</i> </a> </div> </li>'
+                            })
+                            $('#obligationList').append(li);
+                            if(data.num==16){
+                                hasMore = true;
+                            }
+                        }else {
+                            $('#loading').html('到底了');
+                        }
+                        page = data.p;
+                    }else {
+                        $('#loading').html('系统错误');
+                    }
+                    $('#loading').html('到底了');
+                }
+            })
+        }else {
+            $('#loading').html('到底了');
+        }
+    }
+</script>
+</body>

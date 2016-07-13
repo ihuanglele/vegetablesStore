@@ -47,10 +47,10 @@
             $('.item-cont').click(function(){
                 page = 1;
                 hasMore = true;
-                status = $(this).attr('value');
+                sort = $(this).attr('sort');
                 $('.item-cont').removeClass('on');
                 $(this).addClass('on');
-                $('#obligationList').html('');
+                $('#goodList').html('');
                 getOrderList();
             })
 
@@ -71,16 +71,16 @@
                         hasMore = false;
                         if(data.status=='success'){
                             if(data.num>0){
+                                var html = '';
                                 var li = '';
                                 $.each(data.list,function(i,vo){
                                     li += '<li class="card-item"><div class="product-list list-row"> <div class="p-itemrow"> <div class="p-hd"> <div class="p-hd-l">订单号:'+vo.trade+'</div> <div class="p-hd-r">'+vo.status+'</div> </div> <a class="p-item jump order-item" href="<{:U('UserM/order')}>?id='+vo.trade+'" >';
                                     goodsUL = '';
                                     $.each(vo.goods,function(i,v){
-                                        goodsUL += '<div class="p-img"><img src="__ROOT__/upload/'+v.img+'" alt=""> </div> <div class="p-cont"> <div class="ptit"> <ul> <li class="mtit">'+v.name+'</li> <li class="atit">下单时间:'+vo.time+'</li> </ul> </div> </div>';
+                                        goodsUL += '<div class="p-img"><img src="__ROOT__/upload/++" alt=""> </div> <div class="p-cont"> <div class="ptit"> <ul> <li class="mtit">多利农庄6斤有机蔬菜箱 月度 每周2箱月度每周 1次</li> <li class="atit">下单时间:2016-06-13 15:22</li> </ul> </div> </div>';
                                     });
-                                    li += goodsUL+'</a> <div class="p-ft"> <div class="p-ft-l red"><u>¥'+vo.goods_amount+'</u></div> </div></div> </div> </li>';
                                 })
-                                $('#obligationList').append(li);
+                                $('#goodList').append(html);
                                 if(data.num==16){
                                     hasMore = true;
                                 }
@@ -100,3 +100,4 @@
         }
     </script>
 </body>
+<li class="card-item"><div class="product-list list-row"><div class="p-itemrow"><div class="p-hd"><div class="p-hd-l">订单号:BO20160613500003</div><div class="p-hd-r">配送中心处理</div></div><a class="p-item jump order-item" href="/tonys/order/toOrderDetail?ordercode=BO20160613500003&amp;listType=2" data-note="单类产品"><div class="p-img"><img src="http://www.tonysfarm.com/upload/1462418492450.jpg" alt=""></div><div class="p-cont"><div class="ptit"><ul><li class="mtit">多利农庄6斤有机蔬菜箱 月度 每周2箱月度每周 1次</li><li class="atit">下单时间:2016-06-13 15:22</li></ul></div></div></a><div class="p-ft"><div class="p-ft-l red"><u>¥670.00</u></div></div></div></div></li>

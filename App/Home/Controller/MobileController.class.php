@@ -25,7 +25,7 @@ class MobileController extends Controller{
         $goodsType = json_decode(readConf('goodsType'),true);
         foreach($goodsType as $k=>$v){
             $map['cid'] = $k;
-            $data = $Tool->getGoods($map,4,$order);
+            $data = $Tool->getGoods($map,0,$order);
             $lists[] = array('title'=>$v,'data'=>$data,'type'=>$k);
         }
         $this->assign('lists',$lists);

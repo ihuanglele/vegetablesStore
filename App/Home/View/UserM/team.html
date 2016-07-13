@@ -1,0 +1,85 @@
+<body class="g-bg" style="height:100%">
+<div id="a-wrap" style="overflow:hidden">
+    <section>
+        <header id="header" class="header">
+            <nav class="nav bdb">
+                <div class="item" style="line-height: 50px;font-size: 18px;">我的团队</div>
+                <div class="item nbd"></div>
+            </nav>
+        </header>
+        <article id="article" class="article pf">
+            <ul class="card-list" id="list">
+
+            </ul>
+            <div id="loading" style="text-align:center;margin-left:auto; margin-right:auto;border:0px solid #5ea626;width:30%;color:red;"></div>
+        </article>
+        <include file="Public/mFooter" on="4" />
+    </section>
+</div>
+<script>
+    var page = 1;
+    var hasMore = true;
+    var status = '1';
+    var loadGif = '<img src="__PUBLIC__/images/loadingPic.gif">';
+    $(window).ready(function(){
+
+        getOrderList();
+
+        $(window).scroll(function(){
+            totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());
+            if ($(document).height() <= totalheight){
+                getGoodsList();
+                console.log($(window).height());
+            }
+        })
+
+        $('.item-cont').click(function(){
+            page = 1;
+            hasMore = true;
+            status = $(this).attr('value');
+            $('.item-cont').removeClass('on');
+            $(this).addClass('on');
+            $('#obligationList').html('');
+            getOrderList();
+        })
+
+    });
+
+    function getOrderList(){
+        if(hasMore){
+            $.ajax({
+                url:"<{:U('UserM/team')}>",
+                data:{
+                    p:page
+                },
+                beforeSend:function(){
+                    $('#loading').html(loadGif)
+                },
+                success:function(data){
+                    hasMore = false;
+                    if(data.status=='success'){
+                        if(data.num>0){
+                            var li = '';
+                            $.each(data.list,function(i,vo){
+                                li += '<li class="card-item"> <div class="item-wrap"> <a href="javascript:;" class="item-cont address nbd"> <b class="name">'+vo.name+'</b> <b class="small">积分:'+vo.coin+'</b> <i class="break">'+vo.phone+'</i> </a> </div> </li>'
+                            })
+                            $('#list').append(li);
+                            if(data.num==16){
+                                hasMore = true;
+                            }
+                        }else {
+                            $('#loading').html('到底了');
+                        }
+                        page = data.p;
+                    }else {
+                        $('#loading').html('系统错误');
+                    }
+                    $('#loading').html('到底了');
+                }
+            })
+        }else {
+            $('#loading').html('到底了');
+        }
+    }
+</script>
+</body>

@@ -120,9 +120,7 @@ class MobileController extends Controller{
         $this->display('cart');
     }
 
-    public function test(){
 
-    }
 
     //登录页面
     public function login(){

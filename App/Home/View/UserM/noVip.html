@@ -1,0 +1,59 @@
+<body class="g-bg" style="height:100%">
+<div id="a-wrap" style="height:100%">
+
+    <section id="section" class="section" style="position: relative;height: 100%;min-height:470px">
+        <article id="article" class="article">
+            <div class="login-regist">
+                <div class="lr-header"></div>
+                <div class="lr-logo"></div>
+                <div class="dialog" style="display: none;">
+                    <div class="box tc" id="dialog_box_tc"></div>
+                </div>
+                <div class="form-list p">
+                    <ul>
+                        <li class="fl-item">
+                            <b class="name">
+                                <input type="text" class="input-style" id="name" placeholder="开户人姓名"></b></li>
+                        <li class="fl-item">
+                            <b class="name">
+                                <input type="text" class="input-style" id="card" placeholder="输入卡号"></b></li>
+                    </ul>
+                </div>
+                <a href="javascript:;" id="btnLogin" class="login">申请代理</a>
+            </div>
+        </article>
+        <footer class="" style="position:absolute;bottom:0px;width: 100%;">
+            <div class="nav tc a-txt">
+
+            </div>
+        </footer>
+    </section>
+</div>
+<script>
+    $(window).ready(function(){
+        $('#btnLogin').click(function(){
+            var name = $('#name').val();
+            var card = $('#card').val();
+            if(name && card){
+                $.ajax({
+                    'url':"<{:U('UserM/applyVip')}>",
+                    'type':'post',
+                    'data':{
+                        name:name,
+                        card:card
+                    },
+                    'success':function(res){
+                        if(res.status){
+                            window.location.href = res.url;
+                        }else{
+                            alert(res.info);
+                        }
+                    }
+                })
+            }else{
+                alert('填写银行卡信息');
+            }
+        })
+    })
+</script>
+</body>

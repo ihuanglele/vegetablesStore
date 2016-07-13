@@ -272,7 +272,7 @@ class UserMController extends Controller
         $order = $Tool->addOrder();
         if($order){
             $data['uid'] = session('uid');
-            $data['oid'] = $order['oid'];
+            $data['oid'] = $order['trade'];
             $data['amount'] = $order['money'];
             $data['body'] = '消费';
             $data['attach'] = '消费';
@@ -329,16 +329,15 @@ class UserMController extends Controller
             $data['amount'] = $da['amount'];
             $data['status'] = 1;
             $data['pay_time'] = 0;
-            if(M('pay')->add($data)){
+            if(M('wxpay')->add($data)){
                 $this->assign('money',$da['amount']);
-                $this->display('user/paySub');die;
+                $this->display('UserM/paySub');die;
             }else{
                 $this->error('操作失败请重试');die;
             }
         }else{
             $this->error('操作失败请重试');die;
         }
-
     }
 
 

@@ -45,7 +45,7 @@ class WechatNotifyController extends \Org\Wxpay\WxPayNotify
             return false;
         }
         //查询订单状态
-        $Pay = M('pay');
+        $Pay = M('wxpay');
         $payInfo = $Pay->where(array('mytrade'=>$data['out_trade_no']))->field('mytrade,amount,status,uid,oid')->find();
         if($payInfo['status']==1){
             if($payInfo['oid']){    //直接购买

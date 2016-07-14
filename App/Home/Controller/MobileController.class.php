@@ -165,8 +165,10 @@ class MobileController extends Controller{
     public function reg(){
         $from_uid = I('get.from_uid');
         if($from_uid){
-            $info = M('user')->field('uid,leader')->find($from_uid);
+            $info = M('user')->field('uid,leader,is_leader')->find($from_uid);
             if($info){
+                if($info['is_leader'])
+                    $info['leader'] = $from_uid;
                 session('tg',$info);
             }
         }

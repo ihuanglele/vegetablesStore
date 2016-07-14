@@ -238,8 +238,10 @@ class UserMController extends Controller
             if($p==1){
                 //判断是否是销售总监
                 $isLeader = M('user')->where(array('uid'=>session('uid')))->getField('is_leader');
-                if($isLeader)
-                    $ret['team'] = M('user')->where(array('leader'=>session('uid')))->count();
+                if($isLeader){
+                    $mapTeam['invite_uid|leader'] = $this->uid;
+                    $ret['team'] = M('user')->where($mapTeam)->count();
+                }
             }
 
             $num = count($list);

@@ -94,6 +94,7 @@ class CommonController extends Controller{
                 $tg = session('tg');
                 if($tg){
                     $data['invite_uid'] = $tg['uid'];
+
                     $data['leader'] = $tg['leader'];
                 }else{
                     $data['invite_uid'] = 0;

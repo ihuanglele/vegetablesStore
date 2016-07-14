@@ -1,0 +1,34 @@
+<body>
+<div id="a-wrap">
+    <section id="section" class="section">
+        <article id="article" class="article pf">
+            <div class="mytony">
+                <div class="face"><img src="<{$info.headimgurl|headImgUrl}>" alt=""></div>
+                <div class="name"><{$info.nickname}></div>
+            </div>
+            <ul class="card-list">
+                <li class="card-item">
+                    <a href="#" class="item-cont">
+                        <b class="name icon-myorder">账户余额</b>
+                        <i class="data"><span class="a-color"><{$info.money}></span></i>
+                    </a>
+                    <a href="#" class="item-cont">
+                        <b class="name icon-myorder">账户积分</b>
+                        <i class="data"><span class="a-color"><{$info.coin}></span></i>
+                    </a>
+                    <a href="#" class="item-cont">
+                        <b class="name icon-myorder">消费金额</b>
+                        <i class="data"><span class="a-color"><{$info.use_money}></span></i>
+                    </a>
+                </li>
+            </ul>
+        </article>
+        <include file="Public/mFooter" on="4" />
+    </section>
+
+
+    <div>
+
+    </div>
+</div>
+</body>

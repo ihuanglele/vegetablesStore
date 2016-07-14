@@ -235,6 +235,12 @@ class UserMController extends Controller
             $map['invite_uid'] = session('uid');
             $Tool = A('Tool');
             $list = $Tool->getList('user',$map,'uid desc','nickname as name,phone,coin');
+            if($p==1){
+                //判断是否是销售总监
+                $isLeader = M('user')->where(array('uid'=>session('uid')))->getField('is_leader');
+                if($isLeader)
+                    $ret['team'] = M('user')->where(array('leader'=>session('uid')))->count();
+            }
 
             $num = count($list);
             $ret['status'] = 'success';
@@ -253,10 +259,31 @@ class UserMController extends Controller
         if(IS_AJAX){
             $p = I('p',1,'number_int');
             $type = I('get.type',3,'number_int');
-            $map['uid'] = session('uid');
-            $map['type'] = $type;
-            $Tool = A('Tool');
-            $list = $Tool->getList('money',$map,'mid desc','time,note,amount');
+            if(in_array($type,array(3,4))){
+                $map['uid'] = session('uid');
+                $map['type'] = $type;
+                $Tool = A('Tool');
+                $list = $Tool->getList('money',$map,'mid desc','time,note,amount');
+                if(count($list)){
+                    foreach($list as $k=>$v){
+                        $list[$k]['time'] = date('Y-m-d',$list[$k]['time']);
+                    }
+                }
+            }else if($type==5){  //获取总监的 这个麻烦一点呀
+                $map['uid'] = session('uid');
+                $map['type'] = 5;
+                $M = M('money');
+                $count = $M->where($map)->count();
+                $Page = new\Think\Page($count,16);
+                $field = 'DATE_FORMAT(FROM_UNIXTIME(time),"%Y-%c") as t,SUM(amount) as amount,COUNT(mid) as note';
+                $list = $M->where($map)->field($field)->order('t desc')->limit($Page->firstRow,$Page->listRows)->group('t')->select();
+                if(count($list)){
+                    foreach($list as $k=>$v){
+                        $list[$k]['time'] = $list[$k]['t'];
+                        $list[$k]['note'] = '共'.$list[$k]['note'].'笔收入';
+                    }
+                }
+            }
 
             $num = count($list);
             $ret['status'] = 'success';
@@ -270,9 +297,16 @@ class UserMController extends Controller
         }
     }
 
+    //我的钱包
+    public function wallet(){
+        $info = M('user')->find($this->uid);
+        $this->assign('info',$info);
+        $this->display('wallet');
+    }
+
     //我的菜箱
     public function myBox(){
-        $info = M('user')->where(array('uid'=>session('uid')))->field('is_store,goods')->find();
+        $info = M('user')->where(array('uid'=>session('uid')))->field('is_store,goods,card,status')->find();
         if($info['is_store']){
             $ac = I('get.ac');
             $gidArr = json_decode($info['goods'],true);
@@ -291,6 +325,9 @@ class UserMController extends Controller
             $this->assign('list',$list);
             $this->display('myBox');
         }else{
+            $UserStatus = C('UserStatue');
+            $this->assign('info',json_decode($info['card'],true));
+            $this->assign('status',$UserStatus[$info['status']]);
             $this->display('noVip');
         }
     }
@@ -299,13 +336,19 @@ class UserMController extends Controller
     public function applyVip(){
         $info = M('user')->field('is_store,card,use_money')->find($this->uid);
         if($info['use_money']>1980){
-            $name = I('post.name');
-            $card = I('post.card');
-            if($name && $card){
-                $data['card'] = json_encode(array('name'=>$name,'card'=>$card));
-                $data['uid'] = $this->uid;
-                $data['is_store'] = 1;
-                M('user')->save($data);
+            $da = array();
+            foreach($_POST as $k=>$v){
+                if($v==''){
+                    $this->error('填写完整银行卡信息');die;
+                }else{
+                    $da[$k] = $v;
+                }
+            }
+            $data['card'] = json_encode($da);
+            $data['uid'] = $this->uid;
+            $data['is_store'] = 0;
+            $data['status'] = 1;
+            if(M('user')->save($data)){
                 $this->success('处理成功',U('myBox'));
             }else{
                 $this->error('填写完整银行卡信息');
@@ -344,7 +387,7 @@ class UserMController extends Controller
     public function myBoxPic(){
         $info = M('user')->where(array('uid'=>session('uid')))->field('is_store,goods')->find();
         if($info['is_store']){
-            $url = U('mobile/index',array('from_uid'=>$this->uid),true,true);
+            $url = U('mobile/store',array('from_uid'=>$this->uid),true,true);
             $this->assign('url',$url);
             $this->display('myBoxPic');
         }else{
@@ -399,7 +442,7 @@ class UserMController extends Controller
     public function buy(){
         $Tool = A('Order');
         $order = $Tool->addOrder();
-        if($order){
+        if($order['status']){
             $data['uid'] = session('uid');
             $data['oid'] = $order['trade'];
             $data['amount'] = $order['money'];
@@ -497,49 +540,4 @@ class UserMController extends Controller
         $this->display('myFav');
     }
 
-
-
-    /**
-     *显示提现记录
-     */
-    public function getCash(){
-        $uid = session('uid');
-        $uMoney = M('user')->where(array('uid'=>$uid))->getField('money');
-        $CashRate = S('getCashRate');
-        if(!$CashRate) $CashRate = array('rate'=>10,'money'=>'100');
-        if(isset($_POST['money'])){
-            $money = I('post.money',0);
-            if($money>0){
-                if($uMoney<$CashRate['money']){$this->error('低于提现最低金额');die;}
-                $Pay = new \Org\Wxpay\WxBizPay();
-                $data['openid'] = session('openid');
-                $data['amount'] = intval($money*(100-$CashRate['rate']));
-                $data['partner_trade_no'] = createBizPayNum();
-                $data['desc'] = '提现操作';
-                $res = $Pay->send($data);
-                if($res['result_code']=='SUCCESS'){//生成订单信息成功
-                    $data['uid'] = $uid;
-                    $data['time'] = date('Y-m-d H:i:s');
-                    $data['money'] = $money;
-                    $data['trade'] = $data['partner_trade_no'];
-                    $data['status'] = 2;
-                    if(M('pack')->add($data)){
-                        M('user')->where(array('uid'=>$uid))->setDec('money',$money);
-                        $this->success('提现成功',U('user'));
-                    }else{
-                        $this->error('操作失败请重试');die;
-                    }
-                }else{
-                    $this->error('操作失败请重试');die;
-                }
-            }else{
-                $this->error('输入金额有误');
-            }
-        }else{
-            $this->assign('uMoney',$uMoney);
-            $this->assign('CashRate',$CashRate);
-            $this->getData('pack',array('uid'=>session('uid'),'status'=>2),'pid desc');
-            $this->display('getCash');
-        }
-    }
 }

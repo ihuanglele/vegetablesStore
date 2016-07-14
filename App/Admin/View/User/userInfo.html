@@ -30,10 +30,6 @@
                 </td>
             </tr>
             <tr>
-                <td>开户姓名:<{$info.card.name}></td>
-                <td>开户号:<{$info.card.card}></td>
-            </tr>
-            <tr>
                 <td>积分：<{$info.coin}></td>
                 <td>
                     <form class="form-inline" action="<{:U('user/update')}>" method="post">
@@ -64,43 +60,166 @@
         </table>
     </div>
 
-    <!--添加自定义财务记录-->
-    <!--<div class="panel panel-default">
-        <div class="panel-heading">财务管理</div>
-        <div class="panel-body">
-            <div class="col-xs-8 col-xs-offset-2">
-                <form id="money" class="form-horizontal" name="money" action="<{:U('user/umoney')}>" method="post">
+    <div class="col-xs-6">
+        <div class="panel panel-success">
+            <div class="panel-heading">店铺信息</div>
+            <div class="panel-body">
+                <form action="<{:U('store')}>" method="post">
                     <div class="row">
-                        <div class="col-xs-3">
-                            <select name="status" class="form-control">
-                                <option value="5">扣除</option>
-                                <option value="4">奖励</option>
-                            </select>
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">开户人姓名</div>
+                                    <input type="text" class="form-control" value="<{$info.card.name}>" name="card_name"
+                                           placeholder="银行卡开户人姓名">
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-xs-3">
-                            <input class="form-control" name="amount" placeholder="金额" type="text" />
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">银行卡号</div>
+                                    <input type="text" class="form-control" value="<{$info.card.card}>" name="card_card"
+                                           placeholder="银行卡开户人姓名">
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-xs-3">
-                            <input type="hidden" name="uid" value="<{$info.uid}>" />
-                            <button class="btn btn-warning" name="submit">添加记录</button>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">开户行</div>
+                                    <input type="text" class="form-control" value="<{$info.card.bank}>" name="card_bank"
+                                           placeholder="开户行">
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-xs-3 text-center">
-                            <a href="<{:U('money/index',array('id'=>$info['uid']))}>" target="_blank" role="button" class="btn btn-default">查看详细记录</a>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">身份证号</div>
+                                    <input type="text" class="form-control" value="<{$info.card.id}>" name="card_id"
+                                           placeholder="身份证号">
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-xs-12" style="margin-top: 20px;">
-                            <textarea name="note" class="form-control" placeholder="说明"></textarea>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">联系方式</div>
+                                    <input type="text" class="form-control" value="<{$info.card.phone}>"
+                                           name="card_phone" placeholder="联系方式">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">家庭地址</div>
+                                    <input type="text" class="form-control" value="<{$info.card.address}>"
+                                           name="card_address" placeholder="家庭地址">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">店铺名</div>
+                                    <input type="text" class="form-control" value="<{$info.card.storeName}>"
+                                           name="card_storeName" placeholder="店铺名">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class='row'>
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">状态</div>
+                                    <select name="status" class="form-control">
+                                        <option value="0">未申请</option>
+                                        <option value="1">申请中</option>
+                                        <option value="2">已通过</option>
+                                        <option value="3">已拒绝</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class='row'>
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <input type="hidden" name="uid" value="<{$info.uid}>" />
+                                <button class="btn btn-block btn-danger" name="submit" type="submit">修改</button>
+                            </div>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
-    </div>-->
+    </div>
+
+    <div class="col-xs-6">
+        <div class="panel panel-danger">
+            <div class="panel-heading">财务管理</div>
+            <div class="panel-body">
+                <div class="col-xs-12">
+                    <form id="money" class="form-horizontal" name="money" action="<{:U('user/umoney')}>" method="post">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <select name="mstatus" class="form-control">
+                                    <option value="6">提现</option>
+                                    <option value="7">奖励</option>
+                                    <option value="8">扣除</option>
+                                </select>
+                            </div>
+                            <div class="col-xs-3">
+                                <input class="form-control" name="amount" placeholder="金额" type="text"/>
+                            </div>
+                            <div class="col-xs-3">
+                                <input type="hidden" name="uid" value="<{$info.uid}>"/>
+                                <button class="btn btn-warning" name="submit">添加记录</button>
+                            </div>
+                            <div class="col-xs-3 text-center">
+                                <a href="<{:U('money/user',array('uid'=>$info['uid']))}>" target="_blank" role="button"
+                                   class="btn btn-default">查看详细记录</a>
+                            </div>
+                            <div class="col-xs-12" style="margin-top: 20px;">
+                                <textarea name="note" class="form-control" placeholder="说明"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 <script>
     $(window).ready(function(){
         $('select[name="is_leader"]').val('<{$info.is_leader}>');
         $('select[name="is_store"]').val('<{$info.is_store}>');
+        $('select[name="status"]').val('<{$info.status}>');
         var $moneyForm = $('#money');
         $moneyForm.submit(function(){
             if(isNaN($('input[name="amount"]').val())){

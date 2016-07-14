@@ -9,14 +9,30 @@
                 <div class="dialog" style="display: none;">
                     <div class="box tc" id="dialog_box_tc"></div>
                 </div>
+                <p><{$status}></p>
                 <div class="form-list p">
                     <ul>
                         <li class="fl-item">
                             <b class="name">
-                                <input type="text" class="input-style" id="name" placeholder="开户人姓名"></b></li>
+                                <input type="text" class="input-style" value="<{$info.name}>" id="name" placeholder="开户人姓名"></b></li>
                         <li class="fl-item">
                             <b class="name">
-                                <input type="text" class="input-style" id="card" placeholder="输入卡号"></b></li>
+                                <input type="text" class="input-style" value="<{$info.card}>"  id="card" placeholder="输入卡号"></b></li>
+                        <li class="fl-item">
+                            <b class="name">
+                                <input type="text" class="input-style" value="<{$info.bank}>"  id="bank" placeholder="开户行"></b></li>
+                        <li class="fl-item">
+                            <b class="name">
+                                <input type="text" class="input-style" value="<{$info.phone}>"  id="phone" placeholder="联系方式"></b></li>
+                        <li class="fl-item">
+                            <b class="name">
+                                <input type="text" class="input-style" value="<{$info.id}>"  id="id" placeholder="身份证号"></b></li>
+                        <li class="fl-item">
+                            <b class="name">
+                                <input type="text" class="input-style" value="<{$info.address}>"  id="address" placeholder="家庭地址"></b></li>
+                        <li class="fl-item">
+                            <b class="name">
+                                <input type="text" class="input-style" value="<{$info.storeName}>"  id="storeName" placeholder="店铺名"></b></li>
                     </ul>
                 </div>
                 <a href="javascript:;" id="btnLogin" class="login">申请代理</a>
@@ -34,13 +50,23 @@
         $('#btnLogin').click(function(){
             var name = $('#name').val();
             var card = $('#card').val();
-            if(name && card){
+            var bank = $('#bank').val();
+            var phone = $('#phone').val();
+            var id = $('#id').val();
+            var address = $('#address').val();
+            var storeName = $('#storeName').val();
+            if(name && card && bank && phone && id && address && storeName){
                 $.ajax({
                     'url':"<{:U('UserM/applyVip')}>",
                     'type':'post',
                     'data':{
                         name:name,
-                        card:card
+                        card:card,
+                        bank:bank,
+                        phone:phone,
+                        id:id,
+                        address:address,
+                        storeName:storeName
                     },
                     'success':function(res){
                         if(res.status){
@@ -51,7 +77,7 @@
                     }
                 })
             }else{
-                alert('填写银行卡信息');
+                alert('填写完整信息');
             }
         })
     })

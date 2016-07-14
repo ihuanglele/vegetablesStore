@@ -35,6 +35,34 @@ class MobileController extends Controller{
         $this->display('index');
     }
 
+    //个人店铺
+    public function store(){
+        $from_uid = I('get.from_uid');
+        $userInfo = M('user')->field('is_store,goods,card')->find($from_uid);
+        if($userInfo && $userInfo['is_store']){
+            $rewardGidArr = json_decode($userInfo['goods']);
+        }else{
+            $rewardGidArr = array();
+        }
+        if(count($rewardGidArr)){
+            $store = json_decode($userInfo['card'],true);
+            $this->assign('title','欢迎光临'.$store['storeName'].'的菜店');
+            $Tool = A('Tool');
+            $map['gid'] = array('in',$rewardGidArr);
+            $map['status'] = 2;
+            $order = 'gid desc';
+            $list = $Tool->getGoods($map,0,$order);
+            $this->assign('list',$list);
+
+            $slides = readConf('carouselMJson');
+            $this->assign('slides',json_decode($slides,true));
+
+            $this->display('store');
+        }else{
+            $this->index();
+        }
+    }
+
     //分类页
     public function lists(){
         $goodsType = json_decode(readConf('goodsType'),true);

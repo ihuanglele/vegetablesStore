@@ -32,7 +32,7 @@ class OrderController
             $cart = session('cart');
 
             //判断是否来自推广
-            $from_uid = session('uid');
+            $from_uid = session('from_uid');
             $rewardGidArr = array();
             if($from_uid){
                 $userInfo = M('user')->field('is_store,goods')->find($from_uid);

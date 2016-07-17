@@ -222,10 +222,14 @@ class CommonController extends Controller{
 
     //查看订单状态
     public function checkOrder(){
-        $map['trade'] = I('post.id');
+        layout(false);C('SHOW_PAGE_TRACE',false);
+        $map['trade'] = I('get.id');
         $map['uid'] = session('uid');
         $status = M('orders')->where($map)->getField('status');
-        die($status);
+        if(!$status){
+            $status = 0;
+        }
+        echo $status;
     }
 
 }

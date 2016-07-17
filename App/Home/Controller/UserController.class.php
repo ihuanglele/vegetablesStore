@@ -126,7 +126,7 @@ class UserController extends CommonController
             $data['pay_time'] = 0;
             if(M('wxpay')->add($data)){
                 $this->assign('order',$order);
-                $this->assign('id',$trade_no);
+                $this->assign('id',$da['oid']);
                 $this->assign('money',$da['amount']);
                 $this->display('User/paySub');die;
             }else{

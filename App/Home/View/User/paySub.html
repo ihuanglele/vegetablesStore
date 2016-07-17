@@ -5,7 +5,7 @@
     <title>微信支付</title>
     <script src="__PUBLIC__/js/jquery-1.7.2.min.js"></script>
     <script>
-        var id = '<{$trade_no}>';
+        var id = '<{$id}>';
         setInterval(function(){
             $.ajax({
                 'url':"<{:U('common/checkOrder')}>?id="+id,
@@ -38,7 +38,7 @@
 </head>
 <body>
     <div class="box">
-        <img src="<{$order.code_url}>" width="80%">
+        <img src="http://qr.liantu.com/api.php?text=<{$order.code_url}>" width="80%">
         <p class="tip">打开微信扫一扫付款</p>
     </div>
 </body>

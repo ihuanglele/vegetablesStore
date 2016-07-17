@@ -94,7 +94,6 @@ class CommonController extends Controller{
                 $tg = session('tg');
                 if($tg){
                     $data['invite_uid'] = $tg['uid'];
-
                     $data['leader'] = $tg['leader'];
                 }else{
                     $data['invite_uid'] = 0;
@@ -219,6 +218,14 @@ class CommonController extends Controller{
                 die(0);
             }
         }
+    }
+
+    //查看订单状态
+    public function checkOrder(){
+        $map['trade'] = I('post.id');
+        $map['uid'] = session('uid');
+        $status = M('orders')->where($map)->getField('status');
+        die($status);
     }
 
 }

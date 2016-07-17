@@ -167,7 +167,7 @@ class MobileController extends Controller{
         if($from_uid){
             $info = M('user')->field('uid,leader,is_leader')->find($from_uid);
             if($info){
-                if($info['is_leader'])
+                if($info['is_leader'])  //如果推荐人自己是leader
                     $info['leader'] = $from_uid;
                 session('tg',$info);
             }

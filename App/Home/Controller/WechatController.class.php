@@ -57,6 +57,27 @@ class WechatController extends Controller {
         return $order;
     }
 
+    /**
+     * 扫描付款
+     */
+    public function scanPay($body,$attach,$trade_no,$money,$tag){
+        $tools = new \Org\Wxpay\JsApi();
+        //②、统一下单
+        $input = new \Org\Wxpay\WxPayUnifiedOrder();
+        $input->SetBody($body);
+        $input->SetAttach($attach);
+        $input->SetOut_trade_no($trade_no);
+        $input->SetTotal_fee($money);
+        $input->SetTime_start(date("YmdHis"));
+        $input->SetTime_expire(date("YmdHis", time() + 600));
+        $input->SetGoods_tag($tag);
+        $input->SetNotify_url(C('Wx.notify_url'));
+        $input->SetTrade_type("NATIVE");
+        $input->SetProduct_id($trade_no);
+        $order = \Org\Wxpay\Wxpay::unifiedOrder($input);
+        return $order;
+    }
+
 
     public function refund($pid){
         $out_trade_no = $pid;

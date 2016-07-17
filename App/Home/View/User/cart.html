@@ -1,13 +1,13 @@
-<include file="Public:pcHeader" />
-<link href="__PUBLIC__/css/giftconfirm.css" rel="stylesheet" />
+<include file="Public:pcHeader"/>
+<link href="__PUBLIC__/css/giftconfirm.css" rel="stylesheet"/>
 <style>
-    #loginWarp{
+    #loginWarp {
         position: absolute;
-        top:0px;
+        top: 0px;
         left: 0px;
         width: 100%;
         height: 100%;
-        background: rgba(12,12,12,0.5);
+        background: rgba(12, 12, 12, 0.5);
         z-index: 9999;
     }
 </style>
@@ -30,7 +30,7 @@
                     <a href="javascript:void(0)" class="step_line"></a>
                 </li>
                 <li>
-                    <a href="http://www.tonysfarm.com/order/orderconfirm.html" class="step2_on"></a>
+                    <a href="<{:U('user/cart')}>" class="step2_on"></a>
                 </li>
                 <li>
                     <a href="javascript:void(0)" class="step_line"></a>
@@ -43,913 +43,124 @@
     </div>
     <div class="orderConfirm_h2 clearfix">
         <span>-订单结算-</span></div>
-    <div class="acceptadd leftbox">
-        <div class="addressBox_h" id="wocao">
-            <h2 class="title">送货地址
-                <s></s>
-            </h2>
+    <form action="<{:U('user/buy')}>" method="post">
+        <div class="acceptadd leftbox">
+            <div class="addressBox_h" id="wocao">
+                <h2 class="title">送货地址
+                    <s></s>
+                </h2>
 
-            <h3 id="defaultAddress">送至：</h3>
-            <a href="javascript:void(0)" class="newadd" onclick="memberAddress('')">使用新地址</a></div>
-        <div class="addressBox_c">
-            <ul class="select_address nolist leftbox" id="memberAddressListUL">
-                <li id="memberAddressLi196914">
-                    <input onclick="changeAddDis('送至：玉树州曲麻莱县12121212收货人：1212121212(18121212222 121212121)')"
-                           name="memberAddressId" value="196914" type="radio">青海省 玉树州 曲麻莱县 12121212(1212121212)
-                    18121212222
-                    <a href="javascript:void(0)" class="delAdd" onclick="removeMemberAddress(196914)">删除</a></li>
-                <li id="memberAddressLi196915">
-                    <input onclick="changeAddDis('送至：中卫市海原县erererer收货人：444444(18111111111 18111111111)')"
-                           name="memberAddressId" value="196915" type="radio">宁夏 中卫市 海原县 erererer(444444)
-                    18111111111
-                    <a href="javascript:void(0)" class="delAdd" onclick="removeMemberAddress(196915)">删除</a></li>
-                <li id="memberAddressLi196918">
-                    <input onclick="changeAddDis('送至：固原市泾源县sdfsfsf收货人：jdjdjdjdd(18222222222 18222222222)')"
-                           name="memberAddressId" value="196918" type="radio">宁夏 固原市 泾源县 sdfsfsf(jdjdjdjdd)
-                    18222222222
-                    <a href="javascript:void(0)" class="delAdd" onclick="removeMemberAddress(196918)">删除</a></li>
-                <li id="memberAddressLi196919">
-                    <input onclick="changeAddDis('送至：上海市长宁区sdsdsd收货人：sdsdsd(18000000000 18000000000)')"
-                           name="memberAddressId" value="196919" type="radio">上海市 上海市 长宁区 sdsdsd(sdsdsd) 18000000000
-                    <a href="javascript:void(0)" class="delAdd" onclick="removeMemberAddress(196919)">删除</a></li>
-            </ul>
-            <div class="thickbox_address2" id="addressDis">
-                <table id="addAddressNew" style="display:none" class="add_address" border="0" cellpadding="0"
-                       cellspacing="0" width="550px">
-                    <tbody>
-                    <tr>
-                        <td class="td_width">收货人姓名：</td>
-                        <td>
-                            <input id="receiverName2" class="bordersty1" name="receiverName2" type="text">
-                            <strong>*</strong></td>
-                    </tr>
-                    <tr>
-                        <td class="td_width">所在地区：</td>
-                        <td>
-                            <select class="bordersty2" id="province2" name="province2">
-                                <option selected="selected" value="-1">--请选择--</option>
-                                <option value="83027">湖北</option>
-                                <option value="40033">宁夏</option>
-                                <option value="40032">青海省</option>
-                                <option value="40031">甘肃省</option>
-                                <option value="40030">西藏</option>
-                                <option value="40029">贵州省</option>
-                                <option value="40028">江西省</option>
-                                <option value="40027">安徽省</option>
-                                <option value="40026">内蒙古</option>
-                                <option value="40025">陕西省</option>
-                                <option value="40024">新疆</option>
-                                <option value="40023">四川省</option>
-                                <option value="40022">吉林省</option>
-                                <option value="40021">辽宁省</option>
-                                <option value="40020">山西省</option>
-                                <option value="40019">河南省</option>
-                                <option value="40018">河北省</option>
-                                <option value="40017">黑龙江省</option>
-                                <option value="40016">天津市</option>
-                                <option value="40015">湖南省</option>
-                                <option value="40014">广西省</option>
-                                <option value="40013">广东省</option>
-                                <option value="40012">海南省</option>
-                                <option value="40011">福建省</option>
-                                <option value="40010">湖北省</option>
-                                <option value="40009">山东省</option>
-                                <option value="40008">云南省</option>
-                                <option value="40007">重庆市</option>
-                                <option value="40005">江苏省</option>
-                                <option value="40004">北京市</option>
-                                <option value="40003">浙江省</option>
-                                <option value="40001">上海市</option>
-                            </select>
-                            <select class="bordersty2" id="city2" name="city2">
-                                <option selected="selected" value="-1">--请选择--</option>
-                            </select>
-                            <select class="bordersty2" id="district2" name="district2">
-                                <option selected="selected" value="-1">--请选择--</option>
-                            </select>
-                            <strong>*</strong></td>
-                    </tr>
-                    <tr>
-                        <td class="td_width">街道地址：</td>
-                        <td>
-                                <textarea class="bordersty3" rows="" cols="" name="deliveryAddress2"
-                                          id="deliveryAddress2"></textarea>
-                      <span>
-                        <strong>*</strong>不需要重复填写省/市/区</span></td>
-                    </tr>
-                    <tr>
-                        <td class="td_width">手机号码：</td>
-                        <td>
-                            <input name="receiverMobile2" id="receiverMobile2" class="bordersty1" type="text">
-                            <span>手机号码或电话号码必填一个</span></td>
-                    </tr>
-                    <tr>
-                        <td class="td_width">电话号码：</td>
-                        <td>
-                            <input class="bordersty1" name="receiverTel2" id="receiverTel2" type="text">
-                            <span>手机号码或电话号码必填一个</span></td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td>
-                            <input onclick="saveMemberAddress2()" src="c2_files/save.jpg" name="" type="image">
-                            <input onclick="closeAddress()" src="c2_files/cancel.jpg" name="" type="image"></td>
-                    </tr>
-                    </tbody>
-                </table>
+                <h3 id="defaultAddress">送至：</h3>
+                <a href="<{:U('user/address')}>" class="newadd">使用新地址</a></div>
+            <div class="addressBox_c">
+                <ul class="select_address nolist leftbox" id="memberAddressListUL">
+                    <volist name="address" id="vo">
+                        <li>
+                            <label>
+                                <input onclick="changeAddDis('送至：<{$vo.address}>收货人：<{$vo.name}>(<{$vo.phone}>)')"
+                                       name="address" data-defalut="<{$vo.defalut}>" value="<{$vo.id}>" type="radio"><{$vo.address}>-<{$vo.name}>(<{$vo.phone}>)
+                            </label>
+                    </volist>
+                </ul>
             </div>
         </div>
-    </div>
-    <div class="settime leftbox">
-        <div class="settime_h">
-            <h2 class="title">发货日期</h2>
-            <!--日期-->
-            <div style="z-index:19" class="mod_selectDate">
-                <div ordermark="1_1_1" class="timedDelivery_btn_input">
-                    <div class="timedDelivery_input clearfix">
-                  <span class="text">
-                    <span id="disDateNew">任意日期</span>
-                    <span id="timespanDis">&nbsp;&nbsp;</span>
-                    <em></em>
-                  </span>
-                        <i class="icon data_icon"></i>
-                    </div>
-                    <div class="freeTips" style="display: none;">
-                        <div class="text">
-                            <i>
-                            </i>
-                            <span class="onTimeFee">点击这里选择收货时间</span></div>
-                    </div>
-                </div>
-                <div id="timeInn" class="sel_list_box clearfix none" style="display:none;">
-                    <div class="sel_list sel1">
-                        <div class="ul_box scroll-pane" style="overflow: hidden; padding: 0px; width: 203px;">
-                            <div class="jspContainer" style="width: 203px; height: 288px;">
-                                <div class="jspPane" style="padding: 0px; top: 0px; left: 0px; width: 203px;">
-                                    <ul id="orderDateDis">
-                                        <li class="">任意日期</li>
-                                        <li id="w0" class="t" onclick="changeColor(0,3)">周四
-                            <span id="a0">2016-06-30
-                              <i class="icon right_arrow"></i></span>
-                                        </li>
-                                        <li id="w1" class="t" onclick="changeColor(1,3)">周五
-                            <span id="a1">2016-07-01
-                              <i class="icon right_arrow"></i></span>
-                                        </li>
-                                        <li id="w2" class="t" onclick="changeColor(2,3)">周六
-                            <span id="a2">2016-07-02
-                              <i class="icon right_arrow"></i></span>
-                                        </li>
-                                    </ul>
+
+        <div class="goodslist leftbox">
+            <div class="goodslist_h">
+                <h2 class="title">商品清单</h2>
+                <a href="<{:U('index/cart')}>">返回修改购物车</a></div>
+            <div class="goodslist_c">
+                <ul class="goodsListTit">
+                    <li class="clearfix">
+                        <div class="goodsInfo">商品信息</div>
+                        <div class="price">单价</div>
+                        <div class="number">购买数量</div>
+                        <div class="subtotal">小计</div>
+                    </li>
+                </ul>
+                <ul class="goodsListCont" id="goodslist_table">
+                    <volist name="data" id="vo">
+                        <li class="clearfix">
+                            <input type="hidden" name="gid[]" value="<{$vo.gid}>" />
+                            <input type="hidden" name="num[]" value="<{$vo.num}>" />
+                            <div class="goods_orderInfo"></div>
+                            <div class="goods_info">
+                                <div class="goodsInfo">
+                                    <div class="showImg">
+                                        <img src="__ROOT__/upload/<{$vo.img}>" height="80" width="80"></div>
+                                    <p class="goodsName"><{$vo.name}></p>
+
+                                    <p class="goodsDesc"></p>
                                 </div>
+                                <div class="price">¥<{$vo.price}></div>
+                                <div class="number"><{$vo.num}></div>
+                                <div class="subtotal">¥<{$vo['price']*$vo['num']}></div>
                             </div>
-                        </div>
-                    </div>
-                    <div id="tiemSpan2" class="sel_list sel2 sel_list2" style="display: none;">
-                        <div class="timeto">
-                            <div class="timecon"></div>
-                        </div>
-                        <div class="ul_box scroll-pane jspScrollable"
-                             style="overflow: hidden; padding: 0px; width: 134px;" tabindex="0">
-                            <div class="jspContainer" style="width: 134px; height: 252px;">
-                                <div class="jspPane" style="padding: 0px; width: 124px; top: 0px;">
-                                    <ul id="timespaninner">
-                                        <li id="g0" class="" onclick="changeTiemSpan(0,1,4)">全天</li>
-                                        <li id="g1" class="" onclick="changeTiemSpan(1,2,4)">8:00-12:00</li>
-                                        <li id="g2" class="" onclick="changeTiemSpan(2,11,4)">12:00-17:00</li>
-                                        <li id="g3" class="" onclick="changeTiemSpan(3,12,4)">17:00-20:00</li>
-                                    </ul>
-                                </div>
-                                <div class="jspVerticalBar" style="display: none;">
-                                    <div class="jspCap jspCapTop"></div>
-                                    <div class="jspTrack" style="height: 252px;">
-                                        <div class="jspDrag" style="height: 136px;">
-                                            <div class="jspDragTop"></div>
-                                            <div class="jspDragBottom"></div>
-                                        </div>
-                                    </div>
-                                    <div class="jspCap jspCapBottom"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                        </li>
+                    </volist>
+                </ul>
+                <div class="subtotalBox" id="allproductPrice">小计：¥<{$amount}></div>
+
             </div>
-            <!--日期--></div>
-        <table style="margin-top:6px; display:none;" border="0" cellpadding="0" cellspacing="0">
-            <tbody>
-            <tr>
-                <td height="30" width="22">
-                    <input value="1" checked="checked" name="deliveryoption" id="deliveryOnce"
-                           onclick="initOnceOrMoreDelivery(false,1)" type="radio"></td>
-                <td align="left" width="80">
-                    <b style="padding:0;">
-                        <strong style="color:#666;">一次送货</strong></b>
-                </td>
-                <td>
-                    <span class="tips">预约配送日期，全部商品一次完成配送.</span></td>
-            </tr>
-            <tr id="deliveryMoreTr" style="display: none;">
-                <td height="30" width="22">
-                    <input value="2" name="deliveryoption" id="deliveryMore"
-                           onclick="initOnceOrMoreDelivery(false,2)" type="radio"></td>
-                <td align="left" width="80">
-                    <b style="padding:0;">
-                        <strong style="color:#666;">分次送货</strong></b>
-                </td>
-                <td>
-                    <span class="tips">制定商品购买周期，按照您的选择定期配送。</span></td>
-            </tr>
-            </tbody>
-        </table>
-        <div id="singleDeliveryPanel" class="time1 leftbox deliveryTime" style="margin-top: 10px; display: block;">
-            <table border="0" cellpadding="0" cellspacing="0">
-                <tbody>
-                <tr>
-                    <td width="70">
-                        <!-- 发货日期 --></td>
-                    <td width="104">
-                        <input id="orderDate1" di="" class="txtfld2" style="height:16px;display:none;"
-                               onclick="bindDevlieryDate1();" onfocus="showCalendar1();" name="orderDate1"
-                               readonly="readonly" type="text"></td>
-                    <td>
-                        <div id="cal1" style="position: absolute; margin-top: 1px; display: none;"></div>
-                    </td>
-                    <td>
-                        <select id="deliveryTimeSpan" class="txtfld2" name="deliveryTimeSpan"
-                                style="display:none;"></select>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <div id="dev_tips"></div>
-            <input name="3072" id="product_3072" value="" type="hidden"></div>
-        <div id="moreDeliveryPanel" class="moresend leftbox" style="margin-top:10px; display: none;">
-            <div>
-                <div id="newDate" style="display:none">
-                    <div class="datetitle">
-                        <strong>请在日历表中分别选出发货日期</strong>&nbsp;&nbsp;&nbsp;&nbsp;已选
-                        <b id="selectCount">0</b>次，还剩
-                        <b id="remainCount">0</b>次
-                        <a href="javascript:showDate();"></a></div>
-                    <div id="nextDate">
-                        <div class="Header">
-                            <div class="r">
-                                <em>8</em>&gt;</div>
-                            <div class="c">
-                                <em>2016</em>-
-                                <em>7</em></div>
-                        </div>
-                        <div class="Weeks">
-                            <span style="color: red;">日</span>
-                            <span>一</span>
-                            <span>二</span>
-                            <span>三</span>
-                            <span>四</span>
-                            <span>五</span>
-                            <span style="color: red;">六</span></div>
-                        <ul>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);"></li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);"></li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);"></li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);"></li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);"></li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                1
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                2
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                3
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                4
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                5
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                6
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                7
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                8
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                9
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                10
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                11
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                12
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                13
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                14
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                15
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                16
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                17
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                18
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                19
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                20
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                21
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                22
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                23
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                24
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                25
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                26
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                27
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                28
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                29
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                30
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                31
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);"></li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);"></li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);"></li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);"></li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);"></li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);"></li>
-                        </ul>
-                    </div>
-                    <div id="nowDate">
-                        <div class="Header">
-                            <div class="l">&lt;
-                                <em>5</em></div>
-                            <div class="c">
-                                <em>2016</em>-
-                                <em>6</em></div>
-                        </div>
-                        <div class="Weeks">
-                            <span style="color: red;">日</span>
-                            <span>一</span>
-                            <span>二</span>
-                            <span>三</span>
-                            <span>四</span>
-                            <span>五</span>
-                            <span style="color: red;">六</span></div>
-                        <ul>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);"></li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);"></li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);"></li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                1
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                2
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                3
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                4
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                5
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                6
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                7
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                8
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                9
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                10
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                11
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                12
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                13
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                14
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                15
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                16
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                17
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                18
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                19
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                20
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                21
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                22
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                23
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                24
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                25
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                26
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                27
-                            </li>
-                            <li style="background: rgb(204, 204, 204) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                28
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                29
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);">
-                                30
-                            </li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);"></li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);"></li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);"></li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);"></li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);"></li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);"></li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);"></li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);"></li>
-                            <li style="background: rgb(245, 245, 245) none repeat scroll 0% 0%; color: rgb(153, 153, 153);"></li>
-                        </ul>
-                    </div>
-                    <div class="orderDateButton">
-                        <div id="freeDeliveryPrice" style="display:none">与×××天一起送免运费</div>
-                        <p>
-                            <strong>温馨提示</strong>您的商品随蔬菜箱
-                            <i></i>一起配送可以减免运费哦</p>
-                        <span id="confirmOrderList" onclick="confirmOrderList()">确认</span>
-                        <span id="clearOrderList">清空</span></div>
-                </div>
-                <div id="overlay"></div>
-                <div id="win">
-                    <div id="otitle">
-                        <div id="close"></div>
-                        <div id="otitlestr"></div>
-                    </div>
-                    <div id="showstr"></div>
-                </div>
-            </div>
-            <table border="0" cellpadding="0" cellspacing="0">
-                <tbody>
-                <tr>
-                    <td width="96">请设置送货次数</td>
-                    <td width="84">
-                        <select name="" class="txtfld2" style="width:72px;" id="maxDeliveryCount"
-                                onchange="changeDeliveryCount()"></select>
-                    </td>
-                    <td width="74">和发货日期</td>
-                    <td width="36">
-                        <div id="setOrderDateDiv">
-                            <a href="javascript:showDate();" title="点击可设置发货日期">
-                                <img src="__PUBLIC__/images/shrq.gif" alt="点击可设置发货日期"></a>
-                        </div>
-                        <!--input id="setOrderDateBtn" type="button" src="/images/shrq.gif" value="点击可设置发货日期" onclick="showDate()"/-->
-                    </td>
-                    <td>，我希望在
-                        <select id="moreDeliveryTimeSpan" class="txtfld2" name="moreDeliveryTimeSpan"></select>&nbsp;收货。
-                    <span id="deliveryPriceSpan" style="display: none;">单次运费&nbsp;&nbsp;
-                      <strong style="margin-right:2px;" id="onceDeliveryPrice">0</strong>元，合计运费&nbsp;&nbsp;
-                      <strong style="margin-right:2px;" id="allDeliveryPrice">0</strong>元
-                      <a class="lookscopecost" href="http://www.tonysfarm.com/help/help_scopecost.html" target="_blank">查看配送费用</a></span>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <div class="vegbox_warpper leftbox">
-                <div class="vegname leftbox">
-                    <p>
-                    </p>
-                    <dl>
-                        <dt>
-                        <div class="leftpart">请分配您所选购的商品</div>
-                        <div class="rightpart">总件数</div>
-                        </dt>
-                        <div id="deliveryProductList"></div>
-                    </dl>
-                </div>
-                <div class="vegbox_con leftbox">
-                    <div class="vegbox_infor" id="vegbox_infor">
-                        <table border="0" cellpadding="0" cellspacing="0">
-                            <tbody>
-                            <tr id="deliveryCountList"></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div id="confirmMoreDelivery">
-                <input onclick="confirmMoreDelivery()" type="button"></div>
-            <div id="cancelMoreDelivery" style="display:none">
-                <input onclick="cancelMoreDelivery()" type="button"></div>
-        </div>
-    </div>
-    <div class="payMethod leftbox">
-        <div class="payMethod_h curr">
-            <h2 class="title">支付方式
-                <s></s>
-            </h2>
 
-            <h3 id="chargeTypeDis">网上支付</h3></div>
-        <ul class="methodList nolist leftbox">
-            <li id="paytype_chuzhika">
-                <input value="10" name="paymentMethod" onclick="changeChargeType(1)" id="chargableCardPay"
-                       type="radio">
-                <i class="methodName">储值卡支付</i>
-              <span>支持多利储值卡在线支付
-                <span style="color:red">使用储值卡支付不开具发票&nbsp;
-                  <a href="http://www.tonysfarm.com/help/help_prepaidCard.html" target="_blank">查看多利储值卡章程</a></span>
-              </span>
-            </li>
-            <li>
-                <input value="5" name="paymentMethod" checked="checked" id="onlinePay" onclick="changeChargeType(2)"
-                       type="radio">
-                <i class="methodName">网上支付</i>
-              <span>即时到帐，支持绝大数银行借记卡及部分银行信用卡&nbsp;
-                <a href="http://www.tonysfarm.com/help/help_onlinepay.html" target="_blank">查看银行及限额</a></span>
-            </li>
-            <li id="onlinePickUpLi" style="">
-                <input value="8" name="paymentMethod" id="onlinePickUp" onclick="changeChargeType(3)" type="radio">
-                <i class="methodName">货到付款</i>
-                <span>送货上门后再收款，支持现金、POS机刷卡</span></li>
-            <li id="paytype_balance">
-                <input value="6" name="paymentMethod" onclick="changeChargeType(6)" id="balancePay" type="radio">
-                <i class="methodName">账户余额支付</i>
-                <span>用多利账户余额直接支付</span></li>
-        </ul>
-    </div>
-    <div class="goodslist leftbox">
-        <div class="goodslist_h">
-            <h2 class="title">商品清单</h2>
-            <a href="http://www.tonysfarm.com/order/shopcart.html">返回修改购物车</a></div>
-        <!--<table width="100%" border="0" cellspacing="0" cellpadding="0" class="goodslist_table" id="goodslist_table">
-        <tr class="header">
-        <td>商品编号</td>
-        <td>商品名称</td>
-        <td>配送总数量</td>
-        <td>单价</td>
-        <td>优惠</td>
-        <td>小计</td></tr>
-        </table>-->
-        <div class="goodslist_c">
-            <ul class="goodsListTit">
-                <li class="clearfix">
-                    <div class="goodsInfo">商品信息</div>
-                    <div class="price">单价</div>
-                    <div class="number">购买数量</div>
-                    <div class="discount">优惠</div>
-                    <div class="subtotal">小计</div>
-                </li>
-            </ul>
-            <ul class="goodsListCont" id="goodslist_table">
-                <li class="clearfix">
-                    <div class="goods_orderInfo"></div>
-                    <div class="goods_info">
-                        <div class="goodsInfo">
-                            <div class="showImg">
-                                <img src="__PUBLIC__/images/1464748805168.jpg" height="80" width="80"></div>
-                            <p class="goodsName">皇宫菜250g/份</p>
-
-                            <p class="goodsDesc"></p>
-                        </div>
-                        <div class="price">¥11.80</div>
-                        <div class="number">1</div>
-                        <div class="discount">¥0</div>
-                        <div class="subtotal">¥11.80</div>
-                    </div>
-                </li>
-            </ul>
-            <div class="subtotalBox" id="allproductPrice">小计：¥31.80</div>
-            <div class="subtotalBox2 clearfix">
-                <!--开发票 好友推荐-->
-                <div class="accounts_fp_l">
-                    <!-- 发票 -->
-                    <div class="acc_popMian">
-                        <p id="invoice-deduct" class="acc_fp_box acc_pon">开发票
-                            <b></b>
-                        </p>
-
-                        <div id="invoice-balance" class="acc_pop w450"
-                             data-url="/neworder/getDeduction.jspa?key=invoice">
-                            <ul id="invoice_info" class="acc_pop_tab fp_tab clearfix">
-                                <li checked="checked" id="invoice-no-invoice" class="w145 on">
-                                    <input value="0" checked="checked" name="needInvoice" type="radio">不需要发票
-                                </li>
-                                <li class="w145">
-                                    <input value="1" name="needInvoice" type="radio">普通发票
-                                </li>
-                            </ul>
-                            <!-- 不需要发票 -->
-                            <div class="pd10 mt20 acc_pop_tab_main fp on">
-                                <p class="col999">目前仅支持上海地区的跟箱发票，其他地区发票将在1周内邮寄给您。</p></div>
-                            <!-- 普通发票 -->
-                            <div id="normal-invoice-div" class="pd10 acc_pop_tab_main fp">
-                                <form id="normal-invoice-form">
-                                    <div class="mb10">发票抬头：
-                          <span id="invoiceTypeHeaderList">
-                            <label>
-                                <input class="vm mr5" value="4" name="invoiceTypeHeader" id="invoiceTypeHeader"
-                                       onclick="showNoneInvoiceHeader(4)" type="radio">个人</label>
-                            <label>
-                                <input class="vm mr5" value="5" name="invoiceTypeHeader" id="invoiceTypeHeader"
-                                       onclick="showNoneInvoiceHeader(5)" type="radio">单位</label></span>
-                                    </div>
-                                    <p>发票内容：
-                          <span id="invoiceTypeContentList">
-                            <label>
-                                <input class="vm mr5" value="1" name="invoiceTypeContent" id="invoiceTypeContent"
-                                       type="radio">农产品</label>
-                            <label>
-                                <input class="vm mr5" value="2" name="invoiceTypeContent" id="invoiceTypeContent"
-                                       type="radio">有机蔬菜</label>
-                            <label>
-                                <input class="vm mr5" value="3" name="invoiceTypeContent" id="invoiceTypeContent"
-                                       type="radio">蔬菜</label></span>
-                                    </p>
-
-                                    <p id="invoiceHeaderStrP" style="display:none">
-                                        <label>单&nbsp;&nbsp;&nbsp;&nbsp;位：
-                                            <input class="vm mr5" name="invoiceHeaderStr" id="invoiceHeaderStr"
-                                                   type="text"></label>
-                                        <label>税&nbsp;&nbsp;&nbsp;&nbsp;号：
-                                            <input class="vm mr5" name="invoiceDutyNo" id="invoiceDutyNo"
-                                                   type="text"></label></p>
-
-                                    <p>
-                                        <a id="normal-invoice-sumbit" class="ord_btn vm ml63"
-                                           onclick="confirmInvoice()">确认发票信息</a></p>
-
-                                    <p class="col999">单位请填写单位全称。
-                                        <br>目前仅支持上海地区的跟箱发票，其他地区发票将在1周内邮寄给您。</p></form>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 备注 -->
-                    <div class="acc_popMian" style="display:none">
-                        <p class="acc_fp_box acc_pon" id="beizhu">收货备注
-                            <b></b>
-                        </p>
-
-                        <div class="acc_pop w200" id="beizhu-div">
-                            <span class="input_info" id="customerCommentInfo">请输入您的留言，不超过20字</span>
-                                <textarea id="customerComment" name="customerComment" rows="" cols=""
-                                          disabled="disabled"></textarea>
-                        </div>
-                    </div>
-                    <!--好友推荐验证码-->
-                    <!-- <div class="friendtj">
-                    <input type="checkbox" id="friendtj" value=""/> 我是好友推荐的  <a href="/theme/recommend.html" target="_blank">推荐码使用规则</a>
-                    <p>请输入您收到的好友推荐码：<input id="discountReason" name="discountReason" type="text"  class="yqm_input" maxlength="20"/></p></div>
-                    -->
-                </div>
-                <!--开发票 好友推荐-->
-                <div class="summaryBox">
-                    <p class="tip1" id="totalCount">1件商品</p>
-
-                    <p class="tip2" id="deliveryDis">还差¥138.2，免运费！</p></div>
-            </div>
-        </div>
-        <!--div class="order_hj leftbox">
-        <div class="order_hj_left leftbox">
-        <div class="xuding leftbox">
-        <input name="" type="checkbox" value="" />
-        请在配送结束前通知我续订！</div>
-        </div>
-        <div class="order_hj_right rightbox"> <span>优惠小计：￥0.0</span>&nbsp;&nbsp; 商品总计：<b>￥<span id="goodsTotal">0.0</span></b> </div></div-->
-        <div class="comfirm_warp leftbox">
-            <div id="order_sum" class="accounts mt10" data-url="/neworder/getOrderTrading.jspa">
-                <div class="accounts_con clearfix">
-                    <p class="w115">商品金额
-                        <br>￥
-                        <span id="goodsTotalAmount">11.80</span></p>
-                    <ins class="add">+</ins>
-                    <div class="acc_popMian transportbox">
-                        <p class="w115">运费金额
+            <div class="comfirm_warp leftbox">
+                <div id="order_sum" class="accounts mt10" data-url="/neworder/getOrderTrading.jspa">
+                    <div class="accounts_con clearfix">
+                        <p class="w115">商品金额
                             <br>￥
-                            <span id="deliveryPrice">20.00</span>
-                            <i class="acc_icon"></i>
-                        </p>
-                        <!--运费说明开始-->
-                        <div class="acc_pop wid2" id="transport">
-                            <form id="integral-deduct-form">
-                                <div class="header">
-                                    <div class="tit">
-                                        <span>运费须知</span>
-                                        <a href="http://www.tonysfarm.com/help/help_scopecost.html" target="_blank">了解更多</a>
-                                    </div>
-                                    <div>
-                                        <strong>全场150元包邮</strong>
-                                        <br>
-                                        <strong>购买安心食材系列产品：</strong>
-                                        <br>1、选择一次送货，订单金额满150元免运费，订单金额不足150元收取20元
-                                        <br>&nbsp;&nbsp;&nbsp; 运费。
-                                        <br>2、选择分次送货，订购食材同蔬菜箱一起配送，免运费。
-                                        <br>3、选择分次送货，订购食材不同蔬菜箱一起配送，订单金额满150元，分次
-                                        <br>&nbsp;&nbsp;&nbsp; 配送享受1次配送免运费。例如：150元&lt;=单笔订单金额&lt;300元，分次
-                                        <br>&nbsp;&nbsp;&nbsp; 配送享受1次配送免运费；300元&lt;=单笔订单金额&lt;450元，分次配送享
-                                        <br>&nbsp;&nbsp;&nbsp; 受2次配送免运费，以此类推。
-                                        <br>
-                                        <strong>购买卡券系列产品：</strong>
-                                        <br>1.卡券产品不满150元，收取5元运费
-                                    </div>
-                                </div>
-                            </form>
+                            <span id="goodsTotalAmount"><{$amount}></span></p>
+                        <ins class="add">+</ins>
+                        <div class="acc_popMian transportbox">
+                            <p class="w115">运费金额
+                                <br>￥
+                                <span id="deliveryPrice"><{$yunfei}></span>
+                            </p>
                         </div>
-                        <!--运费说明结束--></div>
-                    <ins>-</ins>
-                    <div class="acc_popMian">
-                        <p class="w100 acc_pon" id="deduction">
-                            <i class="yes"></i>抵扣券抵扣
-                            <br>
-                    <span id="integral-deduct-text">￥
-                      <span id="ticket-deduct-text">0.00</span></span>
-                            <i class="acc_icon"></i>
-                        </p>
-                        <!--抵扣券开始-->
-                        <div class="acc_pop w180" id="deduction_div">
-                            <form id="integral-deduct-form">
-                                <div class="header">
-                                    <div class="tit">
-                                        <span>抵用券须知</span>
-                                        <a href="http://www.tonysfarm.com/help/help_discount.html" target="_blank">了解抵用券规则</a>
-                                    </div>
-                                    <div>1、抵用券有两种，实体抵扣券需输入券号和密码验证，
-                                        <br>&nbsp;&nbsp;&nbsp; 短信抵扣券输入券号直接验证；
-                                        <br>2、抵用券的有效期限为一年；
-                                    </div>
-                                </div>
-                                <div id="showOrNoneTicket">[
-                                    <a href="javascript:addTicketOfPay(1)">添加实体抵扣券</a>] &nbsp;&nbsp; [
-                                    <a href="javascript:addTicketOfPay(2)">添加短信抵扣券</a>]
-                                </div>
-                                <ul id="ticketDivList"></ul>
-                                <div class="coupons">共使用了
-                                    <strong id="numberOfSheets">0</strong>张抵用券 &nbsp; 可以优惠
-                                    <strong id="ticketDiscountAmount">0.00</strong>元
-                                </div>
-                                <div class="btn" id="confirm-ticketOfPay">
-                                    <a class="ord_btn vm ml63" href="javascript:confirmTicketOfPay()">确认抵扣</a></div>
-                                <div class="btn" id="cancel-ticketOfPay" style="display:none">
-                                    <a class="ord_btn vm ml63" href="javascript:unLockTicketNo()">取消抵扣</a></div>
-                            </form>
-                        </div>
-                        <!--抵扣券结束--></div>
-                    <!-- 帐户抵扣 -->
-                    <ins style="display:none">-</ins>
-                    <div class="acc_popMian" style="display:none">
-                        <p class="w120 acc_pon " id="account-deduct">
-                            <i class="yes"></i>多利账户抵扣
-                            <br>
-                            <span id="account-deduct-text">￥0.0</span>
-                            <i class="acc_icon"></i>
-                        </p>
 
-                        <div class="acc_pop w180" id="account-deduct-div">
-                            <form id="account-deduct-form">
-                                <p>您的账户余额：
-                                    <span id="account-balance" class="red font14"></span>元</p>
-
-                                <p>
-                                    <span class="input_info">请输入抵扣金额</span>
-                                    <input id="account-deduct-total" class="input_txt" name="accountDeductTotal"
-                                           disabled="disabled" autocomplete="off" type="text"></p>
-
-                                <p>
-                                    <span class="input_info">请输入支付密码</span>
-                                    <input id="account-deduct-pwd" class="input_txt" name="accountDeductPwd"
-                                           disabled="disabled" autocomplete="off" type="password"></p>
-
-                                <p>
-                        <span class="acc_pop_btn fr">
-                          <a title="找回支付密码" data-url="/personalCenter/inc/findMyPwd.jsp" data-win-width="450"
-                             data-win-height="180" class="blue mb5 e-popwin">[忘记密码]</a>
-                          <a id="cancel-deduct" class="blue" href="#" style="display:none">[取消抵扣]</a></span>
-                                    <a id="submit-deduct" class="ord_btn vm mr10 deduction">确认抵扣</a></p>
-                            </form>
-                        </div>
-                    </div>
-                    <!-- 积分抵扣 -->
-                    <ins style="display:none">-</ins>
-                    <div class="acc_popMian" style="display:none">
-                        <p class="w100 acc_pon" id="integral-deduct">
-                            <i class="yes"></i>积分抵扣
-                            <br>
-                            <span id="integral-deduct-text">￥0.0</span>
-                            <i class="acc_icon"></i>
-                        </p>
-
-                        <div class="acc_pop w180" id="integral-deduct-div">
-                            <form id="integral-deduct-form">
-                                <p>可用积分：
-                                    <span id="integral-total-text" class="red"></span></p>
-
-                                <p>可&nbsp;&nbsp;抵&nbsp;&nbsp;扣：￥
-                                    <span id="integral-avalible-text" class="red"></span></p>
-
-                                <p>
-                                    <span class="input_info">请输入抵扣积分数</span>
-                                    <input id="integral-score" class="input_txt" disabled="disabled"
-                                           name="integralScore" type="text"></p>
-
-                                <p>
-                        <span class="acc_pop_btn fr">
-                          <a id="cancel-integral" class="blue" style="display:none">[取消抵扣]</a></span>
-                                    <a id="submit-integral" class="ord_btn vm mr10 deduction">确认抵扣</a></p>
-
-                                <p class="col666">100积分可抵扣1元
-                                    <br>输入的积分必须为100的倍数</p></form>
-                        </div>
-                    </div>
-                    <ins class="equal">=</ins>
-                    <p class="accounts_total">
+                        <ins class="equal">=</ins>
+                        <p class="accounts_total">
                   <span>应付金额
                     <br>
                     <em class="font14">￥</em>
-                    <strong class="font24 red" id="factual-balance">31.80</strong></span>
-                    </p>
-                </div>
-                <div class="accounts_fp clearfix mt10">
-                    <div class="orderConfirmBox">
-                        <div class="promotionBox">
-                            <a class="more" href="#">
-                                <!-- 了解详情 --></a>
-                    <span>
-                      <!-- 满¥23.0，即送好礼！--></span>
-                        </div>
-                        <div class="orderConfirm">
-                            <a href="javascript:commitOrder()">
-                                <img src="__PUBLIC__/images/orderConfirmBtn.jpg" height="36" width="127"></a>
+                    <strong class="font24 red" id="factual-balance"><{$amount+$yunfei}></strong></span>
+                        </p>
+                    </div>
+                    <div class="accounts_fp clearfix mt10">
+                        <div class="orderConfirmBox">
+                            <img src="__PUBLIC__/images/orderConfirmBtn.jpg" style="cursor: pointer" id="orderConfirmBtn">
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
-    </div>
-    <!--健康礼品订单确认结束-->
-    <div class="clearfix"></div>
-</div>
 
-<include file="Public:pcFooter" />
+        <!--健康礼品订单确认结束-->
+        <div class="clearfix"></div>
+    </form>
+</div>
+<script>
+    $(window).ready(function () {
+        $('#defaultAddress').on('click', function () {
+            $('#memberAddressListUL').css('display', 'block');
+        });
+        $('input:radio[data-defalut]').click();
+    })
+
+    $('#orderConfirmBtn').click(function(){
+        var addressId = $('input:radio[name="address"]').val();
+        if(addressId){
+            $('form').submit();
+        }else{
+            alert('请选择收货地址');
+        }
+    })
+
+    function changeAddDis(s) {
+        $('#defaultAddress').html(s);
+        $('#memberAddressListUL').css('display', 'none');
+    }
+
+</script>
+
+<include file="Public:pcFooter"/>

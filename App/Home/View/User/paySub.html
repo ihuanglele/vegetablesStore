@@ -11,7 +11,7 @@
                 'url':"<{:U('common/checkOrder')}>?id="+id,
                 'success':function(res){
                     if(res==2){
-                        window.location.href = "<{:U('user/myOrder')}>";
+                        window.location.href = "<{:U('user/order')}>?id="+id;
                     }
                 }
             })

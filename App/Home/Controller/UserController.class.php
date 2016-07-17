@@ -36,6 +36,12 @@ class UserController extends CommonController
         $Tool = A('Tool');
         $goods = $Tool->getGoods(array('status'=>2),4,'sold_num desc');
         $this->assign('goods',$goods);
+
+        //获取没有付款的订单数量
+        $map['stauts'] = 1;$map['uid'] = session('uid');
+        $count = M('orders')->where($map)->count('trade');
+        $this->assign('noPayNum',$count);
+
         $this->display('index');
     }
 
@@ -137,9 +143,104 @@ class UserController extends CommonController
         }
     }
 
-    public function paySub(){
-        layout(false);
-        $this->display();
+    //我的订单
+    public function myOrder(){
+        $status = I('get.status');
+        if($status){
+            $map['status'] = $status;
+        }
+        $this->assign('status',$status);
+        $trade = I('get.trade','','number_int');
+        if($trade){
+            $map['trade'] = $trade;
+        }
+        $this->assign('trade',$trade);
+
+        $map['uid'] = $this->uid;
+        $Tool = A('Tool');
+        $list = $Tool->getList('orders',$map,'trade desc','trade,goods_info,status,goods_amount,create_time,address_info');
+
+        if($list){
+            $gidArr = array();
+            foreach($list as $v){
+                $goods = json_decode($v['goods_info'],true);
+                foreach($goods as $vo){
+                    if(!in_array($vo['gid'],$gidArr)){
+                        $gidArr[] = $vo['gid'];
+                    }
+                }
+            }
+            $goodInfo = M('goods')->where(array('gid'=>array('in',$gidArr)))->getField('gid,name,img',true);
+            $OrderStatus = C('OrderStatus');
+            //合成数据
+            foreach($list as $o){
+                $i['trade'] = $o['trade'];
+                $i['status'] = $OrderStatus[$o['status']];
+                $i['time'] = Mydate($o['create_time']);
+                $i['goods_amount'] = $o['goods_amount'];
+                $goods = json_decode($v['goods_info'],true);
+                $i['address'] = json_decode($o['address_info'],true);
+                $goodArr = array();
+                foreach($goods as $vo){
+                    $t['name'] = $goodInfo[$vo['gid']]['name'];
+                    $t['img'] = $goodInfo[$vo['gid']]['img'];
+                    $goodArr[] = $t;
+                }
+                $i['goods'] = $goodArr;
+                $data[] = $i;
+            }
+        }else{
+            $data = array();
+        }
+        $this->assign('data',$data);
+        $this->display('myOrder');
+    }
+
+    /**
+     * 我的订单详情
+     */
+    public function order(){
+        $id = I('get.id');
+        $info = M('orders')->find($id);
+        if($info && $info['uid']==session('uid')){
+            $goods = json_decode($info['goods_info'],true);
+            foreach($goods as $vo){
+                $gidArr[] = $vo['gid'];
+            }
+            $goodInfo = M('goods')->where(array('gid'=>array('in',$gidArr)))->getField('gid,name,img',true);
+            $goodArr = array();
+            foreach($goods as $vo){
+                $t['gid'] = $vo['gid'];
+                $t['name'] = $goodInfo[$vo['gid']]['name'];
+                $t['img'] = $goodInfo[$vo['gid']]['img'];
+                $t['buy_price'] = $vo['pay_each_price'];
+                $t['buy_num'] = $vo['buy_num'];
+                $goodArr[] = $t;
+            }
+            $info['goods'] = $goodArr;
+            $info['address'] = json_decode($info['address_info'],true);
+            $info['express'] = json_decode($info['express_info'],true);
+            $this->assign('info',$info);
+            $this->assign('OrderStatus',C('OrderStatus'));
+            $this->display('order');
+        }else{
+            $this->error('订单不存在',U('myOrder'));
+        }
+    }
+
+    public function payOrder(){
+        $order = I('get.order');
+        $info = M('orders')->field('trade,goods_amount,yunfei,uid,status,uid')->find($order);
+        if($info && $info['status']==1 && $info['uid']==session('uid')){
+            $data['uid'] = session('uid');
+            $data['oid'] = $order;
+            $data['amount'] = $info['goods_amount']+$info['yunfei'];
+            $data['body'] = '消费';
+            $data['attach'] = '消费';
+            $this->sendPayData($data);
+        }else{
+            $this->error('订单不存在');
+        }
     }
 
 }

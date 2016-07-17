@@ -12,15 +12,10 @@ use Think\Controller;
 class CommonController extends Controller{
 
     public function _initialize(){
-
         //处理一些菜单信息
-
         $goodsType = json_decode(readConf('goodsType'),true);
-
         $this->assign('goodsType',$goodsType);
-
         $this->assign('Cat',C('HelpCat'));
-
     }
 
     public function login(){

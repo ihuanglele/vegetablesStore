@@ -1,215 +1,100 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>我的订单</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <!--标准mui.css-->
-    <link rel="stylesheet" href="__PUBLIC__/css/mui.min.css">
-    <style>
-        html,
-        body {
-            background-color: #efeff4;
-        }
-        select{width: auto}
-        .mui-views,
-        .mui-view,
-        .mui-pages,
-        .mui-page,
-        .mui-page-content {
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #efeff4;
-        }
-        .mui-pages {
-            top: 46px;
-            height: auto;
-        }
-        .mui-scroll-wrapper,
-        .mui-scroll {
-            background-color: #efeff4;
-        }
-        .mui-page.mui-transitioning {
-            -webkit-transition: -webkit-transform 300ms ease;
-            transition: transform 300ms ease;
-        }
-        .mui-page-left {
-            -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0);
-        }
-        .mui-ios .mui-page-left {
-            -webkit-transform: translate3d(-20%, 0, 0);
-            transform: translate3d(-20%, 0, 0);
-        }
-        .mui-navbar {
-            position: fixed;
-            right: 0;
-            left: 0;
-            z-index: 10;
-            height: 44px;
-            background-color: #f7f7f8;
-        }
-        .mui-navbar .mui-bar {
-            position: absolute;
-            background: transparent;
-            text-align: center;
-        }
-        .mui-android .mui-navbar-inner.mui-navbar-left {
-            opacity: 0;
-        }
-        .mui-ios .mui-navbar-left .mui-left,
-        .mui-ios .mui-navbar-left .mui-center,
-        .mui-ios .mui-navbar-left .mui-right {
-            opacity: 0;
-        }
-        .mui-navbar .mui-btn-nav {
-            -webkit-transition: none;
-            transition: none;
-            -webkit-transition-duration: .0s;
-            transition-duration: .0s;
-        }
-        .mui-navbar .mui-bar .mui-title {
-            display: inline-block;
-            width: auto;
-        }
-        .mui-page-shadow {
-            position: absolute;
-            right: 100%;
-            top: 0;
-            width: 16px;
-            height: 100%;
-            z-index: -1;
-            content: '';
-        }
-        .mui-page-shadow {
-            background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, .01) 50%, rgba(0, 0, 0, .2) 100%);
-            background: linear-gradient(to right, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, .01) 50%, rgba(0, 0, 0, .2) 100%);
-        }
-        .mui-navbar-inner.mui-transitioning,
-        .mui-navbar-inner .mui-transitioning {
-            -webkit-transition: opacity 300ms ease, -webkit-transform 300ms ease;
-            transition: opacity 300ms ease, transform 300ms ease;
-        }
-        .mui-page {
-            display: none;
-        }
-        .mui-pages .mui-page {
-            display: block;
-        }
-        .mui-page .mui-table-view:first-child {
-            margin-top: 15px;
-        }
-        .mui-page .mui-table-view:last-child {
-            margin-bottom: 30px;
-        }
-        .mui-table-view {
-            margin-top: 20px;
-        }
-
-        .mui-table-view span.mui-pull-right {
-            color: #999;
-        }
-        .mui-table-view-divider {
-            background-color: #efeff4;
-            font-size: 14px;
-        }
-        .mui-table-view-divider:before,
-        .mui-table-view-divider:after {
-            height: 0;
-        }
-        .head {
-            height: 40px;
-        }
-        #head {
-            line-height: 40px;
-        }
-        .head-img {
-            width: 40px;
-            height: 40px;
-        }
-        #head-img1 {
-            position: absolute;
-            bottom: 10px;
-            right: 40px;
-            width: 40px;
-            height: 40px;
-        }
-        .update {
-            font-style: normal;
-            color: #999999;
-            margin-right: -25px;
-            font-size: 15px
-        }
-        .mui-fullscreen {
-            position: fixed;
-            z-index: 20;
-            background-color: #000;
-        }
-        .mui-ios .mui-navbar .mui-bar .mui-title {
-            position: static;
-        }
-        h5 {
-            padding-top: 8px;
-            padding-bottom: 8px;
-            text-indent: 12px;
-            border-top: 1px solid #dd524d;
-        }
-
-        .mui-table-view.mui-grid-view .mui-table-view-cell .mui-media-body {
-            font-size: 15px;
-            margin-top: 8px;
-            color: #333;
-        }
-        .info{
-            height: 40px;
-            border-bottom: 1px solid beige;
-        }
-        p img {
-            max-width: 100%;
-            height: auto;
-        }
-    </style>
-</head>
-<body>
-<header class="mui-bar mui-bar-nav">
-    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-    <h1 class="mui-title">我的订单</h1>
-</header>
-<div class="mui-content">
-    <ul class="mui-table-view mui-table-view-chevron">
-        <volist name="list" id="vo">
-            <li class="mui-table-view-cell mui-media mui-collapse">
-                <a class="mui-navigate-right">
-                    <img class="mui-media-object mui-pull-left" src="__ROOT__/upload/<{$gInfo[$vo['gid']]['img']}>">
-                    <div class="mui-media-body">
-                        <{$gInfo[$vo['gid']]['name']}>
-                        <p><{$time|Mydate}></p>
+<link href="__PUBLIC__/css/member.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/thickbox.css" />
+<div class="main clearfix">
+    <div class="member leftbox">
+        <include file="User:leftNav" />
+        <div class="member_right rightbox">
+            <div class="member_right_cont leftbox" id="dingdanDeli" style="display:block">
+                <!--我的订单-查看详情 开始-->
+                <div class="orderDetail_warp leftbox">
+                    <div class="orderDetail_base leftbox">
+                        <div class="baseinfo leftbox">
+                            <div class="baseinfo_left leftbox">订单号：<span id="orderCode"><{$info.trade}></span></div>
+                            <div class="baseinfo_right rightbox">订单状态：<strong id="status"><{$OrderStatus[$info['status']]}></strong>
+                            </div>
+                        </div>
+                        <div class="tip" id="status_tip">
+                            <{$OrderStatus[$info['status']]}>
+                            <eq name="info.status" value="1">
+                                <a href="<{:U('payOrder')}>?order=<{$info.trade}>">现在支付</a>
+                            </eq>
+                        </div>
                     </div>
-                </a>
-                <ul class="mui-table-view mui-table-view-chevron">
-                    <li class="mui-table-view-cell">收货人：<{$vo.name}></li>
-                    <li class="mui-table-view-cell">电话：<{$vo.tel}></li>
-                    <li class="mui-table-view-cell">地址：<{$CityCode[$vo['sheng']]}>-<{$CityCode[$vo['shi']]}>-<{$CityCode[$vo['city']]}><{$vo.addr}></li>
-                </ul>
-            </li>
-        </volist>
-    </ul>
-    <div class="mui-content-padded">
-        <{$page}>
+
+                    <!--订单信息-->
+                    <div class="orderDetail leftbox">
+                        <div class="tit leftbox"><span>订单信息</span></div>
+                        <div class="cont leftbox">
+                            <dl id="receiver_info">
+                                <dt>收货信息</dt>
+                                <dd>收&nbsp;&nbsp;货&nbsp;&nbsp;人：<span id="receiverName"><{$info.address.name}></span> <span id="receiverMobile"><{$info.address.phone}></span></dd>
+                                <dd>地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址：<span id="receiverAddress"><{$info.address.address}></span></dd>
+                                <dd>下单时间：<span id="orderDate"><{$info.create_time|MyDate}></span></dd>
+                                <gt name="info.status" value="1">
+                                    <dd>支付时间：<span><{$info.pay_time|MyDate}></span></dd>
+                                    <gt name="info.status" value="2">
+                                        <dd>发货时间：<span><{$info.express.time|MyDate}></span></dd>
+                                        <dd>发货物流：<span><{$info.express.name}></span></dd>
+                                        <dd>发货单号：<span><{$info.express.num}></span></dd>
+                                    </gt>
+                                </gt>
+                            </dl>
+                            <div class="orderinfo">
+                                <h3>商品清单</h3>
+                                <table class="orderinfo_table" border="0" cellpadding="0" cellspacing="0" width="100%">
+                                    <tbody>
+                                    <tr id="order_item">
+                                        <th>商品编号</th>
+                                        <th>商品名称</th>
+                                        <th>购买价</th>
+                                        <th>配送总数量</th>
+                                        <th>小计</th>
+                                    </tr>
+                                    <volist name="info.goods" id="vo">
+                                        <tr>
+                                            <td><{$vo.gid}></td>
+                                            <td><{$vo.name}></td>
+                                            <td>￥<{$vo.buy_price}></td>
+                                            <td><{$vo.buy_num}></td>
+                                            <td>￥<{$vo['buy_price']*$vo['buy_num']}></td>
+                                        </tr>
+                                    </volist>
+                                    </tbody>
+                                </table>
+                                <p class="integral">&nbsp;<!--积分：<span id="order_points">0</span>--></p>
+
+                            </div>
+                        </div>
+                        <div class="order_crash leftbox">
+                            <ul class="rightbox">
+                                <li><span class="title">商品金额：</span><span id="discounted_amount">￥<{$info.goods_amount}></span></li>
+                                <li><span class="title">运费：</span><span id="freight">￥<{$info.yunfei}></span></li>
+                            </ul>
+                            <div class="payable_warp leftbox">
+                                <div class="payable rightbox"> 应付金额：<strong id="amountPayable">￥<{$info['goods_amount']+$info['yunfei']}></strong> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--我的订单-查看详情 结束-->
+            </div>
+
+            <div class="member_right_cont leftbox jiazaiing" style="display:none">
+                <!--我的订单-查看详情 开始-->
+                <!--订单加载-->
+                <div class="jiazaidiv">
+                    <div class="jiazaiUp" style="position: relative;">
+                        <img src="/images/large_logo.png" width="150" height="150" style="box-shadow:5px 5px 5px rgba(0,0,0,.6);position: absolute;left: 35%; border-radius: 75px; top: 40%; opacity: 0.4;">
+                        <div style="position: absolute;margin-top: 160px;left: 28%;opacity: 0.8;font-size:18px;">请稍后，您的订单正在加载中...</div>
+                        <div>
+                        </div>
+                        <!--我的订单-查看详情 结束-->
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-</body>
-<script src="__PUBLIC__/js/mui.min.js"></script>
 <script>
-    mui.init({
-        swipeBack: true //启用右滑关闭功能
-    });
+
 </script>
-</html>

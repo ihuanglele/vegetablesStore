@@ -129,5 +129,14 @@
     $(window).ready(function(){
         updateCartNum();
     })
+
+    function search_product(id) {
+        var key = $.trim($("#"+id).val());
+        if (key == "") {
+            key=$.trim($("#"+id).attr("placeholder"));
+        }
+        window.location.href = "<{:U('goods/index')}>?keyword=" + key;
+
+    }
 </script>
 </html>

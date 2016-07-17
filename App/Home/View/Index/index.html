@@ -112,7 +112,7 @@
 
                 <span><a href="javascript:void(0);"><{$list.title}></a></span>
 
-                <a href="<{:U('goods/list')}>?type=<{$list.type}>" class="more" target="_blank">更多&gt;</a>
+                <a href="<{:U('goods/index')}>?type=<{$list.type}>" class="more" target="_blank">更多&gt;</a>
 
             </div>
 
@@ -231,19 +231,6 @@
 
 <script language="javascript">
 
-    function search_product(id) {
-
-        var key = $.trim($("#"+id).val());
-
-        if (key == "") {
-
-            key=$.trim($("#"+id).attr("placeholder"));
-
-        }
-
-        window.location.href = "/search.html?keyword=" + key;
-
-    }
 
     $(function () {
 

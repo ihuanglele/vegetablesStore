@@ -253,7 +253,6 @@ class UserController extends CommonController
 
     //我的财务记录
     public function money(){
-        $p = I('p',1,'number_int');
         $type = I('get.type',3,'number_int');
         if(in_array($type,array(3,4))){
             $map['uid'] = session('uid');
@@ -280,7 +279,7 @@ class UserController extends CommonController
                 }
             }
         }
-
+        $this->assign('type',$type);
         $this->assign('list',$list);
         $this->display('money');
     }

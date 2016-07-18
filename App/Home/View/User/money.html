@@ -7,7 +7,17 @@
 
             <div class="member_right_cont leftbox">
 
-                <!--改地址 开始-->
+                <form action="<{:U('money')}>" id="search">
+                    <div class="operation_right">
+                        <select name="type" class="bordersty1 txtsty">
+                            <option value="3">店铺收入</option>
+                            <option value="4">会员返利</option>
+                            <option value="5">团队奖励</option>
+                        </select>
+                        <input type="submit" class="searchBtn">
+                    </div>
+                </form>
+
                 <div class="address_warp leftbox">
                     <div class="currentinfo leftbox" id="addressListDiv" >
                         <table width="100%" border="0" cellspacing="0" cellpadding="0" class="addressList">
@@ -27,8 +37,13 @@
                     </div>
                 </div>
                 <div class="page"><{$page}></div>
-                <!--改地址 结束-->
+
             </div>
         </div>
     </div>
 </div>
+<script>
+    $(window).ready(function(){
+        $('select[name="type"]').val('<{$type}>');
+    })
+</script>

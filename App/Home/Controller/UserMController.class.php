@@ -158,15 +158,15 @@ class UserMController extends Controller
     }
 
     public function payOrder(){
+        $openid = session('openid');
+        if(!$openid){
+            $tools = new \Org\Wxpay\JsApi();
+            $openId = $tools->GetOpenid();
+            session('openid',$openId);
+        }
         $order = I('get.order');
         $info = M('orders')->field('trade,goods_amount,yunfei,uid,status,uid')->find($order);
         if($info && $info['status']==1 && $info['uid']==session('uid')){
-            $openid = session('openid');
-            if(!$openid){
-                $tools = new \Org\Wxpay\JsApi();
-                $openId = $tools->GetOpenid();
-                session('openid',$openId);
-            }
             $data['uid'] = session('uid');
             $data['oid'] = $order;
             $data['amount'] = $info['goods_amount']+$info['yunfei'];

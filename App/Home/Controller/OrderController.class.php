@@ -160,56 +160,63 @@ class OrderController
         if($oInfo['from_uid']==0){  //给上级饭钱
             if($uInfo['invite_uid']){
                 $reward = $oInfo['goods_amount']*0.05;
-                $r1 = M('user')->where(array('uid'=>$uInfo['invite_uid']))->setInc('money',$reward);
-                echo M('user')->getLastSql();
+                if($reward>0.01){       //小于一分钱不记录
+                    $r1 = M('user')->where(array('uid'=>$uInfo['invite_uid']))->setInc('money',$reward);
 
-                //添加用户财务记录
-                $moneyData['uid'] = $uInfo['invite_uid'];
-                $moneyData['amount'] = $reward;
-                $moneyData['time'] = time();
-                $moneyData['note'] = $uInfo['nickname'].'购物返利';
-                $moneyData['type'] = 4;
-                $r2 = M('money')->add($moneyData);
-                if($r1 && $r2){
-                    $res = true;
-                }else{
-                    $res = false;return $res;
+                    //添加用户财务记录
+                    $moneyData['uid'] = $uInfo['invite_uid'];
+                    $moneyData['amount'] = $reward;
+                    $moneyData['time'] = time();
+                    $moneyData['note'] = $uInfo['nickname'].'购物返利';
+                    $moneyData['type'] = 4;
+                    $r2 = M('money')->add($moneyData);
+                    if($r1 && $r2){
+                        $res = true;
+                    }else{
+                        $res = false;return $res;
+                    }
                 }
             }
         }else if($oInfo['reward_amount']>0){    //来自店家 直接给店家钱
             $reward = $oInfo['reward_amount'];
-            $r1 = M('user')->where(array('uid'=>$oInfo['from_uid']))->setInc('money',$reward);
+            if($reward>0.01) {       //小于一分钱不记录
+                $r1 = M('user')->where(array('uid' => $oInfo['from_uid']))->setInc('money', $reward);
 
-            //添加用户财务记录
-            $moneyData['uid'] = $oInfo['from_uid'];
-            $moneyData['amount'] = $reward;
-            $moneyData['time'] = time();
-            $moneyData['note'] = $uInfo['nickname'].'购物返利';
-            $moneyData['type'] = 3;
-            $r2 = M('money')->add($moneyData);
-            if($r1 && $r2){
-                $res = true;
-            }else{
-                $res = false;return $res;
+                //添加用户财务记录
+                $moneyData['uid'] = $oInfo['from_uid'];
+                $moneyData['amount'] = $reward;
+                $moneyData['time'] = time();
+                $moneyData['note'] = $uInfo['nickname'] . '购物返利';
+                $moneyData['type'] = 3;
+                $r2 = M('money')->add($moneyData);
+                if ($r1 && $r2) {
+                    $res = true;
+                } else {
+                    $res = false;
+                    return $res;
+                }
             }
         }
 
         //给leader返利
         if($uInfo['leader']){
             $reward = $oInfo['goods_amount']*0.01;
-            $r1 = M('user')->where(array('uid'=>$uInfo['leader']))->setInc('money',$reward);
+            if($reward>0.01) {       //小于一分钱不记录
+                $r1 = M('user')->where(array('uid' => $uInfo['leader']))->setInc('money', $reward);
 
-            //添加用户财务记录
-            $moneyData['uid'] = $uInfo['leader'];
-            $moneyData['amount'] = $reward;
-            $moneyData['time'] = time();
-            $moneyData['note'] = $uInfo['nickname'].'购物返利';
-            $moneyData['type'] = 5;
-            $r2 = M('money')->add($moneyData);
-            if($r1 && $r2){
-                $res = true;
-            }else{
-                $res = false;return $res;
+                //添加用户财务记录
+                $moneyData['uid'] = $uInfo['leader'];
+                $moneyData['amount'] = $reward;
+                $moneyData['time'] = time();
+                $moneyData['note'] = $uInfo['nickname'] . '购物返利';
+                $moneyData['type'] = 5;
+                $r2 = M('money')->add($moneyData);
+                if ($r1 && $r2) {
+                    $res = true;
+                } else {
+                    $res = false;
+                    return $res;
+                }
             }
         }
 

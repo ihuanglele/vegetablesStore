@@ -195,7 +195,7 @@ class CommonController extends Controller{
     }
 
     public function logout(){
-        session('uid',null);
+        session(null);
         $this->success('安全退出');
     }
 

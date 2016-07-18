@@ -160,7 +160,7 @@ class OrderController
         if($oInfo['from_uid']==0){  //给上级饭钱
             if($uInfo['invite_uid']){
                 $reward = $oInfo['goods_amount']*0.05;
-                if($reward>0.01){       //小于一分钱不记录
+                if($reward>=0.01){       //小于一分钱不记录
                     $r1 = M('user')->where(array('uid'=>$uInfo['invite_uid']))->setInc('money',$reward);
 
                     //添加用户财务记录
@@ -179,7 +179,7 @@ class OrderController
             }
         }else if($oInfo['reward_amount']>0){    //来自店家 直接给店家钱
             $reward = $oInfo['reward_amount'];
-            if($reward>0.01) {       //小于一分钱不记录
+            if($reward>=0.01) {       //小于一分钱不记录
                 $r1 = M('user')->where(array('uid' => $oInfo['from_uid']))->setInc('money', $reward);
 
                 //添加用户财务记录
@@ -201,7 +201,7 @@ class OrderController
         //给leader返利
         if($uInfo['leader']){
             $reward = $oInfo['goods_amount']*0.01;
-            if($reward>0.01) {       //小于一分钱不记录
+            if($reward>=0.01) {       //小于一分钱不记录
                 $r1 = M('user')->where(array('uid' => $uInfo['leader']))->setInc('money', $reward);
 
                 //添加用户财务记录

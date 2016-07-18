@@ -337,7 +337,7 @@ class UserMController extends Controller
     //申请代理
     public function applyVip(){
         $info = M('user')->field('is_store,card,use_money')->find($this->uid);
-        if($info['use_money']>1980){
+        if(1 || $info['use_money']>1980){   //不需要门槛了，现在后台审核
             $da = array();
             foreach($_POST as $k=>$v){
                 if($v==''){

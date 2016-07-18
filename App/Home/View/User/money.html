@@ -1,0 +1,34 @@
+<link href="__PUBLIC__/css/member.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/thickbox.css" />
+<div class="main clearfix">
+    <div class="member leftbox">
+        <include file="User:leftNav" />
+        <div class="member_right rightbox">
+
+            <div class="member_right_cont leftbox">
+
+                <!--改地址 开始-->
+                <div class="address_warp leftbox">
+                    <div class="currentinfo leftbox" id="addressListDiv" >
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="addressList">
+                            <tr id="addressList">
+                                <th>时间</th>
+                                <th>金额</th>
+                                <th>说明</th>
+                            </tr>
+                            <volist name="list" id="vo">
+                                <tr>
+                                    <td><{$vo.time}></td>
+                                    <td><{$vo.amount}></td>
+                                    <td><{$vo.note}></td>
+                                </tr>
+                            </volist>
+                        </table>
+                    </div>
+                </div>
+                <div class="page"><{$page}></div>
+                <!--改地址 结束-->
+            </div>
+        </div>
+    </div>
+</div>

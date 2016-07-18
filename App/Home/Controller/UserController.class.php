@@ -243,4 +243,46 @@ class UserController extends CommonController
         }
     }
 
+    //我推荐的人
+    public function team(){
+        $map['invite_uid'] = session('uid');
+        $Tool = A('Tool');
+        $Tool->getList('user',$map,'uid desc','nickname as name,phone,coin');
+        $this->display('team');
+    }
+
+    //我的财务记录
+    public function money(){
+        $p = I('p',1,'number_int');
+        $type = I('get.type',3,'number_int');
+        if(in_array($type,array(3,4))){
+            $map['uid'] = session('uid');
+            $map['type'] = $type;
+            $Tool = A('Tool');
+            $list = $Tool->getList('money',$map,'mid desc','time,note,amount');
+            if(count($list)){
+                foreach($list as $k=>$v){
+                    $list[$k]['time'] = date('Y-m-d',$list[$k]['time']);
+                }
+            }
+        }else if($type==5){  //获取总监的 这个麻烦一点呀
+            $map['uid'] = session('uid');
+            $map['type'] = 5;
+            $M = M('money');
+            $count = $M->where($map)->count();
+            $Page = new\Think\Page($count,16);
+            $field = 'DATE_FORMAT(FROM_UNIXTIME(time),"%Y-%c") as t,SUM(amount) as amount,COUNT(mid) as note';
+            $list = $M->where($map)->field($field)->order('t desc')->limit($Page->firstRow,$Page->listRows)->group('t')->select();
+            if(count($list)){
+                foreach($list as $k=>$v){
+                    $list[$k]['time'] = $list[$k]['t'];
+                    $list[$k]['note'] = '共'.$list[$k]['note'].'笔收入';
+                }
+            }
+        }
+
+        $this->assign('list',$list);
+        $this->display('money');
+    }
+
 }

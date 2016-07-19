@@ -151,6 +151,8 @@ class UserMController extends Controller
             $info['address'] = json_decode($info['address_info'],true);
             $this->assign('info',$info);
             $this->assign('OrderStatus',C('OrderStatus'));
+            $this->assign('OrderPayType',C('OrderPayType'));
+            $this->assign('OrderType',C('OrderType'));
             $this->display('order');
         }else{
             $this->error('订单不存在',U('myOrder'));
@@ -158,21 +160,27 @@ class UserMController extends Controller
     }
 
     public function payOrder(){
-        $openid = session('openid');
-        if(!$openid){
-            $tools = new \Org\Wxpay\JsApi();
-            $openId = $tools->GetOpenid();
-            session('openid',$openId);
-        }
         $order = I('get.order');
-        $info = M('orders')->field('trade,goods_amount,yunfei,uid,status,uid')->find($order);
+        $info = M('orders')->field('trade,goods_amount,yunfei,uid,status,uid,pay_type')->find($order);
         if($info && $info['status']==1 && $info['uid']==session('uid')){
-            $data['uid'] = session('uid');
-            $data['oid'] = $order;
-            $data['amount'] = $info['goods_amount']+$info['yunfei'];
-            $data['body'] = '消费';
-            $data['attach'] = '消费';
-            $this->sendPayData($data);
+            if($info['pay_type']==1){   //微信支付
+                $openid = session('openid');
+                if(!$openid){
+                    $tools = new \Org\Wxpay\JsApi();
+                    $openId = $tools->GetOpenid();
+                    session('openid',$openId);
+                }
+                $data['uid'] = session('uid');
+                $data['oid'] = $order;
+                $data['amount'] = $info['goods_amount']+$info['yunfei'];
+                $data['body'] = '消费';
+                $data['attach'] = '消费';
+                $this->sendPayData($data);
+            }elseif($info['pay_type']==2){  //余额支付
+                $da['money'] = $info['goods_amount']+$info['yunfei'];
+                $da['trade'] = $order;
+                $this->cashPayOrder($da);
+            }
         }else{
             $this->error('订单不存在');
         }
@@ -445,39 +453,46 @@ class UserMController extends Controller
         $Tool = A('Order');
         $order = $Tool->addOrder();
         if($order['status']){
-            $data['uid'] = session('uid');
-            $data['oid'] = $order['trade'];
-            $data['amount'] = $order['money'];
-            $data['body'] = '消费';
-            $data['attach'] = '消费';
-            $this->sendPayData($data);
+            if($order['pay_type']==1){      //微信支付
+                $data['uid'] = session('uid');
+                $data['oid'] = $order['trade'];
+                $data['amount'] = $order['money'];
+                $data['body'] = '消费';
+                $data['attach'] = '消费';
+                $this->sendPayData($data);
+            }elseif($order['pay_type']==2){ //余额支付
+                $this->cashPayOrder($order);
+            }
         }else{
             $this->error($order['msg']);
         }
     }
 
     /**
-     * 微信充值
+     * 现金支付订单
+     * @param $order['money'] 订单总金额 包含商品和运费
+     * @param $order['trade'] 订单号
      */
-    public function pay(){
-        if(isset($_POST['money'])){
-            $money = I('post.money',0);
-            $uid = session('uid');
-            if($money>0){
-                $data['uid'] = $uid;
-                $data['body'] = '充值';
-                $data['attach'] = '充值';
-                $data['money'] = $money;
-                $data['oid'] = 0;
-                $this->sendPayData($data);
-            }else{
-                $this->error('输入金额有误');
-            }
+    private function cashPayOrder($order){
+        $cash_money = M('user')->where(array('uid'=>$this->uid))->getField('cash_money');   //查询现金余额
+        if($cash_money<$order['money']){
+            //现金余额不足
+            $this->error('现金余额不足',U('myOrder'));die;
+        }
+
+        M('user')->startTrans();
+        $r1 = M('user')->where(array('uid'=>$this->uid))->setDec('cash_money',$order['money']);
+        $Order = A('Order');
+        $r2 = $Order->onOrderPay($order['trade']);
+        if($r1 && $r2 ){
+            M('user')->commit();
+            $this->success('支付成功',U('myOrder'));
         }else{
-            $this->getData('pay',array('uid'=>session('uid'),'status'=>2),'pid desc');
-            $this->display('pay');
+            M('user')->rollback();
+            $this->error('支付失败',U('myOrder'));
         }
     }
+
 
     /**
      * 发起微信支付

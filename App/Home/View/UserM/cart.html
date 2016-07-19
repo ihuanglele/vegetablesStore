@@ -35,10 +35,26 @@
                                 <div class="select-value">微信支付</div>
                                 <select class="data select-area" name="pay">
                                     <option value="wx">微信支付</option>
+                                    <option value="yue">余额支付</option>
                                 </select>
                             </div>
                         </div>
                     </li>
+
+                    <!--购买提现-->
+                    <li class="card-item">
+                        <div class="item-cont select-mode">
+                            <b class="name">购买类型</b>
+                            <div class="data data-input">
+                                <div class="select-value">自己购买</div>
+                                <select class="data select-area" name="to">
+                                    <option value="self">自己购买</option>
+                                    <option value="other">赠送好友</option>
+                                </select>
+                            </div>
+                        </div>
+                    </li>
+
                     <!--商品清单-->
                     <li class="card-item">
                         <div class="item-cont mn pn">
@@ -128,6 +144,10 @@
             $('#sePhone').html(op.attr('data-phone'))
             $('#seAddress').html(op.attr('data-address'))
         }
+
+        $('.select-area').on('change',function(){
+            $(this).prev().html($(this).find('option:selected').html());
+        })
     </script>
 </div>
 </body>

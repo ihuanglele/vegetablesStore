@@ -83,11 +83,22 @@ class OrderController
             $data['yunfei'] = $yunfei;
             $data['pay_time'] = 0;
             $data['status'] = 1;
-            $data['type'] = 1;
+            if($_POST['to']=='other'){ //购买类型
+                $data['type'] = 2;  //赠送他人
+            }else{
+                $data['type'] = 1;  //默认自己购买
+            }
+            //支付方式
+            if($_POST['pay']=='yue'){
+                $data['pay_type'] = 2;  //余额支付
+            }else{
+                $data['pay_type'] = 1;  //微信支付
+            }
             $data['trade'] = createOrderTrade();
             if(M('orders')->add($data)){
                 $ret['status'] = true;
                 $ret['trade'] = $data['trade'];
+                $ret['pay_type'] = $data['pay_type'];
                 $ret['money'] = $yunfei + $goodAmount;
             }else{
                 $ret['status'] = false;
@@ -112,7 +123,7 @@ class OrderController
          * 3.发佣金（如果存在）
          */
         $res = true;
-        $oInfo = M('orders')->field('trade,goods_info,uid,status,goods_amount,reward_amount,reward_info,from_uid,yunfei')->find($oid);   //订单信息
+        $oInfo = M('orders')->field('trade,goods_info,uid,status,goods_amount,reward_amount,reward_info,from_uid,yunfei,type')->find($oid);   //订单信息
         $this->tradeInfo = $oInfo;
 
         if($oInfo['status']!=1) return false;   //确保订单没有处理
@@ -220,7 +231,9 @@ class OrderController
                 }
             }
         }
-
+        if($oInfo['type']==2){  //赠送别人的订单
+            sendGiveOrderTempMsg($oid); //发送模板消息通知
+        }
         return $res;
     }
 

@@ -234,4 +234,36 @@ class MobileController extends Controller{
             $this->login();die;
         }
     }
+
+    //查看一个订单
+    public function order(){
+        $id = I('get.oid');
+        $phone = I('get.phone');
+        $info = M('orders')->find($id);
+        $info['address'] = json_decode($info['address_info'],true);
+        if($info && $info['address']['phone']==$phone){
+            $goods = json_decode($info['goods_info'],true);
+            foreach($goods as $vo){
+                $gidArr[] = $vo['gid'];
+            }
+            $goodInfo = M('goods')->where(array('gid'=>array('in',$gidArr)))->getField('gid,name,img',true);
+            $goodArr = array();
+            foreach($goods as $vo){
+                $t['gid'] = $vo['gid'];
+                $t['name'] = $goodInfo[$vo['gid']]['name'];
+                $t['img'] = $goodInfo[$vo['gid']]['img'];
+                $t['buy_price'] = $vo['pay_each_price'];
+                $t['buy_num'] = $vo['buy_num'];
+                $goodArr[] = $t;
+            }
+            $info['goods'] = $goodArr;
+            $this->assign('info',$info);
+            $this->assign('OrderStatus',C('OrderStatus'));
+            $this->assign('OrderPayType',C('OrderPayType'));
+            $this->assign('OrderType',C('OrderType'));
+            $this->display('order');
+        }else{
+            $this->error('订单不存在',U('index'));
+        }
+    }
 }

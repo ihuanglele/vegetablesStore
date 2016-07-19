@@ -1,0 +1,51 @@
+<style>
+    .btn{
+        color: #3c763d;
+        background-color: #dff0d8;
+        border-color: #d6e9c6;
+        width: 100%;
+        margin: 10px auto;
+        text-align: center;
+        display: block;
+        border: 1px solid;
+    }
+</style>
+<body>
+<div id="a-wrap">
+    <section id="section" class="section">
+        <article id="article" class="article pf">
+            <div class="mytony">
+                <div class="face"><img src="<{$info.headimgurl|headImgUrl}>" alt=""></div>
+                <div class="name"><{$info.nickname}></div>
+            </div>
+
+            <ul class="card-list">
+                <form id="myInfo" action="<{:U('myInfo')}>" method="post" enctype="multipart/form-data">
+                    <li class="card-item">
+                        <a href="#" class="item-cont">
+                            <b class="name">我的账户</b>
+                            <i class="data"><span class="a-color"><{$info.phone}></span></i>
+                        </a>
+                        <a href="#" class="item-cont">
+                            <b class="name">我的昵称</b>
+                            <i class="data"><span class="a-color">
+                            <input name="nickname" value="<{$info.nickname}>">
+                        </span></i>
+                        </a>
+                        <a href="#" class="item-cont">
+                            <b class="name">修改头像</b>
+                            <i class="data"><span class="a-color">
+                            <input type="file" name="img" />
+                        </span></i>
+                        </a>
+                    </li>
+                    <li>
+                        <button type="submit" class="btn" name="submit" >修改</button>
+                    </li>
+                </form>
+            </ul>
+        </article>
+        <include file="Public/mFooter" on="4" />
+    </section>
+</div>
+</body>

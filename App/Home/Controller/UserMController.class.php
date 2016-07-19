@@ -6,14 +6,13 @@
  * Time: 17:10
  * Description:
  */
-
 namespace Home\Controller;
 use Think\Controller;
+use Think\Crypt\Driver\Think;
 
 class UserMController extends Controller
 {
     private $uid = null;
-
     /**
      * 初始化，判断是否登录了
      */
@@ -25,9 +24,7 @@ class UserMController extends Controller
         }else{
             C('LAYOUT_NAME','Public/mLayout');
         }
-
     }
-
     //个人中心
     public function index(){
         $info = M('user')->find($this->uid);
@@ -38,7 +35,6 @@ class UserMController extends Controller
         $this->assign('goods',$goods);
         $this->display('index');
     }
-
     //我的收货地址
     public function myAddress(){
         $Tool = A('Tool');
@@ -46,7 +42,6 @@ class UserMController extends Controller
         $Tool->getList('address',$map,'id desc');
         $this->display('myAddress');
     }
-
     //添加收货地址
     public function addAddress(){
         if(isset($_POST['action'])){
@@ -95,14 +90,12 @@ class UserMController extends Controller
             $this->display('addaddress');
         }
     }
-
     //设置默认地址
     private function setDefaultAddress($id){
         $map['uid'] = $this->uid;
         $map['id'] = array('neq',$id);
         M('address')->where($map)->setField('default',0);
     }
-
     //修改收货地址
     public function editAddress(){
         $id = I('get.id');
@@ -120,12 +113,10 @@ class UserMController extends Controller
             $this->error('页面不存在',U('index'));
         }
     }
-
     //我的订单
     public function myOrder(){
         $this->display('myOrder');
     }
-
     /**
      * 我的订单详情
      */
@@ -158,7 +149,6 @@ class UserMController extends Controller
             $this->error('订单不存在',U('myOrder'));
         }
     }
-
     public function payOrder(){
         $order = I('get.order');
         $info = M('orders')->field('trade,goods_amount,yunfei,uid,status,uid,pay_type')->find($order);
@@ -185,7 +175,6 @@ class UserMController extends Controller
             $this->error('订单不存在');
         }
     }
-
     //获取订单信息
     public function orderList(){
         $p = I('p',1,'number_int');
@@ -197,7 +186,6 @@ class UserMController extends Controller
         $map['uid'] = $this->uid;
         $Tool = A('Tool');
         $list = $Tool->getList('orders',$map,'trade desc','trade,goods_info,status,goods_amount,create_time');
-
         if($list){
             $gidArr = array();
             foreach($list as $v){
@@ -235,7 +223,6 @@ class UserMController extends Controller
         $ret['page'] = $p;
         $this->ajaxReturn($ret);
     }
-
     //我推荐的人
     public function team(){
         if(IS_AJAX){
@@ -251,7 +238,6 @@ class UserMController extends Controller
                     $ret['team'] = M('user')->where($mapTeam)->count();
                 }
             }
-
             $num = count($list);
             $ret['status'] = 'success';
             $ret['num'] = $num;
@@ -263,7 +249,6 @@ class UserMController extends Controller
             $this->display('team');
         }
     }
-
     //我的财务记录
     public function money(){
         if(IS_AJAX){
@@ -294,7 +279,6 @@ class UserMController extends Controller
                     }
                 }
             }
-
             $num = count($list);
             $ret['status'] = 'success';
             $ret['num'] = $num;
@@ -306,14 +290,12 @@ class UserMController extends Controller
             $this->display('money');
         }
     }
-
     //我的钱包
     public function wallet(){
         $info = M('user')->find($this->uid);
         $this->assign('info',$info);
         $this->display('wallet');
     }
-
     //我的菜箱
     public function myBox(){
         $info = M('user')->where(array('uid'=>session('uid')))->field('is_store,goods,card,status')->find();
@@ -341,7 +323,6 @@ class UserMController extends Controller
             $this->display('noVip');
         }
     }
-
     //申请代理
     public function applyVip(){
         $info = M('user')->field('is_store,card,use_money')->find($this->uid);
@@ -367,7 +348,6 @@ class UserMController extends Controller
             $this->error('你还没有达到要求');
         }
     }
-
     //处理上下货
     public function doBox(){
         $info = M('user')->where(array('uid'=>session('uid')))->field('is_store,goods')->find();
@@ -375,13 +355,12 @@ class UserMController extends Controller
             $ac = I('get.ac');
             $id = I('get.id');
             $gidArr = json_decode($info['goods'],true);
-
             if($ac=='un'){//删除
-               foreach($gidArr as $k=>$v){
-                   if($v==$id){
-                       unset($gidArr[$k]);break;
-                   }
-               }
+                foreach($gidArr as $k=>$v){
+                    if($v==$id){
+                        unset($gidArr[$k]);break;
+                    }
+                }
             }else{//添加
                 $gidArr[] = $id;
             }
@@ -392,7 +371,6 @@ class UserMController extends Controller
             $this->error('你还不是会员',U('index'));
         }
     }
-
     //显示我的店铺二维码
     public function myBoxPic(){
         $info = M('user')->where(array('uid'=>session('uid')))->field('is_store,goods')->find();
@@ -404,7 +382,6 @@ class UserMController extends Controller
             $this->error('你还不是会员');
         }
     }
-
     //确认订单
     public function cart(){
         if(IS_POST){
@@ -434,18 +411,14 @@ class UserMController extends Controller
             $this->assign('yunfei',readConf('yunfei'));//商品价格
             $this->assign('data',$data);
 //            var_dump($gInfo,$data);die;
-
             //查询收货地址
             $address = M('address')->where(array('uid'=>$this->uid))->field('id,address,phone,name')->order('`default` desc')->select();
             $this->assign('address',$address);
-
             $this->display('cart');
         }else{
             $this->redirect('mobile/index');
         }
-
     }
-
     /**
      * 购买商品
      */
@@ -467,7 +440,6 @@ class UserMController extends Controller
             $this->error($order['msg']);
         }
     }
-
     /**
      * 现金支付订单
      * @param $order['money'] 订单总金额 包含商品和运费
@@ -479,7 +451,6 @@ class UserMController extends Controller
             //现金余额不足
             $this->error('现金余额不足',U('myOrder'));die;
         }
-
         M('user')->startTrans();
         $r1 = M('user')->where(array('uid'=>$this->uid))->setDec('cash_money',$order['money']);
         $Order = A('Order');
@@ -492,8 +463,6 @@ class UserMController extends Controller
             $this->error('支付失败',U('myOrder'));
         }
     }
-
-
     /**
      * 发起微信支付
      * @param $da
@@ -509,7 +478,6 @@ class UserMController extends Controller
         $openId = session('openid');
         if(!$openId) {$this->error('请在微信里面打开');die;}
         $order = $Pay->pay($openId,$body,$attach,$trade_no,intval($da['amount']*100),$tag);
-
         if($order['result_code']=='SUCCESS'){//生成订单信息成功
             $data['mytrade'] = $trade_no;
             $data['uid'] = $da['uid'];
@@ -528,8 +496,6 @@ class UserMController extends Controller
             $this->error('操作失败请重试');die;
         }
     }
-
-
     /**
      * 显示自己的推广二维码
      */
@@ -538,7 +504,6 @@ class UserMController extends Controller
         $this->assign('url',$url);
         $this->display('tgQrCode');
     }
-
     /**
      * 我的收藏
      */
@@ -556,7 +521,6 @@ class UserMController extends Controller
         $this->assign('list',$list);
         $this->display('myFav');
     }
-
     //我的会员卡
     public function myCard(){
         $useMoney = M('user')->where(array('uid'=>$this->uid))->getField('use_money');
@@ -574,7 +538,6 @@ class UserMController extends Controller
         $this->assign('card',$card);
         $this->display('card');
     }
-
     //返利余额提现
     public function getCash(){
         $money = I('post.money',0,'float');
@@ -583,7 +546,6 @@ class UserMController extends Controller
         if($left_money<$money){$this->error('返利余额不足');die;}
         M('user')->startTrans();
         $r1 = M('user')->where(array('uid'=>$this->uid))->setDec('money',$money);
-
         $da['uid'] = $this->uid;
         $da['amount'] = $money;
         $da['type'] = 9;
@@ -598,7 +560,6 @@ class UserMController extends Controller
             $this->error('申请失败');
         }
     }
-
     //微信充值
     public function wxCz(){
         if(isset($_POST['submit'])){
@@ -620,5 +581,38 @@ class UserMController extends Controller
             $this->display('wxCz');
         }
     }
-
+    //修改头像昵称
+    public function myInfo(){
+        if(isset($_POST['submit'])){
+            $data['nickname'] = I('post.nickname');
+            if(!$data['nickname']){
+                $this->error('昵称不能为空');
+            }
+            //判断是否有文件上传
+            if($_FILES['img']['error']==0){
+                //处理图片
+                $upload = new \Think\Upload(C('UploadConfig'));
+                $info   =   $upload->upload();
+                if($info) {
+                    $data['headimgurl'] = $info['img']['savepath'].$info['img']['savename'];
+                    $image = new \Think\Image();
+                    $image->open('./upload/'.$data['headimgurl']);
+                    $image->thumb(80,80,2)->save('./upload/'.$data['headimgurl']);
+                }else{
+                    $this->error($upload->getError());
+                }
+            }
+            $data['uid'] = $this->uid;
+            if(M('user')->save($data)){
+                session('nickname',$data['nickname']);
+                $this->success('修改成功');
+            }else{
+                $this->error('修改失败');
+            }
+        }else{
+            $info = M('user')->where(array('uid'=>$this->uid))->field('phone,nickname,headimgurl')->find();
+            $this->assign('info',$info);
+            $this->display('myInfo');
+        }
+    }
 }

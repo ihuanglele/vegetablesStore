@@ -77,7 +77,7 @@ class WechatNotifyController extends \Org\Wxpay\WxPayNotify
                 $da3['time'] = time();
                 $da3['type'] = 2;
                 $da3['note'] = '微信充值，订单号：'.$payInfo['mytrade'];
-                $r3 = M('usermoney')->add($da3);
+                $r3 = M('money')->add($da3);
 
                 if($r1 && $r2 && $r3){
                     $Pay->commit();

@@ -562,7 +562,7 @@ class UserMController extends Controller
 
     //返利余额提现
     public function getCash(){
-        $money = I('post.money',0,'number_float');
+        $money = I('post.money',0,'float');
         if(!$money){$this->error('提现金额格式不对');die;}
         $left_money = M('user')->where(array('uid'=>$this->uid))->getField('money');
         if($left_money<$money){$this->error('返利余额不足');die;}
@@ -587,7 +587,7 @@ class UserMController extends Controller
     //微信充值
     public function wxCz(){
         if(isset($_POST['submit'])){
-            $money = I('post.money',0,'number_float');
+            $money = I('post.money',0,'float');
             if(!$money){$this->error('充值格式不对');die;}
             $data['uid'] = session('uid');
             $data['oid'] = 0;

@@ -45,6 +45,7 @@ class MobileController extends Controller{
             $rewardGidArr = array();
         }
         if(count($rewardGidArr)){
+            session('from_uid',$from_uid);
             $store = json_decode($userInfo['card'],true);
             $this->assign('title','欢迎光临'.$store['storeName'].'的菜店');
             $Tool = A('Tool');

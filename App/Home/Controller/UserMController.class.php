@@ -542,4 +542,22 @@ class UserMController extends Controller
         $this->display('myFav');
     }
 
+    //我的会员卡
+    public function myCard(){
+        $useMoney = M('user')->where(array('uid'=>$this->uid))->getField('use_money');
+        if($useMoney<500){
+            $this->error('你还不是会员');
+        }else if($useMoney<812){
+            $card = 'card_500.jpg';
+        }elseif($useMoney<1982){
+            $card = 'card_812.jpg';
+        }elseif($useMoney<3000){
+            $card = 'card_1982.jpg';
+        }else{
+            $card = 'card_3000.jpg';
+        }
+        $this->assign('card',$card);
+        $this->display('card');
+    }
+
 }

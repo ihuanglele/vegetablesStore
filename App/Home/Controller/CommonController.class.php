@@ -39,7 +39,8 @@ class CommonController extends Controller{
             $info = M('user')->where($map)->field('uid,nickname,favorite')->find();
             if($info){
                 $openid = session('openid');
-                if($openid){
+                $ac = I('post.ac');
+                if($openid && $ac=='bind'){
                     $data['uid'] = $info['uid'];
                     $data['nickname'] = session('nickname');
                     $data['headimgurl'] = session('headimgurl');

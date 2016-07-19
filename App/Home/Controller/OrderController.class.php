@@ -177,6 +177,29 @@ class OrderController
                     }
                 }
             }
+
+            //给leader返利
+            if($uInfo['leader']){
+                $reward = $oInfo['goods_amount']*0.01;
+                if($reward>=0.01) {       //小于一分钱不记录
+                    $r1 = M('user')->where(array('uid' => $uInfo['leader']))->setInc('money', $reward);
+
+                    //添加用户财务记录
+                    $moneyData['uid'] = $uInfo['leader'];
+                    $moneyData['amount'] = $reward;
+                    $moneyData['time'] = time();
+                    $moneyData['note'] = $uInfo['nickname'] . '购物返利';
+                    $moneyData['type'] = 5;
+                    $r2 = M('money')->add($moneyData);
+                    if ($r1 && $r2) {
+                        $res = true;
+                    } else {
+                        $res = false;
+                        return $res;
+                    }
+                }
+            }
+
         }else if($oInfo['reward_amount']>0){    //来自店家 直接给店家钱
             $reward = $oInfo['reward_amount'];
             if($reward>=0.01) {       //小于一分钱不记录
@@ -188,28 +211,6 @@ class OrderController
                 $moneyData['time'] = time();
                 $moneyData['note'] = $uInfo['nickname'] . '购物返利';
                 $moneyData['type'] = 3;
-                $r2 = M('money')->add($moneyData);
-                if ($r1 && $r2) {
-                    $res = true;
-                } else {
-                    $res = false;
-                    return $res;
-                }
-            }
-        }
-
-        //给leader返利
-        if($uInfo['leader']){
-            $reward = $oInfo['goods_amount']*0.01;
-            if($reward>=0.01) {       //小于一分钱不记录
-                $r1 = M('user')->where(array('uid' => $uInfo['leader']))->setInc('money', $reward);
-
-                //添加用户财务记录
-                $moneyData['uid'] = $uInfo['leader'];
-                $moneyData['amount'] = $reward;
-                $moneyData['time'] = time();
-                $moneyData['note'] = $uInfo['nickname'] . '购物返利';
-                $moneyData['type'] = 5;
                 $r2 = M('money')->add($moneyData);
                 if ($r1 && $r2) {
                     $res = true;

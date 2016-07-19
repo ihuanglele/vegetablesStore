@@ -68,15 +68,15 @@ class WechatNotifyController extends \Org\Wxpay\WxPayNotify
                 $Pay->startTrans();
                 $da1['status'] = 2;
                 $da1['pay_time'] = time();
-                $r1 = $Pay->where(array('pid'=>$payInfo['pid']))->save($da1);
+                $r1 = $Pay->where(array('pid'=>$payInfo['mytrade']))->save($da1);
 
-                $r2 = M('user')->where(array('uid'=>$payInfo['uid']))->setInc('money',$payInfo['money']);
+                $r2 = M('user')->where(array('uid'=>$payInfo['uid']))->setInc('cash_money',$payInfo['amount']);
 
-                $da3['money'] = $payInfo['money'];
+                $da3['amount'] = $payInfo['amount'];
                 $da3['uid'] = $payInfo['uid'];
                 $da3['time'] = time();
-                $da3['type'] = 3;
-                $da3['note'] = '微信充值，订单号：'.$payInfo['paytrade'];
+                $da3['type'] = 2;
+                $da3['note'] = '微信充值，订单号：'.$payInfo['mytrade'];
                 $r3 = M('usermoney')->add($da3);
 
                 if($r1 && $r2 && $r3){

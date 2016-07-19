@@ -1,0 +1,28 @@
+<body>
+<div id="a-wrap">
+    <section id="section" class="section">
+        <article>
+            <ul class="card-list" style="margin-top: 50px;">
+                <form id="wxCz" action="<{:U('wxCz')}>" method="post">
+                    <input type="text" id="money" placeholder="微信充值" name="money" />
+                    <button type="submit" name="submit" >充值</button>
+                </form>
+            </ul>
+        </article>
+        <include file="Public/mFooter" on="4" />
+    </section>
+
+
+    <script>
+        $(window).ready(function(){
+            $('#wxCz').submit(function(){
+                var m = $('#money').val();
+                if(isNaN(m)){
+                    alert('填写的金额格式不对');return false;
+                }
+
+            })
+        })
+    </script>
+</div>
+</body>

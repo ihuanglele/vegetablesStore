@@ -5,11 +5,11 @@
             <tbody>
             <tr>
                 <td>网站ID：<{$info.uid}></td>
-                <td>余额：<{$info.money}></td>
+                <td>返利余额：<{$info.money}></td>
             </tr>
             <tr>
-                <td>微信昵称：<{$info.nickname}></td>
-                <td>微信头像： <img class="headimg" src="<{$info.headimgurl}>" /></td>
+                <td>微信昵称：<{$info.nickname}><img class="headimg" src="<{$info.headimgurl}>" /></td>
+                <td>现金余额：<{$info.cash_money}> </td>
             </tr>
             <tr>
                 <td>
@@ -188,9 +188,9 @@
                         <div class="row">
                             <div class="col-xs-3">
                                 <select name="mstatus" class="form-control">
-                                    <option value="6">提现</option>
-                                    <option value="7">奖励</option>
-                                    <option value="8">扣除</option>
+                                    <option value="6">返利提现</option>
+                                    <option value="7">现金充值</option>
+                                    <option value="8">扣除现金</option>
                                 </select>
                             </div>
                             <div class="col-xs-3">

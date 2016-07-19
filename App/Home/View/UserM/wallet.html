@@ -9,8 +9,12 @@
             <ul class="card-list">
                 <li class="card-item">
                     <a href="#" class="item-cont">
-                        <b class="name icon-myorder">账户余额</b>
+                        <b class="name icon-myorder">返利余额</b>
                         <i class="data"><span class="a-color"><{$info.money}></span></i>
+                    </a>
+                    <a href="#" class="item-cont">
+                        <b class="name icon-myorder">现金余额</b>
+                        <i class="data"><span class="a-color"><{$info.cash_money}></span></i>
                     </a>
                     <a href="#" class="item-cont">
                         <b class="name icon-myorder">账户积分</b>
@@ -22,13 +26,35 @@
                     </a>
                 </li>
             </ul>
+
+            <ul class="card-list">
+                <form id="getCash" action="<{:U('getCash')}>" method="post">
+                    <input type="text" id="money" placeholder="最多提现<{$info.money}>" name="money" />
+                    <button type="submit" name="submit" >提现</button>
+                </form>
+            </ul>
         </article>
         <include file="Public/mFooter" on="4" />
     </section>
 
 
-    <div>
-
-    </div>
+    <script>
+        $(window).ready(function(){
+            var fanli_money = <{$info.money}>;
+            var day = new Date().getDay();
+            $('#getCash').submit(function(){
+//                if(day!=1){
+//                    alert('只有每月一号才能提现');return false;
+//                }
+                var m = $('#money').val();
+                if(isNaN(m)){
+                    alert('填写的金额格式不对');return false;
+                }
+                if(fanli_money<m){
+                    alert('提现金额超过返利余额');return false;
+                }
+            })
+        })
+    </script>
 </div>
 </body>

@@ -560,4 +560,50 @@ class UserMController extends Controller
         $this->display('card');
     }
 
+    //返利余额提现
+    public function getCash(){
+        $money = I('post.money',0,'number_float');
+        if(!$money){$this->error('提现金额格式不对');die;}
+        $left_money = M('user')->where(array('uid'=>$this->uid))->getField('money');
+        if($left_money<$money){$this->error('返利余额不足');die;}
+        M('user')->startTrans();
+        $r1 = M('user')->where(array('uid'=>$this->uid))->setDec('money',$money);
+
+        $da['uid'] = $this->uid;
+        $da['amount'] = $money;
+        $da['type'] = 9;
+        $da['time'] = time();
+        $da['note'] = '';
+        $r2 = M('money')->add($da);
+        if($r1 && $r2){
+            M('user')->commit();
+            $this->success('申请成功');
+        }else{
+            M('user')->rollback();
+            $this->error('申请失败');
+        }
+    }
+
+    //微信充值
+    public function wxCz(){
+        if(isset($_POST['submit'])){
+            $money = I('post.money',0,'number_float');
+            if(!$money){$this->error('充值格式不对');die;}
+            $data['uid'] = session('uid');
+            $data['oid'] = 0;
+            $data['amount'] = $money;
+            $data['body'] = '充值';
+            $data['attach'] = '充值';
+            $this->sendPayData($data);
+        }else{
+            $openid = session('openid');
+            if(!$openid){
+                $tools = new \Org\Wxpay\JsApi();
+                $openId = $tools->GetOpenid();
+                session('openid',$openId);
+            }
+            $this->display('wxCz');
+        }
+    }
+
 }

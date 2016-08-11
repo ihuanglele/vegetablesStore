@@ -1,34 +1,1 @@
-<form class="form-horizontal" action="<{:U('exportOrder')}>" method="get">
-    <div class="row">
-        <div class="col-xs-3">
-            <div class="form-group">
-                <label class="sr-only">时间起</label>
-                <div class="input-group">
-                    <div class="input-group-addon">时间起</div>
-                    <input type="text" class="form-control form_datetime" data-date="yyyy-mm-dd" name="t1" placeholder="从此时间开始" value="<{$starTime|date='Y-m-d',###}>">
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-3">
-            <div class="form-group">
-                <label class="sr-only">时间止</label>
-                <div class="input-group">
-                    <div class="input-group-addon">时间止</div>
-                    <input type="text" class="form-control form_datetime" data-date="yyyy-mm-dd" name="t2" placeholder="截止到此时间" value="<{$endTime|date='Y-m-d',###}>">
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-1 ">
-            <button type="submit" class="btn btn-primary">导出</button>
-        </div>
-        <div class="col-xs-1 ">
-            <a href="<{:U('exportOrder')}>?t=month" class="btn btn-info">本月</a>
-        </div>
-        <div class="col-xs-1 ">
-            <a href="<{:U('exportOrder')}>?t=15" class="btn btn-info">近15天</a>
-        </div>
-        <div class="col-xs-1 ">
-            <a href="<{:U('exportOrder')}>?t=30" class="btn btn-info">近30天</a>
-        </div>
-    </div>
-</form>
+<form class="form-horizontal" action="<{:U('exportOrder')}>" method="get">    <div class="row">        <div class="col-xs-3">            <div class="form-group">                <label class="sr-only">时间起</label>                <div class="input-group">                    <div class="input-group-addon">时间起</div>                    <input type="text" class="form-control form_datetime" data-date="yyyy-mm-dd" name="t1" placeholder="从此时间开始" value="<{$starTime|date='Y-m-d',###}>">                </div>            </div>        </div>        <div class="col-xs-3">            <div class="form-group">                <label class="sr-only">时间止</label>                <div class="input-group">                    <div class="input-group-addon">时间止</div>                    <input type="text" class="form-control form_datetime" data-date="yyyy-mm-dd" name="t2" placeholder="截止到此时间" value="<{$endTime|date='Y-m-d',###}>">                </div>            </div>        </div>        <div class="col-xs-2">            <div class="input-group">                <div class="input-group-addon">状态</div>                <select class="form-control" name="status">                    <option value="0">全部</option>                    <volist name="OrderStatus" id="v">                        <option value="<{$key}>" ><{$v}></option>                    </volist>                </select>            </div>        </div>        <div class="col-xs-1 ">            <button type="submit" class="btn btn-primary">导出</button>        </div>        <div class="col-xs-1 ">            <a href="<{:U('exportOrder')}>?t=month" class="btn btn-info">本月</a>        </div>        <div class="col-xs-1 ">            <a href="<{:U('exportOrder')}>?t=15" class="btn btn-info">近15天</a>        </div>        <div class="col-xs-1 ">            <a href="<{:U('exportOrder')}>?t=30" class="btn btn-info">近30天</a>        </div>    </div></form>

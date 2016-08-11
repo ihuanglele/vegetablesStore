@@ -1,31 +1,1 @@
-<div class="row">
-    <div class="col-sm-6">
-        <div class="list-group">
-            <a href="#" class="list-group-item active">
-                <h4 class="list-group-item-heading">
-                    <i class="glyphicon glyphicon-volume-up"></i> 商品概述
-                </h4>
-            </a>
-            <volist name="goods" id="vo">
-                <a href="<{:U('goods/index')}>?status=<{$vo.status}>" class="list-group-item">
-                    <p class="list-group-item-text"><{$GoodsStatus[$vo['status']]}>:<{$vo.num}></p>
-                </a>
-            </volist>
-        </div>
-    </div>
-
-    <div class="col-sm-6">
-        <div class="list-group">
-            <a href="#" class="list-group-item active">
-                <h4 class="list-group-item-heading">
-                    <i class="glyphicon glyphicon-volume-up"></i> 订单概述
-                </h4>
-            </a>
-            <volist name="gift" id="vo">
-                <a href="<{:U('gift/index')}>?status=<{$vo.status}>" class="list-group-item">
-                    <p class="list-group-item-text"><{$GiftStatus[$vo['status']]}>:<{$vo.num}></p>
-                </a>
-            </volist>
-        </div>
-    </div>
-</div>
+<div class="row">    <div class="col-sm-6">        <div class="list-group">            <a href="#" class="list-group-item active">                <h4 class="list-group-item-heading">                    <i class="glyphicon glyphicon-volume-up"></i> 商品概述                </h4>            </a>            <volist name="goods" id="vo">                <a href="<{:U('goods/index')}>?status=<{$vo.status}>" class="list-group-item">                    <p class="list-group-item-text"><{$GoodsStatus[$vo['status']]}>:<{$vo.num}></p>                </a>            </volist>        </div>    </div>    <div class="col-sm-6">        <div class="list-group">            <a href="#" class="list-group-item active">                <h4 class="list-group-item-heading">                    <i class="glyphicon glyphicon-volume-up"></i> 订单概述                </h4>            </a>            <volist name="gift" id="vo">                <a href="<{:U('orders/index')}>?status=<{$vo.status}>" class="list-group-item">                    <p class="list-group-item-text"><{$OrderStatus[$vo['status']]}>:<{$vo.num}></p>                </a>            </volist>        </div>    </div></div>

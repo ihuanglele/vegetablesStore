@@ -7,7 +7,7 @@ return array(
     'DB_PWD' => 'vegetables123',
     'DB_PREFIX' => 'vege_',
 
-    'SHOW_PAGE_TRACE' => true,
+    'SHOW_PAGE_TRACE' => false,
     //定义模板信息
     'TMPL_L_DELIM' => '<{',
     'TMPL_R_DELIM' => '}>',
@@ -69,8 +69,9 @@ return array(
     //订单状态
     'OrderStatus' => array(
         '1' => '待付款',
-        '2' => '待发货',
-        '3' => '已发货',
+        '2' => '待确定',
+        '3' => '待发货',
+        '4' => '已发货',
     ),
     //订单类型
     'OrderType' => array(
@@ -100,8 +101,10 @@ return array(
         '5' => '团队返利',    //总监返利
         '6' => '提现',        //money
         '9' => '提现中',       //money
-        '7' => '现金充值',        //cash_money
-        '8' => '扣除现金',        //cash_money
+        '7' => '现金充值【申请】',        //cash_money
+        '8' => '扣除现金【申请】',        //cash_money
+        '10' => '现金充值',        //cash_money
+        '11' => '扣除现金',        //cash_money
     ),
 
 );

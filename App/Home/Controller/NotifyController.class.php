@@ -116,7 +116,7 @@ class NotifyController extends Controller
                         ); //回复单条图文消息
 
                         $news2 = array(
-                            "公司状况",
+                            "良心农业",
                             "全民创业已经如火如荼，然而创业是一个非常自我的过程，它是一种生活方式的选择。从外部的推动有助于提高创业的存活率，但是未必能够提高创新的成功率。第一次创业的人，至少90%以上都会以失败而告终。创业成功者大部分年龄在30岁到38岁之间，而且创业成功最高的概率是第三次创业。",
                             'http://d.maka.im/k/L2DTCNXK?DSCKID=d078814f-6a5f-4f26-b837-dadc84bc19ab&DSTIMESTAMP=1467682127847',
                             'http://'. $_SERVER['HTTP_HOST']."/Public/carousel/1468284734.png"
@@ -265,7 +265,7 @@ class NotifyController extends Controller
         $b1 = array(
             'name'=>'公司简介','sub_button'=>array(
                 array('type'=>'view','name'=>'公司简介','url'=>'http://mp.weixin.qq.com/s?__biz=MzIzODQ2MjU5Nw==&mid=100000013&idx=1&sn=26b059c29acf42bec3659535895aa9af&scene=18#wechat_redirect'),
-                array('type'=>'view','name'=>'公司状况','url'=>'http://d.maka.im/k/L2DTCNXK?DSCKID=d078814f-6a5f-4f26-b837-dadc84bc19ab&DSTIMESTAMP=1467682127847'),
+                array('type'=>'view','name'=>'良心农业','url'=>'http://d.maka.im/k/L2DTCNXK?DSCKID=d078814f-6a5f-4f26-b837-dadc84bc19ab&DSTIMESTAMP=1467682127847'),
             ));
         $b2 = array(
             'name'=>'良心商城','sub_button'=>array(
